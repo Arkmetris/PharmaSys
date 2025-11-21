@@ -1,0 +1,14 @@
+# --- Arquivos Compilados (Lixo gerado pelo build) ---
+/target/
+
+# --- Arquivos do Eclipse (Específicos da sua máquina) ---
+.classpath
+.project
+.settings/
+.metadata/
+
+# --- Arquivos do IntelliJ ou VS Code (Caso alguém use) ---
+.idea/
+*.iml
+.vscode/
+
