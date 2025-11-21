@@ -1,4 +1,4 @@
-package model;
+package br.univ.pharmasys.model;
 
 import java.lang.Math;
 import java.time.LocalDate;
