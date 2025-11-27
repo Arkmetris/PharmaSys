@@ -190,7 +190,7 @@ public class TelaCadastroFuncionario extends javax.swing.JFrame {
                         .addComponent(BotaoCadastrar)
                         .addGap(16, 16, 16))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(198, Short.MAX_VALUE)
+                .addContainerGap(238, Short.MAX_VALUE)
                 .addComponent(LabelTituloCadastroFunc)
                 .addGap(184, 184, 184))
         );
