@@ -30,23 +30,20 @@ public class TelaRelatorios extends javax.swing.JFrame {
 
         LabelRelatorios = new javax.swing.JLabel();
         LabelCategoria = new javax.swing.JLabel();
-        SpinnerCategoria = new javax.swing.JSpinner();
         ButtonCancelar = new javax.swing.JButton();
         ButtonVisualizar = new javax.swing.JButton();
         ButtonGerarPDF = new javax.swing.JButton();
+        ComboBoxCategoria = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(700, 450));
+        setMaximumSize(new java.awt.Dimension(440, 380));
+        setMinimumSize(new java.awt.Dimension(440, 380));
         setResizable(false);
 
         LabelRelatorios.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         LabelRelatorios.setText("Relatórios");
 
         LabelCategoria.setText("Categoria:");
-
-        SpinnerCategoria.setModel(new javax.swing.SpinnerListModel(new String[] {"Funcionários", "Fornecedores", "Estoque"}));
-        SpinnerCategoria.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        SpinnerCategoria.setPreferredSize(new java.awt.Dimension(101, 25));
 
         ButtonCancelar.setText("Cancelar");
         ButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -59,44 +56,47 @@ public class TelaRelatorios extends javax.swing.JFrame {
 
         ButtonGerarPDF.setText("Gerar PDF");
 
+        ComboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Funcionários", "Fornecedores", "Estoque" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(LabelCategoria)
+                .addGap(18, 18, 18)
+                .addComponent(ComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(133, 133, 133))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(213, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(LabelRelatorios)
-                        .addGap(285, 285, 285))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(LabelCategoria)
-                        .addGap(18, 18, 18)
-                        .addComponent(SpinnerCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(240, 240, 240))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
                         .addComponent(ButtonCancelar)
                         .addGap(41, 41, 41)
                         .addComponent(ButtonVisualizar)
                         .addGap(37, 37, 37)
-                        .addComponent(ButtonGerarPDF)
-                        .addGap(170, 170, 170))))
+                        .addComponent(ButtonGerarPDF))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(164, 164, 164)
+                        .addComponent(LabelRelatorios)))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(44, 44, 44)
                 .addComponent(LabelRelatorios)
-                .addGap(84, 84, 84)
+                .addGap(99, 99, 99)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabelCategoria)
-                    .addComponent(SpinnerCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                    .addComponent(ComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(108, 108, 108)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ButtonGerarPDF)
                     .addComponent(ButtonVisualizar)
                     .addComponent(ButtonCancelar))
-                .addGap(120, 120, 120))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();
@@ -135,8 +135,8 @@ public class TelaRelatorios extends javax.swing.JFrame {
     private javax.swing.JButton ButtonCancelar;
     private javax.swing.JButton ButtonGerarPDF;
     private javax.swing.JButton ButtonVisualizar;
+    private javax.swing.JComboBox<String> ComboBoxCategoria;
     private javax.swing.JLabel LabelCategoria;
     private javax.swing.JLabel LabelRelatorios;
-    private javax.swing.JSpinner SpinnerCategoria;
     // End of variables declaration//GEN-END:variables
 }
