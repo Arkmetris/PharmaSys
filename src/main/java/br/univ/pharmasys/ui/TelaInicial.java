@@ -40,15 +40,14 @@ public class TelaInicial extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(700, 450));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("SF Pro", 1, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("SF Pro", 1, 32)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("PHARMASYS");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 205, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(51, 166, 178));
         jPanel1.setPreferredSize(new java.awt.Dimension(350, 450));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frame 23.png"))); // NOI18N
         jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
