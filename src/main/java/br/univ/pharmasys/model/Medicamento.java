@@ -12,7 +12,7 @@ public class Medicamento {
     private int estoqueMin;
     private int estoqueMax;
     private boolean inativo;
-    
+    // Falta adicionar a variavel "laboratorio" "data de expericao" e alterar o nome "forma" para "forma farmaceutica"
     public Medicamento(){
         
     }
