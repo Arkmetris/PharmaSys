@@ -103,6 +103,9 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="formComponentShown"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -123,13 +126,13 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="0" pref="7" max="32767" attributes="0"/>
-                      <Component id="medicamentos" min="-2" pref="140" max="-2" attributes="0"/>
+                      <Component id="ButtonMedicamentos" min="-2" pref="140" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="funcionarios" min="-2" pref="140" max="-2" attributes="0"/>
+                      <Component id="ButtonFuncionarios" min="-2" pref="140" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="fornecedor" min="-2" pref="140" max="-2" attributes="0"/>
+                      <Component id="ButtonFornecedor" min="-2" pref="140" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="relatorios" min="-2" pref="140" max="-2" attributes="0"/>
+                      <Component id="ButtonRelatorios" min="-2" pref="140" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -160,10 +163,10 @@
               </Group>
               <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="funcionarios" alignment="3" min="-2" pref="140" max="-2" attributes="0"/>
-                  <Component id="relatorios" alignment="3" min="-2" pref="140" max="-2" attributes="0"/>
-                  <Component id="fornecedor" alignment="3" min="-2" pref="140" max="-2" attributes="0"/>
-                  <Component id="medicamentos" alignment="3" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="ButtonFuncionarios" alignment="3" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="ButtonRelatorios" alignment="3" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="ButtonFornecedor" alignment="3" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="ButtonMedicamentos" alignment="3" min="-2" pref="140" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="202" max="32767" attributes="0"/>
           </Group>
@@ -217,41 +220,41 @@
         <Property name="text" type="java.lang.String" value="|"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="funcionarios">
+    <Component class="javax.swing.JButton" name="ButtonFuncionarios">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="SF Pro" size="18" style="3"/>
+          <Font name="SF Pro" size="16" style="3"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Funcion&#xe1;rios"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="funcionariosMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ButtonFuncionariosMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="relatorios">
+    <Component class="javax.swing.JButton" name="ButtonRelatorios">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="SF Pro" size="18" style="3"/>
+          <Font name="SF Pro" size="16" style="3"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Relat&#xf3;rios"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="relatoriosMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ButtonRelatoriosMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="fornecedor">
+    <Component class="javax.swing.JButton" name="ButtonFornecedor">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="SF Pro" size="18" style="3"/>
+          <Font name="SF Pro" size="16" style="3"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Fornecedor"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="fornecedorMouseClicked"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fornecedorActionPerformed"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ButtonFornecedorMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonFornecedorActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="medicamentos">
+    <Component class="javax.swing.JButton" name="ButtonMedicamentos">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="SF Pro" size="16" style="3"/>
@@ -259,8 +262,8 @@
         <Property name="text" type="java.lang.String" value="Medicamentos"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="medicamentosMouseClicked"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="medicamentosActionPerformed"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ButtonMedicamentosMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonMedicamentosActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
