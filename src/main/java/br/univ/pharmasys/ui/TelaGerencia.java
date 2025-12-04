@@ -244,7 +244,7 @@ public class TelaGerencia extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void ButtonFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonFornecedorMouseClicked
-
+        //
     }//GEN-LAST:event_ButtonFornecedorMouseClicked
 
     private void ButtonFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonFuncionariosMouseClicked
