@@ -1,5 +1,7 @@
 package br.univ.pharmasys.model;
 
+import br.univ.pharmasys.service.FornecedorValidador;
+
 public class Fornecedor {
     
     private long idFornecedor;
@@ -7,8 +9,7 @@ public class Fornecedor {
     private String cnpj;
     private boolean inativo;
     
-    public Fornecedor(){
-       
+    public Fornecedor() {
     }
     
     public long getIdFornecedor(){
@@ -18,11 +19,8 @@ public class Fornecedor {
     }
     
     public void setIdFornecedor(long idFornecedor){
-         
-        if(idFornecedor <=0){
-           throw new IllegalArgumentException("\nError: O ID de um fornecedor deve ser sempre positiva e maior que zero");
-        }
-        
+
+        FornecedorValidador.idFornecedorValidar(idFornecedor);
         this.idFornecedor = idFornecedor;
     }
     
@@ -33,14 +31,9 @@ public class Fornecedor {
     }
     
     public void setNome (String nome){
-        
-        if(nome == null || nome.trim().isEmpty() == true){
-        
-            throw new IllegalArgumentException("\nError: inválido ou vazio!");
-        }
-        
+
+        FornecedorValidador.nomeValidar(nome);
         nome = nome.trim();
-        
         this.nome = nome;
             
     }
@@ -53,17 +46,9 @@ public class Fornecedor {
     public void setCnpj(String cnpj){
         
         //Validar o cnpj do fornecedor!
-        
-        if (cnpj == null || cnpj.trim().isEmpty() == true){
-            throw new IllegalArgumentException("Error: Não pode ser nulo ou vazio!");
-        }
-        
-          cnpj = cnpj.replaceAll("\\D", "");
-        
-        if (cnpj.length() != 14){
-            throw new IllegalArgumentException("Error: Todo CNPJ deve conter 14 dígitos!");
-        }
-        
+
+        FornecedorValidador.cnpjValidar(cnpj);
+        cnpj= cnpj.replaceAll("\\D ", "");
         this.cnpj = cnpj;
     }
     

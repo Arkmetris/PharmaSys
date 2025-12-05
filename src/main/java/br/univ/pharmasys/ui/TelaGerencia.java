@@ -42,10 +42,10 @@ public class TelaGerencia extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        funcionarios = new javax.swing.JButton();
-        relatorios = new javax.swing.JButton();
-        fornecedor = new javax.swing.JButton();
-        medicamentos = new javax.swing.JButton();
+        ButtonFuncionarios = new javax.swing.JButton();
+        ButtonRelatorios = new javax.swing.JButton();
+        ButtonFornecedor = new javax.swing.JButton();
+        ButtonMedicamentos = new javax.swing.JButton();
 
         jButton3.setFont(new java.awt.Font("SF Pro", 0, 18)); // NOI18N
         jButton3.setText("Visualizar estoque");
@@ -96,6 +96,11 @@ public class TelaGerencia extends javax.swing.JFrame {
         popupRelatorios.add(jMenuItem5);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("SF Pro", 1, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 204, 255));
@@ -104,6 +109,11 @@ public class TelaGerencia extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(204, 0, 51));
         jLabel2.setText("Sair");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
         jLabel3.setText("José Vieira dos Santos");
@@ -114,45 +124,45 @@ public class TelaGerencia extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("|");
 
-        funcionarios.setFont(new java.awt.Font("SF Pro", 3, 18)); // NOI18N
-        funcionarios.setText("Funcionários");
-        funcionarios.addMouseListener(new java.awt.event.MouseAdapter() {
+        ButtonFuncionarios.setFont(new java.awt.Font("SF Pro", 3, 16)); // NOI18N
+        ButtonFuncionarios.setText("Funcionários");
+        ButtonFuncionarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                funcionariosMouseClicked(evt);
+                ButtonFuncionariosMouseClicked(evt);
             }
         });
 
-        relatorios.setFont(new java.awt.Font("SF Pro", 3, 18)); // NOI18N
-        relatorios.setText("Relatórios");
-        relatorios.addMouseListener(new java.awt.event.MouseAdapter() {
+        ButtonRelatorios.setFont(new java.awt.Font("SF Pro", 3, 16)); // NOI18N
+        ButtonRelatorios.setText("Relatórios");
+        ButtonRelatorios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                relatoriosMouseClicked(evt);
+                ButtonRelatoriosMouseClicked(evt);
             }
         });
 
-        fornecedor.setFont(new java.awt.Font("SF Pro", 3, 18)); // NOI18N
-        fornecedor.setText("Fornecedor");
-        fornecedor.addMouseListener(new java.awt.event.MouseAdapter() {
+        ButtonFornecedor.setFont(new java.awt.Font("SF Pro", 3, 16)); // NOI18N
+        ButtonFornecedor.setText("Fornecedor");
+        ButtonFornecedor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                fornecedorMouseClicked(evt);
+                ButtonFornecedorMouseClicked(evt);
             }
         });
-        fornecedor.addActionListener(new java.awt.event.ActionListener() {
+        ButtonFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fornecedorActionPerformed(evt);
+                ButtonFornecedorActionPerformed(evt);
             }
         });
 
-        medicamentos.setFont(new java.awt.Font("SF Pro", 3, 16)); // NOI18N
-        medicamentos.setText("Medicamentos");
-        medicamentos.addMouseListener(new java.awt.event.MouseAdapter() {
+        ButtonMedicamentos.setFont(new java.awt.Font("SF Pro", 3, 16)); // NOI18N
+        ButtonMedicamentos.setText("Medicamentos");
+        ButtonMedicamentos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                medicamentosMouseClicked(evt);
+                ButtonMedicamentosMouseClicked(evt);
             }
         });
-        medicamentos.addActionListener(new java.awt.event.ActionListener() {
+        ButtonMedicamentos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                medicamentosActionPerformed(evt);
+                ButtonMedicamentosActionPerformed(evt);
             }
         });
 
@@ -165,13 +175,13 @@ public class TelaGerencia extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 7, Short.MAX_VALUE)
-                        .addComponent(medicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ButtonMedicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(funcionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ButtonFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(fornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ButtonFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(relatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(ButtonRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -196,19 +206,20 @@ public class TelaGerencia extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addGap(97, 97, 97)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(funcionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(relatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(medicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ButtonFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButtonRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButtonFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButtonMedicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(202, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void fornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fornecedorActionPerformed
+    private void ButtonFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonFornecedorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fornecedorActionPerformed
+        popupFornecedor.setVisible(true);
+    }//GEN-LAST:event_ButtonFornecedorActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
@@ -219,40 +230,49 @@ public class TelaGerencia extends javax.swing.JFrame {
             telaCadastro.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void medicamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_medicamentosMouseClicked
+    private void ButtonMedicamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonMedicamentosMouseClicked
+        
+    }//GEN-LAST:event_ButtonMedicamentosMouseClicked
+
+    private void ButtonMedicamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonMedicamentosActionPerformed
         popupMedicamentos.setVisible(true);
-    }//GEN-LAST:event_medicamentosMouseClicked
-
-    private void medicamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medicamentosActionPerformed
-
-    }//GEN-LAST:event_medicamentosActionPerformed
+    }//GEN-LAST:event_ButtonMedicamentosActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         TelaCadastroFornecedor telaCadastro = new TelaCadastroFornecedor();
         telaCadastro.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void fornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fornecedorMouseClicked
-        popupFornecedor.setVisible(true);
-    }//GEN-LAST:event_fornecedorMouseClicked
+    private void ButtonFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonFornecedorMouseClicked
+        //
+    }//GEN-LAST:event_ButtonFornecedorMouseClicked
 
-    private void funcionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_funcionariosMouseClicked
+    private void ButtonFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonFuncionariosMouseClicked
     popupFuncionarios.setVisible(true);
-    }//GEN-LAST:event_funcionariosMouseClicked
+    }//GEN-LAST:event_ButtonFuncionariosMouseClicked
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
     TelaRelatorios telaRelatorios = new TelaRelatorios();
             telaRelatorios.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-    private void relatoriosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_relatoriosMouseClicked
+    private void ButtonRelatoriosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonRelatoriosMouseClicked
         popupRelatorios.setVisible(true);
-    }//GEN-LAST:event_relatoriosMouseClicked
+    }//GEN-LAST:event_ButtonRelatoriosMouseClicked
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
      TelaCadastroFuncionario telaCadastro = new TelaCadastroFuncionario();
             telaCadastro.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formComponentShown
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        new TelaInicial().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -290,8 +310,10 @@ public class TelaGerencia extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton fornecedor;
-    private javax.swing.JButton funcionarios;
+    private javax.swing.JButton ButtonFornecedor;
+    private javax.swing.JButton ButtonFuncionarios;
+    private javax.swing.JButton ButtonMedicamentos;
+    private javax.swing.JButton ButtonRelatorios;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
@@ -304,11 +326,9 @@ public class TelaGerencia extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JButton medicamentos;
     private javax.swing.JPopupMenu popupFornecedor;
     private javax.swing.JPopupMenu popupFuncionarios;
     private javax.swing.JPopupMenu popupMedicamentos;
     private javax.swing.JPopupMenu popupRelatorios;
-    private javax.swing.JButton relatorios;
     // End of variables declaration//GEN-END:variables
 }
