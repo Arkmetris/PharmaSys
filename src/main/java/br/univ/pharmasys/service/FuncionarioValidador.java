@@ -78,6 +78,7 @@ public class FuncionarioValidador {
        }
        if(telefone.trim().matches("\\S+")){
 
+
            throw new TelefoneInvalidoException("Error: O campo de telefone deve ser preenchido!");
 
        }

@@ -38,7 +38,8 @@ public class Medicamento {
         MedicamentoValidador.skuValidar(sku);
         this.sku = sku.trim();
     }
-    
+
+
     public String getCodigoBarras(){
         return codigoBarras;
     }

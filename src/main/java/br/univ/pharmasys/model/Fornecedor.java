@@ -10,6 +10,7 @@ public class Fornecedor {
     private boolean inativo;
     
     public Fornecedor() {
+
     }
     
     public long getIdFornecedor(){

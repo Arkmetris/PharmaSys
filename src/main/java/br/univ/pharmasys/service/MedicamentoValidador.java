@@ -4,7 +4,7 @@ import br.univ.pharmasys.exceptions.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.regex.Matcher;
+
 
 public class MedicamentoValidador {
 
@@ -25,6 +25,7 @@ public class MedicamentoValidador {
 
 
     }
+
 
     public static void codigoBarrasValidar(String codigo){
         if (codigo == null || codigo.trim().isEmpty()){

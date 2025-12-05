@@ -47,6 +47,7 @@ public class LoteValidador {
 
     public static void dataValidadadeValidador(LocalDate data) {
 
+
         if (data == null) {
 
             throw new DataInvalidoException("A data de validade não pode ser nula!");
