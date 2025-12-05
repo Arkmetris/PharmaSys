@@ -34,15 +34,27 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
         CampoNomeComercial = new javax.swing.JTextField();
         CampoSKU = new javax.swing.JTextField();
         CampoDosagem = new javax.swing.JTextField();
+        CampoPreco = new javax.swing.JTextField();
         CampoPrincipioAtivo = new javax.swing.JTextField();
         CampoEstoqueMinimo = new javax.swing.JTextField();
         CampoEstoqueMaximo = new javax.swing.JTextField();
-        ComboBoxForma = new javax.swing.JComboBox<>();
         CampoEstoqueAtual = new javax.swing.JTextField();
-        CampoPreco = new javax.swing.JTextField();
+        ComboBoxForma = new javax.swing.JComboBox<>();
+        PanelLoteFornecedor = new javax.swing.JPanel();
+        LabelLote = new javax.swing.JLabel();
+        CampoNumeroLote = new javax.swing.JTextField();
+        CampoValidadeLote = new javax.swing.JTextField();
+        CampoQuantidadeRecebida = new javax.swing.JTextField();
+        LabelFornecedor = new javax.swing.JLabel();
+        CampoCnpjFornecedor = new javax.swing.JTextField();
+        CampoIDFornecedor = new javax.swing.JTextField();
+        CampoEmpresaFornecedor = new javax.swing.JTextField();
+        CampoTelefoneFornecedor = new javax.swing.JTextField();
+        CampoEmailFornecedor = new javax.swing.JTextField();
+        LabelCadastroDeEstoque = new javax.swing.JLabel();
         ButtonCancelar = new javax.swing.JButton();
         ButtonCadastrar = new javax.swing.JButton();
-        LabelCadastroDeEstoque = new javax.swing.JLabel();
+        ScrollBar = new javax.swing.JScrollBar();
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,7 +64,6 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TelaCadEstoque");
-        setResizable(false);
 
         PanelMedicamento.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -80,25 +91,163 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
             }
         });
 
-        CampoPrincipioAtivo.setBorder(javax.swing.BorderFactory.createTitledBorder("Princípio Ativo"));
-
-        CampoEstoqueMinimo.setBorder(javax.swing.BorderFactory.createTitledBorder("Estoque Mínimo"));
-
-        CampoEstoqueMaximo.setBorder(javax.swing.BorderFactory.createTitledBorder("Estoque Máximo"));
-
-        ComboBoxForma.setBackground(new java.awt.Color(255, 255, 255));
-        ComboBoxForma.setForeground(new java.awt.Color(0, 0, 0));
-        ComboBoxForma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sólido", "Semissólido", "Líquido", "Gasoso", "Injetável" }));
-        ComboBoxForma.setBorder(javax.swing.BorderFactory.createTitledBorder("Forma"));
-
-        CampoEstoqueAtual.setBorder(javax.swing.BorderFactory.createTitledBorder("Estoque Atual"));
-
         CampoPreco.setBorder(javax.swing.BorderFactory.createTitledBorder("Preço"));
         CampoPreco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CampoPrecoActionPerformed(evt);
             }
         });
+
+        CampoPrincipioAtivo.setBorder(javax.swing.BorderFactory.createTitledBorder("Princípio Ativo"));
+
+        CampoEstoqueMinimo.setBorder(javax.swing.BorderFactory.createTitledBorder("Estoque Mínimo"));
+
+        CampoEstoqueMaximo.setBorder(javax.swing.BorderFactory.createTitledBorder("Estoque Máximo"));
+
+        CampoEstoqueAtual.setBorder(javax.swing.BorderFactory.createTitledBorder("Estoque Atual"));
+
+        ComboBoxForma.setBackground(new java.awt.Color(255, 255, 255));
+        ComboBoxForma.setForeground(new java.awt.Color(0, 0, 0));
+        ComboBoxForma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sólido", "Semissólido", "Líquido", "Gasoso", "Injetável" }));
+        ComboBoxForma.setBorder(javax.swing.BorderFactory.createTitledBorder("Forma"));
+
+        javax.swing.GroupLayout PanelMedicamentoLayout = new javax.swing.GroupLayout(PanelMedicamento);
+        PanelMedicamento.setLayout(PanelMedicamentoLayout);
+        PanelMedicamentoLayout.setHorizontalGroup(
+            PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelMedicamentoLayout.createSequentialGroup()
+                .addGap(114, 114, 114)
+                .addComponent(LabelMedicamento)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(PanelMedicamentoLayout.createSequentialGroup()
+                .addGap(0, 20, Short.MAX_VALUE)
+                .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CampoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CampoEstoqueAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CampoEstoqueMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CampoEstoqueMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CampoPrincipioAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ComboBoxForma, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(CampoDosagem, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CampoSKU, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CampoNomeComercial, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        PanelMedicamentoLayout.setVerticalGroup(
+            PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelMedicamentoLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(LabelMedicamento)
+                .addGap(18, 18, 18)
+                .addComponent(CampoNomeComercial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(CampoSKU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(CampoDosagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(ComboBoxForma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(CampoPrincipioAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(CampoEstoqueMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(CampoEstoqueMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(CampoEstoqueAtual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(CampoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        PanelLoteFornecedor.setBackground(new java.awt.Color(255, 255, 255));
+
+        LabelLote.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        LabelLote.setText("Lote");
+
+        CampoNumeroLote.setBorder(javax.swing.BorderFactory.createTitledBorder("Número do Lote"));
+        CampoNumeroLote.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CampoNumeroLoteActionPerformed(evt);
+            }
+        });
+
+        CampoValidadeLote.setBorder(javax.swing.BorderFactory.createTitledBorder("Validade do Lote"));
+
+        CampoQuantidadeRecebida.setBorder(javax.swing.BorderFactory.createTitledBorder("Quantidade Recebida"));
+
+        LabelFornecedor.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        LabelFornecedor.setText("Fornecedor");
+
+        CampoCnpjFornecedor.setBorder(javax.swing.BorderFactory.createTitledBorder("CNPJ"));
+        CampoCnpjFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CampoCnpjFornecedorActionPerformed(evt);
+            }
+        });
+
+        CampoIDFornecedor.setBorder(javax.swing.BorderFactory.createTitledBorder("ID"));
+
+        CampoEmpresaFornecedor.setBorder(javax.swing.BorderFactory.createTitledBorder("Empresa"));
+
+        CampoTelefoneFornecedor.setBorder(javax.swing.BorderFactory.createTitledBorder("Telefone"));
+
+        CampoEmailFornecedor.setBorder(javax.swing.BorderFactory.createTitledBorder("E-mail"));
+
+        javax.swing.GroupLayout PanelLoteFornecedorLayout = new javax.swing.GroupLayout(PanelLoteFornecedor);
+        PanelLoteFornecedor.setLayout(PanelLoteFornecedorLayout);
+        PanelLoteFornecedorLayout.setHorizontalGroup(
+            PanelLoteFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLoteFornecedorLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(LabelLote, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(155, 155, 155))
+            .addGroup(PanelLoteFornecedorLayout.createSequentialGroup()
+                .addGroup(PanelLoteFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelLoteFornecedorLayout.createSequentialGroup()
+                        .addGap(133, 133, 133)
+                        .addComponent(LabelFornecedor))
+                    .addGroup(PanelLoteFornecedorLayout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addGroup(PanelLoteFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(CampoNumeroLote)
+                            .addComponent(CampoValidadeLote)
+                            .addComponent(CampoQuantidadeRecebida, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                            .addComponent(CampoCnpjFornecedor)
+                            .addComponent(CampoIDFornecedor)
+                            .addComponent(CampoEmpresaFornecedor)
+                            .addComponent(CampoTelefoneFornecedor)
+                            .addComponent(CampoEmailFornecedor))))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        PanelLoteFornecedorLayout.setVerticalGroup(
+            PanelLoteFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelLoteFornecedorLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(LabelLote)
+                .addGap(18, 18, 18)
+                .addComponent(CampoNumeroLote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(CampoValidadeLote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(CampoQuantidadeRecebida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(LabelFornecedor)
+                .addGap(18, 18, 18)
+                .addComponent(CampoCnpjFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(CampoIDFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(CampoEmpresaFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(CampoTelefoneFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(CampoEmailFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        LabelCadastroDeEstoque.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        LabelCadastroDeEstoque.setText("Cadastro De Estoque");
 
         ButtonCancelar.setText("Cancelar");
 
@@ -109,105 +258,49 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
             }
         });
 
-        LabelCadastroDeEstoque.setBackground(new java.awt.Color(51, 51, 51));
-        LabelCadastroDeEstoque.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        LabelCadastroDeEstoque.setText("Cadastro De Estoque");
-
-        javax.swing.GroupLayout PanelMedicamentoLayout = new javax.swing.GroupLayout(PanelMedicamento);
-        PanelMedicamento.setLayout(PanelMedicamentoLayout);
-        PanelMedicamentoLayout.setHorizontalGroup(
-            PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelMedicamentoLayout.createSequentialGroup()
-                .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelMedicamentoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(CampoNomeComercial, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(CampoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PanelMedicamentoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(CampoSKU, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(CampoEstoqueMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PanelMedicamentoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(PanelMedicamentoLayout.createSequentialGroup()
-                                .addComponent(CampoPrincipioAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(CampoEstoqueAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PanelMedicamentoLayout.createSequentialGroup()
-                                .addComponent(CampoDosagem, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(CampoEstoqueMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(PanelMedicamentoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelMedicamentoLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(LabelMedicamento)
-                        .addGap(261, 261, 261))
-                    .addGroup(PanelMedicamentoLayout.createSequentialGroup()
-                        .addComponent(ComboBoxForma, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMedicamentoLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMedicamentoLayout.createSequentialGroup()
-                        .addComponent(ButtonCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ButtonCadastrar)
-                        .addGap(24, 24, 24))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMedicamentoLayout.createSequentialGroup()
-                        .addComponent(LabelCadastroDeEstoque)
-                        .addGap(203, 203, 203))))
-        );
-        PanelMedicamentoLayout.setVerticalGroup(
-            PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelMedicamentoLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(LabelCadastroDeEstoque)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(LabelMedicamento)
-                .addGap(24, 24, 24)
-                .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CampoNomeComercial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CampoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CampoSKU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CampoEstoqueMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CampoDosagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CampoEstoqueMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CampoEstoqueAtual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CampoPrincipioAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelMedicamentoLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ButtonCadastrar)
-                            .addComponent(ButtonCancelar))
-                        .addGap(17, 17, 17))
-                    .addGroup(PanelMedicamentoLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(ComboBoxForma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(95, Short.MAX_VALUE))))
-        );
+        ScrollBar.addAdjustmentListener(new java.awt.event.AdjustmentListener() {
+            public void adjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {
+                ScrollBarAdjustmentValueChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelMedicamento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(PanelMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(PanelLoteFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(ButtonCancelar)
+                                .addGap(18, 18, 18)
+                                .addComponent(ButtonCadastrar))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(264, 264, 264)
+                        .addComponent(LabelCadastroDeEstoque)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(ScrollBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelMedicamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LabelCadastroDeEstoque)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ScrollBar, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
+                    .addComponent(PanelMedicamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelLoteFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ButtonCancelar)
+                    .addComponent(ButtonCadastrar))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -237,6 +330,18 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ButtonCadastrarActionPerformed
 
+    private void CampoNumeroLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoNumeroLoteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CampoNumeroLoteActionPerformed
+
+    private void CampoCnpjFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoCnpjFornecedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CampoCnpjFornecedorActionPerformed
+
+    private void ScrollBarAdjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {//GEN-FIRST:event_ScrollBarAdjustmentValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ScrollBarAdjustmentValueChanged
+
     /**
      * @param args the command line arguments
      */
@@ -265,18 +370,30 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonCadastrar;
     private javax.swing.JButton ButtonCancelar;
+    private javax.swing.JTextField CampoCnpjFornecedor;
     private javax.swing.JTextField CampoDosagem;
+    private javax.swing.JTextField CampoEmailFornecedor;
+    private javax.swing.JTextField CampoEmpresaFornecedor;
     private javax.swing.JTextField CampoEstoqueAtual;
     private javax.swing.JTextField CampoEstoqueMaximo;
     private javax.swing.JTextField CampoEstoqueMinimo;
+    private javax.swing.JTextField CampoIDFornecedor;
     private javax.swing.JTextField CampoNomeComercial;
+    private javax.swing.JTextField CampoNumeroLote;
     private javax.swing.JTextField CampoPreco;
     private javax.swing.JTextField CampoPrincipioAtivo;
+    private javax.swing.JTextField CampoQuantidadeRecebida;
     private javax.swing.JTextField CampoSKU;
+    private javax.swing.JTextField CampoTelefoneFornecedor;
+    private javax.swing.JTextField CampoValidadeLote;
     private javax.swing.JComboBox<String> ComboBoxForma;
     private javax.swing.JLabel LabelCadastroDeEstoque;
+    private javax.swing.JLabel LabelFornecedor;
+    private javax.swing.JLabel LabelLote;
     private javax.swing.JLabel LabelMedicamento;
+    private javax.swing.JPanel PanelLoteFornecedor;
     private javax.swing.JPanel PanelMedicamento;
+    private javax.swing.JScrollBar ScrollBar;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

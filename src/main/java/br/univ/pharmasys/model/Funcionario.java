@@ -1,20 +1,27 @@
 package br.univ.pharmasys.model;
 
 import java.time.LocalDate;
-import br.univ.pharmasys.service.FuncionarioValidador;
 
 public abstract class Funcionario {
 
-  protected  long idFuncionario;
+  protected long idFuncionario;
   protected String nome;
-  protected  String cpf;
+  protected String cpf;
   protected LocalDate dataNascimento;
   protected String sexo;
   protected String telefone;
   protected int tipo;
 
 
-  public Funcionario(){
+  public Funcionario(int idFuncionario, String nome, String cpf, LocalDate dataNascimento,String sexo,  String telefone, int tipo){
+
+      this.idFuncionario = idFuncionario;
+      this.nome = nome;
+      this.cpf = cpf;
+      this.dataNascimento = dataNascimento;
+      this.sexo = sexo;
+      this.telefone = telefone;
+      this.tipo = tipo;
 
   }
 
@@ -23,7 +30,13 @@ public abstract class Funcionario {
   }
 
   public void setIdFuncionario(long idFuncionario) {
-      FuncionarioValidador.idFuncionarioValidar(idFuncionario);
+
+      if(idFuncionario<=0){
+
+          throw new IllegalArgumentException("\nError: O ID de um funcionário precisa ser positivo");
+
+      }
+
       this.idFuncionario = idFuncionario;
   }
 
@@ -32,7 +45,10 @@ public abstract class Funcionario {
   }
 
   public void setNome(String nome) {
-      FuncionarioValidador.nomeValidar(nome);
+
+      if(nome==null || nome.trim().isEmpty()){
+          throw new IllegalArgumentException("\nError: O Campo deve ser preenchido, não pode ficar vazio! ");
+      }
       nome = nome.trim();
       this.nome = nome;
   }
@@ -42,53 +58,77 @@ public abstract class Funcionario {
   }
 
   public void setCpf(String cpf) {
-      FuncionarioValidador.cpfValidar(cpf);
-      cpf=cpf.replaceAll("\\D", "");
+      if(cpf==null || cpf.trim().isEmpty()){
+          throw new IllegalArgumentException("Error: Campo não foi preenchido!");
+      }
+
+      cpf = cpf.replaceAll("\\D", "");
+
+      if(cpf.length()!=11){
+          throw new IllegalArgumentException("Error: todo CPF deve conter 11 digitos!");
+      }
+
       this.cpf = cpf;
   }
 
   public LocalDate getDataNascimento() {
-
       return dataNascimento;
   }
 
   public void setDataNascimento(LocalDate dataNascimento) {
 
-      FuncionarioValidador.dataNascimentoValidar(dataNascimento);
+       if (dataNascimento==null){
+           throw new IllegalArgumentException("Error: O Campo deve ser preenchido!");
+       }
+
+       if (dataNascimento.isAfter(LocalDate.now())){
+
+           throw new IllegalArgumentException("Error: data de nascimento inválida");
+       }
+
        this.dataNascimento = dataNascimento;
 
   }
 
   public String getSexo() {
-
       return sexo;
   }
 
   public void setSexo(String sexo) {
-      FuncionarioValidador.sexoValidar(sexo);
+      if(sexo==null || sexo.trim().isEmpty()){
+          throw new IllegalArgumentException("Error: Campo não foi preenchido!");
+      }
+
       sexo = sexo.trim();
       this.sexo = sexo;
   }
 
   public String getTelefone() {
-
       return telefone;
   }
 
   public void setTelefone(String telefone) {
 
-      FuncionarioValidador.telefoneValidar(telefone);
+      if(telefone ==null || telefone.trim().isEmpty()){
+          throw new IllegalArgumentException("Error: Preencha o campo de telefone!");
+      }
+
+      telefone = telefone.trim();
+
       telefone = telefone.replaceAll("\\D", "");
+
+      if(telefone.length()!=11){
+          throw new IllegalArgumentException("Error: O número deve conter 11 digitos!");
+      }
+
       this.telefone = telefone;
   }
 
   public int getTipo() {
-
       return tipo;
   }
 
   public void setTipo(int tipo) {
-
       this.tipo = tipo;
   }
 
