@@ -16,6 +16,7 @@ public class Lote {
 
   public Lote() {
 
+
   }
   
   public long getIdLote(){
