@@ -11,6 +11,7 @@ public class TelefoneValidador {
 
         if(id <=0){
             throw new IdInvalidoException("\nError: O ID de um fornecedor deve ser sempre positiva e maior que zero");
+
         }
     }
 

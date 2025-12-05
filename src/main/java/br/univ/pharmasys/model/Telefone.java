@@ -18,6 +18,7 @@ public class Telefone {
 
         TelefoneValidador.idTelefoneValidar(idTelefone);
         this.idTelefone = idTelefone;
+
     }
 
     public String getNumeroTelefone() {
