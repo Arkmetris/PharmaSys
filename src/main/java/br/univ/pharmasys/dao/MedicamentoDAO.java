@@ -25,7 +25,7 @@ public class MedicamentoDAO {
     	 stmt.setString(1, med.getNomeComercial());
          stmt.setString(2, med.getSku());
          stmt.setString(3, med.getDosagem());
-         stmt.setString(4, med.getForma());
+         stmt.setString(4, med.getFormaFarmaceutica());
          stmt.setString(5, med.getPrincipioAtivo());
          stmt.setString(6, med.getCodigoBarras());
          stmt.setString(7, med.getLaboratorio());
@@ -33,8 +33,6 @@ public class MedicamentoDAO {
          stmt.setInt(9, med.getEstoqueMin());
          stmt.setInt(10, med.getEstoqueAtual());
          stmt.setDate(11, Date.valueOf(med.getDataExpiracao())); 
-         stmt.setDouble(12, med.getPreco());
-         stmt.setInt(13, med.getLoteId());
          
          stmt.executeUpdate();
          System.out.println("Medicamento salvo com sucesso!");
@@ -62,15 +60,13 @@ public class MedicamentoDAO {
                  med.setNomeComercial(rs.getString("NOME_COMERCIAL"));
                  med.setSku(rs.getString("SKU"));
                  med.setDosagem(rs.getString("DOSAGEM"));
-                 med.setForma(rs.getString("FORMA_FARMACEUTICA"));
+                 med.setFormaFarmaceutica(rs.getString("FORMA_FARMACEUTICA"));
                  med.setPrincipioAtivo(rs.getString("PRINCIPIO_ATIVO"));
                  med.setCodigoBarras(rs.getString("CODIGO_BARRAS"));
                  med.setLaboratorio(rs.getString("LABORATORIO"));
                  med.setEstoqueMax(rs.getInt("ESTOQUE_MAX"));
                  med.setEstoqueMin(rs.getInt("ESTOQUE_MIN"));
                  med.setEstoqueAtual(rs.getInt("ESTOQUE_ATUAL"));
-                 med.setPreco(rs.getDouble("PRECO"));
-                 med.setLoteId(rs.getInt("LOTE_ID"));
 
                  if (rs.getDate("DATA_EXPIRACAO") != null) {
                      med.setDataExpiracao(rs.getDate("DATA_EXPIRACAO").toLocalDate());
@@ -103,15 +99,13 @@ public class MedicamentoDAO {
                  med.setNomeComercial(rs.getString("NOME_COMERCIAL"));
                  med.setSku(rs.getString("SKU"));
                  med.setDosagem(rs.getString("DOSAGEM"));
-                 med.setForma(rs.getString("FORMA_FARMACEUTICA"));
+                 med.setFormaFarmaceutica(rs.getString("FORMA_FARMACEUTICA"));
                  med.setPrincipioAtivo(rs.getString("PRINCIPIO_ATIVO"));
                  med.setCodigoBarras(rs.getString("CODIGO_BARRAS"));
                  med.setLaboratorio(rs.getString("LABORATORIO"));
                  med.setEstoqueMax(rs.getInt("ESTOQUE_MAX"));
                  med.setEstoqueMin(rs.getInt("ESTOQUE_MIN"));
                  med.setEstoqueAtual(rs.getInt("ESTOQUE_ATUAL"));
-                 med.setPreco(rs.getDouble("PRECO"));
-                 med.setLoteId(rs.getInt("LOTE_ID"));
 
                  if (rs.getDate("DATA_EXPIRACAO") != null) {
                      med.setDataExpiracao(rs.getDate("DATA_EXPIRACAO").toLocalDate());
@@ -140,7 +134,7 @@ public class MedicamentoDAO {
 
          stmt.setString(1, med.getNomeComercial());
          stmt.setString(2, med.getDosagem());
-         stmt.setString(3, med.getForma());
+         stmt.setString(3, med.getFormaFarmaceutica());
          stmt.setString(4, med.getPrincipioAtivo());
          stmt.setString(5, med.getCodigoBarras());
          stmt.setString(6, med.getLaboratorio());
@@ -148,8 +142,6 @@ public class MedicamentoDAO {
          stmt.setInt(8, med.getEstoqueMin());
          stmt.setInt(9, med.getEstoqueAtual());
          stmt.setDate(10, Date.valueOf(med.getDataExpiracao()));
-         stmt.setDouble(11, med.getPreco());
-         stmt.setInt(12, med.getLoteId());
          stmt.setString(13, med.getSku());
 
          stmt.executeUpdate();
