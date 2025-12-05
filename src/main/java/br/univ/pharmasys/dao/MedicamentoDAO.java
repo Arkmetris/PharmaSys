@@ -3,13 +3,11 @@ package br.univ.pharmasys.dao;
 import br.univ.pharmasys.util.ConnectionFactory;
 import br.univ.pharmasys.model.Medicamento;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +15,10 @@ public class MedicamentoDAO {
 
 //
  public void create(Medicamento med) {
-     
+
      String sql = "INSERT INTO MEDICAMENTO (NOME_COMERCIAL, SKU, DOSAGEM, FORMA_FARMACEUTICA, PRINCIPIO_ATIVO, CODIGO_BARRAS, LABORATORIO, "
      		+ "ESTOQUE_MAX, ESTOQUE_MIN, ESTOQUE_ATUAL, DATA_EXPIRACAO, PRECO, LOTE_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-     
+
      try (Connection conn = ConnectionFactory.getConnection();
           PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -37,18 +35,18 @@ public class MedicamentoDAO {
          stmt.setDate(11, Date.valueOf(med.getDataExpiracao()));
          stmt.setBigDecimal(12, med.getPreco());
 
-         
+
          stmt.executeUpdate();
          System.out.println("Medicamento salvo com sucesso!");
-         
+
      } catch (SQLException e) {
          throw new RuntimeException("Erro ao salvar medicamento: " + e.getMessage(), e);
      }
  }
- 
+
  //
  public Medicamento buscarPorSku(String sku) {
-	 
+
      String sql = "SELECT * FROM MEDICAMENTO WHERE SKU = ?";
      Medicamento med = null;
 
@@ -60,7 +58,7 @@ public class MedicamentoDAO {
          try (ResultSet rs = stmt.executeQuery()) {
              if (rs.next()) {
                  med = new Medicamento();
-                 
+
                  med.setNomeComercial(rs.getString("NOME_COMERCIAL"));
                  med.setSku(rs.getString("SKU"));
                  med.setDosagem(rs.getString("DOSAGEM"));
@@ -89,7 +87,7 @@ public class MedicamentoDAO {
 
  //
  public List<Medicamento> buscarPorNome(String nome) {
-	 
+
      String sql = "SELECT * FROM MEDICAMENTO WHERE NOME_COMERCIAL = ?";
      List<Medicamento> lista = new ArrayList<>();
 
@@ -101,7 +99,7 @@ public class MedicamentoDAO {
          try (ResultSet rs = stmt.executeQuery()) {
              while (rs.next()) {
                  Medicamento med = new Medicamento();
-                 
+
                  med.setNomeComercial(rs.getString("NOME_COMERCIAL"));
                  med.setSku(rs.getString("SKU"));
                  med.setDosagem(rs.getString("DOSAGEM"));
@@ -130,10 +128,10 @@ public class MedicamentoDAO {
      }
      return lista;
  }
- 
+
  //
  public void update(Medicamento med) {
-	 
+
      String sql = "UPDATE MEDICAMENTO SET NOME_COMERCIAL=?, DOSAGEM=?, FORMA_FARMACEUTICA=?, PRINCIPIO_ATIVO=?, "
      		+ "CODIGO_BARRAS=?, LABORATORIO=?, ESTOQUE_MAX=?, ESTOQUE_MIN=?, ESTOQUE_ATUAL=?, DATA_EXPIRACAO=?, "
      		+ "PRECO=?, LOTE_ID=? WHERE SKU=?";

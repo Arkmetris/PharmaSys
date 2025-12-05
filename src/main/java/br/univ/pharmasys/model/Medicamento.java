@@ -1,13 +1,11 @@
 package br.univ.pharmasys.model;
 
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import br.univ.pharmasys.service.MedicamentoValidador;
 
-
 public class Medicamento {
-    
+
     private String sku;
     private String codigoBarras;
     private String nomeComercial;
@@ -22,164 +20,125 @@ public class Medicamento {
     private BigDecimal preco;
     private boolean inativo;
 
-
     public Medicamento() {
     }
 
-    //Objetivo aqui é fazer um ""escopo"" para o projeto de LPOO
-    //Muito provavelmente não terá todas as funcionalidades, e provavelmente terá que ser corrigido logo depois!
-    
-    public String getSku(){
+    // Objetivo aqui é fazer um "escopo" para o projeto de LPOO
+
+    public String getSku() {
         return sku;
     }
-    
-    public void setSku (String sku){
 
+    public void setSku(String sku) {
         MedicamentoValidador.skuValidar(sku);
         this.sku = sku.trim();
     }
 
-
-    public String getCodigoBarras(){
+    public String getCodigoBarras() {
         return codigoBarras;
     }
-    
-    public void setCodigoBarras (String codigoBarras){
 
+    public void setCodigoBarras(String codigoBarras) {
         MedicamentoValidador.codigoBarrasValidar(codigoBarras);
-        codigoBarras = codigoBarras.trim();
-        this.codigoBarras = codigoBarras;
+        this.codigoBarras = codigoBarras.trim();
     }
-    
-    public String getNomeComercial(){
+
+    public String getNomeComercial() {
         return nomeComercial;
     }
-    
-    public void setNomeComercial (String nomeComercial){
-        
-        //Verificar o nome do medicamento e ver se ele foi corretamente digitado
+
+    public void setNomeComercial(String nomeComercial) {
         MedicamentoValidador.nomeValidar(nomeComercial);
         this.nomeComercial = nomeComercial.trim();
     }
-    
-    public String getPrincipioAtivo(){
+
+    public String getPrincipioAtivo() {
         return principioAtivo;
     }
-    
-    public void setPrincipioAtivo (String principioAtivo){
 
+    public void setPrincipioAtivo(String principioAtivo) {
         MedicamentoValidador.principioAtivoValidar(principioAtivo);
-        principioAtivo = principioAtivo.trim();
-        this.principioAtivo = principioAtivo;
+        this.principioAtivo = principioAtivo.trim();
     }
-    
-    public String getDosagem(){
+
+    public String getDosagem() {
         return dosagem;
     }
-    
-    public void setDosagem (String dosagem){
 
+    public void setDosagem(String dosagem) {
         MedicamentoValidador.dosagemValidar(dosagem);
-        dosagem = dosagem.trim();
-        this.dosagem = dosagem;
-
+        this.dosagem = dosagem.trim();
     }
-    
-    public String getFormaFarmaceutica(){
+
+    public String getFormaFarmaceutica() {
         return formaFarmaceutica;
     }
-    
-    public void setFormaFarmaceutica(String formaFarmaceutica){
 
+    public void setFormaFarmaceutica(String formaFarmaceutica) {
         MedicamentoValidador.formaFarmaceuticaValidar(formaFarmaceutica);
-        formaFarmaceutica = formaFarmaceutica.trim();
-        this.formaFarmaceutica = formaFarmaceutica;
+        this.formaFarmaceutica = formaFarmaceutica.trim();
     }
 
-    public String getLaboratorio(){
+    public String getLaboratorio() {
         return laboratorio;
     }
 
-
-    //Validar se o que será escrito na parte de laboratório
-
-    public void setLaboratorio(String laboratorio){
-
+    public void setLaboratorio(String laboratorio) {
         MedicamentoValidador.laboratorioValidar(laboratorio);
-        laboratorio = laboratorio.trim();
-        this.laboratorio = laboratorio;
+        this.laboratorio = laboratorio.trim();
     }
 
-    public LocalDate getDataExpiracao(){
+    public LocalDate getDataExpiracao() {
         return dataExpiracao;
     }
 
-    public void setDataExpiracao(LocalDate dataExpiracao){
-
-        //Forma de validar a data de expiração de um medicamento
-        //Provavelmente vai sofrer certas alterações futuramente
-
+    public void setDataExpiracao(LocalDate dataExpiracao) {
         MedicamentoValidador.dataExpiracaoValidar(dataExpiracao);
         this.dataExpiracao = dataExpiracao;
     }
 
-    public int getEstoqueMin(){
+    public int getEstoqueMin() {
         return estoqueMin;
     }
-    
-    public void setEstoqueMin(int estoqueMin){
 
+    public void setEstoqueMin(int estoqueMin) {
+        // Cuidado: Certifique-se que o validador lida bem se estoqueMax for 0
         MedicamentoValidador.estoqueMinValidar(estoqueMin, estoqueMax);
         this.estoqueMin = estoqueMin;
-
     }
-    
-    public int getEstoqueMax(){
+
+    public int getEstoqueMax() {
         return estoqueMax;
     }
-    
-    public void setEstoqueMax(int estoqueMax){
 
+    public void setEstoqueMax(int estoqueMax) {
         MedicamentoValidador.estoqueMaxValidar(estoqueMax, estoqueMin);
         this.estoqueMax = estoqueMax;
     }
-    
-    public boolean isInativo(){
 
+    public boolean isInativo() {
         return inativo;
     }
-    
-    public void setInativo(boolean inativo){
 
+    public void setInativo(boolean inativo) {
         this.inativo = inativo;
     }
 
-    public int  getEstoqueAtual(){
+    public int getEstoqueAtual() {
         return estoqueAtual;
     }
 
-    public void setEstoqueAtual(int estoqueAtual){
-        
-        //Analisar a situação atual do estoque
-
+    public void setEstoqueAtual(int estoqueAtual) {
         MedicamentoValidador.estoqueAtualValidar(estoqueAtual, estoqueMin, estoqueMax);
         this.estoqueAtual = estoqueAtual;
     }
 
-    public BigDecimal getPreco(){
-
+    public BigDecimal getPreco() {
         return this.preco;
     }
 
-    public void setPreco(BigDecimal preco){
-
-        //Vai Validar o preço
-
+    public void setPreco(BigDecimal preco) {
         MedicamentoValidador.precoValido(preco);
         this.preco = preco;
     }
 }
-
-   
-    
-  
