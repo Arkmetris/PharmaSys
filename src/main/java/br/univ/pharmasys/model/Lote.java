@@ -14,21 +14,7 @@ public class Lote {
   private int quantidade;            
   private BigDecimal custoUnitario;
 
-  public Lote(long idLote, String skuMedicamento, String numeroLote, LocalDate dataValidade, int quantidade, BigDecimal custoUnitario) {
-
-      LoteValidador.idLoteValidador(idLote);
-      LoteValidador.skuMedicamentoValidar(skuMedicamento);
-      LoteValidador.numeroLoteValidador(numeroLote);
-      LoteValidador.dataValidadadeValidador(dataValidade);
-      LoteValidador.quantidadeValidador(quantidade);
-      LoteValidador.custoUnitarioValidador(custoUnitario);
-
-      this.idLote = idLote;
-      this.skuMedicamento = skuMedicamento;
-      this.numeroLote = numeroLote;
-      this.dataValidade = dataValidade;
-      this.quantidade = quantidade;
-      this.custoUnitario = custoUnitario;
+  public Lote() {
 
   }
   
