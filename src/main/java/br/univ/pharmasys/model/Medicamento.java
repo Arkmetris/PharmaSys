@@ -1,194 +1,181 @@
 package br.univ.pharmasys.model;
 
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Objects;
+import br.univ.pharmasys.service.MedicamentoValidador;
+
 
 public class Medicamento {
 
     private String sku;
     private String codigoBarras;
     private String nomeComercial;
-    private String formaFarmaceutica;
+    private String principioAtivo;
     private String dosagem;
-    private String fabricante;
-    private LocalDate dataExpiracao;
+    private String formaFarmaceutica;
     private String laboratorio;
+    private LocalDate dataExpiracao;
     private int estoqueMin;
     private int estoqueMax;
-    private Integer loteId; // Nullable, corresponde a LOTE_ID na tabela
+    private int estoqueAtual;
+    private BigDecimal preco;
+    private boolean inativo;
+
 
     public Medicamento() {
     }
 
-    // ---------- Getters & Setters com validações ----------
+    //Objetivo aqui é fazer um ""escopo"" para o projeto de LPOO
+    //Muito provavelmente não terá todas as funcionalidades, e provavelmente terá que ser corrigido logo depois!
 
-    public String getSku() {
+    public String getSku(){
         return sku;
     }
 
-    public void setSku(String sku) {
-        if (sku == null) {
-            throw new IllegalArgumentException("ERROR: É obrigatório todo medicamento ter um sku!");
-        }
-        sku = sku.trim();
-        if (sku.isEmpty()) {
-            throw new IllegalArgumentException("ERROR: O seu sku está vazio!");
-        }
-        this.sku = sku;
+    public void setSku (String sku){
+
+        MedicamentoValidador.skuValidar(sku);
+        this.sku = sku.trim();
     }
 
-    public String getCodigoBarras() {
+
+    public String getCodigoBarras(){
         return codigoBarras;
     }
 
-    public void setCodigoBarras(String codigoBarras) {
-        if (codigoBarras == null || codigoBarras.trim().isEmpty()) {
-            throw new IllegalArgumentException("Atenção: o seu código de barras não pode ser vazio ou nulo");
-        }
-        this.codigoBarras = codigoBarras.trim();
+    public void setCodigoBarras (String codigoBarras){
+
+        MedicamentoValidador.codigoBarrasValidar(codigoBarras);
+        codigoBarras = codigoBarras.trim();
+        this.codigoBarras = codigoBarras;
     }
 
-    public String getNomeComercial() {
+    public String getNomeComercial(){
         return nomeComercial;
     }
 
-    public void setNomeComercial(String nomeComercial) {
-        if (nomeComercial == null) {
-            throw new IllegalArgumentException("ERROR: É obrigatório todo medicamento ter um nome!");
-        }
-        nomeComercial = nomeComercial.trim();
-        if (nomeComercial.isEmpty()) {
-            throw new IllegalArgumentException("ERROR: Remédio não encontrado ou não existe!!");
-        }
-        this.nomeComercial = nomeComercial;
+    public void setNomeComercial (String nomeComercial){
+
+        //Verificar o nome do medicamento e ver se ele foi corretamente digitado
+        MedicamentoValidador.nomeValidar(nomeComercial);
+        this.nomeComercial = nomeComercial.trim();
     }
 
-    public String getFormaFarmaceutica() {
-        return formaFarmaceutica;
+    public String getPrincipioAtivo(){
+        return principioAtivo;
     }
 
-    public void setFormaFarmaceutica(String formaFarmaceutica) {
-        if (formaFarmaceutica == null || formaFarmaceutica.trim().isEmpty()) {
-            throw new IllegalArgumentException("Error: a forma farmacêutica está vazia ou nula");
-        }
-        this.formaFarmaceutica = formaFarmaceutica.trim();
+    public void setPrincipioAtivo (String principioAtivo){
+
+        MedicamentoValidador.principioAtivoValidar(principioAtivo);
+        principioAtivo = principioAtivo.trim();
+        this.principioAtivo = principioAtivo;
     }
 
-    public String getDosagem() {
+    public String getDosagem(){
         return dosagem;
     }
 
-    public void setDosagem(String dosagem) {
-        if (dosagem == null) {
-            throw new IllegalArgumentException("Error: A dosagem do medicamento não pode estar vazia!");
-        }
+    public void setDosagem (String dosagem){
+
+        MedicamentoValidador.dosagemValidar(dosagem);
         dosagem = dosagem.trim();
-        if (dosagem.isEmpty()) {
-            throw new IllegalArgumentException("Error: A dosagem foi escrita de uma forma errada, ou está vazia");
-        }
         this.dosagem = dosagem;
+
     }
 
-    public String getFabricante() {
-        return fabricante;
+    public String getFormaFarmaceutica(){
+        return formaFarmaceutica;
     }
 
-    public void setFabricante(String fabricante) {
-        if (fabricante == null || fabricante.trim().isEmpty()) {
-            throw new IllegalArgumentException("Error: Fabricante não pode ser vazio ou nulo");
-        }
-        this.fabricante = fabricante.trim();
+    public void setFormaFarmaceutica(String formaFarmaceutica){
+
+        MedicamentoValidador.formaFarmaceuticaValidar(formaFarmaceutica);
+        formaFarmaceutica = formaFarmaceutica.trim();
+        this.formaFarmaceutica = formaFarmaceutica;
     }
 
-    public LocalDate getDataExpiracao() {
-        return dataExpiracao;
-    }
-
-    public void setDataExpiracao(LocalDate dataExpiracao) {
-        if (dataExpiracao == null) {
-            throw new IllegalArgumentException("Error: A data de validade não pode ser vazia!");
-        } else if (dataExpiracao.isBefore(LocalDate.now())) {
-            throw new IllegalArgumentException("Error: O produto deve ter validade futura!");
-        }
-        this.dataExpiracao = dataExpiracao;
-    }
-
-    public String getLaboratorio() {
+    public String getLaboratorio(){
         return laboratorio;
     }
 
-    public void setLaboratorio(String laboratorio) {
-        if (laboratorio == null || laboratorio.trim().isEmpty()) {
-            throw new IllegalArgumentException("Error: Laboratório não pode ser vazio ou nulo");
-        }
-        this.laboratorio = laboratorio.trim();
+
+    //Validar se o que será escrito na parte de laboratório
+
+    public void setLaboratorio(String laboratorio){
+
+        MedicamentoValidador.laboratorioValidar(laboratorio);
+        laboratorio = laboratorio.trim();
+        this.laboratorio = laboratorio;
     }
 
-    public int getEstoqueMin() {
+    public LocalDate getDataExpiracao(){
+        return dataExpiracao;
+    }
+
+    public void setDataExpiracao(LocalDate dataExpiracao){
+
+        //Forma de validar a data de expiração de um medicamento
+        //Provavelmente vai sofrer certas alterações futuramente
+
+        MedicamentoValidador.dataExpiracaoValidar(dataExpiracao);
+        this.dataExpiracao = dataExpiracao;
+    }
+
+    public int getEstoqueMin(){
         return estoqueMin;
     }
 
-    public void setEstoqueMin(int estoqueMin) {
-        if (estoqueMin < 0) {
-            throw new IllegalArgumentException("Error: O estoque mínimo não pode ser menor que zero!");
-        }
-        if (this.estoqueMax > 0 && estoqueMin > this.estoqueMax) {
-            throw new IllegalArgumentException("Error: Estoque mínimo não pode ser maior que o máximo");
-        }
+    public void setEstoqueMin(int estoqueMin){
+
+        MedicamentoValidador.estoqueMinValidar(estoqueMin, estoqueMax);
         this.estoqueMin = estoqueMin;
+
     }
 
-    public int getEstoqueMax() {
+    public int getEstoqueMax(){
         return estoqueMax;
     }
 
-    public void setEstoqueMax(int estoqueMax) {
-        if (estoqueMax <= 0) {
-            throw new IllegalArgumentException("Error: o estoque máximo não pode ser negativo ou igual a 0!");
-        }
-        if (this.estoqueMin > 0 && this.estoqueMin > estoqueMax) {
-            throw new IllegalArgumentException("Error: o estoque mínimo não pode ser maior que o máximo!");
-        }
+    public void setEstoqueMax(int estoqueMax){
+
+        MedicamentoValidador.estoqueMaxValidar(estoqueMax, estoqueMin);
         this.estoqueMax = estoqueMax;
     }
 
-    public Integer getLoteId() {
-        return loteId;
+    public boolean isInativo(){
+
+        return inativo;
     }
 
-    public void setLoteId(Integer loteId) {
-        // loteId pode ser null (campo opcional na tabela)
-        this.loteId = loteId;
+    public void setInativo(boolean inativo){
+
+        this.inativo = inativo;
     }
 
-    // ---------- equals/hashCode/toString (úteis em coleções e logs) ----------
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Medicamento)) return false;
-        Medicamento that = (Medicamento) o;
-        return Objects.equals(sku, that.sku);
+    public int  getEstoqueAtual(){
+        return estoqueAtual;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(sku);
+    public void setEstoqueAtual(int estoqueAtual){
+
+        //Analisar a situação atual do estoque
+
+        MedicamentoValidador.estoqueAtualValidar(estoqueAtual, estoqueMin, estoqueMax);
+        this.estoqueAtual = estoqueAtual;
     }
 
-    @Override
-    public String toString() {
-        return "Medicamento{" +
-                "sku='" + sku + '\'' +
-                ", codigoBarras='" + codigoBarras + '\'' +
-                ", nomeComercial='" + nomeComercial + '\'' +
-                ", formaFarmaceutica='" + formaFarmaceutica + '\'' +
-                ", dosagem='" + dosagem + '\'' +
-                ", fabricante='" + fabricante + '\'' +
-                ", dataExpiracao=" + dataExpiracao +
-                ", laboratorio='" + laboratorio + '\'' +
-                ", estoqueMin=" + estoqueMin +
-                ", estoqueMax=" + estoqueMax +
-                ", loteId=" + loteId +
-                '}';
+    public BigDecimal getPreco(){
+
+        return this.preco;
+    }
+
+    public void setPreco(BigDecimal preco){
+
+        //Vai Validar o preço
+
+        MedicamentoValidador.precoValido(preco);
+        this.preco = preco;
     }
 }
