@@ -25,11 +25,7 @@ public class Medicamento {
 
     public Medicamento() {
     }
-    
-    public Medicamento(){
-        
-    }
-    
+
     //Objetivo aqui é fazer um ""escopo"" para o projeto de LPOO
     //Muito provavelmente não terá todas as funcionalidades, e provavelmente terá que ser corrigido logo depois!
     

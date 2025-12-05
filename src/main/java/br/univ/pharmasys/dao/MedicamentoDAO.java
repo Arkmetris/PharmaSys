@@ -34,8 +34,7 @@ public class MedicamentoDAO {
          stmt.setInt(8, med.getEstoqueMax());
          stmt.setInt(9, med.getEstoqueMin());
          stmt.setInt(10, med.getEstoqueAtual());
-         stmt.setDate(11, Date.valueOf(med.getDataExpiracao())); 
-
+         stmt.setDate(11, Date.valueOf(med.getDataExpiracao()));
          stmt.setBigDecimal(12, med.getPreco());
 
          
@@ -113,7 +112,6 @@ public class MedicamentoDAO {
                  med.setEstoqueMax(rs.getInt("ESTOQUE_MAX"));
                  med.setEstoqueMin(rs.getInt("ESTOQUE_MIN"));
                  med.setEstoqueAtual(rs.getInt("ESTOQUE_ATUAL"));
-
                  med.setPreco(rs.getBigDecimal("PRECO"));
 
 
@@ -153,7 +151,6 @@ public class MedicamentoDAO {
          stmt.setInt(8, med.getEstoqueMin());
          stmt.setInt(9, med.getEstoqueAtual());
          stmt.setDate(10, Date.valueOf(med.getDataExpiracao()));
-
          stmt.setString(13, med.getSku());
 
          stmt.executeUpdate();
