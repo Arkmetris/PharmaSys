@@ -4,16 +4,23 @@ import br.univ.pharmasys.exceptions.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.regex.Matcher;
 
 public class MedicamentoValidador {
 
 
     public static void skuValidar(String sku){
 
-        if (sku == null || sku.trim().isEmpty()){
+        if (sku == null|| sku.trim().isEmpty()){
 
             throw new ErroDePreenchimentoInvalidoException("Campo Vazio!");
 
+        }
+
+        sku = sku.trim();
+
+        if(!sku.matches("\\S+")){
+            throw new ErroDePreenchimentoInvalidoException("Não pode espaço no meio do sku");
         }
 
 
@@ -23,7 +30,17 @@ public class MedicamentoValidador {
         if (codigo == null || codigo.trim().isEmpty()){
 
             throw new ErroDePreenchimentoInvalidoException("Campo do código de barras deve ser preenchido!");
+        }
 
+        codigo = codigo.trim();
+        if(codigo.length()!=13){
+
+            throw new ErroDePreenchimentoInvalidoException("Código de barras deve ter 13 caracteres!");
+
+        }
+        else if(!codigo.matches("\\S+")){
+
+            throw new ErroDePreenchimentoInvalidoException("Atenção: Não pode haver espaçamento no meio do código de barras");
         }
     }
 
@@ -38,6 +55,12 @@ public class MedicamentoValidador {
         if (nome.isEmpty()){
             throw new NomeInvalidoException("ERROR: Remédio não encontrado ou não existe!!");
         }
+        else if (!nome.matches("\\S+")){
+
+            throw new NomeInvalidoException("Atenção: você não pode por espaçamento nos seus nomes!");
+        }
+
+
 
     }
 
@@ -45,6 +68,13 @@ public class MedicamentoValidador {
 
         if(principio == null || principio.trim().isEmpty()){
             throw new ErroDePreenchimentoInvalidoException("Está inválido ou vazio!");
+        }
+
+
+        principio = principio.trim();
+
+        if (!principio.matches("\\S+")){
+            throw new ErroDePreenchimentoInvalidoException("Não é permitido espaçamento");
         }
 
     }
@@ -60,6 +90,11 @@ public class MedicamentoValidador {
         if(dose.isEmpty()){
             throw new ErroDePreenchimentoInvalidoException("Error: A dosagem foi escrita de uma forma errada, ou está vazia");
         }
+        else if (!dose.matches("\\S+")){
+
+            throw new ErroDePreenchimentoInvalidoException("Atenção: Não é permitido espaçamentos na dosagem!");
+
+        }
 
     }
 
@@ -69,12 +104,27 @@ public class MedicamentoValidador {
             throw new ErroDePreenchimentoInvalidoException("Error: a forma está vazia ou nula");
         }
 
+        formaFarmaceutica = formaFarmaceutica.trim();
+
+        if(!formaFarmaceutica.matches("\\S+")){
+
+            throw new ErroDePreenchimentoInvalidoException("Atenção: Não é permitido espaçamentos!");
+        }
+
     }
 
     public static void laboratorioValidar(String laboratorio){
 
         if(laboratorio == null || laboratorio.trim().isEmpty()){
             throw new ErroDePreenchimentoInvalidoException("Error: Está vazia ou nula");
+        }
+
+        laboratorio = laboratorio.trim();
+
+        if(!laboratorio.matches("\\S+")){
+
+            throw new ErroDePreenchimentoInvalidoException("Atenção: Não é permitido espaçamentos");
+
         }
     }
 

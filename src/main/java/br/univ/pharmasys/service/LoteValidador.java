@@ -22,12 +22,24 @@ public class LoteValidador {
             throw new ErroDePreenchimentoInvalidoException("\nError: Em seu lote, o sku do seu medicamento não pode ser vazio e nem nulo!");
         }
 
+        sku = sku.trim();
+
+        if(!sku.matches("\\S+")){
+            throw new ErroDePreenchimentoInvalidoException("Não pode espaço no meio do sku");
+        }
+
 
     }
 
     public static void numeroLoteValidador(String numeroLote) {
         if (numeroLote == null || numeroLote.trim().isEmpty()) {
             throw new ErroDePreenchimentoInvalidoException("\nError: Não pode ser vazio ou nulo!");
+        }
+
+        numeroLote = numeroLote.trim();
+
+        if(!numeroLote.matches("\\S+")){
+            throw new ErroDePreenchimentoInvalidoException("Atenção: Sem espaçamentos no campo de preenchimento");
         }
 
 
