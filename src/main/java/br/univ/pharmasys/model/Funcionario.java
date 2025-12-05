@@ -14,22 +14,7 @@ public abstract class Funcionario {
   protected int tipo;
 
 
-  public Funcionario(int idFuncionario, String nome, String cpf, LocalDate dataNascimento,String sexo,  String telefone, int tipo){
-
-        FuncionarioValidador.idFuncionarioValidar(idFuncionario);
-        FuncionarioValidador.nomeValidar(nome);
-        FuncionarioValidador.cpfValidar(cpf);
-        FuncionarioValidador.dataNascimentoValidar(dataNascimento);
-        FuncionarioValidador.sexoValidar(sexo);
-        FuncionarioValidador.telefoneValidar(telefone);
-
-       this.idFuncionario = idFuncionario;
-       this.nome = nome.trim();
-       this.cpf = cpf.replaceAll("\\D", "");
-       this.dataNascimento = dataNascimento;
-       this.sexo = sexo.trim();
-       this.telefone = telefone.replaceAll("\\D", "");
-       this.tipo = tipo;
+  public Funcionario(){
 
   }
 
@@ -48,6 +33,7 @@ public abstract class Funcionario {
 
   public void setNome(String nome) {
       FuncionarioValidador.nomeValidar(nome);
+      nome = nome.trim();
       this.nome = nome;
   }
 
@@ -57,7 +43,8 @@ public abstract class Funcionario {
 
   public void setCpf(String cpf) {
       FuncionarioValidador.cpfValidar(cpf);
-      this.cpf = cpf.replaceAll("\\D", "");
+      cpf=cpf.replaceAll("\\D", "");
+      this.cpf = cpf;
   }
 
   public LocalDate getDataNascimento() {
@@ -79,7 +66,8 @@ public abstract class Funcionario {
 
   public void setSexo(String sexo) {
       FuncionarioValidador.sexoValidar(sexo);
-      this.sexo = sexo.trim();
+      sexo = sexo.trim();
+      this.sexo = sexo;
   }
 
   public String getTelefone() {
@@ -90,7 +78,8 @@ public abstract class Funcionario {
   public void setTelefone(String telefone) {
 
       FuncionarioValidador.telefoneValidar(telefone);
-      this.telefone = telefone.replaceAll("\\D", "");
+      telefone = telefone.replaceAll("\\D", "");
+      this.telefone = telefone;
   }
 
   public int getTipo() {

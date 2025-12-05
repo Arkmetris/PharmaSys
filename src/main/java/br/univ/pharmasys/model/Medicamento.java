@@ -1,6 +1,7 @@
 package br.univ.pharmasys.model;
 
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import br.univ.pharmasys.service.MedicamentoValidador;
 
@@ -18,39 +19,11 @@ public class Medicamento {
     private int estoqueMin;
     private int estoqueMax;
     private int estoqueAtual;
+    private BigDecimal preco;
     private boolean inativo;
 
 
-    public Medicamento(String sku, String codigoBarras, String nomeComercial, String principioAtivo, String dosagem, String formaFarmaceutica,
-                       String laboratorio, LocalDate dataExpiracao, int estoqueMin, int estoqueMax, int estoqueAtual, boolean inativo) {
-
-
-               MedicamentoValidador.skuValidar(sku);
-               MedicamentoValidador.codigoBarrasValidar(codigoBarras);
-               MedicamentoValidador.nomeValidar(nomeComercial);
-               MedicamentoValidador.principioAtivoValidar(principioAtivo);
-               MedicamentoValidador.dosagemValidar(dosagem);
-               MedicamentoValidador.formaFarmaceuticaValidar(formaFarmaceutica);
-               MedicamentoValidador.laboratorioValidar(laboratorio);
-               MedicamentoValidador.dataExpiracaoValidar(dataExpiracao);
-               MedicamentoValidador.estoqueMinValidar(estoqueMin, estoqueMax);
-               MedicamentoValidador.estoqueMaxValidar(estoqueMax, estoqueMin);
-               MedicamentoValidador.estoqueAtualValidar(estoqueAtual, estoqueMin, estoqueMax);
-
-               this.sku = sku;
-               this.codigoBarras = codigoBarras;
-               this.nomeComercial = nomeComercial;
-               this.principioAtivo = principioAtivo;
-               this.dosagem = dosagem;
-               this.formaFarmaceutica = formaFarmaceutica;
-               this.laboratorio = laboratorio;
-               this.dataExpiracao = dataExpiracao;
-               this.estoqueMin = estoqueMin;
-               this.estoqueMax = estoqueMax;
-               this.estoqueAtual = estoqueAtual;
-               this.inativo = inativo;
-
-
+    public Medicamento() {
     }
     
     public Medicamento(){
@@ -119,10 +92,10 @@ public class Medicamento {
         return formaFarmaceutica;
     }
     
-    public void setFormaFarmaceutica(String forma){
+    public void setFormaFarmaceutica(String formaFarmaceutica){
 
         MedicamentoValidador.formaFarmaceuticaValidar(formaFarmaceutica);
-        formaFarmaceutica = forma.trim();
+        formaFarmaceutica = formaFarmaceutica.trim();
         this.formaFarmaceutica = formaFarmaceutica;
     }
 
@@ -194,6 +167,19 @@ public class Medicamento {
 
         MedicamentoValidador.estoqueAtualValidar(estoqueAtual, estoqueMin, estoqueMax);
         this.estoqueAtual = estoqueAtual;
+    }
+
+    public BigDecimal getPreco(){
+
+        return this.preco;
+    }
+
+    public void setPreco(BigDecimal preco){
+
+        //Vai Validar o preço
+
+        MedicamentoValidador.precoValido(preco);
+        this.preco = preco;
     }
 }
 

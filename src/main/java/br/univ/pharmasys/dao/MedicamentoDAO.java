@@ -3,11 +3,13 @@ package br.univ.pharmasys.dao;
 import br.univ.pharmasys.util.ConnectionFactory;
 import br.univ.pharmasys.model.Medicamento;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +35,11 @@ public class MedicamentoDAO {
          stmt.setInt(9, med.getEstoqueMin());
          stmt.setInt(10, med.getEstoqueAtual());
          stmt.setDate(11, Date.valueOf(med.getDataExpiracao())); 
+<<<<<<< HEAD
+=======
+         stmt.setBigDecimal(12, med.getPreco());
+
+>>>>>>> 6ad3f4f8e34ea020d64c25d8047536c1401d15b0
          
          stmt.executeUpdate();
          System.out.println("Medicamento salvo com sucesso!");
@@ -67,6 +74,11 @@ public class MedicamentoDAO {
                  med.setEstoqueMax(rs.getInt("ESTOQUE_MAX"));
                  med.setEstoqueMin(rs.getInt("ESTOQUE_MIN"));
                  med.setEstoqueAtual(rs.getInt("ESTOQUE_ATUAL"));
+<<<<<<< HEAD
+=======
+                 med.setPreco(rs.getBigDecimal("PRECO"));
+
+>>>>>>> 6ad3f4f8e34ea020d64c25d8047536c1401d15b0
 
                  if (rs.getDate("DATA_EXPIRACAO") != null) {
                      med.setDataExpiracao(rs.getDate("DATA_EXPIRACAO").toLocalDate());
@@ -106,6 +118,11 @@ public class MedicamentoDAO {
                  med.setEstoqueMax(rs.getInt("ESTOQUE_MAX"));
                  med.setEstoqueMin(rs.getInt("ESTOQUE_MIN"));
                  med.setEstoqueAtual(rs.getInt("ESTOQUE_ATUAL"));
+<<<<<<< HEAD
+=======
+                 med.setPreco(rs.getBigDecimal("PRECO"));
+
+>>>>>>> 6ad3f4f8e34ea020d64c25d8047536c1401d15b0
 
                  if (rs.getDate("DATA_EXPIRACAO") != null) {
                      med.setDataExpiracao(rs.getDate("DATA_EXPIRACAO").toLocalDate());
@@ -142,6 +159,10 @@ public class MedicamentoDAO {
          stmt.setInt(8, med.getEstoqueMin());
          stmt.setInt(9, med.getEstoqueAtual());
          stmt.setDate(10, Date.valueOf(med.getDataExpiracao()));
+<<<<<<< HEAD
+=======
+         stmt.setBigDecimal(11, med.getPreco());
+>>>>>>> 6ad3f4f8e34ea020d64c25d8047536c1401d15b0
          stmt.setString(13, med.getSku());
 
          stmt.executeUpdate();

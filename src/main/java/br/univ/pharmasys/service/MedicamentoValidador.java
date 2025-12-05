@@ -2,6 +2,7 @@ package br.univ.pharmasys.service;
 
 import br.univ.pharmasys.exceptions.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class MedicamentoValidador {
@@ -135,5 +136,22 @@ public class MedicamentoValidador {
         }
 
     }
+
+    public static void precoValido (BigDecimal preco){
+
+        if(preco == null){
+            throw new CustoUnitarioInvalidoException("\nError:Não pode ser nulo!");
+        }
+
+        else if (preco.compareTo(BigDecimal.ZERO)== 0){
+            throw new CustoUnitarioInvalidoException("Error: Não pode ser zero!");
+        }
+        else if (preco.compareTo(BigDecimal.ZERO) < 0) {
+            throw new CustoUnitarioInvalidoException("Error: Não pode ser negativo!");
+        }
+
+
+    }
+
 
 }

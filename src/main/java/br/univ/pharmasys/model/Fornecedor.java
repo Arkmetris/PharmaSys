@@ -9,18 +9,7 @@ public class Fornecedor {
     private String cnpj;
     private boolean inativo;
     
-    public Fornecedor(long idFornecedor, String nome, String cnpj, boolean inativo) {
-
-        FornecedorValidador.idFornecedorValidar(idFornecedor);
-        FornecedorValidador.nomeValidar(nome);
-        FornecedorValidador.cnpjValidar(cnpj);
-
-
-        this.idFornecedor = idFornecedor;
-        this.nome = nome.trim();
-        this.cnpj = cnpj.replaceAll("\\D", "");
-        this.inativo = inativo;
-       
+    public Fornecedor() {
     }
     
     public long getIdFornecedor(){
@@ -44,7 +33,8 @@ public class Fornecedor {
     public void setNome (String nome){
 
         FornecedorValidador.nomeValidar(nome);
-        this.nome = nome.trim();
+        nome = nome.trim();
+        this.nome = nome;
             
     }
     
@@ -58,7 +48,8 @@ public class Fornecedor {
         //Validar o cnpj do fornecedor!
 
         FornecedorValidador.cnpjValidar(cnpj);
-        this.cnpj = cnpj.replaceAll("\\D ","");
+        cnpj= cnpj.replaceAll("\\D ", "");
+        this.cnpj = cnpj;
     }
     
     public boolean isInativo(){
