@@ -19,6 +19,9 @@ public class FuncionarioValidador {
        if(nome==null || nome.trim().isEmpty()){
            throw new NomeInvalidoException("\nError: O Campo deve ser preenchido, não pode ficar vazio! ");
        }
+
+       nome = nome.trim();
+
    }
 
    public static void cpfValidar(String cpf){
@@ -53,6 +56,13 @@ public class FuncionarioValidador {
            throw new ErroDePreenchimentoInvalidoException("Error: Campo não foi preenchido!");
        }
 
+       sexo = sexo.trim();
+
+       if(!sexo.matches("\\S+")){
+
+           throw new ErroDePreenchimentoInvalidoException("Atenção: Não pode ter espaçamentos nesse campo");
+       }
+
    }
 
    public static void telefoneValidar(String telefone){
@@ -66,6 +76,13 @@ public class FuncionarioValidador {
        if(telefone.length()!=11){
            throw new TelefoneInvalidoException("Error: O número deve conter 11 digitos!");
        }
+       if(telefone.trim().matches("\\S+")){
+
+
+           throw new TelefoneInvalidoException("Error: O campo de telefone deve ser preenchido!");
+
+       }
+
 
    }
 }
