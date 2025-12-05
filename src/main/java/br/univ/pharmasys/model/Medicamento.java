@@ -54,11 +54,11 @@ public class Medicamento {
         return nomeComercial;
     }
     
-    public static void setNomeComercial(String nomeComercial){
+    public void setNomeComercial (String nomeComercial){
         
         //Verificar o nome do medicamento e ver se ele foi corretamente digitado
         MedicamentoValidador.nomeValidar(nomeComercial);
-        nomeComercial = nomeComercial.trim();
+        this.nomeComercial = nomeComercial.trim();
     }
     
     public String getPrincipioAtivo(){
