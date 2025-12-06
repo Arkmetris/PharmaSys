@@ -4,14 +4,14 @@
 
 	public class ValidadorUtils {
 
-	    public static boolean isEmailValido(String email) {
+	    public static boolean EmailValido(String email) {
 	        if (email == null || email.isEmpty()) return false;
 	        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
 	        Pattern pat = Pattern.compile(emailRegex);
 	        return pat.matcher(email).matches();
 	    }
 	    
-	    public static boolean isCpfValido(String cpf) {
+	    public static boolean CpfValido(String cpf) {
 	    	
 	        cpf = cpf.replaceAll("[^0-9]", "");
 
@@ -48,6 +48,49 @@
 
 	            return (dig10 == cpf.charAt(9)) && (dig11 == cpf.charAt(10));
 	            
+	        } catch (InputMismatchException erro) {
+	            return false;
+	        }
+	    }
+	    
+	    public static boolean CnpjValido(String cnpj) {
+	        cnpj = cnpj.replaceAll("[^0-9]", "");
+
+	        if (cnpj.equals("00000000000000") || cnpj.length() != 14) return false;
+
+	        char dig13, dig14;
+	        int sm, i, r, num, peso;
+
+	        try {
+	           
+	            sm = 0;
+	            peso = 2;
+	            for (i = 11; i >= 0; i--) {
+	                num = (int) (cnpj.charAt(i) - 48);
+	                sm = sm + (num * peso);
+	                peso = peso + 1;
+	                if (peso == 10) peso = 2;
+	            }
+
+	            r = sm % 11;
+	            if ((r == 0) || (r == 1)) dig13 = '0';
+	            else dig13 = (char) ((11 - r) + 48);
+
+	            
+	            sm = 0;
+	            peso = 2;
+	            for (i = 12; i >= 0; i--) {
+	                num = (int) (cnpj.charAt(i) - 48);
+	                sm = sm + (num * peso);
+	                peso = peso + 1;
+	                if (peso == 10) peso = 2;
+	            }
+
+	            r = sm % 11;
+	            if ((r == 0) || (r == 1)) dig14 = '0';
+	            else dig14 = (char) ((11 - r) + 48);
+
+	            return (dig13 == cnpj.charAt(12)) && (dig14 == cnpj.charAt(13));
 	        } catch (InputMismatchException erro) {
 	            return false;
 	        }
