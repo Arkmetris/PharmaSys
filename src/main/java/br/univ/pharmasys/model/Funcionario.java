@@ -3,7 +3,7 @@ package br.univ.pharmasys.model;
 import java.time.LocalDate;
 import br.univ.pharmasys.service.FuncionarioValidador;
 
-public abstract class Funcionario {
+public class Funcionario {
 
   protected  long idFuncionario;
   protected String nome;
@@ -22,7 +22,11 @@ public abstract class Funcionario {
     return idFuncionario;
   }
 
+
+
   public void setIdFuncionario(long idFuncionario) {
+
+      //Vai validar o id do funcionario, chamando o FuncionarioValidador.idFuncionarioValidar()
       FuncionarioValidador.idFuncionarioValidar(idFuncionario);
       this.idFuncionario = idFuncionario;
   }
@@ -32,8 +36,10 @@ public abstract class Funcionario {
   }
 
   public void setNome(String nome) {
-      FuncionarioValidador.nomeValidar(nome);
+
+      //Vai validar o nome do funcionario, chamando o FuncionarioValidador.nomeValidar()
       nome = nome.trim();
+      FuncionarioValidador.nomeValidar(nome);
       this.nome = nome;
   }
 
@@ -42,6 +48,8 @@ public abstract class Funcionario {
   }
 
   public void setCpf(String cpf) {
+
+      //Vai validar o CPF do funcionario, mas provavelmente vai ser mudado logo, logo
       FuncionarioValidador.cpfValidar(cpf);
       cpf=cpf.replaceAll("\\D", "");
       this.cpf = cpf;
@@ -54,6 +62,7 @@ public abstract class Funcionario {
 
   public void setDataNascimento(LocalDate dataNascimento) {
 
+      //Validação da data de nascimento do funcionario
       FuncionarioValidador.dataNascimentoValidar(dataNascimento);
        this.dataNascimento = dataNascimento;
 
@@ -65,8 +74,8 @@ public abstract class Funcionario {
   }
 
   public void setSexo(String sexo) {
-      FuncionarioValidador.sexoValidar(sexo);
       sexo = sexo.trim();
+      FuncionarioValidador.sexoValidar(sexo);
       this.sexo = sexo;
   }
 

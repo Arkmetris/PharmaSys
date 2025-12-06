@@ -19,9 +19,6 @@ public class FuncionarioValidador {
        if(nome==null || nome.trim().isEmpty()){
            throw new NomeInvalidoException("\nError: O Campo deve ser preenchido, não pode ficar vazio! ");
        }
-
-       nome = nome.trim();
-
    }
 
    public static void cpfValidar(String cpf){
@@ -67,7 +64,7 @@ public class FuncionarioValidador {
 
    public static void telefoneValidar(String telefone){
 
-       if(telefone ==null || telefone.trim().isEmpty()){
+       if(telefone ==null || telefone.isEmpty()){
            throw new TelefoneInvalidoException("Error: Preencha o campo de telefone!");
        }
 

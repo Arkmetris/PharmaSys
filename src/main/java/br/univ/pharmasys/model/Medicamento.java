@@ -30,8 +30,9 @@ public class Medicamento {
     }
 
     public void setSku(String sku) {
+        sku = sku.trim();
         MedicamentoValidador.skuValidar(sku);
-        this.sku = sku.trim();
+        this.sku = sku;
     }
 
     public String getCodigoBarras() {
@@ -39,8 +40,9 @@ public class Medicamento {
     }
 
     public void setCodigoBarras(String codigoBarras) {
+        codigoBarras = codigoBarras.trim();
         MedicamentoValidador.codigoBarrasValidar(codigoBarras);
-        this.codigoBarras = codigoBarras.trim();
+        this.codigoBarras = codigoBarras;
     }
 
     public String getNomeComercial() {
@@ -48,8 +50,9 @@ public class Medicamento {
     }
 
     public void setNomeComercial(String nomeComercial) {
+        nomeComercial = nomeComercial.trim();
         MedicamentoValidador.nomeValidar(nomeComercial);
-        this.nomeComercial = nomeComercial.trim();
+        this.nomeComercial = nomeComercial;
     }
 
     public String getPrincipioAtivo() {
@@ -57,8 +60,9 @@ public class Medicamento {
     }
 
     public void setPrincipioAtivo(String principioAtivo) {
+        principioAtivo = principioAtivo.trim();
         MedicamentoValidador.principioAtivoValidar(principioAtivo);
-        this.principioAtivo = principioAtivo.trim();
+        this.principioAtivo = principioAtivo;
     }
 
     public String getDosagem() {
@@ -66,8 +70,9 @@ public class Medicamento {
     }
 
     public void setDosagem(String dosagem) {
+        dosagem = dosagem.trim();
         MedicamentoValidador.dosagemValidar(dosagem);
-        this.dosagem = dosagem.trim();
+        this.dosagem = dosagem;
     }
 
     public String getFormaFarmaceutica() {
@@ -75,8 +80,9 @@ public class Medicamento {
     }
 
     public void setFormaFarmaceutica(String formaFarmaceutica) {
+        formaFarmaceutica = formaFarmaceutica.trim();
         MedicamentoValidador.formaFarmaceuticaValidar(formaFarmaceutica);
-        this.formaFarmaceutica = formaFarmaceutica.trim();
+        this.formaFarmaceutica = formaFarmaceutica;
     }
 
     public String getLaboratorio() {
@@ -84,8 +90,9 @@ public class Medicamento {
     }
 
     public void setLaboratorio(String laboratorio) {
+        laboratorio = laboratorio.trim();
         MedicamentoValidador.laboratorioValidar(laboratorio);
-        this.laboratorio = laboratorio.trim();
+        this.laboratorio = laboratorio;
     }
 
     public LocalDate getDataExpiracao() {

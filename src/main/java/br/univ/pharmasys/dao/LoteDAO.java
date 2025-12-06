@@ -60,7 +60,7 @@ public class LoteDAO {
 
                     lote.setIdLote(rs.getLong("ID_LOTE"));
                     lote.setSkuMedicamento(rs.getString("SKU_MEDICAMENTO"));
-                    lote.setNumeroLote(rs.getInt("NUMERO_LOTE"));
+                    lote.setNumeroLote(rs.getString("NUMERO_LOTE"));
 
                     Date sqlDate = rs.getDate("VALIDADE");
                     if (sqlDate != null) {
@@ -104,7 +104,7 @@ public class LoteDAO {
             stmt.setInt(4, lote.getQuantidadeAtual());
             stmt.setBigDecimal(5, lote.getPreco());
 
-            stmt.setInt(6, lote.getNumeroLote());
+            stmt.setString(6, lote.getNumeroLote());
 
             stmt.executeUpdate();
 // Executa a instrução SQL para atualizar o Lote.
