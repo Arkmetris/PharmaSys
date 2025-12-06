@@ -23,7 +23,6 @@ public class Funcionario {
   }
 
 
-
   public void setIdFuncionario(long idFuncionario) {
 
       //Vai validar o id do funcionario, chamando o FuncionarioValidador.idFuncionarioValidar()

@@ -45,9 +45,8 @@ public class Lote {
       LoteValidador.skuMedicamentoValidar(skuMedicamento);
       this.skuMedicamento = skuMedicamento;
   }
-  
 
-  
+
   public LocalDate getValidade(){
      return this.validade;
   }
