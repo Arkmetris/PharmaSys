@@ -30,7 +30,11 @@ public class Medicamento {
     }
 
     public void setSku(String sku) {
+ AceitaMatheus
         sku = sku.trim();
+
+        sku=sku.trim();
+ main
         MedicamentoValidador.skuValidar(sku);
         this.sku = sku;
     }
@@ -40,7 +44,11 @@ public class Medicamento {
     }
 
     public void setCodigoBarras(String codigoBarras) {
+ AceitaMatheus
         codigoBarras = codigoBarras.trim();
+
+        codigoBarras=codigoBarras.trim();
+ main
         MedicamentoValidador.codigoBarrasValidar(codigoBarras);
         this.codigoBarras = codigoBarras;
     }
@@ -50,7 +58,11 @@ public class Medicamento {
     }
 
     public void setNomeComercial(String nomeComercial) {
+ AceitaMatheus
         nomeComercial = nomeComercial.trim();
+
+        nomeComercial=nomeComercial.trim();
+ main
         MedicamentoValidador.nomeValidar(nomeComercial);
         this.nomeComercial = nomeComercial;
     }
@@ -60,7 +72,11 @@ public class Medicamento {
     }
 
     public void setPrincipioAtivo(String principioAtivo) {
+ AceitaMatheus
         principioAtivo = principioAtivo.trim();
+
+        principioAtivo=principioAtivo.trim();
+ main
         MedicamentoValidador.principioAtivoValidar(principioAtivo);
         this.principioAtivo = principioAtivo;
     }
@@ -70,7 +86,11 @@ public class Medicamento {
     }
 
     public void setDosagem(String dosagem) {
+ AceitaMatheus
         dosagem = dosagem.trim();
+
+        dosagem =  dosagem.trim();
+ main
         MedicamentoValidador.dosagemValidar(dosagem);
         this.dosagem = dosagem;
     }
@@ -80,7 +100,11 @@ public class Medicamento {
     }
 
     public void setFormaFarmaceutica(String formaFarmaceutica) {
+ AceitaMatheus
         formaFarmaceutica = formaFarmaceutica.trim();
+
+        formaFarmaceutica =  formaFarmaceutica.trim();
+ main
         MedicamentoValidador.formaFarmaceuticaValidar(formaFarmaceutica);
         this.formaFarmaceutica = formaFarmaceutica;
     }
@@ -90,7 +114,11 @@ public class Medicamento {
     }
 
     public void setLaboratorio(String laboratorio) {
+ AceitaMatheus
         laboratorio = laboratorio.trim();
+
+        laboratorio =  laboratorio.trim();
+ main
         MedicamentoValidador.laboratorioValidar(laboratorio);
         this.laboratorio = laboratorio;
     }

@@ -26,7 +26,10 @@ public class Telefone {
     }
 
     public void setNumeroTelefone(String numeroTelefone) {
+ AceitaMatheus
 
+
+ main
         numeroTelefone = numeroTelefone.trim();
         TelefoneValidador.numeroTelefoneValidar(numeroTelefone);
         this.numeroTelefone = numeroTelefone;

@@ -7,11 +7,12 @@ public class Funcionario {
 
   protected  long idFuncionario;
   protected String nome;
-  protected  String cpf;
+  protected String cpf;
   protected LocalDate dataNascimento;
   protected String sexo;
   protected String telefone;
   protected int tipo;
+  protected String senha;
 
 
   public Funcionario(){
@@ -36,8 +37,11 @@ public class Funcionario {
   }
 
   public void setNome(String nome) {
+ AceitaMatheus
 
       //Vai validar o nome do funcionario, chamando o FuncionarioValidador.nomeValidar()
+
+ main
       nome = nome.trim();
       FuncionarioValidador.nomeValidar(nome);
       this.nome = nome;
@@ -99,6 +103,16 @@ public class Funcionario {
   public void setTipo(int tipo) {
 
       this.tipo = tipo;
+  }
+
+  public String getSenha() {
+      return senha;
+  }
+
+  public void setSenha(String senha) {
+      senha= senha.trim();
+      FuncionarioValidador.senhaValidar(senha);
+      this.senha = senha;
   }
 
 

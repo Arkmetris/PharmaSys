@@ -46,7 +46,19 @@ public class Lote {
       this.skuMedicamento = skuMedicamento;
   }
   
+ AceitaMatheus
 
+  public String getNumeroLote(){
+    return this.numeroLote;
+  }
+  
+  public void setNumeroLote(String numeroLote){
+
+      numeroLote = numeroLote.trim();
+      LoteValidador.numeroLoteValidador(numeroLote);
+      this.numeroLote = numeroLote;
+  }
+> main
   
   public LocalDate getValidade(){
      return this.validade;

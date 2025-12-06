@@ -32,7 +32,10 @@ public class Fornecedor {
     }
     
     public void setNome (String nome){
+ AceitaMatheus
 
+
+ main
         nome = nome.trim();
         FornecedorValidador.nomeValidar(nome);
         this.nome = nome;
