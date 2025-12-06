@@ -7,12 +7,14 @@ import br.univ.pharmasys.service.LoteValidador;
 
 public class Lote {
     
-  private long idLote;               
-  private String skuMedicamento;      
-  private String numeroLote;         
-  private LocalDate dataValidade;    
-  private int quantidade;            
-  private BigDecimal custoUnitario;
+	private long idLote;
+	private String skuMedicamento;
+	private int numeroLote;   
+	private LocalDate validade;
+	private int quantidadeRecebida;
+	private int quantidadeAtual;
+	private BigDecimal preco;
+//mudei as class para ficar igual ao banco  de dados, agora falta mudar o codigo e agrecentar em vez de  quantidade usar quantidade recebida e qunatitade atual
 
   public Lote() {
 
