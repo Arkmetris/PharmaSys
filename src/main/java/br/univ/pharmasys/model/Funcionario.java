@@ -3,15 +3,16 @@ package br.univ.pharmasys.model;
 import java.time.LocalDate;
 import br.univ.pharmasys.service.FuncionarioValidador;
 
-public abstract class Funcionario {
+public class Funcionario {
 
   protected  long idFuncionario;
   protected String nome;
-  protected  String cpf;
+  protected String cpf;
   protected LocalDate dataNascimento;
   protected String sexo;
   protected String telefone;
   protected int tipo;
+  protected String senha;
 
 
   public Funcionario(){
@@ -32,8 +33,8 @@ public abstract class Funcionario {
   }
 
   public void setNome(String nome) {
-      FuncionarioValidador.nomeValidar(nome);
       nome = nome.trim();
+      FuncionarioValidador.nomeValidar(nome);
       this.nome = nome;
   }
 
@@ -65,8 +66,8 @@ public abstract class Funcionario {
   }
 
   public void setSexo(String sexo) {
-      FuncionarioValidador.sexoValidar(sexo);
       sexo = sexo.trim();
+      FuncionarioValidador.sexoValidar(sexo);
       this.sexo = sexo;
   }
 
@@ -90,6 +91,16 @@ public abstract class Funcionario {
   public void setTipo(int tipo) {
 
       this.tipo = tipo;
+  }
+
+  public String getSenha() {
+      return senha;
+  }
+
+  public void setSenha(String senha) {
+      senha= senha.trim();
+      FuncionarioValidador.senhaValidar(senha);
+      this.senha = senha;
   }
 
 

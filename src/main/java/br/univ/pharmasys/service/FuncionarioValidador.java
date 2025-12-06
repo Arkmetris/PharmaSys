@@ -20,8 +20,6 @@ public class FuncionarioValidador {
            throw new NomeInvalidoException("\nError: O Campo deve ser preenchido, não pode ficar vazio! ");
        }
 
-       nome = nome.trim();
-
    }
 
    public static void cpfValidar(String cpf){
@@ -82,7 +80,18 @@ public class FuncionarioValidador {
            throw new TelefoneInvalidoException("Error: O campo de telefone deve ser preenchido!");
 
        }
-
-
    }
+
+    public static void senhaValidar(String senha){
+
+        if(senha==null || senha.trim().isEmpty()){
+            throw new ErroDePreenchimentoInvalidoException("Atenção: Preencha o campo de senha!");
+        }
+        senha = senha.trim();
+
+        if(!senha.matches("\\S+")){
+            throw new ErroDePreenchimentoInvalidoException("Falta de preenchimento da senha");
+        }
+
+    }
 }
