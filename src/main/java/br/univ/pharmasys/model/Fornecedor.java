@@ -33,8 +33,8 @@ public class Fornecedor {
     
     public void setNome (String nome){
 
-        FornecedorValidador.nomeValidar(nome);
         nome = nome.trim();
+        FornecedorValidador.nomeValidar(nome);
         this.nome = nome;
             
     }

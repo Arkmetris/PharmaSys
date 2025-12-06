@@ -79,7 +79,19 @@ public class FuncionarioValidador {
            throw new TelefoneInvalidoException("Error: O campo de telefone deve ser preenchido!");
 
        }
-
-
    }
+
+   public static void senhaValidar(String senha){
+        if(senha==null || senha.trim().isEmpty()){
+            throw new ErroDePreenchimentoInvalidoException("Error: Preencha o campo de senha!");
+        }
+
+        senha = senha.trim();
+
+        if(!senha.matches("\\S+")){
+
+            throw new ErroDePreenchimentoInvalidoException("Atenção: Não pode ter espaçamentos no meio da senha");
+        }
+   }
+
 }

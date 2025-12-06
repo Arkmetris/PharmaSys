@@ -50,6 +50,7 @@ public class Medicamento {
     }
 
     public void setNomeComercial(String nomeComercial) {
+
         nomeComercial = nomeComercial.trim();
         MedicamentoValidador.nomeValidar(nomeComercial);
         this.nomeComercial = nomeComercial;
@@ -60,6 +61,7 @@ public class Medicamento {
     }
 
     public void setPrincipioAtivo(String principioAtivo) {
+
         principioAtivo = principioAtivo.trim();
         MedicamentoValidador.principioAtivoValidar(principioAtivo);
         this.principioAtivo = principioAtivo;
@@ -80,6 +82,7 @@ public class Medicamento {
     }
 
     public void setFormaFarmaceutica(String formaFarmaceutica) {
+
         formaFarmaceutica = formaFarmaceutica.trim();
         MedicamentoValidador.formaFarmaceuticaValidar(formaFarmaceutica);
         this.formaFarmaceutica = formaFarmaceutica;

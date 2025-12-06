@@ -40,7 +40,6 @@ public class Lote {
   }
   
   public void setSkuMedicamento(String skuMedicamento){
-
       skuMedicamento = skuMedicamento.trim();
       LoteValidador.skuMedicamentoValidar(skuMedicamento);
       this.skuMedicamento = skuMedicamento;
@@ -63,7 +62,6 @@ public class Lote {
     }
 
     public void setNumeroLote(String numeroLote){
-
         numeroLote = numeroLote.trim();
         LoteValidador.numeroLoteValidador(numeroLote);
         this.numeroLote = numeroLote;

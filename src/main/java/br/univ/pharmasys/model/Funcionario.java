@@ -12,6 +12,7 @@ public class Funcionario {
   protected String sexo;
   protected String telefone;
   protected int tipo;
+  protected String senha;
 
 
   public Funcionario(){
@@ -74,6 +75,7 @@ public class Funcionario {
   }
 
   public void setSexo(String sexo) {
+
       sexo = sexo.trim();
       FuncionarioValidador.sexoValidar(sexo);
       this.sexo = sexo;
@@ -100,7 +102,15 @@ public class Funcionario {
 
       this.tipo = tipo;
   }
+    public String getSenha() {
+        return senha;
+    }
 
+    public void setSenha(String senha) {
+        senha= senha.trim();
+        FuncionarioValidador.senhaValidar(senha);
+        this.senha = senha;
+    }
 
 }
 
