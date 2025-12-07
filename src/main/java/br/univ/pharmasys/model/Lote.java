@@ -67,27 +67,27 @@ public class Lote {
         this.numeroLote = numeroLote;
     }
 
-  public int getQuantidadeRecebida(){
-    return this.quantidadeRecebida;
-  }
-  
-  public void setQuantidadeRecebida(int quantidadeRecebida){
+    public int getQuantidadeRecebida(){
+        return this.quantidadeRecebida;
+    }
 
-      LoteValidador.quantidadeRecebidaValidador(quantidadeRecebida);
-      this.quantidadeRecebida = quantidadeRecebida;
+    public void setQuantidadeRecebida(int quantidadeRecebida){
+
+        LoteValidador.quantidadeRecebidaValidador(quantidadeRecebida);
+        this.quantidadeRecebida = quantidadeRecebida;
     }
 
     public int getQuantidadeAtual(){
-      return this.quantidadeAtual;
+        return this.quantidadeAtual;
     }
 
     public void setQuantidadeAtual(int quantidadeAtual){
 
-      LoteValidador.quantidadeAtualValidador(quantidadeAtual);
-      this.quantidadeAtual = quantidadeAtual;
+        LoteValidador.quantidadeAtualValidador(quantidadeAtual);
+        this.quantidadeAtual = quantidadeAtual;
     }
-  
-  public BigDecimal getPreco(){
+
+    public BigDecimal getPreco(){
       
       return this.preco;
   }

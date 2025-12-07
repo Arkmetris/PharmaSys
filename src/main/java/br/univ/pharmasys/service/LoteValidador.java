@@ -58,23 +58,23 @@ public class LoteValidador {
         }
     }
 
-   public static void quantidadeRecebidaValidador(int quantidadeRecebida) {
+    public static void quantidadeRecebidaValidador(int quantidadeRecebida) {
 
         //Vai validar a quantidade recebida
 
-       if (quantidadeRecebida < 0){
-           throw new QuantidadeInvalidaException("Atenção: não pode ser negativo!");
-       }
-   }
+        if (quantidadeRecebida < 0){
+            throw new QuantidadeInvalidaException("Atenção: não pode ser negativo!");
+        }
+    }
 
-   public static void quantidadeAtualValidador(int quantidadeAtual) {
+    public static void quantidadeAtualValidador(int quantidadeAtual) {
 
         //Vai validar a quantidade atual
 
         if (quantidadeAtual < 0){
             throw new QuantidadeInvalidaException("Atenção: não pode ser negativo!");
         }
-   }
+    }
 
 
   public static void precoValidador (BigDecimal custo) {
