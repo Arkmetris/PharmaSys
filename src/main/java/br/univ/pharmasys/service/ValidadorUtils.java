@@ -57,9 +57,11 @@
 	    }
 	    
 	    public static boolean cnpjValido(String cnpj) {
-	        cnpj = cnpj.replaceAll("[^0-9]", "");
-
-	        if (cnpj.equals("00000000000000") || cnpj.length() != 14) return false;
+	    	
+	    	if (cnpj == null) return false;
+	        cnpj = cnpj.replaceAll("\\D", "");
+	        
+	        if (cnpj.length() != 14 || cnpj.matches("(\\d)\\1{13}")) return false;
 
 	        char dig13, dig14;
 	        int sm, i, r, num, peso;
