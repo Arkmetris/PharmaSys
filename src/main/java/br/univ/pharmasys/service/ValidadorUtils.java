@@ -1,7 +1,8 @@
+package br.univ.pharmasys.service;
 
-	import java.util.regex.Pattern;
-	import java.util.InputMismatchException;
-	//a
+import java.util.regex.Pattern;
+import java.util.InputMismatchException;
+
 	public class ValidadorUtils {
 
 	    public static boolean emailValido(String email) {
