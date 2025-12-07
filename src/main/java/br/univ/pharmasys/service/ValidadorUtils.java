@@ -1,22 +1,25 @@
 
 	import java.util.regex.Pattern;
 	import java.util.InputMismatchException;
-//a
+	
 	public class ValidadorUtils {
 
-	    public static boolean EmailValido(String email) {
+	    public static boolean emailValido(String email) {
 	        if (email == null || email.isEmpty()) return false;
 	        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
 	        Pattern pat = Pattern.compile(emailRegex);
 	        return pat.matcher(email).matches();
 	    }
 	    
-	    public static boolean CpfValido(String cpf) {
+	    public static boolean cpfValido(String cpf) {
 	    	
-	        cpf = cpf.replaceAll("[^0-9]", "");
+	    	if (cpf == null) return false;
 
-	        if (cpf.equals("00000000000") || cpf.equals("11111111111") ||
-	            cpf.length() != 11) return false;
+	        cpf = cpf.replaceAll("\\D", "");
+
+	        if (cpf.length() != 11 || cpf.matches("(\\d)\\1{10}")) {
+	            return false;
+	        }
 
 	        char dig10, dig11;
 	        int sm, i, r, num, peso;
@@ -53,7 +56,7 @@
 	        }
 	    }
 	    
-	    public static boolean CnpjValido(String cnpj) {
+	    public static boolean cnpjValido(String cnpj) {
 	        cnpj = cnpj.replaceAll("[^0-9]", "");
 
 	        if (cnpj.equals("00000000000000") || cnpj.length() != 14) return false;
