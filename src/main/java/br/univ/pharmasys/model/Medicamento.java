@@ -30,7 +30,7 @@ public class Medicamento {
     }
 
     public void setSku(String sku) {
-        sku=sku.trim();
+        sku = sku.trim();
         MedicamentoValidador.skuValidar(sku);
         this.sku = sku;
     }
@@ -40,7 +40,7 @@ public class Medicamento {
     }
 
     public void setCodigoBarras(String codigoBarras) {
-        codigoBarras=codigoBarras.trim();
+        codigoBarras = codigoBarras.trim();
         MedicamentoValidador.codigoBarrasValidar(codigoBarras);
         this.codigoBarras = codigoBarras;
     }
@@ -50,7 +50,8 @@ public class Medicamento {
     }
 
     public void setNomeComercial(String nomeComercial) {
-        nomeComercial=nomeComercial.trim();
+
+        nomeComercial = nomeComercial.trim();
         MedicamentoValidador.nomeValidar(nomeComercial);
         this.nomeComercial = nomeComercial;
     }
@@ -60,7 +61,8 @@ public class Medicamento {
     }
 
     public void setPrincipioAtivo(String principioAtivo) {
-        principioAtivo=principioAtivo.trim();
+
+        principioAtivo = principioAtivo.trim();
         MedicamentoValidador.principioAtivoValidar(principioAtivo);
         this.principioAtivo = principioAtivo;
     }
@@ -70,7 +72,7 @@ public class Medicamento {
     }
 
     public void setDosagem(String dosagem) {
-        dosagem =  dosagem.trim();
+        dosagem = dosagem.trim();
         MedicamentoValidador.dosagemValidar(dosagem);
         this.dosagem = dosagem;
     }
@@ -80,7 +82,8 @@ public class Medicamento {
     }
 
     public void setFormaFarmaceutica(String formaFarmaceutica) {
-        formaFarmaceutica =  formaFarmaceutica.trim();
+
+        formaFarmaceutica = formaFarmaceutica.trim();
         MedicamentoValidador.formaFarmaceuticaValidar(formaFarmaceutica);
         this.formaFarmaceutica = formaFarmaceutica;
     }
@@ -90,7 +93,7 @@ public class Medicamento {
     }
 
     public void setLaboratorio(String laboratorio) {
-        laboratorio =  laboratorio.trim();
+        laboratorio = laboratorio.trim();
         MedicamentoValidador.laboratorioValidar(laboratorio);
         this.laboratorio = laboratorio;
     }

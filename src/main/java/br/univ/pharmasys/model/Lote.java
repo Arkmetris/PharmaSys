@@ -9,8 +9,8 @@ public class Lote {
     
 	private long idLote;
 	private String skuMedicamento;
-	private int numeroLote;   
 	private LocalDate validade;
+    private String numeroLote;
 	private int quantidadeRecebida;
 	private int quantidadeAtual;
 	private BigDecimal preco;
@@ -20,7 +20,9 @@ public class Lote {
 
 
   }
-  
+
+  //Criação da classe Lote (models) possuindo validações
+
   public long getIdLote(){
 
       return this.idLote;
@@ -38,52 +40,62 @@ public class Lote {
   }
   
   public void setSkuMedicamento(String skuMedicamento){
-
       skuMedicamento = skuMedicamento.trim();
       LoteValidador.skuMedicamentoValidar(skuMedicamento);
       this.skuMedicamento = skuMedicamento;
   }
   
-  public String getNumeroLote(){
-    return this.numeroLote;
-  }
-  
-  public void setNumeroLote(String numeroLote){
 
-      numeroLote = numeroLote.trim();
-      LoteValidador.numeroLoteValidador(numeroLote);
-      this.numeroLote = numeroLote;
+  
+  public LocalDate getValidade(){
+     return this.validade;
   }
   
-  public LocalDate getDataValidade(){
-     return this.dataValidade;
-  }
-  
-  public void setDataValidade(LocalDate dataValidade){
+  public void setValidade(LocalDate validade){
 
-      LoteValidador.dataValidadadeValidador(dataValidade);
-      this.dataValidade = dataValidade;
+      LoteValidador.dataValidadadeValidador(validade);
+      this.validade = validade;
   }
-  
-  public int getQuantidade(){
-    return this.quantidade;
-  }
-  
-  public void setQuantidade(int quantidade){
 
-      LoteValidador.quantidadeValidador(quantidade);
-      this.quantidade = quantidade;
+    public String getNumeroLote(){
+        return this.numeroLote;
     }
-  
-  public BigDecimal getCustoUnitario(){
+
+    public void setNumeroLote(String numeroLote){
+        numeroLote = numeroLote.trim();
+        LoteValidador.numeroLoteValidador(numeroLote);
+        this.numeroLote = numeroLote;
+    }
+
+    public int getQuantidadeRecebida(){
+        return this.quantidadeRecebida;
+    }
+
+    public void setQuantidadeRecebida(int quantidadeRecebida){
+
+        LoteValidador.quantidadeRecebidaValidador(quantidadeRecebida);
+        this.quantidadeRecebida = quantidadeRecebida;
+    }
+
+    public int getQuantidadeAtual(){
+        return this.quantidadeAtual;
+    }
+
+    public void setQuantidadeAtual(int quantidadeAtual){
+
+        LoteValidador.quantidadeAtualValidador(quantidadeAtual);
+        this.quantidadeAtual = quantidadeAtual;
+    }
+
+    public BigDecimal getPreco(){
       
-      return this.custoUnitario;
+      return this.preco;
   }
   
-  public void setCustoUnitario(BigDecimal custoUnitario){
+  public void setPreco(BigDecimal preco){
 
-      LoteValidador.custoUnitarioValidador(custoUnitario);
-      this.custoUnitario = custoUnitario;
+      LoteValidador.precoValidador(preco);
+      this.preco = preco;
 
   }
 

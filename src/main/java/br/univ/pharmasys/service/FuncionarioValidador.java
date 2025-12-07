@@ -19,7 +19,6 @@ public class FuncionarioValidador {
        if(nome==null || nome.trim().isEmpty()){
            throw new NomeInvalidoException("\nError: O Campo deve ser preenchido, não pode ficar vazio! ");
        }
-
    }
 
    public static void cpfValidar(String cpf){
@@ -65,7 +64,7 @@ public class FuncionarioValidador {
 
    public static void telefoneValidar(String telefone){
 
-       if(telefone ==null || telefone.trim().isEmpty()){
+       if(telefone ==null || telefone.isEmpty()){
            throw new TelefoneInvalidoException("Error: Preencha o campo de telefone!");
        }
 
@@ -82,16 +81,17 @@ public class FuncionarioValidador {
        }
    }
 
-    public static void senhaValidar(String senha){
-
+   public static void senhaValidar(String senha){
         if(senha==null || senha.trim().isEmpty()){
-            throw new ErroDePreenchimentoInvalidoException("Atenção: Preencha o campo de senha!");
+            throw new ErroDePreenchimentoInvalidoException("Error: Preencha o campo de senha!");
         }
+
         senha = senha.trim();
 
         if(!senha.matches("\\S+")){
-            throw new ErroDePreenchimentoInvalidoException("Falta de preenchimento da senha");
-        }
 
-    }
+            throw new ErroDePreenchimentoInvalidoException("Atenção: Não pode ter espaçamentos no meio da senha");
+        }
+   }
+
 }

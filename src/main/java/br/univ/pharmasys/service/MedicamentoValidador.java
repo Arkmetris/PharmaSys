@@ -8,6 +8,8 @@ import java.time.LocalDate;
 
 public class MedicamentoValidador {
 
+    //Aqui vai possuir todas as validações de Medicamento.java
+    //Os valores que entrarem em Medicamento.java serão tratados na hora que esses métodos forem chamados
 
     public static void skuValidar(String sku){
 
@@ -146,7 +148,7 @@ public class MedicamentoValidador {
         if (minimo < 0) {
             throw new EstoqueMinInvalidoException("Error:O estoque não pode ser menor que zero!");
         }
-        else if (maximoAtual > 0 && minimo > maximoAtual){
+        else if (minimo > maximoAtual){
 
             throw new EstoqueMinInvalidoException("Error: Estoque mínimo não pode ser maior que o máximo");
 
@@ -159,7 +161,7 @@ public class MedicamentoValidador {
         if (maximo <= 0){
             throw new EstoqueMaxInvalidoException("Error: o estoque máximo não pode ser negativo ou igual a 0!");
         }
-        else if (maximo > 0 && minimoAtual>maximo) {
+        else if (minimoAtual>maximo) {
             throw new EstoqueMaxInvalidoException("Error: o estoque mínimo não pode ser maior que o máximo!");
         }
 

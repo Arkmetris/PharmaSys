@@ -7,6 +7,8 @@ import java.time.LocalDate;
 
 public class LoteValidador {
 
+     //Aqui vai possuir todas as validações de Lote.java
+    //Os valores que entrarem em Lote.java serão tratados na hora que esses métodos forem chamados
 
     public static void idLoteValidador(long id) {
 
@@ -31,20 +33,6 @@ public class LoteValidador {
 
     }
 
-    public static void numeroLoteValidador(String numeroLote) {
-        if (numeroLote == null || numeroLote.trim().isEmpty()) {
-            throw new ErroDePreenchimentoInvalidoException("\nError: Não pode ser vazio ou nulo!");
-        }
-
-        numeroLote = numeroLote.trim();
-
-        if(!numeroLote.matches("\\S+")){
-            throw new ErroDePreenchimentoInvalidoException("Atenção: Sem espaçamentos no campo de preenchimento");
-        }
-
-
-    }
-
     public static void dataValidadadeValidador(LocalDate data) {
 
 
@@ -58,14 +46,38 @@ public class LoteValidador {
         }
     }
 
-   public static void quantidadeValidador(int quantidade) {
+    public static void numeroLoteValidador(String numeroLote) {
+        if (numeroLote == null || numeroLote.trim().isEmpty()) {
+            throw new ErroDePreenchimentoInvalidoException("\nError: Não pode ser vazio ou nulo!");
+        }
 
-       if (quantidade < 0){
-           throw new QuantidadeInvalidaException("Atenção: não pode ser negativo!");
-       }
-   }
+        numeroLote = numeroLote.trim();
 
-  public static void custoUnitarioValidador (BigDecimal custo) {
+        if (!numeroLote.matches("\\S+")) {
+            throw new ErroDePreenchimentoInvalidoException("Atenção: Sem espaçamentos no campo de preenchimento");
+        }
+    }
+
+    public static void quantidadeRecebidaValidador(int quantidadeRecebida) {
+
+        //Vai validar a quantidade recebida
+
+        if (quantidadeRecebida < 0){
+            throw new QuantidadeInvalidaException("Atenção: não pode ser negativo!");
+        }
+    }
+
+    public static void quantidadeAtualValidador(int quantidadeAtual) {
+
+        //Vai validar a quantidade atual
+
+        if (quantidadeAtual < 0){
+            throw new QuantidadeInvalidaException("Atenção: não pode ser negativo!");
+        }
+    }
+
+
+  public static void precoValidador (BigDecimal custo) {
 
 
       if(custo == null){
