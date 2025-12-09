@@ -13,29 +13,31 @@ import br.univ.pharmasys.util.ConnectionFactory;
 
 public class TelefoneDAO {
 
-    public long create(Telefone telefone) {
-        String sql = "INSERT INTO TELEFONE (NUMERO) VALUES (?)";
-        
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+	public long create(Telefone telefone) {
+	    try (Connection conn = ConnectionFactory.getConnection()) {
+	        return create(telefone, conn);
+	    } catch (SQLException e) {
+	        throw new RuntimeException(e);
+	    }
+	}
 
-            stmt.setString(1, telefone.getNumeroTelefone());
-            
-            stmt.executeUpdate();
-            
-            try (ResultSet rs = stmt.getGeneratedKeys()) {
-                if (rs.next()) {
-                    long idGerado = rs.getLong(1);
-                    telefone.setIdTelefone(idGerado);
-                    return idGerado;
-                }
-            }
-            
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao salvar Telefone: " + e.getMessage(), e);
-        }
-        throw new RuntimeException("Nenhuma chave gerada ao salvar telefone.");
-    }
+	public long create(Telefone telefone, Connection conn) throws SQLException {
+	    String sql = "INSERT INTO TELEFONE (NUMERO) VALUES (?)";
+	    
+	    try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+	        stmt.setString(1, telefone.getNumeroTelefone());
+	        stmt.executeUpdate();
+	        
+	        try (ResultSet rs = stmt.getGeneratedKeys()) {
+	            if (rs.next()) {
+	                long id = rs.getLong(1);
+	                telefone.setIdTelefone(id);
+	                return id;
+	            }
+	        }
+	    }
+	    throw new SQLException("Falha ao criar telefone, nenhum ID obtido.");
+	}
 
     public Telefone buscarPorNumero(String numero) {
         String sql = "SELECT * FROM TELEFONE WHERE NUMERO = ?";
