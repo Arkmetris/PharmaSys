@@ -9,8 +9,8 @@ import java.nio.file.Path;
 ///Geração do código de barras
 public class CodigoDeBarras {
    
-    String path = "C:\\Users\\Pichau\\Documents";
-
+    String path = "C:\\Users\\CodigodeBarras";
+    
     private String gerarCodigoBarrasEAN13(String valor) throws Exception {
         if (valor == null || valor.trim().isEmpty()) {
             throw new IllegalArgumentException("Valor do código de barras não pode estar vazio.");
@@ -32,4 +32,5 @@ public class CodigoDeBarras {
         //TODO salvar codigo de barras no banco de dados: método esperado (skumedicamento,codigodebarrasgerado, tipodecodigoEan13)
     }
 }
+
 
