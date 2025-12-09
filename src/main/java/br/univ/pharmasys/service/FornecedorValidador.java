@@ -1,6 +1,5 @@
 package br.univ.pharmasys.service;
 
-import br.univ.pharmasys.exceptions.CnpjInvalidoException;
 import br.univ.pharmasys.exceptions.IdInvalidoException;
 import br.univ.pharmasys.exceptions.NomeInvalidoException;
 
@@ -20,20 +19,10 @@ public class FornecedorValidador {
 
             throw new NomeInvalidoException("\nError: Preencha o campo");
         }
-    }
+        //Vai validar o nome tendo apenas letras e caracteres como "ç" ou "ã".
+        if(!nome.matches("[\\p{L} ]+")){
 
-    public static void  cnpjValidar(String cnpj){
-
-
-        if (cnpj == null || cnpj.trim().isEmpty()){
-            throw new CnpjInvalidoException("Error: Não pode ser nulo ou vazio!");
-        }
-
-        cnpj = cnpj.replaceAll("\\D", "");
-
-        if (cnpj.length() != 14){
-            throw new CnpjInvalidoException("Error: Todo CNPJ deve conter 14 dígitos!");
+            throw new NomeInvalidoException("Atenção: Preencha o campo corretamente, sem números ou símbolos");
         }
     }
-
 }
