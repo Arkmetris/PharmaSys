@@ -9,7 +9,7 @@ public class Medicamento {
     private String sku;
     private String codigoBarras;
     private String nomeComercial;
-    private String principioAtivo;
+    private String Fabricante;// Trocado por fabricante para não ter erro na tabela sql 
     private String dosagem;
     private String formaFarmaceutica;
     private String laboratorio;
@@ -56,15 +56,15 @@ public class Medicamento {
         this.nomeComercial = nomeComercial;
     }
 
-    public String getPrincipioAtivo() {
-        return principioAtivo;
+    public String getFabricante() {
+        return Fabricante;
     }
 
-    public void setPrincipioAtivo(String principioAtivo) {
+    public void setFabricante(String Fabricante) {
 
-        principioAtivo = principioAtivo.trim();
-        MedicamentoValidador.principioAtivoValidar(principioAtivo);
-        this.principioAtivo = principioAtivo;
+        Fabricante = Fabricante.trim();
+        MedicamentoValidador.fabricanteValidar(Fabricante);
+        this.Fabricante = Fabricante;
     }
 
     public String getDosagem() {
@@ -151,4 +151,14 @@ public class Medicamento {
         MedicamentoValidador.precoValido(preco);
         this.preco = preco;
     }
+    private Long loteId;
+
+    public Long getLoteId() {
+        return loteId;
+    }
+
+    public void setLoteId(Long loteId) {
+        this.loteId = loteId;
+    }
+
 }
