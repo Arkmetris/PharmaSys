@@ -31,15 +31,5 @@ public class TelefoneValidador {
             throw new ErroDePreenchimentoInvalidoException("Atenção: Preencha o campo corretamente!");
 
         }
-
-        if (numerotelefone.trim().matches("\\S+")) {
-
-
-            throw new TelefoneInvalidoException("Error: O campo de telefone deve ser preenchido!");
-
-        }
-        if (numerotelefone.length() != 11) {
-            throw new TelefoneInvalidoException("Error: O número deve conter 11 digitos!");
-        }
     }
 }
