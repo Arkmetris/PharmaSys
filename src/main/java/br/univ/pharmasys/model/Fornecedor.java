@@ -52,10 +52,6 @@ public class Fornecedor {
        ValidadorUtils.cnpjValido(cnpj);
         cnpj= cnpj.replaceAll("\\D ", "");
         this.cnpj = cnpj;
-
-    public void setCnpj(String cnpj) {
-        FornecedorValidador.cnpjValidar(cnpj);
-        this.cnpj = cnpj.replaceAll("\\D", "");
     }
 
     public String getEstado() {
