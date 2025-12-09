@@ -1,6 +1,7 @@
 package br.univ.pharmasys.model;
 
 import br.univ.pharmasys.service.FornecedorValidador;
+import br.univ.pharmasys.service.ValidadorUtils;
 
 public class Fornecedor {
 
@@ -43,10 +44,14 @@ public class Fornecedor {
     public String getCnpj() {
         return cnpj;
     }
-
-    public void setCnpj(String cnpj) {
-        FornecedorValidador.cnpjValidar(cnpj);
-        this.cnpj = cnpj.replaceAll("\\D", "");
+    
+    public void setCnpj(String cnpj){
+        
+        //Validar o cnpj do fornecedor!
+       cnpj = cnpj.trim();
+       ValidadorUtils.cnpjValido(cnpj);
+        cnpj= cnpj.replaceAll("\\D ", "");
+        this.cnpj = cnpj;
     }
 
     public String getEstado() {

@@ -2,6 +2,8 @@ package br.univ.pharmasys.model;
 
 import java.time.LocalDate;
 import br.univ.pharmasys.service.FuncionarioValidador;
+import br.univ.pharmasys.service.TelefoneValidador;
+import br.univ.pharmasys.service.ValidadorUtils;
 
 public class Funcionario {
 
@@ -51,7 +53,8 @@ public class Funcionario {
   public void setCpf(String cpf) {
 
       //Vai validar o CPF do funcionario, mas provavelmente vai ser mudado logo, logo
-      FuncionarioValidador.cpfValidar(cpf);
+      cpf = cpf.trim();
+      ValidadorUtils.cpfValido(cpf);
       cpf=cpf.replaceAll("\\D", "");
       this.cpf = cpf;
   }
@@ -88,7 +91,8 @@ public class Funcionario {
 
   public void setTelefone(String telefone) {
 
-      FuncionarioValidador.telefoneValidar(telefone);
+      telefone = telefone.trim();
+      TelefoneValidador.numeroTelefoneValidar(telefone);
       telefone = telefone.replaceAll("\\D", "");
       this.telefone = telefone;
   }
