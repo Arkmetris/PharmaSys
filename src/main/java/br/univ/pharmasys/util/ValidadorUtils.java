@@ -1,4 +1,4 @@
-package br.univ.pharmasys.service;
+package br.univ.pharmasys.util;
 //a
 import java.util.regex.Pattern;
 

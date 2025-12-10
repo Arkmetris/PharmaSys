@@ -29,12 +29,12 @@ public class FuncionarioValidador {
    public static void dataNascimentoValidar(LocalDate dataNascimento){
 
        if (dataNascimento==null){
-           throw new DataNascimentoInvalidoException("Error: O Campo deve ser preenchido!");
+           throw new DataInvalidoException("Error: O Campo deve ser preenchido!");
        }
 
        if (dataNascimento.isAfter(LocalDate.now())){
 
-           throw new DataNascimentoInvalidoException("Error: data de nascimento inválida");
+           throw new DataInvalidoException("Error: data de nascimento inválida");
        }
    }
 

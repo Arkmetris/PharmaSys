@@ -1,7 +1,7 @@
 package br.univ.pharmasys.model;
 
 import br.univ.pharmasys.service.FornecedorValidador;
-import br.univ.pharmasys.service.ValidadorUtils;
+import br.univ.pharmasys.util.ValidadorUtils;
 
 public class Fornecedor {
 

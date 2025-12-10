@@ -10,14 +10,6 @@ public class LoteValidador {
      //Aqui vai possuir todas as validações de Lote.java
     //Os valores que entrarem em Lote.java serão tratados na hora que esses métodos forem chamados
 
-    public static void idLoteValidador(long id) {
-
-        if (id <= 0) {
-            throw new IdInvalidoException("\nError: O ID do lote deve ser sempre positivo e maior que zero!");
-        }
-
-    }
-
     public static void skuMedicamentoValidar(String sku) {
 
         if (sku == null || sku.trim().isEmpty()) {
@@ -46,15 +38,9 @@ public class LoteValidador {
         }
     }
 
-    public static void numeroLoteValidador(String numeroLote) {
-        if (numeroLote == null || numeroLote.trim().isEmpty()) {
-            throw new ErroDePreenchimentoInvalidoException("\nError: Não pode ser vazio ou nulo!");
-        }
-
-        numeroLote = numeroLote.trim();
-
-        if (!numeroLote.matches("\\S+")) {
-            throw new ErroDePreenchimentoInvalidoException("Atenção: Sem espaçamentos no campo de preenchimento");
+    public static void numeroLoteValidador(int numeroLote) {
+        if (numeroLote <= 0) {
+            throw new ErroDePreenchimentoInvalidoException("\nError: Não pode ser negativo ou igual a 0");
         }
     }
 
