@@ -10,7 +10,7 @@ import javax.crypto.spec.PBEKeySpec;
 
 public class SenhaUtil {
 
-	private static final int ITERATIONS = 310_000;
+	private static final int ITERATIONS = 150_000;
 	private static final int KEY_LENGTH = 256;
 	private static final int SALT_LENGTH = 16;
 	private static final String ALGORITHM = "PBKDF2WithHmacSHA256";
