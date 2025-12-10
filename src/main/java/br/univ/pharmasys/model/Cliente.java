@@ -6,7 +6,7 @@ package br.univ.pharmasys.model;
 //  PRIMARY KEY (CPF_CLIENTE)
 
 import br.univ.pharmasys.service.ClienteValidador;
-import br.univ.pharmasys.service.ValidadorUtils;
+import br.univ.pharmasys.util.ValidadorUtils;
 
 public class Cliente {
     protected String cpf;

@@ -113,21 +113,21 @@ public class MedicamentoValidador {
 
     public static void estoqueMinValidar(int minimo, int maximoAtual) {
         if (minimo < 0) {
-            throw new EstoqueMinInvalidoException("O estoque mínimo não pode ser negativo.");
+            throw new EstoqueInvalidoException("O estoque mínimo não pode ser negativo.");
         }
 
         if (minimo > maximoAtual) {
-            throw new EstoqueMinInvalidoException("O estoque mínimo não pode ser maior que o estoque máximo.");
+            throw new EstoqueInvalidoException("O estoque mínimo não pode ser maior que o estoque máximo.");
         }
     }
 
     public static void estoqueMaxValidar(int maximo, int minimoAtual) {
         if (maximo <= 0) {
-            throw new EstoqueMaxInvalidoException("O estoque máximo deve ser maior que zero.");
+            throw new EstoqueInvalidoException("O estoque máximo deve ser maior que zero.");
         }
 
         if (minimoAtual > maximo) {
-            throw new EstoqueMaxInvalidoException("O estoque mínimo não pode ser maior que o máximo.");
+            throw new EstoqueInvalidoException("O estoque mínimo não pode ser maior que o máximo.");
         }
     }
 
