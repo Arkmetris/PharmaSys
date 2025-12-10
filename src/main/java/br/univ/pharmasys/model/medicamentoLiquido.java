@@ -2,6 +2,8 @@ package br.univ.pharmasys.model;
 //a
 import br.univ.pharmasys.exceptions.ErroDePreenchimentoInvalidoException;
 
+import br.univ.pharmasys.service.medicamentoLiquidoValidador;
+
 public class medicamentoLiquido extends Medicamento {
 
     private double volumeMl;      
@@ -16,12 +18,7 @@ public class medicamentoLiquido extends Medicamento {
     }
 
     public void setvolumeMl(double volumeMl) {
-    	
-        // Validação que o volume não pode ser zero ou negativo
-    	
-        if (volumeMl <= 0) {
-            throw new ErroDePreenchimentoInvalidoException("O volume em ml deve ser maior que zero.");
-        }
+        medicamentoLiquidoValidador.validarVolume(volumeMl);
         this.volumeMl = volumeMl;
     }
 
@@ -30,19 +27,8 @@ public class medicamentoLiquido extends Medicamento {
     }
 
     public void settipoRecipiente(String tipoRecipiente) {
-        if (tipoRecipiente == null || tipoRecipiente.trim().isEmpty()) {
-            throw new ErroDePreenchimentoInvalidoException("O tipo de recipiente é obrigatório.");
-        }
-
-        tipoRecipiente = tipoRecipiente.trim();
-
-        // Validação que não permite que fique sem espaços
-        
-        if (!tipoRecipiente.matches("\\S+")) {
-            throw new ErroDePreenchimentoInvalidoException("O tipo de recipiente não pode conter espaços.");
-        }
-
-        this.tipoRecipiente = tipoRecipiente;
+        medicamentoLiquidoValidador.validarTipoRecipiente(tipoRecipiente);
+        this.tipoRecipiente = tipoRecipiente.trim();
     }
 
     @Override

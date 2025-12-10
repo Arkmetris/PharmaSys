@@ -1,4 +1,6 @@
 package br.univ.pharmasys.model;
+
+import br.univ.pharmasys.service.medicamentoComprimidoValidador;
 //a
 import br.univ.pharmasys.exceptions.ErroDePreenchimentoInvalidoException;
 
@@ -15,10 +17,7 @@ public class medicamentoComprimido extends Medicamento {
     }
 
     public void setQuantidadeComprimidos(int quantidadeComprimidos) {
-        
-        if (quantidadeComprimidos <= 0) {
-            throw new ErroDePreenchimentoInvalidoException("A quantidade de comprimidos deve ser maior que zero.");
-        }
+    	medicamentoComprimidoValidador.validarQuantidade(quantidadeComprimidos);
         this.quantidadeComprimidos = quantidadeComprimidos;
     }
 }
