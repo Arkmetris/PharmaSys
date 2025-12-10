@@ -1,91 +1,65 @@
 package br.univ.pharmasys.model;
 
-import java.time.LocalDate;
 import java.math.BigDecimal;
-
-import br.univ.pharmasys.service.LoteValidador;
+import java.time.LocalDate;
 
 public class Lote {
-    
-	private long idLote;
-	private String skuMedicamento;
-	private int numeroLote;   
-	private LocalDate validade;
-	private int quantidadeRecebida;
-	private int quantidadeAtual;
-	private BigDecimal preco;
-//mudei as class para ficar igual ao banco  de dados, agora falta mudar o codigo e agrecentar em vez de  quantidade usar quantidade recebida e qunatitade atual
 
-  public Lote() {
+    private int numeroLote;              
+    private String skuMedicamento;
+    private LocalDate validade;
+    private int quantidadeRecebida;
+    private int quantidadeAtual;
+    private BigDecimal preco;
 
+    public Lote() {}
 
-  }
   
-  public long getIdLote(){
-
-      return this.idLote;
-  }
-  
-  public void setIdLote(long idLote){
-
-      LoteValidador.idLoteValidador(idLote);
-      this.idLote = idLote;
-  }
-  
-  public String getSkuMedicamento(){
-
-      return this.skuMedicamento;
-  }
-  
-  public void setSkuMedicamento(String skuMedicamento){
-
-      skuMedicamento = skuMedicamento.trim();
-      LoteValidador.skuMedicamentoValidar(skuMedicamento);
-      this.skuMedicamento = skuMedicamento;
-  }
-  
-  public String getNumeroLote(){
-    return this.numeroLote;
-  }
-  
-  public void setNumeroLote(String numeroLote){
-
-      numeroLote = numeroLote.trim();
-      LoteValidador.numeroLoteValidador(numeroLote);
-      this.numeroLote = numeroLote;
-  }
-  
-  public LocalDate getDataValidade(){
-     return this.dataValidade;
-  }
-  
-  public void setDataValidade(LocalDate dataValidade){
-
-      LoteValidador.dataValidadadeValidador(dataValidade);
-      this.dataValidade = dataValidade;
-  }
-  
-  public int getQuantidade(){
-    return this.quantidade;
-  }
-  
-  public void setQuantidade(int quantidade){
-
-      LoteValidador.quantidadeValidador(quantidade);
-      this.quantidade = quantidade;
+    public int getNumeroLote() {
+        return numeroLote;
     }
-  
-  public BigDecimal getCustoUnitario(){
-      
-      return this.custoUnitario;
-  }
-  
-  public void setCustoUnitario(BigDecimal custoUnitario){
 
-      LoteValidador.custoUnitarioValidador(custoUnitario);
-      this.custoUnitario = custoUnitario;
+    public void setNumeroLote(int numeroLote) {
+        this.numeroLote = numeroLote;
+    }
 
-  }
+    public String getSkuMedicamento() {
+        return skuMedicamento;
+    }
 
-}  
-  
+    public void setSkuMedicamento(String skuMedicamento) {
+        this.skuMedicamento = skuMedicamento;
+    }
+
+    public LocalDate getValidade() {
+        return validade;
+    }
+
+    public void setValidade(LocalDate validade) {
+        this.validade = validade;
+    }
+
+    public int getQuantidadeRecebida() {
+        return quantidadeRecebida;
+    }
+
+    public void setQuantidadeRecebida(int quantidadeRecebida) {
+        this.quantidadeRecebida = quantidadeRecebida;
+    }
+
+    public int getQuantidadeAtual() {
+        return quantidadeAtual;
+    }
+
+    public void setQuantidadeAtual(int quantidadeAtual) {
+        this.quantidadeAtual = quantidadeAtual;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
+    }
+}

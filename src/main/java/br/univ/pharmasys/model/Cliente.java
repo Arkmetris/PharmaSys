@@ -21,7 +21,6 @@ public class Cliente {
     }
 
     public void setCpf(String cpf) {
-        ClienteValidador.cpfValidar(cpf);
         cpf=cpf.replaceAll("\\D", "");
         this.cpf = cpf;
     }
@@ -31,7 +30,6 @@ public class Cliente {
     }
 
     public void setSexo(String sexo) {
-        ClienteValidador.sexoValidar(sexo);
         sexo = sexo.trim();
         this.sexo = sexo;
     }
@@ -41,7 +39,6 @@ public class Cliente {
     }
 
     public void setNome(String nome) {
-        ClienteValidador.nomeValidar(nome);
         nome = nome.trim();
         this.nome = nome;
     }

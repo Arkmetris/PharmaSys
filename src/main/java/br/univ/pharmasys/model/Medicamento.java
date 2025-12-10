@@ -9,7 +9,7 @@ public class Medicamento {
     private String sku;
     private String codigoBarras;
     private String nomeComercial;
-    private String principioAtivo;
+    private String Fabricante;// Trocado por fabricante para não ter erro na tabela sql 
     private String dosagem;
     private String formaFarmaceutica;
     private String laboratorio;
@@ -30,7 +30,7 @@ public class Medicamento {
     }
 
     public void setSku(String sku) {
-        sku=sku.trim();
+        sku = sku.trim();
         MedicamentoValidador.skuValidar(sku);
         this.sku = sku;
     }
@@ -40,7 +40,7 @@ public class Medicamento {
     }
 
     public void setCodigoBarras(String codigoBarras) {
-        codigoBarras=codigoBarras.trim();
+        codigoBarras = codigoBarras.trim();
         MedicamentoValidador.codigoBarrasValidar(codigoBarras);
         this.codigoBarras = codigoBarras;
     }
@@ -50,19 +50,21 @@ public class Medicamento {
     }
 
     public void setNomeComercial(String nomeComercial) {
-        nomeComercial=nomeComercial.trim();
+
+        nomeComercial = nomeComercial.trim();
         MedicamentoValidador.nomeValidar(nomeComercial);
         this.nomeComercial = nomeComercial;
     }
 
-    public String getPrincipioAtivo() {
-        return principioAtivo;
+    public String getFabricante() {
+        return Fabricante;
     }
 
-    public void setPrincipioAtivo(String principioAtivo) {
-        principioAtivo=principioAtivo.trim();
-        MedicamentoValidador.principioAtivoValidar(principioAtivo);
-        this.principioAtivo = principioAtivo;
+    public void setFabricante(String Fabricante) {
+
+        Fabricante = Fabricante.trim();
+        MedicamentoValidador.fabricanteValidar(Fabricante);
+        this.Fabricante = Fabricante;
     }
 
     public String getDosagem() {
@@ -70,7 +72,7 @@ public class Medicamento {
     }
 
     public void setDosagem(String dosagem) {
-        dosagem =  dosagem.trim();
+        dosagem = dosagem.trim();
         MedicamentoValidador.dosagemValidar(dosagem);
         this.dosagem = dosagem;
     }
@@ -80,7 +82,8 @@ public class Medicamento {
     }
 
     public void setFormaFarmaceutica(String formaFarmaceutica) {
-        formaFarmaceutica =  formaFarmaceutica.trim();
+
+        formaFarmaceutica = formaFarmaceutica.trim();
         MedicamentoValidador.formaFarmaceuticaValidar(formaFarmaceutica);
         this.formaFarmaceutica = formaFarmaceutica;
     }
@@ -90,7 +93,7 @@ public class Medicamento {
     }
 
     public void setLaboratorio(String laboratorio) {
-        laboratorio =  laboratorio.trim();
+        laboratorio = laboratorio.trim();
         MedicamentoValidador.laboratorioValidar(laboratorio);
         this.laboratorio = laboratorio;
     }
@@ -148,4 +151,14 @@ public class Medicamento {
         MedicamentoValidador.precoValido(preco);
         this.preco = preco;
     }
+    private Long loteId;
+
+    public Long getLoteId() {
+        return loteId;
+    }
+
+    public void setLoteId(Long loteId) {
+        this.loteId = loteId;
+    }
+
 }

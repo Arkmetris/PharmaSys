@@ -26,6 +26,15 @@ public class ClienteValidador {
             throw new NomeInvalidoException("\nError: O Campo deve ser preenchido, não pode ficar vazio! ");
         }
 
+<<<<<<< HEAD
+=======
+        //Vai validar o nome tendo apenas letras e caracteres como "ç" ou "ã".
+        if(!nome.matches("[\\p{L} ]+")){
+
+            throw new NomeInvalidoException("Atenção: Preencha o campo corretamente, sem números ou símbolos");
+        }
+
+>>>>>>> origin/main
     }
 
     public static void sexoValidar(String sexo){
