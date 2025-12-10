@@ -26,10 +26,9 @@ public class TelefoneValidador {
         numerotelefone = numerotelefone.replaceAll("\\D", "");
 
         //Vai determinar o número de telefone com apenas 11 dígitos (sendo apenas números, claro).
-        if(!numerotelefone.matches("^\\{11}$")){
+        if(!numerotelefone.matches("^\\d{11}$")){
 
             throw new ErroDePreenchimentoInvalidoException("Atenção: Preencha o campo corretamente!");
-
         }
     }
 }
