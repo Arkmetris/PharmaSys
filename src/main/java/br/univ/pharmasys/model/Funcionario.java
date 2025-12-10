@@ -16,6 +16,12 @@ public class Funcionario {
     protected int tipo;
     protected String senha;
     protected String email;
+    protected String cep;
+    protected String rua;
+    protected String bairro;
+    protected String cidade;
+    protected String estado;
+    protected Long telefoneId;
 
 
     public Funcionario() {
@@ -109,5 +115,61 @@ public class Funcionario {
             ValidadorUtils.emailValido(email);
         }
         this.email = email;
+    }
+
+    public Long getTelefoneId() {
+        return telefoneId;
+    }
+
+    public void setTelefoneId(Long telefoneId) {
+        this.telefoneId = telefoneId;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        if (cep != null) {
+            this.cep = cep.replaceAll("\\D", "");
+        } else {
+            this.cep = cep;
+        }
+    }
+
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) {
+        if (rua != null) rua = rua.trim();
+        this.rua = rua;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        if (bairro != null) bairro = bairro.trim();
+        this.bairro = bairro;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        if (cidade != null) cidade = cidade.trim();
+        this.cidade = cidade;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        if (estado != null) estado = estado.trim();
+        this.estado = estado;
     }
 }
