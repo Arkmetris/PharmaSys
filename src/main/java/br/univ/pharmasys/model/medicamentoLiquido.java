@@ -11,11 +11,11 @@ public class medicamentoLiquido extends Medicamento {
         super();
     }
 
-    public double getVolumeMl() {
+    public double getvolumeMl() {
         return volumeMl;
     }
 
-    public void setVolumeMl(double volumeMl) {
+    public void setvolumeMl(double volumeMl) {
     	
         // Validação que o volume não pode ser zero ou negativo
     	
@@ -25,11 +25,11 @@ public class medicamentoLiquido extends Medicamento {
         this.volumeMl = volumeMl;
     }
 
-    public String getTipoRecipiente() {
+    public String gettipoRecipiente() {
         return tipoRecipiente;
     }
 
-    public void setTipoRecipiente(String tipoRecipiente) {
+    public void settipoRecipiente(String tipoRecipiente) {
         if (tipoRecipiente == null || tipoRecipiente.trim().isEmpty()) {
             throw new ErroDePreenchimentoInvalidoException("O tipo de recipiente é obrigatório.");
         }
