@@ -1,6 +1,6 @@
 package br.univ.pharmasys.model;
 //a
-import br.univ.pharmasys.exceptions.ErroDePreenchimentoInvalidoException;
+import br.univ.pharmasys.service.medicamentoTopicoValidador;
 
 public class medicamentoTopico extends Medicamento {
 
@@ -15,11 +15,8 @@ public class medicamentoTopico extends Medicamento {
         return pesoGramas;
     }
 
-    public void setpesoGramas(double pesoGramas) {
-        
-        if (pesoGramas <= 0) {
-            throw new ErroDePreenchimentoInvalidoException("O peso em gramas deve ser maior que zero.");
-        }
+    public void setPesoGramas(double pesoGramas) {
+        medicamentoTopicoValidador.validarPeso(pesoGramas);
         this.pesoGramas = pesoGramas;
     }
 
@@ -27,18 +24,9 @@ public class medicamentoTopico extends Medicamento {
         return tipoEmbalagem;
     }
 
-    public void settipoEmbalagem(String tipoEmbalagem) {
-        if (tipoEmbalagem == null || tipoEmbalagem.trim().isEmpty()) {
-            throw new ErroDePreenchimentoInvalidoException("O tipo de embalagem é obrigatório.");
-        }
-
-        tipoEmbalagem = tipoEmbalagem.trim();
-
-        if (!tipoEmbalagem.matches("\\S+")) {
-            throw new ErroDePreenchimentoInvalidoException("O tipo de embalagem não pode conter espaços.");
-        }
-
-        this.tipoEmbalagem = tipoEmbalagem;
+    public void setTipoEmbalagem(String tipoEmbalagem) {
+        medicamentoTopicoValidador.validarTipoEmbalagem(tipoEmbalagem);
+        this.tipoEmbalagem = tipoEmbalagem.trim();
     }
     
     @Override

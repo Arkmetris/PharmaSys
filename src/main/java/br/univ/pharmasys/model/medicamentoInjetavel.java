@@ -1,6 +1,6 @@
 package br.univ.pharmasys.model;
 //a
-import br.univ.pharmasys.exceptions.ErroDePreenchimentoInvalidoException;
+import br.univ.pharmasys.service.medicamentoInjetavelValidador;
 
 public class medicamentoInjetavel extends Medicamento {
 
@@ -17,17 +17,8 @@ public class medicamentoInjetavel extends Medicamento {
     }
 
     public void setviaAdministracao(String viaAdministracao) {
-        if (viaAdministracao == null || viaAdministracao.trim().isEmpty()) {
-            throw new ErroDePreenchimentoInvalidoException("A via de administração é obrigatória.");
-        }
-
-        viaAdministracao = viaAdministracao.trim();
-
-        if (!viaAdministracao.matches("\\S+")) {
-            throw new ErroDePreenchimentoInvalidoException("A via de administração não pode conter espaços.");
-        }
-
-        this.viaAdministracao = viaAdministracao;
+        medicamentoInjetavelValidador.validarViaAdministracao(viaAdministracao);
+        this.viaAdministracao = viaAdministracao.trim();
     }
 
     public double gettemperaturaMinima() {
@@ -35,11 +26,7 @@ public class medicamentoInjetavel extends Medicamento {
     }
 
     public void settemperaturaMinima(double temperaturaMinima) {
-
-    	if (this.temperaturaMaxima != 0 && temperaturaMinima > this.temperaturaMaxima) {
-            throw new ErroDePreenchimentoInvalidoException("A temperatura mínima não pode ser maior que a temperatura máxima.");
-        }
-        
+        medicamentoInjetavelValidador.validarTemperatura(temperaturaMinima, this.temperaturaMaxima);
         this.temperaturaMinima = temperaturaMinima;
     }
 
@@ -48,11 +35,7 @@ public class medicamentoInjetavel extends Medicamento {
     }
 
     public void settemperaturaMaxima(double temperaturaMaxima) {
-
-    	if (temperaturaMaxima < this.temperaturaMinima) {
-            throw new ErroDePreenchimentoInvalidoException("A temperatura máxima não pode ser menor que a temperatura mínima.");
-        }
-
+        medicamentoInjetavelValidador.validarTemperatura(this.temperaturaMinima, temperaturaMaxima);
         this.temperaturaMaxima = temperaturaMaxima;
     }
 }
