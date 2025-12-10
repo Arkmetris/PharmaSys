@@ -61,8 +61,7 @@ public class FuncionarioValidador {
         senha = senha.trim();
 
         //Vai verificar se a senha possui no mínimo 8 caracteres ou no máximo 14.
-        //Também vai analisar se é composto apenas por números;
-        if (!senha.matches("^\\d{8,14}$")){
+        if (senha.length() < 8 || senha.length() > 14){
 
             throw new ErroDePreenchimentoInvalidoException("Atenção: Senha incompleta, ela deve ter no mínimo 8 dígitos e no máximo 14 dígitos");
 
