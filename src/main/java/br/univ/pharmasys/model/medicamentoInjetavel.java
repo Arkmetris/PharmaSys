@@ -1,5 +1,5 @@
 package br.univ.pharmasys.model;
-//a
+//b
 import br.univ.pharmasys.service.medicamentoInjetavelValidador;
 
 public class medicamentoInjetavel extends Medicamento {
