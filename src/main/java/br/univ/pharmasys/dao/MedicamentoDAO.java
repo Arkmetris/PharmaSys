@@ -106,7 +106,7 @@ public class MedicamentoDAO {
                  med.setSku(rs.getString("SKU"));
                  med.setDosagem(rs.getString("DOSAGEM"));
                  med.setFormaFarmaceutica(rs.getString("FORMA_FARMACEUTICA"));
-                 med.setFabricante(rs.getString("PRINCIPIO_ATIVO"));
+                 med.setFabricante(rs.getString("FABRICANTE"));
                  med.setCodigoBarras(rs.getString("CODIGO_BARRAS"));
                  med.setLaboratorio(rs.getString("LABORATORIO"));
                  med.setEstoqueMax(rs.getInt("ESTOQUE_MAX"));

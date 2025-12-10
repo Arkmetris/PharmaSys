@@ -7,7 +7,6 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
@@ -25,7 +24,7 @@ public class TelaInicial extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(700, 450));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 36));
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("PHARMASYS");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
@@ -33,10 +32,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(51, 166, 178));
         jPanel1.setPreferredSize(new java.awt.Dimension(350, 450));
 
-        // Carregamento CORRIGIDO da imagem
-        jLabel1.setIcon(new javax.swing.ImageIcon(
-                getClass().getResource("/br/univ/pharmasys/ui/Frame_23.png")
-        ));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/univ/pharmasys/ui/Frame_23.png")));
         jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -56,19 +52,19 @@ public class TelaInicial extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 450));
 
-        jLabel3.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("SansSerif", 1, 24));
         jLabel3.setText("Seja bem vindo!");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 16));
         jLabel4.setText("Faça o seu login aqui:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("SansSerif", 1, 12));
         jLabel5.setText("Login:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 170, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("SansSerif", 1, 12));
         jLabel6.setText("Senha:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, -1, -1));
 
@@ -86,10 +82,9 @@ public class TelaInicial extends javax.swing.JFrame {
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, 280, -1));
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
     public static void main(String args[]) {
-
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -106,7 +101,6 @@ public class TelaInicial extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -117,5 +111,4 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    // End of variables declaration//GEN-END:variables
 }
