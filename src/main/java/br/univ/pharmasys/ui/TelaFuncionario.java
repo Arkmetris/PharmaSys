@@ -46,7 +46,7 @@ public class TelaFuncionario extends JFrame {
         buttonVenda = new JButton();
         buttonEstoque = new JButton();
 
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(new Dimension(700, 450));
 
         labelLogo.setFont(new Font("SF Pro", 1, 16)); 

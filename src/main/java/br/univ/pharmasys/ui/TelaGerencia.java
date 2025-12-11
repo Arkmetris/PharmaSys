@@ -104,7 +104,7 @@ public class TelaGerencia extends JFrame {
         });
         popupRelatorios.add(jMenuItem5);
 
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         addComponentListener(new ComponentAdapter() {
             public void componentShown(ComponentEvent evt) {
                 formComponentShown(evt);
