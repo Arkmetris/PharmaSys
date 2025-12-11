@@ -1,15 +1,16 @@
 package br.univ.pharmasys.service;
 
+import br.univ.pharmasys.exceptions.ErroDePreenchimentoInvalidoException;
 import br.univ.pharmasys.exceptions.IdInvalidoException;
 import br.univ.pharmasys.exceptions.TelefoneInvalidoException;
 
 public class TelefoneValidador {
 
 
-    public static void idTelefoneValidar(long id){
+    public static void idTelefoneValidar(long id) {
 
 
-        if(id <=0){
+        if (id <= 0) {
             throw new IdInvalidoException("\nError: O ID de um fornecedor deve ser sempre positiva e maior que zero");
 
         }
@@ -17,23 +18,17 @@ public class TelefoneValidador {
 
     public static void numeroTelefoneValidar(String numerotelefone) {
 
-        if(numerotelefone ==null || numerotelefone.trim().isEmpty()){
+        if (numerotelefone == null || numerotelefone.trim().isEmpty()) {
 
             throw new TelefoneInvalidoException("Error: Preencha o campo de telefone!");
         }
 
         numerotelefone = numerotelefone.replaceAll("\\D", "");
 
-        if(numerotelefone.length()!=11){
-            throw new TelefoneInvalidoException("Error: O número deve conter 11 digitos!");
+        //Vai determinar o número de telefone com apenas 11 dígitos (sendo apenas números, claro).
+        if(!numerotelefone.matches("^\\d{11}$")){
+
+            throw new ErroDePreenchimentoInvalidoException("Atenção: Preencha o campo corretamente!");
         }
-        if(numerotelefone.trim().matches("\\S+")){
-
-
-            throw new TelefoneInvalidoException("Error: O campo de telefone deve ser preenchido!");
-
-        }
-
     }
-
 }

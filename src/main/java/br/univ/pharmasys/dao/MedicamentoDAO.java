@@ -13,38 +13,43 @@ import java.util.List;
 
 public class MedicamentoDAO {
 
-//
- public void create(Medicamento med) {
-
-     String sql = "INSERT INTO MEDICAMENTO (NOME_COMERCIAL, SKU, DOSAGEM, FORMA_FARMACEUTICA, PRINCIPIO_ATIVO, CODIGO_BARRAS, LABORATORIO, "
-     		+ "ESTOQUE_MAX, ESTOQUE_MIN, ESTOQUE_ATUAL, DATA_EXPIRACAO, PRECO, LOTE_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-     try (Connection conn = ConnectionFactory.getConnection();
-          PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-    	 stmt.setString(1, med.getNomeComercial());
-         stmt.setString(2, med.getSku());
-         stmt.setString(3, med.getDosagem());
-         stmt.setString(4, med.getFormaFarmaceutica());
-         stmt.setString(5, med.getPrincipioAtivo());
-         stmt.setString(6, med.getCodigoBarras());
-         stmt.setString(7, med.getLaboratorio());
-         stmt.setInt(8, med.getEstoqueMax());
-         stmt.setInt(9, med.getEstoqueMin());
-         stmt.setInt(10, med.getEstoqueAtual());
-         stmt.setDate(11, Date.valueOf(med.getDataExpiracao()));
-         stmt.setBigDecimal(12, med.getPreco());
 
 
-         stmt.executeUpdate();
-         System.out.println("Medicamento salvo com sucesso!");
 
-     } catch (SQLException e) {
-         throw new RuntimeException("Erro ao salvar medicamento: " + e.getMessage(), e);
-     }
- }
 
- //
+	public void create(Medicamento med) {
+
+	    String sql = "INSERT INTO MEDICAMENTO (NOME_COMERCIAL, SKU, DOSAGEM, FORMA_FARMACEUTICA, FABRICANTE, "
+	            + "CODIGO_BARRAS, LABORATORIO, ESTOQUE_MAX, ESTOQUE_MIN, ESTOQUE_ATUAL, DATA_EXPIRACAO, PRECO, LOTE_ID) "
+	            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+	    try (Connection conn = ConnectionFactory.getConnection();
+	         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+	        stmt.setString(1, med.getNomeComercial());
+	        stmt.setString(2, med.getSku());
+	        stmt.setString(3, med.getDosagem());
+	        stmt.setString(4, med.getFormaFarmaceutica());
+	        stmt.setString(5, med.getFabricante()); // Agora certo
+	        stmt.setString(6, med.getCodigoBarras());
+	        stmt.setString(7, med.getLaboratorio());
+	        stmt.setInt(8, med.getEstoqueMax());
+	        stmt.setInt(9, med.getEstoqueMin());
+	        stmt.setInt(10, med.getEstoqueAtual());
+	        stmt.setDate(11, Date.valueOf(med.getDataExpiracao()));
+	        stmt.setBigDecimal(12, med.getPreco());
+	        stmt.setLong(13, med.getLoteId()); // Adicionado LOTE_ID
+
+	        stmt.executeUpdate();
+	        System.out.println("Medicamento salvo com sucesso!");
+
+	    } catch (SQLException e) {
+	        throw new RuntimeException("Erro ao salvar medicamento: " + e.getMessage(), e);
+	    }
+	}
+
+
+ 
  public Medicamento buscarPorSku(String sku) {
 
      String sql = "SELECT * FROM MEDICAMENTO WHERE SKU = ?";
@@ -63,7 +68,7 @@ public class MedicamentoDAO {
                  med.setSku(rs.getString("SKU"));
                  med.setDosagem(rs.getString("DOSAGEM"));
                  med.setFormaFarmaceutica(rs.getString("FORMA_FARMACEUTICA"));
-                 med.setPrincipioAtivo(rs.getString("PRINCIPIO_ATIVO"));
+                 med.setFabricante(rs.getString("FABRICANTE"));
                  med.setCodigoBarras(rs.getString("CODIGO_BARRAS"));
                  med.setLaboratorio(rs.getString("LABORATORIO"));
                  med.setEstoqueMax(rs.getInt("ESTOQUE_MAX"));
@@ -85,7 +90,7 @@ public class MedicamentoDAO {
      return med;
  }
 
- //
+ 
  public List<Medicamento> buscarPorNome(String nome) {
 
      String sql = "SELECT * FROM MEDICAMENTO WHERE NOME_COMERCIAL = ?";
@@ -104,7 +109,7 @@ public class MedicamentoDAO {
                  med.setSku(rs.getString("SKU"));
                  med.setDosagem(rs.getString("DOSAGEM"));
                  med.setFormaFarmaceutica(rs.getString("FORMA_FARMACEUTICA"));
-                 med.setPrincipioAtivo(rs.getString("PRINCIPIO_ATIVO"));
+                 med.setFabricante(rs.getString("PRINCIPIO_ATIVO"));
                  med.setCodigoBarras(rs.getString("CODIGO_BARRAS"));
                  med.setLaboratorio(rs.getString("LABORATORIO"));
                  med.setEstoqueMax(rs.getInt("ESTOQUE_MAX"));
@@ -129,37 +134,40 @@ public class MedicamentoDAO {
      return lista;
  }
 
- //
+
  public void update(Medicamento med) {
 
-     String sql = "UPDATE MEDICAMENTO SET NOME_COMERCIAL=?, DOSAGEM=?, FORMA_FARMACEUTICA=?, PRINCIPIO_ATIVO=?, "
-     		+ "CODIGO_BARRAS=?, LABORATORIO=?, ESTOQUE_MAX=?, ESTOQUE_MIN=?, ESTOQUE_ATUAL=?, DATA_EXPIRACAO=?, "
-     		+ "PRECO=?, LOTE_ID=? WHERE SKU=?";
+	    String sql = "UPDATE MEDICAMENTO SET NOME_COMERCIAL=?, DOSAGEM=?, FORMA_FARMACEUTICA=?, FABRICANTE=?, "
+	            + "CODIGO_BARRAS=?, LABORATORIO=?, ESTOQUE_MAX=?, ESTOQUE_MIN=?, ESTOQUE_ATUAL=?, DATA_EXPIRACAO=?, "
+	            + "PRECO=?, LOTE_ID=? WHERE SKU=?";
 
-     try (Connection conn = ConnectionFactory.getConnection();
-          PreparedStatement stmt = conn.prepareStatement(sql)) {
+	    try (Connection conn = ConnectionFactory.getConnection();
+	         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-         stmt.setString(1, med.getNomeComercial());
-         stmt.setString(2, med.getDosagem());
-         stmt.setString(3, med.getFormaFarmaceutica());
-         stmt.setString(4, med.getPrincipioAtivo());
-         stmt.setString(5, med.getCodigoBarras());
-         stmt.setString(6, med.getLaboratorio());
-         stmt.setInt(7, med.getEstoqueMax());
-         stmt.setInt(8, med.getEstoqueMin());
-         stmt.setInt(9, med.getEstoqueAtual());
-         stmt.setDate(10, Date.valueOf(med.getDataExpiracao()));
-         stmt.setString(13, med.getSku());
+	        stmt.setString(1, med.getNomeComercial());
+	        stmt.setString(2, med.getDosagem());
+	        stmt.setString(3, med.getFormaFarmaceutica());
+	        stmt.setString(4, med.getFabricante());
+	        stmt.setString(5, med.getCodigoBarras());
+	        stmt.setString(6, med.getLaboratorio());
+	        stmt.setInt(7, med.getEstoqueMax());
+	        stmt.setInt(8, med.getEstoqueMin());
+	        stmt.setInt(9, med.getEstoqueAtual());
+	        stmt.setDate(10, Date.valueOf(med.getDataExpiracao()));
+	        stmt.setBigDecimal(11, med.getPreco());
+	        stmt.setLong(12, med.getLoteId());
+	        stmt.setString(13, med.getSku()); 
 
-         stmt.executeUpdate();
-         System.out.println("Medicamento atualizado com sucesso!");
+	        stmt.executeUpdate();
+	        System.out.println("Medicamento atualizado com sucesso!");
 
-     } catch (SQLException e) {
-         throw new RuntimeException("Erro ao atualizar medicamento: " + e.getMessage(), e);
-     }
- }
+	    } catch (SQLException e) {
+	        throw new RuntimeException("Erro ao atualizar medicamento: " + e.getMessage(), e);
+	    }
+	}
 
- //
+
+
  public void delete(String sku) {
      String sql = "DELETE FROM MEDICAMENTO WHERE SKU = ?";
 
