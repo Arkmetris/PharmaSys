@@ -64,7 +64,7 @@ public class FornecedorValidador {
 
     public static void emailValidar(String email){
         if(email == null || email.trim().isEmpty()){
-            throw new NomeInvalidoException("\nPreencha o campo Email");
+            throw new NomeInvalidoException("\n Preencha o campo Email");
         }
     }
 
