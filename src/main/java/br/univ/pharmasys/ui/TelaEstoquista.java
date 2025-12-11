@@ -44,7 +44,7 @@ public class TelaEstoquista extends JFrame {
         jButtonFornecedores = new JButton();
         jButtonEstoque = new JButton();
 
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(new Dimension(700, 450));
 
         jLabelLogo.setFont(new Font("SF Pro", 1, 16));
