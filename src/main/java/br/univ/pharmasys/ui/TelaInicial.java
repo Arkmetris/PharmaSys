@@ -149,12 +149,12 @@ public class TelaInicial extends JFrame {
                     this.dispose();
                     
                 } else if (usuario.getTipo() == 2) {
-                    // Aqui você colocaria a tela do Farmacêutico futuramente
                     JOptionPane.showMessageDialog(this, "Bem-vindo Farmacêutico(a) " + usuario.getNome());
-                    // new TelaFarmaceutico().setVisible(true);
-                    // this.dispose();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Bem-vindo " + usuario.getNome());
+                    new TelaFuncionario().setVisible(true);
+                    this.dispose();
+                } else if (usuario.getTipo() == 1) {
+                    JOptionPane.showMessageDialog(this, "Bem-vindo Esoquista" + usuario.getNome());
+                    // TODO new TelaEstoquista().setVisible(true);
                 }
 
             } else {
@@ -187,14 +187,12 @@ public class TelaInicial extends JFrame {
 	    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
 	        java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 	    }
-	
-	    /* Abre a tela */
+	    
 	    java.awt.EventQueue.invokeLater(() -> {
 	        new TelaInicial().setVisible(true);
 	    });
 }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonEntrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -205,8 +203,5 @@ public class TelaInicial extends JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField TextSenha;
     private javax.swing.JTextField TextLogin;
-    // End of variables declaration//GEN-END:variables
-		public void actionPerformed(ActionEvent e) {
-		}
 }
 
