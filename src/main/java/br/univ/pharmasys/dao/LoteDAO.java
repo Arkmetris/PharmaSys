@@ -39,9 +39,6 @@ public class LoteDAO {
 
            
             ResultSet rs = stmt.getGeneratedKeys();
-            if (rs.next()) {
-                lote.setNumeroLote(rs.getInt(1));
-            }
 
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao cadastrar Lote: " + e.getMessage(), e);
@@ -64,7 +61,6 @@ public class LoteDAO {
                 while (rs.next()) {
                     Lote lote = new Lote();
 
-                    lote.setNumeroLote(rs.getInt("NUMERO_LOTE"));
                     lote.setSkuMedicamento(rs.getString("SKU_MEDICAMENTO"));
 
                     Date sqlDate = rs.getDate("VALIDADE");
