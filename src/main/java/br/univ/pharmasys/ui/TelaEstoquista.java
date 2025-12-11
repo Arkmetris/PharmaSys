@@ -1,128 +1,147 @@
 package br.univ.pharmasys.ui;
 
-public class TelaEstoquista extends javax.swing.JFrame {
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+
+@SuppressWarnings("serial")
+public class TelaEstoquista extends JFrame {
 
     public TelaEstoquista() {
         initComponents();
+        initRelogio();
     }
 
-    @SuppressWarnings("unchecked")
+    // Método que inicializa o relógio
+    private void initRelogio() {
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("HH:mm");
+        Timer timer = new Timer(1000, e -> {
+            LocalTime agora = LocalTime.now();
+            relogio.setText(agora.format(formato));
+        });
+        timer.setInitialDelay(0);
+        timer.start();
+    }
+    
+    // Método para definir o nome do usuário mostrado na tela
+    public void definirUsuarioLogado(String nome) {
+    	labelNome.setText(nome);
+    }
     private void initComponents() {
 
-        jLabelLogo = new javax.swing.JLabel();
-        jLabelSair = new javax.swing.JLabel();
-        jLabelUsuario = new javax.swing.JLabel();
-        jLabelHora = new javax.swing.JLabel();
-        jLabelSeparador = new javax.swing.JLabel();
-        jTextFieldBusca = new javax.swing.JTextField();
-        jLabelLupa = new javax.swing.JLabel();
-        jButtonCadastroMed = new javax.swing.JButton();
-        jButtonFornecedores = new javax.swing.JButton();
-        jButtonEstoque = new javax.swing.JButton();
+        jLabelLogo = new JLabel();
+        jLabelSair = new JLabel();
+        labelNome = new JLabel();
+        relogio = new JLabel();
+        jTextFieldBusca = new JTextField();
+        jLabelLupa = new JLabel();
+        jButtonCadastroMed = new JButton();
+        jButtonFornecedores = new JButton();
+        jButtonEstoque = new JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setSize(new java.awt.Dimension(700, 450));
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setSize(new Dimension(700, 450));
 
-        jLabelLogo.setFont(new java.awt.Font("SF Pro", 1, 16));
-        jLabelLogo.setForeground(new java.awt.Color(51, 204, 255));
+        jLabelLogo.setFont(new Font("SF Pro", 1, 16));
+        jLabelLogo.setForeground(new Color(51, 204, 255));
         jLabelLogo.setText("LOGO PHARMASYS");
 
-        jLabelSair.setFont(new java.awt.Font("SF Pro", 0, 14));
-        jLabelSair.setForeground(new java.awt.Color(204, 0, 51));
+        jLabelSair.setFont(new Font("SF Pro", 0, 14));
+        jLabelSair.setForeground(new Color(204, 0, 51));
         jLabelSair.setText("Sair");
-        jLabelSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabelSair.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        jLabelSair.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        jLabelSair.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
                 jLabelSairMouseClicked(evt);
             }
         });
 
-        jLabelUsuario.setFont(new java.awt.Font("SF Pro", 0, 14));
-        jLabelUsuario.setText("Ana Souza (Estoquista)");
+        labelNome.setFont(new Font("SF Pro", 0, 14));
 
-        jLabelHora.setFont(new java.awt.Font("SF Pro", 0, 14));
-        jLabelHora.setText("00:00");
+        relogio.setFont(new Font("SF Pro", 0, 14));
+        relogio.setText("00:00");
 
-        jLabelSeparador.setText("|");
-
-        jTextFieldBusca.setFont(new java.awt.Font("SF Pro", 2, 14));
-        jTextFieldBusca.setForeground(new java.awt.Color(102, 102, 102));
+        jTextFieldBusca.setFont(new Font("SF Pro", 2, 14));
+        jTextFieldBusca.setForeground(new Color(102, 102, 102));
         jTextFieldBusca.setText("Buscar no estoque");
 
         jLabelLupa.setText("LUPA");
 
-        jButtonCadastroMed.setFont(new java.awt.Font("SF Pro", 0, 18));
+        jButtonCadastroMed.setFont(new Font("SF Pro", 0, 18));
         jButtonCadastroMed.setText("Cadastrar Medicamento");
         jButtonCadastroMed.addActionListener(evt -> abrirCadastroMedicamento());
 
-        jButtonFornecedores.setFont(new java.awt.Font("SF Pro", 0, 18));
+        jButtonFornecedores.setFont(new Font("SF Pro", 0, 18));
         jButtonFornecedores.setText("Gerenciar Fornecedores");
         jButtonFornecedores.addActionListener(evt -> abrirFornecedores());
 
-        jButtonEstoque.setFont(new java.awt.Font("SF Pro", 0, 18));
+        jButtonEstoque.setFont(new Font("SF Pro", 0, 18));
         jButtonEstoque.setText("Visualizar Estoque");
         jButtonEstoque.addActionListener(evt -> abrirEstoque());
 
         // Layout
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-
+        GroupLayout layout = new GroupLayout(getContentPane());
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(jLabelLogo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 230, Short.MAX_VALUE)
-                                .addComponent(jLabelUsuario)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelSeparador)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelHora)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabelSair)
-                                .addContainerGap())
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(jTextFieldBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelLupa)
-                                .addContainerGap())
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addComponent(jButtonCadastroMed, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)
-                                .addComponent(jButtonFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)
-                                .addComponent(jButtonEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 30, Short.MAX_VALUE))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addGap(23)
+        			.addComponent(jLabelLogo)
+        			.addPreferredGap(ComponentPlacement.RELATED, 610, Short.MAX_VALUE)
+        			.addComponent(jLabelSair)
+        			.addContainerGap())
+        		.addGroup(layout.createSequentialGroup()
+        			.addGap(34)
+        			.addComponent(jTextFieldBusca, GroupLayout.PREFERRED_SIZE, 631, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jLabelLupa)
+        			.addContainerGap())
+        		.addGroup(layout.createSequentialGroup()
+        			.addGap(50)
+        			.addComponent(jButtonCadastroMed, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
+        			.addGap(40)
+        			.addComponent(jButtonFornecedores, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
+        			.addGap(40)
+        			.addComponent(jButtonEstoque, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
+        			.addGap(0, 30, Short.MAX_VALUE))
+        		.addGroup(layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(labelNome, GroupLayout.PREFERRED_SIZE, 270, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED, 490, Short.MAX_VALUE)
+        			.addComponent(relogio)
+        			.addContainerGap())
         );
-
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabelLogo)
-                                        .addComponent(jLabelSair)
-                                        .addComponent(jLabelUsuario)
-                                        .addComponent(jLabelHora)
-                                        .addComponent(jLabelSeparador))
-                                .addGap(42, 42, 42)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jTextFieldBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabelLupa))
-                                .addGap(40, 40, 40)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButtonCadastroMed, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButtonFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButtonEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(220, Short.MAX_VALUE))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jLabelLogo)
+        				.addComponent(jLabelSair))
+        			.addGap(42)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jTextFieldBusca, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jLabelLupa))
+        			.addGap(40)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jButtonCadastroMed, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jButtonFornecedores, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jButtonEstoque, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(labelNome)
+        				.addComponent(relogio)))
         );
+        getContentPane().setLayout(layout);
 
         pack();
     }
 
-    private void jLabelSairMouseClicked(java.awt.event.MouseEvent evt) {
+    private void jLabelSairMouseClicked(MouseEvent evt) {
         new TelaInicial().setVisible(true);
         this.dispose();
     }
@@ -143,17 +162,16 @@ public class TelaEstoquista extends javax.swing.JFrame {
     }
 
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(() -> new TelaEstoquista().setVisible(true));
+        EventQueue.invokeLater(() -> new TelaEstoquista().setVisible(true));
     }
 
-    private javax.swing.JButton jButtonCadastroMed;
-    private javax.swing.JButton jButtonFornecedores;
-    private javax.swing.JButton jButtonEstoque;
-    private javax.swing.JLabel jLabelLogo;
-    private javax.swing.JLabel jLabelSair;
-    private javax.swing.JLabel jLabelUsuario;
-    private javax.swing.JLabel jLabelHora;
-    private javax.swing.JLabel jLabelSeparador;
-    private javax.swing.JLabel jLabelLupa;
-    private javax.swing.JTextField jTextFieldBusca;
+    private JButton jButtonCadastroMed;
+    private JButton jButtonFornecedores;
+    private JButton jButtonEstoque;
+    private JLabel jLabelLogo;
+    private JLabel jLabelSair;
+    private JLabel labelNome;
+    private JLabel relogio;
+    private JLabel jLabelLupa;
+    private JTextField jTextFieldBusca;
 }
