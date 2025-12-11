@@ -16,7 +16,7 @@ public class Fornecedor {
     private String cidade;
 
     private String email;
-    private Long telefoneId; 
+    private String telefoneId;
 
     private boolean inativo;
 
@@ -102,11 +102,11 @@ public class Fornecedor {
         this.email = email.trim();
     }
 
-    public Long getTelefoneId() {
+    public String getTelefoneId() {
         return telefoneId;
     }
 
-    public void setTelefoneId(Long telefoneId) {
+    public void setTelefoneId(String telefoneId) {
         this.telefoneId = telefoneId;
     }
 
@@ -117,4 +117,5 @@ public class Fornecedor {
     public void setInativo(boolean inativo) {
         this.inativo = inativo;
     }
+
 }
