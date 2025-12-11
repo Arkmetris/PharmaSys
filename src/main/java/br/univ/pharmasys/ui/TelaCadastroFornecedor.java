@@ -4,6 +4,8 @@
  */
 package br.univ.pharmasys.ui;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author kessy
@@ -42,7 +44,7 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
         ButtonCancelar = new javax.swing.JButton();
         ButtonCadastrar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(701, 447));
         setMinimumSize(new java.awt.Dimension(701, 447));
 

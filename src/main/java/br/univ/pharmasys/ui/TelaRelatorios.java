@@ -20,7 +20,7 @@ public class TelaRelatorios extends JFrame {
         ButtonGerarPDF = new javax.swing.JButton();
         ComboBoxCategoria = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(440, 380));
         setMinimumSize(new java.awt.Dimension(440, 380));
         setResizable(false);

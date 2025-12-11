@@ -1,5 +1,7 @@
 package br.univ.pharmasys.ui;
 
+import javax.swing.JFrame;
+
 public class TelaEstoque extends javax.swing.JFrame {
 
     public TelaEstoque() {
@@ -15,7 +17,7 @@ public class TelaEstoque extends javax.swing.JFrame {
         btnAtualizar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
         setTitle("Estoque de Medicamentos");
 
         jLabelTitulo.setFont(new java.awt.Font("SF Pro", 1, 20));
