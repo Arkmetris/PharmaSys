@@ -15,11 +15,13 @@ public class MedicamentoInjetavelValidador {
 
     public static void validarTemperatura(double min, double max) {
     	// Só valida se o Max já tiver sido setado
+
+        if(min < -273 || max > 273) {
+            throw new ErroDePreenchimentoInvalidoException("Temperaturas não podem ser menores que -273°C.");
+        }
+
         if (max != 0 && min > max) {
             throw new ErroDePreenchimentoInvalidoException("A temperatura mínima não pode ser maior que a máxima.");
-        }
-        if (max != 0 && max < min) {
-             throw new ErroDePreenchimentoInvalidoException("A temperatura máxima não pode ser menor que a mínima.");
         }
     }
 }

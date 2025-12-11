@@ -26,7 +26,9 @@ public class MedicamentoInjetavel extends Medicamento {
     }
 
     public void setTemperaturaMinima(double temperaturaMinima) {
-        MedicamentoInjetavelValidador.validarTemperatura(temperaturaMinima, this.temperaturaMaxima);
+      if(this.temperaturaMaxima != 0) {
+          MedicamentoInjetavelValidador.validarTemperatura(temperaturaMinima, this.temperaturaMaxima);
+      }
         this.temperaturaMinima = temperaturaMinima;
     }
 
@@ -35,7 +37,9 @@ public class MedicamentoInjetavel extends Medicamento {
     }
 
     public void setTemperaturaMaxima(double temperaturaMaxima) {
-        MedicamentoInjetavelValidador.validarTemperatura(this.temperaturaMinima, temperaturaMaxima);
+       if(this.temperaturaMinima != 0) {
+           MedicamentoInjetavelValidador.validarTemperatura(this.temperaturaMinima, temperaturaMaxima);
+       }
         this.temperaturaMaxima = temperaturaMaxima;
     }
 }

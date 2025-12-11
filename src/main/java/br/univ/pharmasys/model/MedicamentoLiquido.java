@@ -25,6 +25,7 @@ public class MedicamentoLiquido extends Medicamento {
     }
 
     public void setTipoRecipiente(String tipoRecipiente) {
+        tipoRecipiente = tipoRecipiente.trim();
         MedicamentoLiquidoValidador.validarTipoRecipiente(tipoRecipiente);
         this.tipoRecipiente = tipoRecipiente.trim();
     }
