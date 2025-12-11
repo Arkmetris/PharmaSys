@@ -11,7 +11,7 @@ public class MedicamentoTopico extends Medicamento {
         super();
     }
 
-    public double getpesoGramas() {
+    public double getPesoGramas() {
         return pesoGramas;
     }
 
@@ -20,7 +20,7 @@ public class MedicamentoTopico extends Medicamento {
         this.pesoGramas = pesoGramas;
     }
 
-    public String gettipoEmbalagem() {
+    public String getTipoEmbalagem() {
         return tipoEmbalagem;
     }
 
