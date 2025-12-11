@@ -91,11 +91,11 @@ public class TelaGerencia extends JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("SF Pro", 1, 16)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("SF Pro", 1, 16));
         jLabel1.setForeground(new java.awt.Color(51, 204, 255));
         jLabel1.setText("LOGO PHARMASYS");
 
-        jLabel2.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("SF Pro", 0, 14));
         jLabel2.setForeground(new java.awt.Color(204, 0, 51));
         jLabel2.setText("Sair");
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -104,16 +104,15 @@ public class TelaGerencia extends JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
-        jLabel3.setText("José Vieira dos Santos");
+        jLabel3.setFont(new java.awt.Font("SF Pro", 0, 14));
 
-        jLabel4.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("SF Pro", 0, 14));
         jLabel4.setText("00:00");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14));
         jLabel5.setText("|");
 
-        ButtonFuncionarios.setFont(new java.awt.Font("SF Pro", 3, 16)); // NOI18N
+        ButtonFuncionarios.setFont(new java.awt.Font("SF Pro", 3, 16));
         ButtonFuncionarios.setText("Funcionários");
         ButtonFuncionarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -121,7 +120,7 @@ public class TelaGerencia extends JFrame {
             }
         });
 
-        ButtonRelatorios.setFont(new java.awt.Font("SF Pro", 3, 16)); // NOI18N
+        ButtonRelatorios.setFont(new java.awt.Font("SF Pro", 3, 16));
         ButtonRelatorios.setText("Relatórios");
         ButtonRelatorios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -129,7 +128,7 @@ public class TelaGerencia extends JFrame {
             }
         });
 
-        ButtonFornecedor.setFont(new java.awt.Font("SF Pro", 3, 16)); // NOI18N
+        ButtonFornecedor.setFont(new java.awt.Font("SF Pro", 3, 16));
         ButtonFornecedor.setText("Fornecedor");
         ButtonFornecedor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -142,7 +141,7 @@ public class TelaGerencia extends JFrame {
             }
         });
 
-        ButtonMedicamentos.setFont(new java.awt.Font("SF Pro", 3, 16)); // NOI18N
+        ButtonMedicamentos.setFont(new java.awt.Font("SF Pro", 3, 16));
         ButtonMedicamentos.setText("Medicamentos");
         ButtonMedicamentos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

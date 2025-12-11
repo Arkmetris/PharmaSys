@@ -23,7 +23,7 @@ public class InicializadorDatabase {
             admin.setTipo(3);
             admin.setSexo("M");
             admin.setTelefone("81999999999");
-            admin.setEmail("admin@pharmasys.com");
+            admin.setEmail("Email");
             
             dao.create(admin);
             
