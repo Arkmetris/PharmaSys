@@ -1,13 +1,11 @@
 package br.univ.pharmasys.ui;
 
-import javax.swing.JFrame;
+import javax.swing.*;
+import javax.swing.LayoutStyle.*;
+import javax.swing.GroupLayout.*;
+import java.time.LocalDate;
 import br.univ.pharmasys.dao.FuncionarioDAO;
 import br.univ.pharmasys.model.Funcionario;
-import java.time.LocalDate;
-import javax.swing.JOptionPane;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.GroupLayout;
 
 @SuppressWarnings("serial")
 public class TelaCadastroFuncionario extends JFrame {
@@ -20,45 +18,45 @@ public class TelaCadastroFuncionario extends JFrame {
 
     private void initComponents() {
 
-        LabelTituloCadastroFunc = new javax.swing.JLabel();
-        BotaoCadastrar = new javax.swing.JButton();
-        BotaoCancelar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        boxDia = new javax.swing.JComboBox<>();
-        boxMes = new javax.swing.JComboBox<>();
-        boxAno = new javax.swing.JComboBox<>();
-        boxSexo = new javax.swing.JComboBox<>();
+        LabelTituloCadastroFunc = new JLabel();
+        BotaoCadastrar = new JButton();
+        BotaoCancelar = new JButton();
+        jLabel1 = new JLabel();
+        jLabel2 = new JLabel();
+        jLabel3 = new JLabel();
+        jLabel4 = new JLabel();
+        jLabel5 = new JLabel();
+        jLabel6 = new JLabel();
+        jLabel7 = new JLabel();
+        jLabel8 = new JLabel();
+        jLabel9 = new JLabel();
+        jLabel10 = new JLabel();
+        jLabel11 = new JLabel();
+        boxDia = new JComboBox<>();
+        boxMes = new JComboBox<>();
+        boxAno = new JComboBox<>();
+        boxSexo = new JComboBox<>();
         //boxSexo.setPreferredSize(new java.awt.Dimension(100, 25));
-        TextNome = new javax.swing.JTextField();
-        TextCpf = new javax.swing.JTextField();
-        TextEmail = new javax.swing.JTextField();
-        TextEmailConfirm = new javax.swing.JTextField();
-        TextTelefone = new javax.swing.JTextField();
-        TextSenha = new javax.swing.JTextField();
-        TextSenhaConfirm = new javax.swing.JTextField();
-        boxCargo = new javax.swing.JComboBox<>();
-        boxCargo.setModel(new javax.swing.DefaultComboBoxModel<>(
+        TextNome = new JTextField();
+        TextCpf = new JTextField();
+        TextEmail = new JTextField();
+        TextEmailConfirm = new JTextField();
+        TextTelefone = new JTextField();
+        TextSenha = new JTextField();
+        TextSenhaConfirm = new JTextField();
+        boxCargo = new JComboBox<>();
+        boxCargo.setModel(new DefaultComboBoxModel<>(
                 new String[] { "Estoquista", "Atendente", "Gerente" }
         ));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
         setMinimumSize(new java.awt.Dimension(660, 500));
         setResizable(false);
 
         LabelTituloCadastroFunc.setBackground(new java.awt.Color(255, 255, 255));
         LabelTituloCadastroFunc.setFont(new java.awt.Font("SF Pro", 1, 24)); // NOI18N
-        LabelTituloCadastroFunc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelTituloCadastroFunc.setHorizontalAlignment(SwingConstants.CENTER);
         LabelTituloCadastroFunc.setText("Cadastro de Funcionário");
 
         BotaoCadastrar.setText("Cadastrar");
@@ -98,13 +96,13 @@ public class TelaCadastroFuncionario extends JFrame {
         jLabel9.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
         jLabel9.setText("Confirmar a senha:");
 
-        boxDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "  ", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", " " }));
+        boxDia.setModel(new DefaultComboBoxModel<>(new String[] { "  ", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", " " }));
 
-        boxMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro", " " }));
+        boxMes.setModel(new DefaultComboBoxModel<>(new String[] { "janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro", " " }));
 
-        boxAno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "  ", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", " " }));
+        boxAno.setModel(new DefaultComboBoxModel<>(new String[] { "  ", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", " " }));
 
-        boxSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "  ", "Fem", "Masc" }));
+        boxSexo.setModel(new DefaultComboBoxModel<>(new String[] { "  ", "Fem", "Masc" }));
 
         //TextCargo.setText(" ");
 
@@ -117,7 +115,7 @@ public class TelaCadastroFuncionario extends JFrame {
 
         TextSenha.setFont(new java.awt.Font("SF Pro", 0, 12)); // NOI18N
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         layout.setHorizontalGroup(
         	layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(layout.createSequentialGroup()
@@ -355,43 +353,43 @@ public class TelaCadastroFuncionario extends JFrame {
     public static void main(String args[]) {
 
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ReflectiveOperationException | UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         java.awt.EventQueue.invokeLater(() -> new TelaCadastroFuncionario().setVisible(true));
     }
 
-    private javax.swing.JButton BotaoCadastrar;
-    private javax.swing.JButton BotaoCancelar;
-    private javax.swing.JLabel LabelTituloCadastroFunc;
-    private javax.swing.JComboBox<String> boxDia;
-    private javax.swing.JComboBox<String> boxMes;
-    private javax.swing.JComboBox<String> boxAno;
-    private javax.swing.JComboBox<String> boxSexo;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField TextNome;
-    private javax.swing.JTextField TextCpf;
-    private javax.swing.JComboBox<String> boxCargo ;
-    private javax.swing.JTextField TextEmail;
-    private javax.swing.JTextField TextEmailConfirm;
-    private javax.swing.JTextField TextTelefone;
-    private javax.swing.JTextField TextSenha;
-    private javax.swing.JTextField TextSenhaConfirm;
+    private JButton BotaoCadastrar;
+    private JButton BotaoCancelar;
+    private JLabel LabelTituloCadastroFunc;
+    private JComboBox<String> boxDia;
+    private JComboBox<String> boxMes;
+    private JComboBox<String> boxAno;
+    private JComboBox<String> boxSexo;
+    private JLabel jLabel1;
+    private JLabel jLabel10;
+    private JLabel jLabel11;
+    private JLabel jLabel2;
+    private JLabel jLabel3;
+    private JLabel jLabel4;
+    private JLabel jLabel5;
+    private JLabel jLabel6;
+    private JLabel jLabel7;
+    private JLabel jLabel8;
+    private JLabel jLabel9;
+    private JTextField TextNome;
+    private JTextField TextCpf;
+    private JComboBox<String> boxCargo ;
+    private JTextField TextEmail;
+    private JTextField TextEmailConfirm;
+    private JTextField TextTelefone;
+    private JTextField TextSenha;
+    private JTextField TextSenhaConfirm;
 }

@@ -4,6 +4,8 @@
  */
 package br.univ.pharmasys.ui;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author kessy
@@ -50,7 +52,7 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
             }
         });
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
         setTitle("TelaCadEstoque");
         setResizable(false);
 
