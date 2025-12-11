@@ -25,6 +25,7 @@ public class MedicamentoTopico extends Medicamento {
     }
 
     public void setTipoEmbalagem(String tipoEmbalagem) {
+        tipoEmbalagem = tipoEmbalagem.trim();
         MedicamentoTopicoValidador.validarTipoEmbalagem(tipoEmbalagem);
         this.tipoEmbalagem = tipoEmbalagem.trim();
     }
