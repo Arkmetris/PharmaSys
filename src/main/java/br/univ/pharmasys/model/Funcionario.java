@@ -17,7 +17,6 @@ public class Funcionario {
   private String senha;
   private String email;
 
-
   public Funcionario(){
 
   }
@@ -25,8 +24,6 @@ public class Funcionario {
   public  long getIdFuncionario() {
     return idFuncionario;
   }
-
-
 
   public void setIdFuncionario(long idFuncionario) {
 
