@@ -6,20 +6,6 @@ import br.univ.pharmasys.exceptions.NomeInvalidoException;
 
 public class ClienteValidador {
 
-    public static void cpfValidar(String cpf){
-
-        if(cpf==null || cpf.trim().isEmpty()){
-            throw new CpfInvalidoException("Error: Campo não foi preenchido!");
-        }
-
-        cpf = cpf.replaceAll("\\D", "");
-
-        if(cpf.length()!=11){
-            throw new CpfInvalidoException("Error: todo CPF deve conter 11 digitos!");
-        }
-
-    }
-
     public static void nomeValidar(String nome){
 
         if(nome==null || nome.trim().isEmpty()){

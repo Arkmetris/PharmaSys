@@ -18,8 +18,8 @@ public class LoteValidador {
 
         sku = sku.trim();
 
-        if(!sku.matches("\\S+")){
-            throw new ErroDePreenchimentoInvalidoException("Não pode espaço no meio do sku");
+        if(!sku.matches("[A-Z0-9\\-]+")){
+            throw new ErroDePreenchimentoInvalidoException("Não pode espaço no meio do sku ou caracteres inválidos");
         }
 
 

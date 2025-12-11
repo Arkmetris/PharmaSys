@@ -11,7 +11,7 @@ import javax.swing.GroupLayout;
 
 @SuppressWarnings("serial")
 public class TelaCadastroFuncionario extends JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaCadastroFuncionario.class.getName());
 
     public TelaCadastroFuncionario() {
@@ -38,14 +38,18 @@ public class TelaCadastroFuncionario extends JFrame {
         boxMes = new javax.swing.JComboBox<>();
         boxAno = new javax.swing.JComboBox<>();
         boxSexo = new javax.swing.JComboBox<>();
+        //boxSexo.setPreferredSize(new java.awt.Dimension(100, 25));
         TextNome = new javax.swing.JTextField();
         TextCpf = new javax.swing.JTextField();
-        TextCargo = new javax.swing.JTextField();
         TextEmail = new javax.swing.JTextField();
         TextEmailConfirm = new javax.swing.JTextField();
         TextTelefone = new javax.swing.JTextField();
         TextSenha = new javax.swing.JTextField();
         TextSenhaConfirm = new javax.swing.JTextField();
+        boxCargo = new javax.swing.JComboBox<>();
+        boxCargo.setModel(new javax.swing.DefaultComboBoxModel<>(
+                new String[] { "Estoquista", "Atendente", "Gerente" }
+        ));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
@@ -73,7 +77,7 @@ public class TelaCadastroFuncionario extends JFrame {
         jLabel2.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
         jLabel2.setText("Data de nascimento:");
 
-        jLabel3.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("SF Pro", 0, 13)); // NOI18N
         jLabel3.setText("Sexo:");
 
         jLabel4.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
@@ -88,7 +92,7 @@ public class TelaCadastroFuncionario extends JFrame {
         jLabel7.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
         jLabel7.setText("Confirmar email:");
 
-        jLabel8.setFont(new java.awt.Font("SF Pro", 0, 16)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
         jLabel8.setText("Definir senha:");
 
         jLabel9.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
@@ -102,7 +106,7 @@ public class TelaCadastroFuncionario extends JFrame {
 
         boxSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "  ", "Fem", "Masc" }));
 
-        TextCargo.setText(" ");
+        //TextCargo.setText(" ");
 
         TextEmail.setText(" ");
 
@@ -144,9 +148,9 @@ public class TelaCadastroFuncionario extends JFrame {
         										.addPreferredGap(ComponentPlacement.RELATED)
         										.addComponent(TextEmailConfirm))
         									.addGroup(layout.createSequentialGroup()
-        										.addComponent(jLabel6, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+        										.addComponent(jLabel6, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
         										.addPreferredGap(ComponentPlacement.RELATED)
-        										.addComponent(TextEmail, GroupLayout.PREFERRED_SIZE, 419, GroupLayout.PREFERRED_SIZE))))
+        										.addComponent(TextEmail, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE))))
         							.addGap(0, 0, Short.MAX_VALUE))
         						.addGroup(layout.createSequentialGroup()
         							.addGroup(layout.createParallelGroup(Alignment.LEADING)
@@ -168,12 +172,12 @@ public class TelaCadastroFuncionario extends JFrame {
         						.addGroup(layout.createSequentialGroup()
         							.addComponent(jLabel5, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
         							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(TextCargo, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE))
-        						.addComponent(BotaoCancelar)
+        							.addComponent(boxCargo, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(BotaoCancelar)
         						.addGroup(layout.createSequentialGroup()
         							.addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
         							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(boxSexo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        							.addComponent(boxSexo, GroupLayout.PREFERRED_SIZE,45,GroupLayout.PREFERRED_SIZE)))
         					.addPreferredGap(ComponentPlacement.UNRELATED)
         					.addComponent(BotaoCadastrar)
         					.addGap(16))
@@ -199,14 +203,14 @@ public class TelaCadastroFuncionario extends JFrame {
         				.addComponent(boxDia, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         				.addComponent(boxMes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         				.addComponent(boxAno, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(boxSexo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(boxSexo, GroupLayout.PREFERRED_SIZE,25, GroupLayout.PREFERRED_SIZE))
         			.addGap(7)
         			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(jLabel4)
         				.addComponent(TextCpf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         				.addComponent(jLabel5)
-        				.addComponent(TextCargo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(jLabel10))
+                            .addComponent(boxCargo, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
         			.addPreferredGap(ComponentPlacement.UNRELATED)
         			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(jLabel11)
@@ -293,10 +297,13 @@ public class TelaCadastroFuncionario extends JFrame {
             func.setDataNascimento(LocalDate.of(ano, mes, dia));
 
 
-            String cargoTexto = TextCargo.getText().toLowerCase().trim();
+            String cargoTexto = (String) boxCargo.getSelectedItem();
+            cargoTexto = cargoTexto.toLowerCase().trim();
+
+
             int tipoCargo = 1;
-            
-   
+
+
             if (cargoTexto.contains("gerente") || cargoTexto.equals("3")) {
                 tipoCargo = 3; // Gerente
             } else if (cargoTexto.contains("atendente") || cargoTexto.equals("2")) {
@@ -381,7 +388,7 @@ public class TelaCadastroFuncionario extends JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField TextNome;
     private javax.swing.JTextField TextCpf;
-    private javax.swing.JTextField TextCargo;
+    private javax.swing.JComboBox<String> boxCargo ;
     private javax.swing.JTextField TextEmail;
     private javax.swing.JTextField TextEmailConfirm;
     private javax.swing.JTextField TextTelefone;

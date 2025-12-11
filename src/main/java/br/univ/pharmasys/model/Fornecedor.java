@@ -14,7 +14,8 @@ public class Fornecedor {
     private String bairro;
     private String cidade;
     private String email;
-    private Long telefoneId;
+    private String telefoneId;
+
     private boolean inativo;
 
     public Fornecedor() {
@@ -143,12 +144,11 @@ public class Fornecedor {
         this.email = email;
     }
 
-    public Long getTelefoneId() {
+    public String getTelefoneId() {
         return telefoneId;
     }
 
-    public void setTelefoneId(Long telefoneId) {
-        FornecedorValidador.telefoneIdValidar(telefoneId);
+    public void setTelefoneId(String telefoneId) {
         this.telefoneId = telefoneId;
     }
 
@@ -159,4 +159,5 @@ public class Fornecedor {
     public void setInativo(boolean inativo) {
         this.inativo = inativo;
     }
+
 }
