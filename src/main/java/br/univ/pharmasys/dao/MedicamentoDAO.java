@@ -3,11 +3,7 @@ package br.univ.pharmasys.dao;
 import br.univ.pharmasys.util.ConnectionFactory;
 import br.univ.pharmasys.model.Medicamento;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,7 +102,7 @@ public class MedicamentoDAO {
                  med.setSku(rs.getString("SKU"));
                  med.setDosagem(rs.getString("DOSAGEM"));
                  med.setFormaFarmaceutica(rs.getString("FORMA_FARMACEUTICA"));
-                 med.setFabricante(rs.getString("PRINCIPIO_ATIVO"));
+                 med.setFabricante(rs.getString("FABRICANTE"));
                  med.setCodigoBarras(rs.getString("CODIGO_BARRAS"));
                  med.setLaboratorio(rs.getString("LABORATORIO"));
                  med.setEstoqueMax(rs.getInt("ESTOQUE_MAX"));

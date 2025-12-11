@@ -20,12 +20,6 @@ public class FornecedorValidador {
         }
     }
 
-    public static void cnpjValidar(String cnpj){
-        if(cnpj == null || cnpj.trim().isEmpty()){
-            throw new NomeInvalidoException("\nPreencha o campo CNPJ");
-        }
-    }
-
     public static void estadoValidar(String estado){
         if(estado == null || estado.trim().isEmpty()){
             throw new NomeInvalidoException("\nPreencha o campo Estado");
