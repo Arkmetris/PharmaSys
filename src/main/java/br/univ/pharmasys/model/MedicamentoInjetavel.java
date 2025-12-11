@@ -12,29 +12,29 @@ public class MedicamentoInjetavel extends Medicamento {
         super();
     }
 
-    public String getviaAdministracao() {
+    public String getViaAdministracao() {
         return viaAdministracao;
     }
 
-    public void setviaAdministracao(String viaAdministracao) {
+    public void setViaAdministracao(String viaAdministracao) {
         MedicamentoInjetavelValidador.validarViaAdministracao(viaAdministracao);
         this.viaAdministracao = viaAdministracao.trim();
     }
 
-    public double gettemperaturaMinima() {
+    public double getTemperaturaMinima() {
         return temperaturaMinima;
     }
 
-    public void settemperaturaMinima(double temperaturaMinima) {
+    public void setTemperaturaMinima(double temperaturaMinima) {
         MedicamentoInjetavelValidador.validarTemperatura(temperaturaMinima, this.temperaturaMaxima);
         this.temperaturaMinima = temperaturaMinima;
     }
 
-    public double gettemperaturaMaxima() {
+    public double getTemperaturaMaxima() {
         return temperaturaMaxima;
     }
 
-    public void settemperaturaMaxima(double temperaturaMaxima) {
+    public void setTemperaturaMaxima(double temperaturaMaxima) {
         MedicamentoInjetavelValidador.validarTemperatura(this.temperaturaMinima, temperaturaMaxima);
         this.temperaturaMaxima = temperaturaMaxima;
     }

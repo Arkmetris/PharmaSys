@@ -11,20 +11,20 @@ public class MedicamentoLiquido extends Medicamento {
         super();
     }
 
-    public double getvolumeMl() {
+    public double getVolumeMl() {
         return volumeMl;
     }
 
-    public void setvolumeMl(double volumeMl) {
+    public void setVolumeMl(double volumeMl) {
         MedicamentoLiquidoValidador.validarVolume(volumeMl);
         this.volumeMl = volumeMl;
     }
 
-    public String gettipoRecipiente() {
+    public String getTipoRecipiente() {
         return tipoRecipiente;
     }
 
-    public void settipoRecipiente(String tipoRecipiente) {
+    public void setTipoRecipiente(String tipoRecipiente) {
         MedicamentoLiquidoValidador.validarTipoRecipiente(tipoRecipiente);
         this.tipoRecipiente = tipoRecipiente.trim();
     }
