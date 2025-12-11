@@ -8,19 +8,17 @@ public class Fornecedor {
     private long idFornecedor;
     private String nome;
     private String cnpj;
-
     private String estado;
     private String cep;
     private String rua;
     private String bairro;
     private String cidade;
-
     private String email;
-    private Long telefoneId; 
-
+    private Long telefoneId;
     private boolean inativo;
 
-    public Fornecedor() {}
+    public Fornecedor() {
+    }
 
     public long getIdFornecedor() {
         return idFornecedor;
@@ -36,6 +34,10 @@ public class Fornecedor {
     }
 
     public void setNome(String nome) {
+        if (nome == null) {
+            this.nome = null;
+            return;
+        }
         nome = nome.trim();
         FornecedorValidador.nomeValidar(nome);
         this.nome = nome;
@@ -44,14 +46,16 @@ public class Fornecedor {
     public String getCnpj() {
         return cnpj;
     }
-    
-    public void setCnpj(String cnpj){
-        
-        //Validar o cnpj do fornecedor!
-       cnpj = cnpj.trim();
-       ValidadorUtils.cnpjValido(cnpj);
-        cnpj= cnpj.replaceAll("\\D ", "");
-        this.cnpj = cnpj;
+
+    public void setCnpj(String cnpj) {
+        if (cnpj == null) {
+            this.cnpj = null;
+            return;
+        }
+        cnpj = cnpj.trim();
+        FornecedorValidador.cnpjValidar(cnpj);
+        ValidadorUtils.cnpjValido(cnpj);
+        this.cnpj = cnpj.replaceAll("\\D", "");
     }
 
     public String getEstado() {
@@ -59,7 +63,13 @@ public class Fornecedor {
     }
 
     public void setEstado(String estado) {
-        this.estado = estado.trim();
+        if (estado == null) {
+            this.estado = null;
+            return;
+        }
+        estado = estado.trim();
+        FornecedorValidador.estadoValidar(estado);
+        this.estado = estado;
     }
 
     public String getCep() {
@@ -67,7 +77,13 @@ public class Fornecedor {
     }
 
     public void setCep(String cep) {
-        this.cep = cep.replaceAll("\\D", "");
+        if (cep == null) {
+            this.cep = null;
+            return;
+        }
+        cep = cep.replaceAll("\\D", "");
+        FornecedorValidador.cepValidar(cep);
+        this.cep = cep;
     }
 
     public String getRua() {
@@ -75,7 +91,13 @@ public class Fornecedor {
     }
 
     public void setRua(String rua) {
-        this.rua = rua.trim();
+        if (rua == null) {
+            this.rua = null;
+            return;
+        }
+        rua = rua.trim();
+        FornecedorValidador.ruaValidar(rua);
+        this.rua = rua;
     }
 
     public String getBairro() {
@@ -83,7 +105,13 @@ public class Fornecedor {
     }
 
     public void setBairro(String bairro) {
-        this.bairro = bairro.trim();
+        if (bairro == null) {
+            this.bairro = null;
+            return;
+        }
+        bairro = bairro.trim();
+        FornecedorValidador.bairroValidar(bairro);
+        this.bairro = bairro;
     }
 
     public String getCidade() {
@@ -91,7 +119,13 @@ public class Fornecedor {
     }
 
     public void setCidade(String cidade) {
-        this.cidade = cidade.trim();
+        if (cidade == null) {
+            this.cidade = null;
+            return;
+        }
+        cidade = cidade.trim();
+        FornecedorValidador.cidadeValidar(cidade);
+        this.cidade = cidade;
     }
 
     public String getEmail() {
@@ -99,7 +133,14 @@ public class Fornecedor {
     }
 
     public void setEmail(String email) {
-        this.email = email.trim();
+        if (email == null) {
+            this.email = null;
+            return;
+        }
+        email = email.trim();
+        FornecedorValidador.emailValidar(email);
+        ValidadorUtils.emailValido(email);
+        this.email = email;
     }
 
     public Long getTelefoneId() {
@@ -107,6 +148,7 @@ public class Fornecedor {
     }
 
     public void setTelefoneId(Long telefoneId) {
+        FornecedorValidador.telefoneIdValidar(telefoneId);
         this.telefoneId = telefoneId;
     }
 
