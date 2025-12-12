@@ -42,7 +42,7 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
         ComboBoxForma = new javax.swing.JComboBox<>();
         CampoEstoqueAtual = new javax.swing.JTextField();
         CampoPreco = new javax.swing.JTextField();
-        ButtonVoltar = new javax.swing.JButton();
+        ButtonCancelar = new javax.swing.JButton();
         ButtonCadastrar = new javax.swing.JButton();
         LabelCadastroDeEstoque = new javax.swing.JLabel();
 
@@ -52,7 +52,7 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
             }
         });
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
         setTitle("TelaCadEstoque");
         setResizable(false);
 
@@ -102,12 +102,7 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
             }
         });
 
-        ButtonVoltar.setText("Voltar");
-        ButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonVoltarActionPerformed(evt);
-            }
-        });
+        ButtonCancelar.setText("Cancelar");
 
         ButtonCadastrar.setText("Cadastrar");
         ButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -124,40 +119,33 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
         PanelMedicamento.setLayout(PanelMedicamentoLayout);
         PanelMedicamentoLayout.setHorizontalGroup(
             PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMedicamentoLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(PanelMedicamentoLayout.createSequentialGroup()
                 .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMedicamentoLayout.createSequentialGroup()
-                        .addComponent(ButtonVoltar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ButtonCadastrar)
-                        .addGap(24, 24, 24))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMedicamentoLayout.createSequentialGroup()
-                        .addComponent(LabelCadastroDeEstoque)
-                        .addGap(203, 203, 203))))
+                    .addGroup(PanelMedicamentoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(CampoNomeComercial, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(CampoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelMedicamentoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(CampoSKU, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(CampoEstoqueMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelMedicamentoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(PanelMedicamentoLayout.createSequentialGroup()
+                                .addComponent(CampoPrincipioAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(CampoEstoqueAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PanelMedicamentoLayout.createSequentialGroup()
+                                .addComponent(CampoDosagem, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(CampoEstoqueMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(PanelMedicamentoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelMedicamentoLayout.createSequentialGroup()
-                        .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelMedicamentoLayout.createSequentialGroup()
-                                .addComponent(CampoNomeComercial, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(CampoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PanelMedicamentoLayout.createSequentialGroup()
-                                .addComponent(CampoSKU, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(CampoEstoqueMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(PanelMedicamentoLayout.createSequentialGroup()
-                                    .addComponent(CampoPrincipioAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(CampoEstoqueAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(PanelMedicamentoLayout.createSequentialGroup()
-                                    .addComponent(CampoDosagem, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(CampoEstoqueMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(PanelMedicamentoLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(LabelMedicamento)
@@ -165,6 +153,17 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
                     .addGroup(PanelMedicamentoLayout.createSequentialGroup()
                         .addComponent(ComboBoxForma, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMedicamentoLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMedicamentoLayout.createSequentialGroup()
+                        .addComponent(ButtonCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ButtonCadastrar)
+                        .addGap(24, 24, 24))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMedicamentoLayout.createSequentialGroup()
+                        .addComponent(LabelCadastroDeEstoque)
+                        .addGap(203, 203, 203))))
         );
         PanelMedicamentoLayout.setVerticalGroup(
             PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,7 +193,7 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ButtonCadastrar)
-                            .addComponent(ButtonVoltar))
+                            .addComponent(ButtonCancelar))
                         .addGap(17, 17, 17))
                     .addGroup(PanelMedicamentoLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -240,11 +239,6 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ButtonCadastrarActionPerformed
 
-    private void ButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonVoltarActionPerformed
-    new TelaEstoquista().setVisible(true);
-        this.dispose();        
-    }//GEN-LAST:event_ButtonVoltarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -272,7 +266,7 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonCadastrar;
-    private javax.swing.JButton ButtonVoltar;
+    private javax.swing.JButton ButtonCancelar;
     private javax.swing.JTextField CampoDosagem;
     private javax.swing.JTextField CampoEstoqueAtual;
     private javax.swing.JTextField CampoEstoqueMaximo;
