@@ -1,65 +1,105 @@
 package br.univ.pharmasys.ui;
 
+import br.univ.pharmasys.model.Fornecedor;
 import br.univ.pharmasys.model.Funcionario;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
 @SuppressWarnings("serial")
-public class TelaVisualizacaoRelatorio extends JDialog {
+public class TelaVisualizacaoRelatorio extends JFrame {
 
     private JTable tabela;
     private JScrollPane scrollPane;
 
-    public TelaVisualizacaoRelatorio(Frame parent, String titulo, List<Funcionario> listaFuncionarios) {
-        super(parent, titulo, true);
-        initComponents(listaFuncionarios);
+    public TelaVisualizacaoRelatorio(Frame parent, String titulo, List<?> lista) {
+        setTitle(titulo);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        initComponents(lista);
+        pack();
+        setLocationRelativeTo(parent);
     }
 
-    private void initComponents(List<Funcionario> lista) {
-        setSize(800, 500);
-        setLocationRelativeTo(null);
+    @SuppressWarnings("unchecked")
+	private void initComponents(List<?> lista) {
+
         setLayout(new BorderLayout());
+        
+        JLabel lblTitulo = new JLabel("Visualização de Relatório");
+        lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+        lblTitulo.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        add(lblTitulo, BorderLayout.NORTH);
 
-        String[] colunas = {"ID", "Nome", "CPF", "Email", "Telefone", "Tipo"};
-        DefaultTableModel model = new DefaultTableModel(colunas, 0) {
-            @Override 
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-
-	for (Funcionario f : lista) {
-	            
-		String cargo;
-		switch (f.getTipo()) {
-		case 1: cargo = "Estoquista"; break;
-		case 2: cargo = "Atendente"; break;
-		case 3: cargo = "Gerente"; break;
-		default: cargo = "Outro"; break;
-		}
-	
-		Object[] linha = {
-				f.getIdFuncionario(),
-				f.getNome(),
-				f.getCpf(),
-				f.getEmail(),
-				f.getTelefone(),
-				cargo
-			        };
-		model.addRow(linha);
-	}
-
+        DefaultTableModel model = new DefaultTableModel();
         tabela = new JTable(model);
         scrollPane = new JScrollPane(tabela);
-
         add(scrollPane, BorderLayout.CENTER);
-        
+
         JButton btnFechar = new JButton("Fechar");
-        btnFechar.addActionListener(evt -> dispose());
-        JPanel panelSul = new JPanel();
-        panelSul.add(btnFechar);
-        add(panelSul, BorderLayout.SOUTH);
+        btnFechar.addActionListener(e -> dispose());
+        JPanel panelBotoes = new JPanel();
+        panelBotoes.add(btnFechar);
+        add(panelBotoes, BorderLayout.SOUTH);
+
+        if (lista != null && !lista.isEmpty()) {
+            Object primeiroItem = lista.get(0);
+
+            if (primeiroItem instanceof Funcionario) {
+                configurarTabelaFuncionarios(model, (List<Funcionario>) lista);
+            } else if (primeiroItem instanceof Fornecedor) {
+                configurarTabelaFornecedores(model, (List<Fornecedor>) lista);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "A lista está vazia.");
+        }
+    }
+
+    private void configurarTabelaFuncionarios(DefaultTableModel model, List<Funcionario> lista) {
+
+        model.addColumn("Nome");
+        model.addColumn("CPF");
+        model.addColumn("Email");
+        model.addColumn("Telefone");
+        model.addColumn("Cargo");
+
+        for (Funcionario f : lista) {
+            String cargo = "Desconhecido";
+            if (f.getTipo() == 1) cargo = "Estoquista";
+            else if (f.getTipo() == 2) cargo = "Atendente";
+            else if (f.getTipo() == 3) cargo = "Gerente";
+
+            model.addRow(new Object[]{
+                f.getNome(),
+                f.getCpf(),
+                f.getEmail(),
+                f.getTelefone(),
+                cargo
+            });
+        }
+	}
+
+
+    private void configurarTabelaFornecedores(DefaultTableModel model, List<Fornecedor> lista) {
+
+        model.addColumn("ID");
+        model.addColumn("Nome / Empresa");
+        model.addColumn("CNPJ");
+        model.addColumn("Email");
+        model.addColumn("Telefone");
+
+        for (Fornecedor f : lista) {
+            model.addRow(new Object[]{
+                f.getIdFornecedor(),
+                f.getNome(),
+                f.getCnpj(),
+                f.getEmail(),
+                f.getTelefoneId()
+            });
+        }
     }
 }
+
+       

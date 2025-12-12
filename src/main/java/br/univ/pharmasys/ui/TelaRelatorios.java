@@ -9,6 +9,9 @@ import com.itextpdf.text.pdf.PdfWriter;
 import br.univ.pharmasys.dao.FuncionarioDAO;
 import br.univ.pharmasys.model.Funcionario;
 
+import br.univ.pharmasys.dao.FornecedorDAO;
+import br.univ.pharmasys.model.Fornecedor;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -25,6 +28,7 @@ public class TelaRelatorios extends JFrame {
     
     private static final Logger logger = Logger.getLogger(TelaRelatorios.class.getName());
     private final FuncionarioDAO funDAO = new FuncionarioDAO();
+    private final FornecedorDAO fornDAO = new FornecedorDAO();
     
     public TelaRelatorios() {
         initComponents();
@@ -115,52 +119,114 @@ private void configurarEventos() {
     }
 
     private void acaoVisualizar(ActionEvent evt) {
-        String categoria = (String) ComboBoxCategoria.getSelectedItem();
+    	String categoria = (String) ComboBoxCategoria.getSelectedItem();
+    	try {
+    		if ("Funcionários".equals(categoria)) {
+    			List<Funcionario> lista = funDAO.listarTodos();
+            if (verificarListaVazia(lista)) return;
+  
+            TelaVisualizacaoRelatorio telaVis = new TelaVisualizacaoRelatorio(this, "Relatório de Funcionários", lista);
+            telaVis.setVisible(true);
 
-        if ("Funcionários".equals(categoria)) {
-            try {
-            	
-                // 1. Busca dados do banco
-                List<Funcionario> lista = funDAO.listarTodos();
+            } else if ("Fornecedores".equals(categoria)) {
+    			List<Fornecedor> lista = fornDAO.listarTodos();
+            if (verificarListaVazia(lista)) return;
 
-                if (lista.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Nenhum funcionário encontrado.");
-                    return;
-                }
+            TelaVisualizacaoRelatorio telaVis = new TelaVisualizacaoRelatorio(this, "Relatório de Fornecedores", lista);
+            telaVis.setVisible(true);
 
-                // 2. Abre a tela de visualização
-                TelaVisualizacaoRelatorio telaVis = new TelaVisualizacaoRelatorio(this, "Relatório de Funcionários", lista);
-                telaVis.setVisible(true);
-
-            } catch (Exception e) {
+    		} else {
+    			JOptionPane.showMessageDialog(this, "Funcionalidade para " + categoria + " ainda não implementada.");
+    		}
+           
+    	} catch (Exception e) {
                 logger.log(Level.SEVERE, "Erro ao visualizar", e);
                 JOptionPane.showMessageDialog(this, "Erro ao carregar dados: " + e.getMessage());
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Funcionalidade para " + categoria + " ainda não implementada.");
         }
-    }
+	}
 
     private void acaoGerarPDF(ActionEvent evt) {
         String categoria = (String) ComboBoxCategoria.getSelectedItem();
 
-        if ("Funcionários".equals(categoria)) {
-            try {
+        try {
+            if ("Funcionários".equals(categoria)) {
                 List<Funcionario> lista = funDAO.listarTodos();
-                if (lista.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Nada para exportar.");
-                    return;
-                }
+                if (verificarListaVazia(lista)) return;
                 gerarPdfFuncionarios(lista);
-            } catch (Exception e) {
-                logger.log(Level.SEVERE, "Erro ao gerar PDF", e);
-                JOptionPane.showMessageDialog(this, "Erro ao gerar PDF: " + e.getMessage());
+
+            } else if ("Fornecedores".equals(categoria)) {
+                // Nova lógica para Fornecedores
+                List<Fornecedor> lista = fornDAO.listarTodos();
+                if (verificarListaVazia(lista)) return;
+                gerarPdfFornecedores(lista);
+
+            } else {
+                JOptionPane.showMessageDialog(this, "PDF para " + categoria + " ainda não implementado.");
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "PDF para " + categoria + " ainda não implementado.");
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Erro ao gerar PDF", e);
+            JOptionPane.showMessageDialog(this, "Erro ao gerar PDF: " + e.getMessage());
         }
     }
 
+    private void gerarPdfFornecedores(List<Fornecedor> lista) {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Salvar Relatório de Fornecedores");
+        fileChooser.setSelectedFile(new java.io.File("Relatorio_Fornecedores.pdf"));
+
+        int userSelection = fileChooser.showSaveDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            String caminhoArquivo = fileChooser.getSelectedFile().getAbsolutePath();
+            if (!caminhoArquivo.endsWith(".pdf")) {
+                caminhoArquivo += ".pdf";
+            }
+
+            Document document = new Document();
+            try {
+                PdfWriter.getInstance(document, new FileOutputStream(caminhoArquivo));
+                document.open();
+
+                Paragraph titulo = new Paragraph("Relatório de Fornecedores - PharmaSys");
+                titulo.setAlignment(Element.ALIGN_CENTER);
+                titulo.setSpacingAfter(20);
+                document.add(titulo);
+
+
+                Paragraph data = new Paragraph("Gerado em: " + new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()));
+                data.setSpacingAfter(20);
+                document.add(data);
+
+                PdfPTable table = new PdfPTable(5);
+                table.setWidthPercentage(100);
+                
+                table.setWidths(new float[] { 1f, 3f, 2f, 3f, 2f }); 
+                
+                table.addCell("ID");
+                table.addCell("Nome");
+                table.addCell("CNPJ");
+                table.addCell("Email");
+                table.addCell("Telefone");
+
+                for (Fornecedor f : lista) {
+                    table.addCell(String.valueOf(f.getIdFornecedor()));
+                    table.addCell(f.getNome() != null ? f.getNome() : "");
+                    table.addCell(f.getCnpj() != null ? f.getCnpj() : "");
+                    table.addCell(f.getEmail() != null ? f.getEmail() : "");
+                    table.addCell(f.getTelefoneId() != null ? f.getTelefoneId() : ""); 
+                }
+
+                document.add(table);
+                document.close();
+
+                JOptionPane.showMessageDialog(this, "PDF de Fornecedores gerado com sucesso!\nLocal: " + caminhoArquivo);
+
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+    
     private void gerarPdfFuncionarios(List<Funcionario> lista) {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Salvar Relatório em PDF");
@@ -180,22 +246,18 @@ private void configurarEventos() {
                 PdfWriter.getInstance(document, new FileOutputStream(caminhoArquivo));
                 document.open();
 
-                // Título
                 Paragraph titulo = new Paragraph("Relatório de Funcionários - PharmaSys");
                 titulo.setAlignment(Element.ALIGN_CENTER);
                 titulo.setSpacingAfter(20);
                 document.add(titulo);
 
-                // Data
                 Paragraph data = new Paragraph("Gerado em: " + new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()));
                 data.setSpacingAfter(20);
                 document.add(data);
 
-                // Tabela
                 PdfPTable table = new PdfPTable(5);
                 table.setWidthPercentage(100);
                 
-                // Cabeçalho da Tabela
                 table.addCell("Nome");
                 table.addCell("CPF");
                 table.addCell("Email");
@@ -203,7 +265,7 @@ private void configurarEventos() {
                 table.addCell("Cargo");
 
                 String cargoTexto = "";
-                // Dados
+
                 for (Funcionario f : lista) {
                     table.addCell(f.getNome());
                     table.addCell(f.getCpf());
@@ -233,6 +295,14 @@ private void configurarEventos() {
     }
     private void ButtonCancelarActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
+    }
+    
+    private boolean verificarListaVazia(List<?> lista) {
+        if (lista.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nenhum registro encontrado para gerar relatório.");
+            return true;
+        }
+        return false;
     }
     
     public static void main(String args[]) {
