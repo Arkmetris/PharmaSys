@@ -210,9 +210,10 @@ public class TelaCadastroFornecedor extends JFrame {
             limparCampos();
             this.dispose(); 
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+//            e.printStackTrace();
+//        }
         }
     }
 
