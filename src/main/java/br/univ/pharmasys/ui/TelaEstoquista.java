@@ -147,7 +147,7 @@ public class TelaEstoquista extends JFrame {
     }
 
     private void abrirCadastroMedicamento() {
-        new TelaCadastroMedicamento().setVisible(true);
+        new TelaCadastroDeEstoque().setVisible(true);
         this.dispose();
     }
 
