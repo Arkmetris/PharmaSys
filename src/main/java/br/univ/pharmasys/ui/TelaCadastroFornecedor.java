@@ -187,6 +187,31 @@ public class TelaCadastroFornecedor extends JFrame {
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro inesperado: " + e.getMessage(), "Erro Crítico", JOptionPane.ERROR_MESSAGE);
+
+            Fornecedor fornecedor = new Fornecedor();
+
+            fornecedor.setNome(CampoEmpresa.getText());
+            fornecedor.setCnpj(CampoCnpj.getText());
+            fornecedor.setEmail(CampoEmail.getText());
+            fornecedor.setTelefoneId(CampoTelefone.getText());
+
+            // Tem que criar as caixa de escrever os dados de endereço
+            fornecedor.setEstado("");
+            fornecedor.setCep("");
+            fornecedor.setRua("");
+            fornecedor.setBairro("");
+            fornecedor.setCidade("");
+
+            FornecedorDAO dao = new FornecedorDAO();
+            dao.create(fornecedor);
+
+            JOptionPane.showMessageDialog(this, "Fornecedor cadastrado com sucesso!");
+            
+            limparCampos();
+            this.dispose(); 
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
     }
@@ -218,7 +243,7 @@ public class TelaCadastroFornecedor extends JFrame {
 
         EventQueue.invokeLater(() -> new TelaCadastroFornecedor().setVisible(true));
     }
-    
+
     private JButton ButtonCadastrar;
     private JButton ButtonCancelar;
     private JTextField CampoCnpj;
