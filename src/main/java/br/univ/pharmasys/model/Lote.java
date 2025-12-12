@@ -44,7 +44,7 @@ public class Lote {
         return this.numeroLote;
     }
 
-    private void setNumeroLote(int numeroLote){
+    public void setNumeroLote(int numeroLote){
 
         LoteValidador.numeroLoteValidador(numeroLote);
         this.numeroLote = numeroLote;
