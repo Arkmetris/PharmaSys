@@ -5,7 +5,14 @@
 package br.univ.pharmasys.ui;
 
 import javax.swing.JFrame;
+import java.math.BigDecimal;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
+import javax.swing.JOptionPane;
+
+import br.univ.pharmasys.dao.MedicamentoDAO;
+import br.univ.pharmasys.model.Medicamento;
 /**
  *
  * @author kessy
@@ -45,6 +52,7 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
         ButtonVoltar = new javax.swing.JButton();
         ButtonCadastrar = new javax.swing.JButton();
         LabelCadastroDeEstoque = new javax.swing.JLabel();
+        CampoDataExpiracao = new javax.swing.JTextField();
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,8 +96,6 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
 
         CampoEstoqueMaximo.setBorder(javax.swing.BorderFactory.createTitledBorder("Estoque Máximo"));
 
-        ComboBoxForma.setBackground(new java.awt.Color(255, 255, 255));
-        ComboBoxForma.setForeground(new java.awt.Color(0, 0, 0));
         ComboBoxForma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sólido", "Semissólido", "Líquido", "Gasoso", "Injetável" }));
         ComboBoxForma.setBorder(javax.swing.BorderFactory.createTitledBorder("Forma"));
 
@@ -102,10 +108,10 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
             }
         });
 
-        ButtonVoltar.setText("Voltar");
-        ButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+        ButtonCancelar.setText("Cancelar");
+        ButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonVoltarActionPerformed(evt);
+                ButtonCancelarActionPerformed(evt);
             }
         });
 
@@ -120,6 +126,8 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
         LabelCadastroDeEstoque.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         LabelCadastroDeEstoque.setText("Cadastro De Estoque");
 
+        CampoDataExpiracao.setBorder(javax.swing.BorderFactory.createTitledBorder("Data de validade"));
+
         javax.swing.GroupLayout PanelMedicamentoLayout = new javax.swing.GroupLayout(PanelMedicamento);
         PanelMedicamento.setLayout(PanelMedicamentoLayout);
         PanelMedicamentoLayout.setHorizontalGroup(
@@ -128,7 +136,7 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMedicamentoLayout.createSequentialGroup()
-                        .addComponent(ButtonVoltar)
+                        .addComponent(ButtonCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ButtonCadastrar)
                         .addGap(24, 24, 24))
@@ -150,21 +158,22 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
                                 .addComponent(CampoEstoqueMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(PanelMedicamentoLayout.createSequentialGroup()
-                                    .addComponent(CampoPrincipioAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(CampoEstoqueAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(PanelMedicamentoLayout.createSequentialGroup()
                                     .addComponent(CampoDosagem, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(CampoEstoqueMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(CampoEstoqueMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(PanelMedicamentoLayout.createSequentialGroup()
+                                    .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(CampoPrincipioAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(ComboBoxForma, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(CampoEstoqueAtual, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                                        .addComponent(CampoDataExpiracao)))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(PanelMedicamentoLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(LabelMedicamento)
-                        .addGap(261, 261, 261))
-                    .addGroup(PanelMedicamentoLayout.createSequentialGroup()
-                        .addComponent(ComboBoxForma, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(261, 261, 261))))
         );
         PanelMedicamentoLayout.setVerticalGroup(
             PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,17 +198,15 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
                 .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CampoEstoqueAtual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CampoPrincipioAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelMedicamentoLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ButtonCadastrar)
-                            .addComponent(ButtonVoltar))
-                        .addGap(17, 17, 17))
-                    .addGroup(PanelMedicamentoLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(ComboBoxForma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(95, Short.MAX_VALUE))))
+                .addGap(18, 18, 18)
+                .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(CampoDataExpiracao)
+                    .addComponent(ComboBoxForma))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ButtonCadastrar)
+                    .addComponent(ButtonCancelar))
+                .addGap(17, 17, 17))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -237,13 +244,43 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
     }//GEN-LAST:event_CampoPrecoActionPerformed
 
     private void ButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCadastrarActionPerformed
-        // TODO add your handling code here:
+     try {
+    Medicamento med = new Medicamento();
+        med.setNomeComercial(CampoNomeComercial.getText());
+        med.setSku(CampoSKU.getText());
+        med.setDosagem(CampoDosagem.getText());
+        med.setFormaFarmaceutica(ComboBoxForma.getSelectedItem().toString());
+        //med.setLaboratorio(CampoLaboratorio.getText());
+
+        med.setEstoqueMax(Integer.parseInt(CampoEstoqueMaximo.getText().trim()));
+        med.setEstoqueMin(Integer.parseInt(CampoEstoqueMinimo.getText().trim()));
+        med.setEstoqueAtual(Integer.parseInt(CampoEstoqueAtual.getText().trim()));
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String dataTxt = CampoDataExpiracao.getText().trim();
+        med.setDataExpiracao(LocalDate.parse(dataTxt, formatter));
+
+        String precoTxt = CampoPreco.getText().trim().replace(",", ".");
+        med.setPreco(new BigDecimal(precoTxt));
+
+        MedicamentoDAO dao = new MedicamentoDAO();
+        dao.create(med);
+
+        JOptionPane.showMessageDialog(this, "Medicamento cadastrado com sucesso!");
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(
+            this,
+            "Erro ao cadastrar medicamento:\n" + e.getMessage(),
+            "Erro",
+            JOptionPane.ERROR_MESSAGE
+        );
+    }
     }//GEN-LAST:event_ButtonCadastrarActionPerformed
 
-    private void ButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonVoltarActionPerformed
-        new TelaEstoquista().setVisible(true);
-        this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_ButtonVoltarActionPerformed
+    private void ButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_ButtonCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,7 +309,8 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonCadastrar;
-    private javax.swing.JButton ButtonVoltar;
+    private javax.swing.JButton ButtonCancelar;
+    private javax.swing.JTextField CampoDataExpiracao;
     private javax.swing.JTextField CampoDosagem;
     private javax.swing.JTextField CampoEstoqueAtual;
     private javax.swing.JTextField CampoEstoqueMaximo;
