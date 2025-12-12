@@ -108,8 +108,8 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
             }
         });
 
-        ButtonCancelar.setText("Cancelar");
-        ButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+        ButtonVoltar.setText("Voltar");
+        ButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonCancelarActionPerformed(evt);
             }
@@ -136,7 +136,7 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMedicamentoLayout.createSequentialGroup()
-                        .addComponent(ButtonCancelar)
+                        .addComponent(ButtonVoltar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ButtonCadastrar)
                         .addGap(24, 24, 24))
@@ -205,7 +205,7 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(PanelMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ButtonCadastrar)
-                    .addComponent(ButtonCancelar))
+                    .addComponent(ButtonVoltar))
                 .addGap(17, 17, 17))
         );
 
@@ -279,6 +279,7 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonCadastrarActionPerformed
 
     private void ButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelarActionPerformed
+        new TelaEstoquista().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ButtonCancelarActionPerformed
 
@@ -309,7 +310,7 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonCadastrar;
-    private javax.swing.JButton ButtonCancelar;
+    private javax.swing.JButton ButtonVoltar;
     private javax.swing.JTextField CampoDataExpiracao;
     private javax.swing.JTextField CampoDosagem;
     private javax.swing.JTextField CampoEstoqueAtual;
