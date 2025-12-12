@@ -3,6 +3,10 @@ package br.univ.pharmasys.ui;
 import javax.swing.*;
 
 import br.univ.pharmasys.dao.FornecedorDAO;
+import br.univ.pharmasys.exceptions.ErroDePreenchimentoInvalidoException;
+import br.univ.pharmasys.exceptions.IdInvalidoException;
+import br.univ.pharmasys.exceptions.NomeInvalidoException;
+import br.univ.pharmasys.exceptions.TelefoneInvalidoException;
 import br.univ.pharmasys.model.Fornecedor;
 
 import java.awt.*;
@@ -147,6 +151,42 @@ public class TelaCadastroFornecedor extends JFrame {
 
     private void cadastrarFornecedor() {
         try {
+            FornecedorDAO dao = new FornecedorDAO();
+
+            String cnpjDigitado = CampoCnpj.getText();
+            if (dao.buscarPorCnpj(cnpjDigitado) != null) {
+                throw new IllegalArgumentException("Este CNPJ já está cadastrado no sistema.");
+            }
+
+            Fornecedor fornecedor = new Fornecedor();
+
+            fornecedor.setNome(CampoEmpresa.getText());
+            fornecedor.setCnpj(cnpjDigitado);
+            fornecedor.setEmail(CampoEmail.getText());
+            fornecedor.setTelefoneId(CampoTelefone.getText());
+
+            //Tem que atualziar a tela com isso ainda
+            fornecedor.setEstado("PE"); 
+            fornecedor.setCep("00000000");
+            fornecedor.setRua("Sem Rua");
+            fornecedor.setBairro("Sem Bairro");
+            fornecedor.setCidade("Sem Cidade");
+            dao.create(fornecedor);
+
+            JOptionPane.showMessageDialog(this, "Fornecedor cadastrado com sucesso!");
+            limparCampos();
+
+        } catch (NomeInvalidoException | IdInvalidoException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Erro de Validação", JOptionPane.WARNING_MESSAGE);
+            
+        } catch (TelefoneInvalidoException | ErroDePreenchimentoInvalidoException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Telefone Inválido", JOptionPane.WARNING_MESSAGE);
+            
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Atenção", JOptionPane.WARNING_MESSAGE); 
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro inesperado: " + e.getMessage(), "Erro Crítico", JOptionPane.ERROR_MESSAGE);
 
             Fornecedor fornecedor = new Fornecedor();
 
