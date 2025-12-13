@@ -1,4 +1,5 @@
 package br.univ.pharmasys.ui;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class RealizarVenda extends javax.swing.JFrame {
@@ -36,7 +37,7 @@ public class RealizarVenda extends javax.swing.JFrame {
         jCheckBox4 = new javax.swing.JCheckBox();
         jButton3 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("SF Pro", 1, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 204, 255));

@@ -19,11 +19,12 @@ public class Medicamento {
     private int estoqueAtual;
     private BigDecimal preco;
     private boolean inativo;
+    private long loteId;
 
     public Medicamento() {
     }
 
-    // Objetivo aqui é fazer um "escopo" para o projeto de LPOO
+    //Classe Medicamento onde vai pegar os valores e recebera validações
 
     public String getSku() {
         return sku;
@@ -151,13 +152,15 @@ public class Medicamento {
         MedicamentoValidador.precoValido(preco);
         this.preco = preco;
     }
-    private Long loteId;
 
-    public Long getLoteId() {
+
+    public long getLoteId() {
         return loteId;
     }
 
-    public void setLoteId(Long loteId) {
+    public void setLoteId(long loteId) {
+
+        MedicamentoValidador.idLoteValidar(loteId);
         this.loteId = loteId;
     }
 

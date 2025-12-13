@@ -81,20 +81,24 @@ CREATE TABLE APROVA (
 ) ENGINE=InnoDB;
 
 -- -----------------------------------------------------
--- TABELA FORNECEDOR
+-- TABELA FORNECEDOR 
 -- -----------------------------------------------------
 CREATE TABLE FORNECEDOR (
     ID_FORNECEDOR INT NOT NULL AUTO_INCREMENT,
     NOME VARCHAR(100) NOT NULL,
     CNPJ VARCHAR(20) NOT NULL,
-    ENDERECO VARCHAR(150),
+    RUA VARCHAR(150),
+    BAIRRO VARCHAR(100),
+    CIDADE VARCHAR(100),
+    ESTADO VARCHAR(50),
+    CEP VARCHAR(20),
     TELEFONE_ID INT,
     EMAIL VARCHAR(100),
     INATIVO TINYINT DEFAULT 0,
+    
     PRIMARY KEY (ID_FORNECEDOR),
     UNIQUE (CNPJ) 
 ) ENGINE=InnoDB;
-
 -- -----------------------------------------------------
 -- TABELA LOTE
 -- -----------------------------------------------------
