@@ -2,6 +2,7 @@ package br.univ.pharmasys.model;
 
 import java.time.LocalDate;
 import br.univ.pharmasys.exceptions.QuantidadeInvalidaException;
+import java.math.BigDecimal;
 
 public class Pedido {
 	private long id_pedido;
@@ -38,14 +39,14 @@ public LocalDate getData() {
     this.data = data;
 }
 
-public double getPrecoUnitario() {
+public BigDecimal getPrecoUnitario() {
 	return preco_unitario;
-}public void setPrecoUnitario(double preco_unitario) {
+}public void setPrecoUnitario(BigDecimal preco_unitario) {
     this.preco_unitario = preco_unitario;
     calcularValorTotal();
 }
 
-public double getValorTotal() {
+public BigDecimal getValorTotal() {
 	  return valor_total;
 }
 private void calcularValorTotal() {
