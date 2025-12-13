@@ -36,7 +36,7 @@ public class MedicamentoTopicoDAO extends MedicamentoDAO {
                 top.setEstoqueMin(rs.getInt("ESTOQUE_MIN"));
                 top.setEstoqueAtual(rs.getInt("ESTOQUE_ATUAL"));
                 top.setPreco(rs.getBigDecimal("PRECO"));
-                top.setLoteId(rs.getLong("LOTE_ID"));
+
 
                 if (rs.getDate("DATA_EXPIRACAO") != null) {
                     top.setDataExpiracao(rs.getDate("DATA_EXPIRACAO").toLocalDate());

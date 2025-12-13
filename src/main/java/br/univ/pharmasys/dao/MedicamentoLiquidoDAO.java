@@ -34,7 +34,6 @@ public class MedicamentoLiquidoDAO extends MedicamentoDAO {
                 liq.setEstoqueMin(rs.getInt("ESTOQUE_MIN"));
                 liq.setEstoqueAtual(rs.getInt("ESTOQUE_ATUAL"));
                 liq.setPreco(rs.getBigDecimal("PRECO"));
-                liq.setLoteId(rs.getLong("LOTE_ID"));
 
                 if (rs.getDate("DATA_EXPIRACAO") != null) {
                     liq.setDataExpiracao(rs.getDate("DATA_EXPIRACAO").toLocalDate());
