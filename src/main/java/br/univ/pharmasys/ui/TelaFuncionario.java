@@ -37,28 +37,25 @@ public class TelaFuncionario extends JFrame {
     
     private void initComponents() {
 
-        labelLogo = new JLabel();
-        labelSair = new JLabel();
-        labelNome = new JLabel();
-        relogio = new JLabel();
-        labelLupa = new JLabel();
-        textBusca = new JTextField();
-        buttonVenda = new JButton();
-        buttonEstoque = new JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(new Dimension(700, 450));
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setSize(new java.awt.Dimension(700, 450));
 
-        labelLogo.setFont(new Font("SF Pro", 1, 16)); 
-        labelLogo.setForeground(new Color(51, 204, 255));
-        labelLogo.setText("LOGO PHARMASYS");
-
-        labelSair.setFont(new Font("SF Pro", 0, 14)); 
-        labelSair.setForeground(new Color(204, 0, 51));
-        labelSair.setText("labelSair");
-        labelSair.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                SairMouseClicked(evt);
+        jLabel2.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 0, 51));
+        jLabel2.setText("Sair");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
             }
         });
 
@@ -67,7 +64,8 @@ public class TelaFuncionario extends JFrame {
         relogio.setFont(new Font("SF Pro", 0, 14));
         relogio.setText("00:00");
 
-        labelLupa.setText("Lupa");
+        jLabel6.setFont(new java.awt.Font("SF Pro", 1, 12)); // NOI18N
+        jLabel6.setText("PESQUISAR");
 
         textBusca.setFont(new Font("SF Pro", 2, 14));
         textBusca.setForeground(new Color(102, 102, 102));
@@ -89,57 +87,58 @@ public class TelaFuncionario extends JFrame {
         buttonEstoque.setFont(new Font("SF Pro", 0, 18)); 
         buttonEstoque.setText("Visualizar estoque");
 
-        GroupLayout layout = new GroupLayout(getContentPane());
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pharmasys_logo.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-        	layout.createParallelGroup(Alignment.TRAILING)
-        		.addGroup(layout.createSequentialGroup()
-        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(layout.createSequentialGroup()
-        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        						.addGroup(layout.createSequentialGroup()
-        							.addGap(123)
-        							.addComponent(buttonVenda, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-        							.addGap(52)
-        							.addComponent(buttonEstoque, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
-        						.addGroup(layout.createSequentialGroup()
-        							.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        								.addGroup(layout.createSequentialGroup()
-        									.addGap(34)
-        									.addComponent(textBusca, GroupLayout.PREFERRED_SIZE, 631, GroupLayout.PREFERRED_SIZE))
-        								.addGroup(layout.createSequentialGroup()
-        									.addContainerGap()
-        									.addComponent(labelNome, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE)))
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-        								.addComponent(labelLupa, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-        								.addComponent(relogio, GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))))
-        					.addPreferredGap(ComponentPlacement.RELATED, 6, Short.MAX_VALUE))
-        				.addGroup(layout.createSequentialGroup()
-        					.addGap(23)
-        					.addComponent(labelLogo)
-        					.addPreferredGap(ComponentPlacement.RELATED, 511, Short.MAX_VALUE)
-        					.addComponent(labelSair, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)))
-        			.addGap(0))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jTextField1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(134, 134, 134)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(135, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-        	layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(layout.createSequentialGroup()
-        			.addContainerGap()
-        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(labelLogo)
-        				.addComponent(labelSair))
-        			.addGap(42)
-        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(textBusca, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(labelLupa))
-        			.addGap(26)
-        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(buttonEstoque, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(buttonVenda, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
-        			.addPreferredGap(ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
-        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(labelNome)
-        				.addComponent(relogio, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel1))
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(213, Short.MAX_VALUE))
         );
         getContentPane().setLayout(layout);
 

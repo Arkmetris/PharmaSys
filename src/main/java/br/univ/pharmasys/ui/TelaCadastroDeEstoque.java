@@ -4,7 +4,6 @@
  */
 package br.univ.pharmasys.ui;
 
-import javax.swing.JFrame;
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
@@ -13,6 +12,7 @@ import javax.swing.JOptionPane;
 
 import br.univ.pharmasys.dao.MedicamentoDAO;
 import br.univ.pharmasys.model.Medicamento;
+
 /**
  *
  * @author kessy
@@ -126,7 +126,7 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
         LabelCadastroDeEstoque.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         LabelCadastroDeEstoque.setText("Cadastro De Estoque");
 
-        CampoDataExpiracao.setBorder(javax.swing.BorderFactory.createTitledBorder("Data de validade"));
+        CampoDataExpiracao.setBorder(javax.swing.BorderFactory.createTitledBorder("Data de Expiração"));
 
         javax.swing.GroupLayout PanelMedicamentoLayout = new javax.swing.GroupLayout(PanelMedicamento);
         PanelMedicamento.setLayout(PanelMedicamentoLayout);
@@ -244,7 +244,7 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
     }//GEN-LAST:event_CampoPrecoActionPerformed
 
     private void ButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCadastrarActionPerformed
-     try {
+       try {
     Medicamento med = new Medicamento();
         med.setNomeComercial(CampoNomeComercial.getText());
         med.setSku(CampoSKU.getText());
@@ -279,7 +279,7 @@ public class TelaCadastroDeEstoque extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonCadastrarActionPerformed
 
     private void ButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelarActionPerformed
-        this.dispose();
+    this.dispose();
     }//GEN-LAST:event_ButtonCancelarActionPerformed
 
     /**
