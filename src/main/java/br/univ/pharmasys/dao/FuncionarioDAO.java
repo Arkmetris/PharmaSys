@@ -40,7 +40,7 @@ public class FuncionarioDAO {
         """;
 
         try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             long idTel = pegarTelefoneId(fun.getTelefone(), conn);
 
@@ -60,6 +60,14 @@ public class FuncionarioDAO {
             stmt.setString(8, senhaHash);
 
             stmt.executeUpdate();
+
+
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    long id = rs.getLong(1);
+                    fun.setIdFuncionario(id);
+                }
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao salvar Funcionario: " + e.getMessage(), e);

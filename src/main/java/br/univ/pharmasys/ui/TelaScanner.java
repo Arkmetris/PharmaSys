@@ -4,14 +4,14 @@ package br.univ.pharmasys.ui;
  *
  * @author kessy
  */
-public class TelaSacnner extends javax.swing.JFrame {
+public class TelaScanner extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaSacnner.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaScanner.class.getName());
 
     /**
      * Creates new form TelaSacnner
      */
-    public TelaSacnner() {
+    public TelaScanner() {
         initComponents();
     }
 
@@ -163,7 +163,7 @@ public class TelaSacnner extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TelaSacnner().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new TelaScanner().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

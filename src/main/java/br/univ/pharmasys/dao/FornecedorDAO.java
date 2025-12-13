@@ -33,7 +33,7 @@ public class FornecedorDAO {
 
 
         try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
 
             long idTelefone = pegarTelefoneId(fornecedor.getTelefoneId(), conn);
@@ -50,6 +50,13 @@ public class FornecedorDAO {
 
 
             stmt.executeUpdate();
+
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    long id = rs.getLong(1);
+                    fornecedor.setIdFornecedor(id);
+                }
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException("Error ao salvar fornecedor" + e.getMessage(), e);
