@@ -20,8 +20,7 @@ public class Medicamento {
     private BigDecimal preco;
     private boolean inativo;
 
-    public Medicamento(String dipirona) {
-    }
+    
     public Medicamento(){
     
     }
