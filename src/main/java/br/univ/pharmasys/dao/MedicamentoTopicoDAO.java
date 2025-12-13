@@ -107,7 +107,7 @@ public class MedicamentoTopicoDAO extends MedicamentoDAO {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao deletar MedicamentoTopico: " + e.getMessage(), e);
         }
-        //apaga do pai por último
+        //apaga do pai por ultimo
         super.delete(sku);
     }
 }
