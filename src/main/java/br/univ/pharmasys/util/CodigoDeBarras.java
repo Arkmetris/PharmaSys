@@ -15,9 +15,9 @@ import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-//
+
 public class CodigoDeBarras {
-   
+
     private String gerarCodigoBarrasEAN13(String valor) throws RuntimeException {
         String usuarioHome = System.getProperty("user.home");
         System.out.println("user.home: " + usuarioHome);
@@ -45,11 +45,11 @@ public class CodigoDeBarras {
         System.out.println("Código de barras EAN_13 gerado.: " + caminhoCompleto.toAbsolutePath());
         return caminhoCompleto.toAbsolutePath().toString();
     }
-   
+
     public String criarCodigo(Medicamento medicamento) {
         return gerarCodigoBarrasEAN13(medicamento.getSku());
     }
-    
+
     public String criarCodigo(String sku) {
         return gerarCodigoBarrasEAN13(sku);
     }
