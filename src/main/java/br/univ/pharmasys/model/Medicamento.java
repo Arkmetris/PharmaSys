@@ -20,9 +20,11 @@ public class Medicamento {
     private BigDecimal preco;
     private boolean inativo;
 
-    public Medicamento() {
+    public Medicamento(String dipirona) {
     }
-
+    public Medicamento(){
+    
+    }
     // Objetivo aqui é fazer um "escopo" para o projeto de LPOO
 
     public String getSku() {

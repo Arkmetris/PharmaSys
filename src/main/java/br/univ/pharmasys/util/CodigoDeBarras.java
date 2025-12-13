@@ -1,6 +1,9 @@
-package br.univ.pharmasys.service;
+package br.univ.pharmasys.util;
 
 import br.univ.pharmasys.exceptions.ValorVazioException;
+
+import br.univ.pharmasys.model.Medicamento;
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.oned.EAN13Writer;
 import com.google.zxing.common.BitMatrix;
@@ -12,13 +15,12 @@ import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class CodigoDeBarras {
    
-    private String gerarCodigoBarrasEAN13(String valor) throws RuntimeException{
+    private String gerarCodigoBarrasEAN13(String valor) throws RuntimeException {
         String usuarioHome = System.getProperty("user.home");
         System.out.println("user.home: " + usuarioHome);
-        
+
         Path documentosPath = Paths.get(usuarioHome, "Documents");
         System.out.println("Caminho para Documentos: " + documentosPath.toAbsolutePath());
 
@@ -29,7 +31,7 @@ public class CodigoDeBarras {
 
         }
         String nomeArquivo = valor.replaceAll("[^a-zA-Z0-9]", "_") + ".png";
-        Path caminhoCompleto = FileSystems.getDefault().getPath(usuarioHome,nomeArquivo);
+        Path caminhoCompleto = FileSystems.getDefault().getPath(usuarioHome, nomeArquivo);
 
         EAN13Writer barcodeWriter = new EAN13Writer();
         BitMatrix bitMatrix = barcodeWriter.encode(valor, BarcodeFormat.EAN_13, 300, 100);
@@ -42,9 +44,12 @@ public class CodigoDeBarras {
         System.out.println("Código de barras EAN_13 gerado.: " + caminhoCompleto.toAbsolutePath());
         return caminhoCompleto.toAbsolutePath().toString();
     }
+   
+    public String criarCodigo(Medicamento medicamento) {
+        return gerarCodigoBarrasEAN13(medicamento.getSku());
+    }
 
-    public void criar(String skuMedicamento) throws Exception {
-        String codigoDeBarrasGerado = gerarCodigoBarrasEAN13(skuMedicamento);
-        //TODO salvar codigo de barras no banco de dados: método esperado (skumedicamento,codigodebarrasgerado, tipodecodigoEan13)
+    public String criarCodigo(String sku) {
+        return gerarCodigoBarrasEAN13(sku);
     }
 }
