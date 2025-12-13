@@ -48,7 +48,7 @@ public class CodigoDeBarras {
     public String criarCodigo(Medicamento medicamento) {
         return gerarCodigoBarrasEAN13(medicamento.getSku());
     }
-
+    
     public String criarCodigo(String sku) {
         return gerarCodigoBarrasEAN13(sku);
     }
