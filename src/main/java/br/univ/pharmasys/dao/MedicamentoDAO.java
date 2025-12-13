@@ -3,11 +3,7 @@ package br.univ.pharmasys.dao;
 import br.univ.pharmasys.model.Medicamento;
 import br.univ.pharmasys.util.ConnectionFactory;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 

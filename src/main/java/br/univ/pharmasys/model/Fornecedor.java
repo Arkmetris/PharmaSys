@@ -1,6 +1,7 @@
 package br.univ.pharmasys.model;
 
 import br.univ.pharmasys.service.FornecedorValidador;
+import br.univ.pharmasys.service.TelefoneValidador;
 import br.univ.pharmasys.util.ValidadorUtils;
 
 public class Fornecedor {
@@ -16,7 +17,7 @@ public class Fornecedor {
     private String cidade;
 
     private String email;
-    private Long telefoneId; 
+    private String telefoneId;
 
     private boolean inativo;
 
@@ -44,16 +45,18 @@ public class Fornecedor {
     public String getCnpj() {
         return cnpj;
     }
-    
-    public void setCnpj(String cnpj){
-        
-        //Validar o cnpj do fornecedor!
-       cnpj = cnpj.trim();
-       ValidadorUtils.cnpjValido(cnpj);
-        cnpj= cnpj.replaceAll("\\D ", "");
-        this.cnpj = cnpj;
-    }
+      
+    public void setCnpj(String cnpj) {
 
+        if (cnpj == null || cnpj.trim().isEmpty()) {
+            throw new IllegalArgumentException("O CNPJ não pode estar vazio.");
+        }
+        boolean valido = ValidadorUtils.cnpjValido(cnpj);
+        if (!valido) {
+            throw new IllegalArgumentException("CNPJ inválido! Verifique os dígitos.");
+        }
+        this.cnpj = cnpj.replaceAll("\\D", "");
+    }
     public String getEstado() {
         return estado;
     }
@@ -99,15 +102,21 @@ public class Fornecedor {
     }
 
     public void setEmail(String email) {
-        this.email = email.trim();
+        email = email != null ? email.trim() : "";
+        FornecedorValidador.emailValidar(email); 
+        if (!ValidadorUtils.emailValido(email)) {
+            throw new IllegalArgumentException("Formato de E-mail inválido.");
+        }       
+        this.email = email;
     }
 
-    public Long getTelefoneId() {
+    public String getTelefoneId() {
         return telefoneId;
     }
 
-    public void setTelefoneId(Long telefoneId) {
-        this.telefoneId = telefoneId;
+    public void setTelefoneId(String telefoneId) {
+        TelefoneValidador.numeroTelefoneValidar(telefoneId);
+        this.telefoneId = telefoneId.replaceAll("[^0-9]", "");
     }
 
     public boolean isInativo() {
@@ -117,4 +126,5 @@ public class Fornecedor {
     public void setInativo(boolean inativo) {
         this.inativo = inativo;
     }
+
 }

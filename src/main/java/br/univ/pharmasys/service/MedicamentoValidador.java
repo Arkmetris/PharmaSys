@@ -10,14 +10,22 @@ public class MedicamentoValidador {
     // Contém validações de campos do Medicamento
     // Todos os atributos são verificados antes de salvar/atualizar
 
+    public static void idLoteValidar(long id){
+
+        if(id <=0){
+            throw new IdInvalidoException("\nError: O ID de um fornecedor deve ser sempre positiva e maior que zero");
+        }
+    }
+
+
     public static void skuValidar(String sku) {
         if (sku == null || sku.trim().isEmpty()) {
             throw new ErroDePreenchimentoInvalidoException("O campo SKU não pode estar vazio.");
         }
 
         sku = sku.trim();
-        if (!sku.matches("\\S+")) {
-            throw new ErroDePreenchimentoInvalidoException("O SKU não pode conter espaços.");
+        if (!sku.matches("[A-Z0-9\\-]+")) {
+            throw new ErroDePreenchimentoInvalidoException("O SKU não pode conter espaços ou símbolos.");
         }
     }
 
@@ -48,8 +56,8 @@ public class MedicamentoValidador {
             throw new NomeInvalidoException("O nome do medicamento não pode estar vazio.");
         }
 
-        if (!nome.matches("\\S+")) {
-            throw new NomeInvalidoException("O nome do medicamento não pode conter espaços.");
+        if (!nome.matches("[\\p{L} ]+")) {
+            throw new NomeInvalidoException("O nome do medicamento não pode conter números ou símbolos.");
         }
     }
 
@@ -60,7 +68,7 @@ public class MedicamentoValidador {
 
         fabricante = fabricante.trim();
 
-        if (!fabricante.matches("\\S+")) {
+        if (!fabricante.matches("[\\p{L}\\p{N} .()\\-]+")) {
             throw new ErroDePreenchimentoInvalidoException("O fabricante não pode conter espaços.");
         }
     }
@@ -72,7 +80,7 @@ public class MedicamentoValidador {
 
         dose = dose.trim();
 
-        if (!dose.matches("\\S+")) {
+        if (!dose.matches("[\\p{L}\\p{N} %/.,()\\-]+")) {
             throw new ErroDePreenchimentoInvalidoException("A dosagem não pode conter espaços.");
         }
     }
@@ -84,7 +92,7 @@ public class MedicamentoValidador {
 
         forma = forma.trim();
 
-        if (!forma.matches("\\S+")) {
+        if (!forma.matches("[\\p{L}]+")) {
             throw new ErroDePreenchimentoInvalidoException("A forma farmacêutica não pode conter espaços.");
         }
     }
@@ -96,7 +104,8 @@ public class MedicamentoValidador {
 
         laboratorio = laboratorio.trim();
 
-        if (!laboratorio.matches("\\S+")) {
+        //Vai permitir caracteres especiais, letras, numeros e acentos...
+        if (!laboratorio.matches("[\\p{L}\\p{N} .()\\-]+")) {
             throw new ErroDePreenchimentoInvalidoException("O laboratório não pode conter espaços.");
         }
     }
