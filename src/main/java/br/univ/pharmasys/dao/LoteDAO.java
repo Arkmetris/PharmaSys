@@ -14,11 +14,10 @@ import java.util.List;
 
 public class LoteDAO {
 
-
     public void create(Lote lote) {
 
         String sql = "INSERT INTO LOTE (SKU_MEDICAMENTO, VALIDADE, QUANTIDADE_RECEBIDA, "
-                   + "QUANTIDADE_ATUAL, PRECO) VALUES (?, ?, ?, ?, ?)";
+                + "QUANTIDADE_ATUAL, PRECO) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -37,16 +36,18 @@ public class LoteDAO {
 
             stmt.executeUpdate();
 
-           
-            ResultSet rs = stmt.getGeneratedKeys();
-
+            // Recuperar ID do lote gerado
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    lote.setNumeroLote(rs.getInt(1));
+                }
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao cadastrar Lote: " + e.getMessage(), e);
         }
     }
 
- 
     public List<Lote> buscarPorSku(String sku) {
 
         String sql = "SELECT * FROM LOTE WHERE SKU_MEDICAMENTO LIKE ?";
@@ -62,7 +63,7 @@ public class LoteDAO {
                 while (rs.next()) {
                     Lote lote = new Lote();
 
-
+                    lote.setNumeroLote(rs.getInt("NUMERO_LOTE"));              // 🔧 CORRIGIDO!
                     lote.setSkuMedicamento(rs.getString("SKU_MEDICAMENTO"));
 
                     Date sqlDate = rs.getDate("VALIDADE");
@@ -86,8 +87,8 @@ public class LoteDAO {
     public void update(Lote lote) {
 
         String sql = "UPDATE LOTE SET SKU_MEDICAMENTO = ?, VALIDADE = ?, "
-                   + "QUANTIDADE_RECEBIDA = ?, QUANTIDADE_ATUAL = ?, PRECO = ? "
-                   + "WHERE NUMERO_LOTE = ?";
+                + "QUANTIDADE_RECEBIDA = ?, QUANTIDADE_ATUAL = ?, PRECO = ? "
+                + "WHERE NUMERO_LOTE = ?";
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -104,7 +105,6 @@ public class LoteDAO {
             stmt.setInt(4, lote.getQuantidadeAtual());
             stmt.setBigDecimal(5, lote.getPreco());
 
-         
             stmt.setInt(6, lote.getNumeroLote());
 
             stmt.executeUpdate();
@@ -113,7 +113,6 @@ public class LoteDAO {
             throw new RuntimeException("Erro ao atualizar Lote: " + e.getMessage(), e);
         }
     }
-
 
     public void delete(int numeroLote) {
 
