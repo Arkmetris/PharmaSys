@@ -2,7 +2,7 @@ package br.univ.pharmasys.model;
 //b
 import br.univ.pharmasys.service.MedicamentoInjetavelValidador;
 
-public class MedicamentoInjetavel extends Medicamento {
+public abstract class MedicamentoInjetavel extends Medicamento {
 
     private String viaAdministracao;
     private double temperaturaMinima;
@@ -42,4 +42,6 @@ public class MedicamentoInjetavel extends Medicamento {
        }
         this.temperaturaMaxima = temperaturaMaxima;
     }
+
+    public abstract void delete(String sku);
 }

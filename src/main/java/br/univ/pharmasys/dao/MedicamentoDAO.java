@@ -10,6 +10,9 @@ import java.util.List;
 public class MedicamentoDAO {
 
 
+
+
+
 	public void create(Medicamento med) {
 
 	    String sql = "INSERT INTO MEDICAMENTO (NOME_COMERCIAL, SKU, DOSAGEM, FORMA_FARMACEUTICA, FABRICANTE, "
