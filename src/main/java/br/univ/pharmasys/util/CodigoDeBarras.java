@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//
 public class CodigoDeBarras {
    
     private String gerarCodigoBarrasEAN13(String valor) throws RuntimeException {
