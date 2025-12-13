@@ -28,17 +28,6 @@ public class FornecedorValidador {
         }
     }
 
-    public static void cnpjValidar(String cnpj){
-        if(cnpj == null || cnpj.trim().isEmpty()){
-            throw new NomeInvalidoException("\nPreencha o campo CNPJ");
-        }
-
-        // esse bloco exige que sejam digitados exatos 14 dígitos
-        if(!cnpj.matches("\\d{14}")){
-            throw new NomeInvalidoException("\nO CNPJ deve conter exatamente 14 dígitos numéricos");
-        }
-    }
-
     public static void estadoValidar(String estado) {
         if (estado == null || estado.trim().isEmpty()) {
             throw new NomeInvalidoException("\nPreencha o campo Estado");
@@ -88,29 +77,6 @@ public class FornecedorValidador {
         }
         if(cidade.length() < 3){
             throw new NomeInvalidoException("\nO nome da cidade é muito curto");
-        }
-    }
-
-    public static void emailValidar(String email){
-        if(email == null || email.trim().isEmpty()){
-            throw new NomeInvalidoException("\nPreencha o campo Email");
-        }
-
-        // 2. Exige que começe com letras, números ou ponto/traço, exige a obrigatoriedade do arroba (@)
-        //tenha o domínio (gmail., yahoo., etc) e a extensão final (.com, .br, .net)
-        if(!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")){
-            throw new NomeInvalidoException("\nO formato do e-mail é inválido");
-        }
-    }
-
-    public static void telefoneIdValidar(String telefoneId){
-        if(telefoneId == null || telefoneId.trim().isEmpty()){
-            throw new IdInvalidoException("\nO ID do Telefone é inválido");
-        }
-
-        //verifica se possui apenas números
-        if(!telefoneId.matches("\\d+")){
-            throw new IdInvalidoException("\nO ID do Telefone deve conter apenas números");
         }
     }
 }

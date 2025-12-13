@@ -42,6 +42,4 @@ public class MedicamentoInjetavel extends Medicamento { //correção
        }
         this.temperaturaMaxima = temperaturaMaxima;
     }
-
-    public abstract void delete(String sku);
 }

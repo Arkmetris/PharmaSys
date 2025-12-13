@@ -1,5 +1,6 @@
 package br.univ.pharmasys.model;
 
+import br.univ.pharmasys.exceptions.ErroDePreenchimentoInvalidoException;
 import br.univ.pharmasys.service.FornecedorValidador;
 import br.univ.pharmasys.service.TelefoneValidador;
 import br.univ.pharmasys.util.ValidadorUtils;
@@ -62,7 +63,9 @@ public class Fornecedor {
     }
 
     public void setEstado(String estado) {
-        this.estado = estado.trim();
+        estado = estado.trim();
+        FornecedorValidador.estadoValidar(estado);
+        this.estado = estado;
     }
 
     public String getCep() {
@@ -70,6 +73,8 @@ public class Fornecedor {
     }
 
     public void setCep(String cep) {
+        cep = cep.trim();
+        FornecedorValidador.cepValidar(cep);
         this.cep = cep.replaceAll("\\D", "");
     }
 
@@ -78,7 +83,9 @@ public class Fornecedor {
     }
 
     public void setRua(String rua) {
-        this.rua = rua.trim();
+        rua= rua.trim();
+        FornecedorValidador.ruaValidar(rua);
+        this.rua = rua;
     }
 
     public String getBairro() {
@@ -86,7 +93,9 @@ public class Fornecedor {
     }
 
     public void setBairro(String bairro) {
-        this.bairro = bairro.trim();
+        bairro = bairro.trim();
+        FornecedorValidador.bairroValidar(bairro);
+        this.bairro = bairro;
     }
 
     public String getCidade() {
@@ -94,7 +103,9 @@ public class Fornecedor {
     }
 
     public void setCidade(String cidade) {
-        this.cidade = cidade.trim();
+        cidade = cidade.trim();
+        FornecedorValidador.cidadeValidar(cidade);
+        this.cidade = cidade;
     }
 
     public String getEmail() {
@@ -102,8 +113,12 @@ public class Fornecedor {
     }
 
     public void setEmail(String email) {
-        email = email != null ? email.trim() : "";
-        FornecedorValidador.emailValidar(email); 
+        email = email.trim();
+
+        if(email == null || email.trim().isEmpty() ){
+            throw new ErroDePreenchimentoInvalidoException("O campo do E-mail deve ser preenchido.");
+        }
+
         if (!ValidadorUtils.emailValido(email)) {
             throw new IllegalArgumentException("Formato de E-mail inválido.");
         }       
