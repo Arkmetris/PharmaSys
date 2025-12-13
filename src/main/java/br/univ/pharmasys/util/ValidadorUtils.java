@@ -1,7 +1,7 @@
-package br.univ.pharmasys.service;
+package br.univ.pharmasys.util;
 //a
 import java.util.regex.Pattern;
-import java.util.InputMismatchException;
+
 
 	public class ValidadorUtils {
 
@@ -14,7 +14,7 @@ import java.util.InputMismatchException;
 	    
 	    public static boolean cpfValido(String cpf) {
 
-	        if (cpf == null) return false;
+	        if (cpf == null || cpf.trim().isEmpty()) return false;
 
 	        cpf = cpf.replaceAll("\\D", "");
 
@@ -53,7 +53,7 @@ import java.util.InputMismatchException;
 	    
 	    public static boolean cnpjValido(String cnpj) {
 
-	        if (cnpj == null) return false;
+	        if (cnpj == null || cnpj.trim().isEmpty()) return false;
 
 
 	        cnpj = cnpj.replaceAll("\\D", "");
