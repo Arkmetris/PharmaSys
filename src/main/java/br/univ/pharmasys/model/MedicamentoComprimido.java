@@ -20,4 +20,5 @@ public class MedicamentoComprimido extends Medicamento {
     	MedicamentoComprimidoValidador.validarQuantidade(quantidadeComprimidos);
         this.quantidadeComprimidos = quantidadeComprimidos;
     }
+
 }
