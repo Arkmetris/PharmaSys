@@ -33,10 +33,10 @@ public class MedicamentoDAO {
             stmt.setBigDecimal(12, med.getPreco());
 
             // LOTE_ID pode ser null
-            if (med.getLoteId() != null) {
+            if (med.getLoteId() > 0) {
                 stmt.setLong(13, med.getLoteId());
             } else {
-                stmt.setNull(13, java.sql.Types.INTEGER);
+                stmt.setNull(13, java.sql.Types.BIGINT);
             }
 
             stmt.executeUpdate();
@@ -152,10 +152,10 @@ public class MedicamentoDAO {
             stmt.setDate(10, Date.valueOf(med.getDataExpiracao()));
             stmt.setBigDecimal(11, med.getPreco());
 
-            if (med.getLoteId() != null) {
+            if (med.getLoteId() > 0) {
                 stmt.setLong(12, med.getLoteId());
             } else {
-                stmt.setNull(12, java.sql.Types.INTEGER);
+                stmt.setNull(12, java.sql.Types.BIGINT);
             }
 
             stmt.setString(13, med.getSku());
