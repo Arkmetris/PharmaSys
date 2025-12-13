@@ -8,8 +8,8 @@ public class Pedido {
 	private int quantidade;
 	private Status status;
 	private LocalDate data;
-	private double preco_unitario;
-	private double valor_total;
+	private BigDecimal preco_unitario;
+	private BigDecimal valor_total;
 
 
 public  long getIdPedido() {
