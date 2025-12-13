@@ -19,7 +19,7 @@ public class Medicamento {
     private int estoqueAtual;
     private BigDecimal preco;
     private boolean inativo;
-    private long loteId;
+
 
     public Medicamento() {
     }
@@ -152,16 +152,4 @@ public class Medicamento {
         MedicamentoValidador.precoValido(preco);
         this.preco = preco;
     }
-
-
-    public long getLoteId() {
-        return loteId;
-    }
-
-    public void setLoteId(long loteId) {
-
-        MedicamentoValidador.idLoteValidar(loteId);
-        this.loteId = loteId;
-    }
-
 }

@@ -1,6 +1,8 @@
 package br.univ.pharmasys.model;
 
 import java.time.LocalDate;
+
+import br.univ.pharmasys.exceptions.ErroDePreenchimentoInvalidoException;
 import br.univ.pharmasys.service.FuncionarioValidador;
 import br.univ.pharmasys.service.TelefoneValidador;
 import br.univ.pharmasys.util.ValidadorUtils;
@@ -119,7 +121,14 @@ public class Funcionario {
     }
     public void setEmail(String email) {
       email = email.trim();
-      ValidadorUtils.emailValido(email);
+      if(email == null || email.trim().isEmpty()){
+          throw new ErroDePreenchimentoInvalidoException("O Email não deve estar vazio.");
+      }
+      boolean validar =  ValidadorUtils.emailValido(email);
+      if(!validar){
+          throw new ErroDePreenchimentoInvalidoException("Email inválido, verifique se está corretamento escrito!");
+      }
+
       this.email = email;
     }
 

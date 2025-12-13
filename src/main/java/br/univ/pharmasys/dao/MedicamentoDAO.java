@@ -32,12 +32,6 @@ public class MedicamentoDAO {
             stmt.setDate(11, Date.valueOf(med.getDataExpiracao()));
             stmt.setBigDecimal(12, med.getPreco());
 
-            // LOTE_ID pode ser null
-            if (med.getLoteId() > 0) {
-                stmt.setLong(13, med.getLoteId());
-            } else {
-                stmt.setNull(13, java.sql.Types.BIGINT);
-            }
 
             stmt.executeUpdate();
             System.out.println("Medicamento salvo com sucesso!");
@@ -73,7 +67,7 @@ public class MedicamentoDAO {
                     med.setEstoqueMin(rs.getInt("ESTOQUE_MIN"));
                     med.setEstoqueAtual(rs.getInt("ESTOQUE_ATUAL"));
                     med.setPreco(rs.getBigDecimal("PRECO"));
-                    //med.setLoteId(rs.getObject("LOTE_ID", Integer.class));
+
 
                     if (rs.getDate("DATA_EXPIRACAO") != null) {
                         med.setDataExpiracao(rs.getDate("DATA_EXPIRACAO").toLocalDate());
@@ -151,12 +145,6 @@ public class MedicamentoDAO {
             stmt.setInt(9, med.getEstoqueAtual());
             stmt.setDate(10, Date.valueOf(med.getDataExpiracao()));
             stmt.setBigDecimal(11, med.getPreco());
-
-            if (med.getLoteId() > 0) {
-                stmt.setLong(12, med.getLoteId());
-            } else {
-                stmt.setNull(12, java.sql.Types.BIGINT);
-            }
 
             stmt.setString(13, med.getSku());
 
