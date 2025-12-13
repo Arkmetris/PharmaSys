@@ -2,7 +2,7 @@ package br.univ.pharmasys.model;
 //b
 import br.univ.pharmasys.service.MedicamentoInjetavelValidador;
 
-public class MedicamentoInjetavel extends Medicamento {
+public class MedicamentoInjetavel extends Medicamento { //correção
 
     private String viaAdministracao;
     private double temperaturaMinima;
