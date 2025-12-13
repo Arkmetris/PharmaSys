@@ -37,7 +37,7 @@ public class MedicamentoInjetavelDAO extends MedicamentoDAO {
                 inj.setEstoqueMin(rs.getInt("ESTOQUE_MIN"));
                 inj.setEstoqueAtual(rs.getInt("ESTOQUE_ATUAL"));
                 inj.setPreco(rs.getBigDecimal("PRECO"));
-                inj.setLoteId(rs.getLong("LOTE_ID"));
+
 
                 if (rs.getDate("DATA_EXPIRACAO") != null) {
                     inj.setDataExpiracao(rs.getDate("DATA_EXPIRACAO").toLocalDate());

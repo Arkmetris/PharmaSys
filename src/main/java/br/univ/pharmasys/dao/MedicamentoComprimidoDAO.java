@@ -35,7 +35,7 @@ public class MedicamentoComprimidoDAO extends MedicamentoDAO {
                 comp.setEstoqueMin(rs.getInt("ESTOQUE_MIN"));
                 comp.setEstoqueAtual(rs.getInt("ESTOQUE_ATUAL"));
                 comp.setPreco(rs.getBigDecimal("PRECO"));
-                comp.setLoteId(rs.getLong("LOTE_ID"));
+
 
                 if (rs.getDate("DATA_EXPIRACAO") != null) {
                     comp.setDataExpiracao(rs.getDate("DATA_EXPIRACAO").toLocalDate());
