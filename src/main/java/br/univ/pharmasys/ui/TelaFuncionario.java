@@ -48,9 +48,12 @@ public class TelaFuncionario extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(new Dimension(700, 450));
 
-        labelLogo.setFont(new Font("SF Pro", 1, 16)); 
-        labelLogo.setForeground(new Color(51, 204, 255));
-        labelLogo.setText("LOGO PHARMASYS");
+
+    try {   
+        labelLogo.setIcon(new ImageIcon(getClass().getResource("/pharmasys_logo.png")));
+    } catch (Exception e) {
+        labelLogo.setText("Imagem não encontrada");
+    }
 
         labelSair.setFont(new Font("SF Pro", 0, 14)); 
         labelSair.setForeground(new Color(204, 0, 51));
@@ -64,7 +67,6 @@ public class TelaFuncionario extends JFrame {
         labelNome.setFont(new Font("SF Pro", 0, 14));
 
         relogio.setFont(new Font("SF Pro", 0, 14));
-        relogio.setText("00:00");
 
         labelLupa.setText("PESQUISAR");
 

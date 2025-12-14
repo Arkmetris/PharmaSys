@@ -294,7 +294,9 @@ private void configurarEventos() {
         }
     }
     private void ButtonCancelarActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+        TelaGerencia gerente = new TelaGerencia();
+        gerente.setVisible(true);
+        this.dispose();
     }
     
     private boolean verificarListaVazia(List<?> lista) {

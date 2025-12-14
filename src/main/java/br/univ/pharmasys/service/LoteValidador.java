@@ -22,11 +22,9 @@ public class LoteValidador {
             throw new ErroDePreenchimentoInvalidoException("Não pode espaço no meio do sku ou caracteres inválidos");
         }
 
-
     }
 
     public static void dataValidadadeValidador(LocalDate data) {
-
 
         if (data == null) {
 

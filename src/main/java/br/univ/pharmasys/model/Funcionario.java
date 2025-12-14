@@ -1,8 +1,6 @@
 package br.univ.pharmasys.model;
 
 import java.time.LocalDate;
-
-import br.univ.pharmasys.exceptions.ErroDePreenchimentoInvalidoException;
 import br.univ.pharmasys.service.FuncionarioValidador;
 import br.univ.pharmasys.service.TelefoneValidador;
 import br.univ.pharmasys.util.ValidadorUtils;
