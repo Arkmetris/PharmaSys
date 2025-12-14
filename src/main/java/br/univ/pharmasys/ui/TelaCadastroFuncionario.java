@@ -3,6 +3,9 @@ package br.univ.pharmasys.ui;
 import javax.swing.*;
 import javax.swing.LayoutStyle.*;
 import javax.swing.GroupLayout.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import br.univ.pharmasys.dao.FuncionarioDAO;
 import br.univ.pharmasys.model.Funcionario;
@@ -67,6 +70,11 @@ public class TelaCadastroFuncionario extends JFrame {
         });
 
         BotaoCancelar.setText("Cancelar");
+        BotaoCancelar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                BotaoCancelarActionPerformed(evt);
+            }
+        });
 
         //
         jLabel1.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
@@ -348,6 +356,10 @@ public class TelaCadastroFuncionario extends JFrame {
             case "dezembro": return 12;
             default: return 1; 
         }
+    }
+
+    private void BotaoCancelarActionPerformed(ActionEvent evt) {
+        this.dispose();
     }
 
     public static void main(String args[]) {

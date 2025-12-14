@@ -1,11 +1,5 @@
 package br.univ.pharmasys.model;
 
-//CPF_CLIENTE VARCHAR(11) NOT NULL,
-//  SEXO VARCHAR(10),
-//  NOME VARCHAR(200),
-//  PRIMARY KEY (CPF_CLIENTE)
-
-import br.univ.pharmasys.exceptions.ErroDePreenchimentoInvalidoException;
 import br.univ.pharmasys.service.ClienteValidador;
 import br.univ.pharmasys.util.ValidadorUtils;
 

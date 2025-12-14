@@ -34,22 +34,24 @@ public class TelaEstoquista extends JFrame {
     }
     private void initComponents() {
 
-        jLabelLogo = new JLabel();
+        labelLogo = new JLabel();
         jLabelSair = new JLabel();
         labelNome = new JLabel();
         relogio = new JLabel();
-        jTextFieldBusca = new JTextField();
-        jLabelLupa = new JLabel();
-        jButtonCadastroMed = new JButton();
-        jButtonFornecedores = new JButton();
-        jButtonEstoque = new JButton();
+        textFieldBusca = new JTextField();
+        labelLupa = new JLabel();
+        buttonCadastroMed = new JButton();
+        buttonFornecedores = new JButton();
+        buttonEstoque = new JButton();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(new Dimension(700, 450));
 
-        jLabelLogo.setFont(new Font("SF Pro", 1, 16));
-        jLabelLogo.setForeground(new Color(51, 204, 255));
-        jLabelLogo.setText("LOGO PHARMASYS");
+  try {   
+        labelLogo.setIcon(new ImageIcon(getClass().getResource("/pharmasys_logo.png")));
+    } catch (Exception e) {
+        labelLogo.setText("Imagem não encontrada");
+    }
 
         jLabelSair.setFont(new Font("SF Pro", 0, 14));
         jLabelSair.setForeground(new Color(204, 0, 51));
@@ -66,23 +68,23 @@ public class TelaEstoquista extends JFrame {
         relogio.setFont(new Font("SF Pro", 0, 14));
         relogio.setText("00:00");
 
-        jTextFieldBusca.setFont(new Font("SF Pro", 2, 14));
-        jTextFieldBusca.setForeground(new Color(102, 102, 102));
-        jTextFieldBusca.setText("Buscar no estoque");
+        textFieldBusca.setFont(new Font("SF Pro", 2, 14));
+        textFieldBusca.setForeground(new Color(102, 102, 102));
+        textFieldBusca.setText("Buscar no estoque");
 
-        jLabelLupa.setText("LUPA");
+        labelLupa.setText("LUPA");
 
-        jButtonCadastroMed.setFont(new Font("SF Pro", 0, 18));
-        jButtonCadastroMed.setText("Cadastrar Medicamento");
-        jButtonCadastroMed.addActionListener(evt -> abrirCadastroMedicamento());
+        buttonCadastroMed.setFont(new Font("SF Pro", 0, 18));
+        buttonCadastroMed.setText("Cadastrar Medicamento");
+        buttonCadastroMed.addActionListener(evt -> abrirCadastroMedicamento());
 
-        jButtonFornecedores.setFont(new Font("SF Pro", 0, 18));
-        jButtonFornecedores.setText("Gerenciar Fornecedores");
-        jButtonFornecedores.addActionListener(evt -> abrirFornecedores());
+        buttonFornecedores.setFont(new Font("SF Pro", 0, 18));
+        buttonFornecedores.setText("Gerenciar Fornecedores");
+        buttonFornecedores.addActionListener(evt -> abrirFornecedores());
 
-        jButtonEstoque.setFont(new Font("SF Pro", 0, 18));
-        jButtonEstoque.setText("Visualizar Estoque");
-        jButtonEstoque.addActionListener(evt -> abrirEstoque());
+        buttonEstoque.setFont(new Font("SF Pro", 0, 18));
+        buttonEstoque.setText("Visualizar Estoque");
+        buttonEstoque.addActionListener(evt -> abrirEstoque());
 
         // Layout
         GroupLayout layout = new GroupLayout(getContentPane());
@@ -90,23 +92,23 @@ public class TelaEstoquista extends JFrame {
         	layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(layout.createSequentialGroup()
         			.addGap(23)
-        			.addComponent(jLabelLogo)
+        			.addComponent(labelLogo)
         			.addPreferredGap(ComponentPlacement.RELATED, 610, Short.MAX_VALUE)
         			.addComponent(jLabelSair)
         			.addContainerGap())
         		.addGroup(layout.createSequentialGroup()
         			.addGap(34)
-        			.addComponent(jTextFieldBusca, GroupLayout.PREFERRED_SIZE, 631, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(textFieldBusca, GroupLayout.PREFERRED_SIZE, 631, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(jLabelLupa)
+        			.addComponent(labelLupa)
         			.addContainerGap())
         		.addGroup(layout.createSequentialGroup()
         			.addGap(50)
-        			.addComponent(jButtonCadastroMed, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(buttonCadastroMed, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
         			.addGap(40)
-        			.addComponent(jButtonFornecedores, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(buttonFornecedores, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
         			.addGap(40)
-        			.addComponent(jButtonEstoque, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(buttonEstoque, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
         			.addGap(0, 30, Short.MAX_VALUE))
         		.addGroup(layout.createSequentialGroup()
         			.addContainerGap()
@@ -120,17 +122,17 @@ public class TelaEstoquista extends JFrame {
         		.addGroup(layout.createSequentialGroup()
         			.addContainerGap()
         			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jLabelLogo)
+        				.addComponent(labelLogo)
         				.addComponent(jLabelSair))
         			.addGap(42)
         			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jTextFieldBusca, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(jLabelLupa))
+        				.addComponent(textFieldBusca, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(labelLupa))
         			.addGap(40)
         			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jButtonCadastroMed, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(jButtonFornecedores, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(jButtonEstoque, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(buttonCadastroMed, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(buttonFornecedores, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(buttonEstoque, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
         			.addPreferredGap(ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
         			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(labelNome)
@@ -162,16 +164,34 @@ public class TelaEstoquista extends JFrame {
     }
 
     public static void main(String args[]) {
+
+         try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(TelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(TelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(TelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
         EventQueue.invokeLater(() -> new TelaEstoquista().setVisible(true));
     }
 
-    private JButton jButtonCadastroMed;
-    private JButton jButtonFornecedores;
-    private JButton jButtonEstoque;
-    private JLabel jLabelLogo;
+    private JButton buttonCadastroMed;
+    private JButton buttonFornecedores;
+    private JButton buttonEstoque;
+    private JLabel labelLogo;
     private JLabel jLabelSair;
     private JLabel labelNome;
     private JLabel relogio;
-    private JLabel jLabelLupa;
-    private JTextField jTextFieldBusca;
+    private JLabel labelLupa;
+    private JTextField textFieldBusca;
 }
