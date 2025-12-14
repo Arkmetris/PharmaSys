@@ -24,15 +24,7 @@ public class Cliente {
 
     public void setCpf(String cpf) {
         cpf = cpf.trim();
-
-        if(cpf == null || cpf.trim().isEmpty()){
-            throw new ErroDePreenchimentoInvalidoException("O CPF deve ser preenchido!");
-        }
-
-        boolean valido = ValidadorUtils.cpfValido(cpf);
-        if(!valido){
-            throw new ErroDePreenchimentoInvalidoException("Atenção: Verifique os dígitos!");
-        }
+        ValidadorUtils.cpfValido(cpf);
         cpf=cpf.replaceAll("\\D", "");
         this.cpf = cpf;
     }

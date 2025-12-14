@@ -32,10 +32,17 @@ public class PedidoDAO {
 	                stmt.setNull(3, java.sql.Types.DATE);
 	            }
 
-	            stmt.setDouble(4, pedido.getPrecoUnitario());
-	            stmt.setDouble(5, pedido.getValorTotal());
+	            stmt.setBigDecimal(4, pedido.getPrecoUnitario());
+	            stmt.setBigDecimal(5, pedido.getValorTotal());
 
 	            stmt.executeUpdate();
+
+             try (ResultSet rs = stmt.getGeneratedKeys()) {
+                 if (rs.next()) {
+                     long id = rs.getLong(1);
+                     pedido.setIdPedido(id);
+                 }
+             }
 	            
 		 } catch (SQLException e) {
 	            throw new RuntimeException("Erro ao salvar Pedido: " + e.getMessage(), e);}
@@ -76,8 +83,8 @@ public List<Pedido> listarTodos() {
                stmt.setInt(1, pedido.getquantidade());
                stmt.setString(2, pedido.getStatus().name());
                stmt.setDate(3, Date.valueOf(pedido.getData()));
-               stmt.setDouble(4, pedido.getPrecoUnitario());
-               stmt.setDouble(5, pedido.getValorTotal());
+               stmt.setBigDecimal(4, pedido.getPrecoUnitario());
+               stmt.setBigDecimal(5, pedido.getValorTotal());
                stmt.setLong(6, pedido.getIdPedido());
 
                stmt.executeUpdate();
@@ -111,7 +118,7 @@ public List<Pedido> listarTodos() {
 
 	        pedido.setQuantidade(rs.getInt("QUANTIDADE"));
 	        pedido.setStatus(Status.valueOf(rs.getString("STATUS")));
-	        pedido.setPrecoUnitario(rs.getDouble("PRECO_UNITARIO"));
+	        pedido.setPrecoUnitario(rs.getBigDecimal("PRECO_UNITARIO"));
 
 	        Date dataSql = rs.getDate("DATA");
 	        if (dataSql != null) {
