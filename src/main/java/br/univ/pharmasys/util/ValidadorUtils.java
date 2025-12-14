@@ -1,98 +1,118 @@
 package br.univ.pharmasys.util;
-//a
+
+import br.univ.pharmasys.exceptions.ErroDePreenchimentoInvalidoException;
 import java.util.regex.Pattern;
 
+public class ValidadorUtils {
 
-	public class ValidadorUtils {
+    public static void emailValido(String email) {
+        if (email == null || email.trim().isEmpty()) {
+            throw new ErroDePreenchimentoInvalidoException("O campo de e-mail não pode estar vazio.");
+        }
+        
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pat = Pattern.compile(emailRegex);
+        
+        if (!pat.matcher(email).matches()) {
+            throw new ErroDePreenchimentoInvalidoException("O formato do e-mail é inválido.");
+        }
+    }
+    
+    public static void cpfValido(String cpf) {
 
-	    public static boolean emailValido(String email) {
-	        if (email == null || email.isEmpty()) return false;
-	        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-	        Pattern pat = Pattern.compile(emailRegex);
-	        return pat.matcher(email).matches();
-	    }
-	    
-	    public static boolean cpfValido(String cpf) {
+        if (cpf == null || cpf.trim().isEmpty()) {
+            throw new ErroDePreenchimentoInvalidoException("O CPF é obrigatório.");
+        }
 
-	        if (cpf == null || cpf.trim().isEmpty()) return false;
+        String cpfLimpo = cpf.replaceAll("\\D", "");
 
-	        cpf = cpf.replaceAll("\\D", "");
+        if (cpfLimpo.length() != 11) {
+            throw new ErroDePreenchimentoInvalidoException("O CPF deve conter exatamente 11 dígitos.");
+        }
 
-	        if (cpf.length() != 11 || cpf.matches("(\\d)\\1{10}")) {
-	            return false;
-	        }
+        if (cpfLimpo.matches("(\\d)\\1{10}")) {
+            throw new ErroDePreenchimentoInvalidoException("CPF inválido (todos os números são iguais).");
+        }
 
-	        char dig10, dig11;
-	        int sm, i, r, num, peso;
+        char dig10, dig11;
+        int sm, i, r, num, peso;
 
-	        sm = 0;
-	        peso = 10;
-	        for (i = 0; i < 9; i++) {
-	            num = (int) (cpf.charAt(i) - 48);
-	            sm = sm + (num * peso);
-	            peso = peso - 1;
-	        }
+        sm = 0;
+        peso = 10;
+        for (i = 0; i < 9; i++) {
+            num = (int) (cpfLimpo.charAt(i) - 48);
+            sm = sm + (num * peso);
+            peso = peso - 1;
+        }
 
-	        r = 11 - (sm % 11);
-	        if ((r == 10) || (r == 11)) dig10 = '0';
-	        else dig10 = (char) (r + 48);
-	        
-	        sm = 0;
-	        peso = 11;
-	        for (i = 0; i < 10; i++) {
-	            num = (int) (cpf.charAt(i) - 48);
-	            sm = sm + (num * peso);
-	            peso = peso - 1;
-	        }
+        r = 11 - (sm % 11);
+        if ((r == 10) || (r == 11)) dig10 = '0';
+        else dig10 = (char) (r + 48);
+        
+        sm = 0;
+        peso = 11;
+        for (i = 0; i < 10; i++) {
+            num = (int) (cpfLimpo.charAt(i) - 48);
+            sm = sm + (num * peso);
+            peso = peso - 1;
+        }
 
-	        r = 11 - (sm % 11);
-	        if ((r == 10) || (r == 11)) dig11 = '0';
-	        else dig11 = (char) (r + 48);
-	        return (dig10 == cpf.charAt(9)) && (dig11 == cpf.charAt(10));
-	    }
-	    
-	    public static boolean cnpjValido(String cnpj) {
+        r = 11 - (sm % 11);
+        if ((r == 10) || (r == 11)) dig11 = '0';
+        else dig11 = (char) (r + 48);
 
-	        if (cnpj == null || cnpj.trim().isEmpty()) return false;
+        if ((dig10 != cpfLimpo.charAt(9)) || (dig11 != cpfLimpo.charAt(10))) {
+            throw new ErroDePreenchimentoInvalidoException("O CPF informado é inválido (dígitos verificadores não conferem).");
+        }
+    }
+    
+    public static void cnpjValido(String cnpj) {
 
+        if (cnpj == null || cnpj.trim().isEmpty()) {
+            throw new ErroDePreenchimentoInvalidoException("O CNPJ é obrigatório.");
+        }
 
-	        cnpj = cnpj.replaceAll("\\D", "");
+        String cnpjLimpo = cnpj.replaceAll("\\D", "");
 
+        if (cnpjLimpo.length() != 14) {
+            throw new ErroDePreenchimentoInvalidoException("O CNPJ deve conter exatamente 14 dígitos.");
+        }
 
-	        if (cnpj.length() != 14 || cnpj.matches("(\\d)\\1{13}")) return false;
+        if (cnpjLimpo.matches("(\\d)\\1{13}")) {
+             throw new ErroDePreenchimentoInvalidoException("CNPJ inválido (todos os números são iguais).");
+        }
 
+        char dig13, dig14;
+        int sm, i, r, num, peso;
 
-	        char dig13, dig14;
-	        int sm, i, r, num, peso;
+        sm = 0;
+        peso = 2;
+        for (i = 11; i >= 0; i--) {
+            num = (int) (cnpjLimpo.charAt(i) - 48);
+            sm = sm + (num * peso);
+            peso = peso + 1;
+            if (peso == 10) peso = 2;
+        }
 
+        r = sm % 11;
+        if ((r == 0) || (r == 1)) dig13 = '0';
+        else dig13 = (char) ((11 - r) + 48);
 
-	        sm = 0;
-	        peso = 2;
-	        for (i = 11; i >= 0; i--) {
-	            num = (int) (cnpj.charAt(i) - 48);
-	            sm = sm + (num * peso);
-	            peso = peso + 1;
-	            if (peso == 10) peso = 2;
-	        }
+        sm = 0;
+        peso = 2;
+        for (i = 12; i >= 0; i--) {
+            num = (int) (cnpjLimpo.charAt(i) - 48);
+            sm = sm + (num * peso);
+            peso = peso + 1;
+            if (peso == 10) peso = 2;
+        }
 
-	        r = sm % 11;
-	        if ((r == 0) || (r == 1)) dig13 = '0';
-	        else dig13 = (char) ((11 - r) + 48);
+        r = sm % 11;
+        if ((r == 0) || (r == 1)) dig14 = '0';
+        else dig14 = (char) ((11 - r) + 48);
 
-	        sm = 0;
-	        peso = 2;
-	        for (i = 12; i >= 0; i--) {
-	            num = (int) (cnpj.charAt(i) - 48);
-	            sm = sm + (num * peso);
-	            peso = peso + 1;
-	            if (peso == 10) peso = 2;
-	        }
-
-	        r = sm % 11;
-	        if ((r == 0) || (r == 1)) dig14 = '0';
-	        else dig14 = (char) ((11 - r) + 48);
-
-	        return (dig13 == cnpj.charAt(12)) && (dig14 == cnpj.charAt(13));
-	    }
-	    
-	}
+        if ((dig13 != cnpjLimpo.charAt(12)) || (dig14 != cnpjLimpo.charAt(13))) {
+            throw new ErroDePreenchimentoInvalidoException("O CNPJ informado é inválido.");
+        }
+    }
+}
