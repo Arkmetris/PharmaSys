@@ -121,14 +121,7 @@ public class Funcionario {
     }
     public void setEmail(String email) {
       email = email.trim();
-      if(email == null || email.trim().isEmpty()){
-          throw new ErroDePreenchimentoInvalidoException("O Email não deve estar vazio.");
-      }
-      boolean validar =  ValidadorUtils.emailValido(email);
-      if(!validar){
-          throw new ErroDePreenchimentoInvalidoException("Email inválido, verifique se está corretamento escrito!");
-      }
-
+      ValidadorUtils.emailValido(email);
       this.email = email;
     }
 
