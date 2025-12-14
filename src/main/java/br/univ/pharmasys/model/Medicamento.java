@@ -32,7 +32,7 @@ public class Medicamento {
 
     public void setSku(String sku) {
         sku = sku.trim();
-        MedicamentoValidador.skuValidar(sku);
+        MedicamentoValidador.skuValidador(sku);
         this.sku = sku;
     }
 
@@ -42,7 +42,7 @@ public class Medicamento {
 
     public void setCodigoBarras(String codigoBarras) {
         codigoBarras = codigoBarras.trim();
-        MedicamentoValidador.codigoBarrasValidar(codigoBarras);
+        MedicamentoValidador.codigoBarrasValidador(codigoBarras);
         this.codigoBarras = codigoBarras;
     }
 
@@ -53,7 +53,7 @@ public class Medicamento {
     public void setNomeComercial(String nomeComercial) {
 
         nomeComercial = nomeComercial.trim();
-        MedicamentoValidador.nomeValidar(nomeComercial);
+        MedicamentoValidador.nomeValidador(nomeComercial);
         this.nomeComercial = nomeComercial;
     }
 
@@ -64,7 +64,7 @@ public class Medicamento {
     public void setFabricante(String Fabricante) {
 
         Fabricante = Fabricante.trim();
-        MedicamentoValidador.fabricanteValidar(Fabricante);
+        MedicamentoValidador.fabricanteValidador(Fabricante);
         this.Fabricante = Fabricante;
     }
 
@@ -74,7 +74,7 @@ public class Medicamento {
 
     public void setDosagem(String dosagem) {
         dosagem = dosagem.trim();
-        MedicamentoValidador.dosagemValidar(dosagem);
+        MedicamentoValidador.dosagemValidador(dosagem);
         this.dosagem = dosagem;
     }
 
@@ -85,7 +85,7 @@ public class Medicamento {
     public void setFormaFarmaceutica(String formaFarmaceutica) {
 
         formaFarmaceutica = formaFarmaceutica.trim();
-        MedicamentoValidador.formaFarmaceuticaValidar(formaFarmaceutica);
+        MedicamentoValidador.formaFarmaceuticaValidador(formaFarmaceutica);
         this.formaFarmaceutica = formaFarmaceutica;
     }
 
@@ -95,7 +95,7 @@ public class Medicamento {
 
     public void setLaboratorio(String laboratorio) {
         laboratorio = laboratorio.trim();
-        MedicamentoValidador.laboratorioValidar(laboratorio);
+        MedicamentoValidador.laboratorioValidador(laboratorio);
         this.laboratorio = laboratorio;
     }
 
@@ -104,7 +104,7 @@ public class Medicamento {
     }
 
     public void setDataExpiracao(LocalDate dataExpiracao) {
-        MedicamentoValidador.dataExpiracaoValidar(dataExpiracao);
+        MedicamentoValidador.dataExpiracaoValidador(dataExpiracao);
         this.dataExpiracao = dataExpiracao;
     }
 
@@ -114,7 +114,7 @@ public class Medicamento {
 
     public void setEstoqueMin(int estoqueMin) {
         // Cuidado: Certifique-se que o validador lida bem se estoqueMax for 0
-        MedicamentoValidador.estoqueMinValidar(estoqueMin, estoqueMax);
+        MedicamentoValidador.estoqueMinValidador(estoqueMin, estoqueMax);
         this.estoqueMin = estoqueMin;
     }
 
@@ -123,7 +123,7 @@ public class Medicamento {
     }
 
     public void setEstoqueMax(int estoqueMax) {
-        MedicamentoValidador.estoqueMaxValidar(estoqueMax, estoqueMin);
+        MedicamentoValidador.estoqueMaxValidador(estoqueMax, estoqueMin);
         this.estoqueMax = estoqueMax;
     }
 
@@ -140,7 +140,7 @@ public class Medicamento {
     }
 
     public void setEstoqueAtual(int estoqueAtual) {
-        MedicamentoValidador.estoqueAtualValidar(estoqueAtual, estoqueMin, estoqueMax);
+        MedicamentoValidador.estoqueAtualValidador(estoqueAtual, estoqueMin, estoqueMax);
         this.estoqueAtual = estoqueAtual;
     }
 
@@ -149,7 +149,7 @@ public class Medicamento {
     }
 
     public void setPreco(BigDecimal preco) {
-        MedicamentoValidador.precoValido(preco);
+        MedicamentoValidador.precoValidador(preco);
         this.preco = preco;
     }
 }

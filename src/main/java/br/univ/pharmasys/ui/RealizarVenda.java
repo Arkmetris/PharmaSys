@@ -6,8 +6,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 @SuppressWarnings("serial")
 public class RealizarVenda extends JFrame {
@@ -56,9 +54,11 @@ private void initRelogio() {
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        labelLogo.setFont(new Font("SF Pro", 1, 16)); 
-        labelLogo.setForeground(new Color(51, 204, 255));
-        labelLogo.setText("PHARMASYS");
+     try {   
+        labelLogo.setIcon(new ImageIcon(getClass().getResource("/pharmasys_logo.png")));
+    } catch (Exception e) {
+        labelLogo.setText("Imagem não encontrada");
+    }
 
         labelNome.setFont(new Font("SF Pro", 0, 14)); 
 
