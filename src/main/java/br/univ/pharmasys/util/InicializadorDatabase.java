@@ -2,6 +2,7 @@ package br.univ.pharmasys.util;
 
 import br.univ.pharmasys.dao.FuncionarioDAO;
 import br.univ.pharmasys.model.Funcionario;
+import java.time.LocalDate;
 
 public class InicializadorDatabase {
 
@@ -9,7 +10,7 @@ public class InicializadorDatabase {
         FuncionarioDAO dao = new FuncionarioDAO();
         
         // Dados do Admin Padrão
-        String cpfAdmin = "11111111111"; 
+        String cpfAdmin = "11122233396"; 
         
 
         if (dao.buscarPorCpf(cpfAdmin) == null) {
@@ -21,14 +22,15 @@ public class InicializadorDatabase {
             admin.setCpf(cpfAdmin);
             admin.setSenha("admin12345");
             admin.setTipo(3);
-            admin.setSexo("M");
+            admin.setSexo("Masc");
             admin.setTelefone("81999999999");
-            admin.setEmail("Email");
+            admin.setEmail("admin@pharmasys.com");
+            admin.setDataNascimento(LocalDate.of(1990, 1, 1));
             
             dao.create(admin);
             
             System.out.println(">> SUCESSO! Admin criado.");
-            System.out.println(">> Use CPF: 11111111111 | Senha: admin12345");
+            System.out.println(">> Use CPF: " + cpfAdmin + " | Senha: admin12345");
             
         } else {
             System.out.println(">> Sistema iniciado. Admin padrão já verificado no banco.");
