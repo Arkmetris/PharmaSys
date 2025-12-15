@@ -111,7 +111,7 @@ public class MedicamentoValidador {
             throw new EstoqueInvalidoException("O estoque mínimo não pode ser negativo.");
         }
 
-        if (min > max) {
+        if (max > 0 && min > max) {
             throw new EstoqueInvalidoException("O estoque mínimo não pode ser maior que o estoque máximo.");
         }
     }
@@ -121,21 +121,21 @@ public class MedicamentoValidador {
             throw new EstoqueInvalidoException("O estoque máximo deve ser maior que zero.");
         }
 
-        if (min > max) {
+        if (min > 0 && min > max) {
             throw new EstoqueInvalidoException("O estoque mínimo não pode ser maior que o máximo.");
         }
     }
 
-    public static String estoqueAtualValidador(int atual, int minimo, int maximo) {
+    public static String estoqueAtualValidador(int atual, int min, int max) {
         if (atual < 0) {
             throw new ErroDePreenchimentoInvalidoException("O estoque atual não pode ser negativo.");
         }
 
-        if (atual <= minimo) {
+        if (min>0 && atual <= min) {
             return "Estoque baixo.";
         }
 
-        if (atual >= maximo) {
+        if (max > 0 && atual >= max) {
             return "Estoque cheio.";
         }
 

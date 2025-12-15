@@ -12,22 +12,6 @@ public class DependenteValidador {
         }
     }
 
-    public static void validarCpfFuncionario(String cpf) {
-        if (cpf == null || cpf.trim().isEmpty()) {
-            throw new ErroDePreenchimentoInvalidoException("O CPF do funcionário titular é obrigatório.");
-        }
-
-        cpf = cpf.trim();
-
-        if (!cpf.matches("\\d+")) {
-            throw new ErroDePreenchimentoInvalidoException("O CPF do funcionário deve conter apenas números.");
-        }
-
-        if (cpf.length() != 11) {
-            throw new ErroDePreenchimentoInvalidoException("O CPF do funcionário deve ter exatamente 11 dígitos.");
-        }
-    }
-
     public static void validarNome(String nome) {
         if (nome == null || nome.trim().isEmpty()) {
             throw new ErroDePreenchimentoInvalidoException("O nome do dependente é obrigatório.");

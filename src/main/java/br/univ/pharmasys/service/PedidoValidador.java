@@ -1,9 +1,7 @@
 package br.univ.pharmasys.service;
 
-import br.univ.pharmasys.exceptions.CustoUnitarioInvalidoException;
-import br.univ.pharmasys.exceptions.DataInvalidoException;
-import br.univ.pharmasys.exceptions.IdInvalidoException;
-import br.univ.pharmasys.exceptions.QuantidadeInvalidaException;
+import br.univ.pharmasys.exceptions.*;
+import br.univ.pharmasys.model.Status;
 
 import java.time.LocalDate;
 import java.math.BigDecimal;
@@ -45,6 +43,12 @@ public class PedidoValidador {
 
         if (preco.compareTo(BigDecimal.ZERO) <= 0) {
             throw new CustoUnitarioInvalidoException("O preço deve ser maior que zero.");
+        }
+    }
+
+    public static void statusValidador(Status status) {
+        if (status == null) {
+            throw new ErroDePreenchimentoInvalidoException("O status do pedido deve ser informado.");
         }
     }
 

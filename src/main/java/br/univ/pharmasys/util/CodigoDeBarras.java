@@ -1,4 +1,4 @@
-package br.univ.pharmasys.service;
+package br.univ.pharmasys.util;
 //a
 import br.univ.pharmasys.dao.CodigoDeBarrasDAO; // Importação necessária do DAO
 import br.univ.pharmasys.exceptions.ValorVazioException;
