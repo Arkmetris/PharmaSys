@@ -5,7 +5,7 @@ import br.univ.pharmasys.service.PedidoValidador;
 import java.math.BigDecimal;
 
 public class Pedido {
-    private long id_pedido;
+    private long idPedido;
     private int quantidade;
     private Status status;
     private LocalDate data;
@@ -14,12 +14,12 @@ public class Pedido {
 
 
     public long getIdPedido() {
-        return id_pedido;
+        return idPedido;
     }
 
-    public void setIdPedido(long id_pedido) {
-        PedidoValidador.idPedidoValidar(id_pedido);
-        this.id_pedido = id_pedido;
+    public void setIdPedido(long idPedido) {
+        PedidoValidador.idPedidoValidar(idPedido);
+        this.idPedido = idPedido;
     }
 
     public int getquantidade() {
@@ -37,7 +37,7 @@ public class Pedido {
     }
 
     public void setStatus(Status status) {
-
+        PedidoValidador.statusValidador(status);
         this.status = status;
     }
 
