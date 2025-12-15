@@ -24,7 +24,7 @@ public class PagamentoValidador {
     public static void idPedidoValidador(Pedido idPedido){
 
         if (idPedido == null){
-            throw new ErroDePreenchimentoInvalidoException("O dependente deve estar vinculado a um funcionário (Objeto).");
+            throw new ErroDePreenchimentoInvalidoException("O pedido não pode ser nulo.");
         }
     }
 
