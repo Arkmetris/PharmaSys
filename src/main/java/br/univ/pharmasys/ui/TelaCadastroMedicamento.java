@@ -8,16 +8,27 @@ import java.awt.Font;
 import java.awt.EventQueue;
 import java.awt.CardLayout;
 import java.time.LocalDate;
+import java.math.BigDecimal;
 
 @SuppressWarnings("serial")
 public class TelaCadastroMedicamento extends JFrame {
 
+    private JPanel panelCards;
+    private CardLayout cardLayout;
+
+    private JTextField txtSku, txtNome, txtCodigo, txtDosagem, txtForma,
+            txtFabricante, txtLab, txtEstMin, txtEstMax,
+            txtEstAtual, txtPreco;
+
+    private JComboBox<String> boxDia, boxMes, boxAno, comboTipo;
+
+    private JTextField txtQtdComp, txtVolume, txtRecipiente,
+            txtVia, txtTempMin, txtTempMax,
+            txtPeso, txtEmbalagem;
+
     public TelaCadastroMedicamento() {
         initComponents();
     }
-
-    private JPanel panelCards;
-    private CardLayout cardLayout;
 
     private void initComponents() {
 
@@ -27,178 +38,120 @@ public class TelaCadastroMedicamento extends JFrame {
         setResizable(false);
 
         JLabel labelTitulo = new JLabel("Cadastro de Medicamento");
-        labelTitulo.setFont(new Font("SF Pro", 1, 26));
+        labelTitulo.setFont(new Font("SF Pro", Font.BOLD, 26));
         labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 
         JLabel lblTipo = new JLabel("Tipo de Medicamento:");
-        JComboBox<String> comboTipo = new JComboBox<>(new String[]{"Comum", "Comprimido", "Líquido", "Injetável", "Tópico"});
+        comboTipo = new JComboBox<>(new String[]{
+                "Selecione...", "Comprimido", "Líquido", "Injetável", "Tópico"
+        });
 
         JLabel lblSku = new JLabel("SKU:");
-        JTextField txtSku = new JTextField();
+        txtSku = new JTextField();
 
         JLabel lblNome = new JLabel("Nome Comercial:");
-        JTextField txtNome = new JTextField();
+        txtNome = new JTextField();
 
         JLabel lblCodigo = new JLabel("Código de Barras:");
-        JTextField txtCodigo = new JTextField();
+        txtCodigo = new JTextField();
 
         JLabel lblDosagem = new JLabel("Dosagem:");
-        JTextField txtDosagem = new JTextField();
+        txtDosagem = new JTextField();
 
         JLabel lblForma = new JLabel("Forma Farmacêutica:");
-        JTextField txtForma = new JTextField();
+        txtForma = new JTextField();
 
         JLabel lblFabricante = new JLabel("Fabricante:");
-        JTextField txtFabricante = new JTextField();
+        txtFabricante = new JTextField();
 
         JLabel lblLab = new JLabel("Laboratório:");
-        JTextField txtLab = new JTextField();
+        txtLab = new JTextField();
 
         JLabel lblData = new JLabel("Data de Expiração:");
-        JComboBox<String> boxDia = new JComboBox<>(dias());
-        JComboBox<String> boxMes = new JComboBox<>(meses());
-        JComboBox<String> boxAno = new JComboBox<>(anos());
+        boxDia = new JComboBox<>(dias());
+        boxMes = new JComboBox<>(meses());
+        boxAno = new JComboBox<>(anos());
 
         JLabel lblEstMin = new JLabel("Estoque Mínimo:");
-        JTextField txtEstMin = new JTextField();
+        txtEstMin = new JTextField();
 
         JLabel lblEstMax = new JLabel("Estoque Máximo:");
-        JTextField txtEstMax = new JTextField();
+        txtEstMax = new JTextField();
 
         JLabel lblEstAtual = new JLabel("Estoque Atual:");
-        JTextField txtEstAtual = new JTextField("0");
+        txtEstAtual = new JTextField("0");
 
         JLabel lblPreco = new JLabel("Preço:");
-        JTextField txtPreco = new JTextField();
+        txtPreco = new JTextField();
 
+        // ===== CARDS =====
         cardLayout = new CardLayout();
         panelCards = new JPanel(cardLayout);
         panelCards.setBorder(BorderFactory.createTitledBorder("Dados Específicos"));
 
-        JPanel panelComum = new JPanel();
-        panelComum.add(new JLabel("Nenhum dado específico necessário."));
+        JPanel panelVazio = new JPanel();
+        panelVazio.add(new JLabel("Selecione o tipo do medicamento."));
 
         JPanel panelComprimido = new JPanel();
-        JLabel lblQtdComp = new JLabel("Qtd. Comprimidos:");
-        JTextField txtQtdComp = new JTextField(10);
-        panelComprimido.add(lblQtdComp);
+        txtQtdComp = new JTextField(10);
+        panelComprimido.add(new JLabel("Qtd. Comprimidos:"));
         panelComprimido.add(txtQtdComp);
 
         JPanel panelLiquido = new JPanel();
-        JLabel lblVolume = new JLabel("Volume (ml):");
-        JTextField txtVolume = new JTextField(8);
-        JLabel lblRecipiente = new JLabel("Recipiente:");
-        JTextField txtRecipiente = new JTextField(10);
-        panelLiquido.add(lblVolume);
+        txtVolume = new JTextField(8);
+        txtRecipiente = new JTextField(10);
+        panelLiquido.add(new JLabel("Volume (ml):"));
         panelLiquido.add(txtVolume);
-        panelLiquido.add(lblRecipiente);
+        panelLiquido.add(new JLabel("Recipiente:"));
         panelLiquido.add(txtRecipiente);
 
         JPanel panelInjetavel = new JPanel();
-        JLabel lblVia = new JLabel("Via Admin.:");
-        JTextField txtVia = new JTextField(8);
-        JLabel lblTempMin = new JLabel("Temp. Min:");
-        JTextField txtTempMin = new JTextField(5);
-        JLabel lblTempMax = new JLabel("Temp. Max:");
-        JTextField txtTempMax = new JTextField(5);
-        panelInjetavel.add(lblVia);
+        txtVia = new JTextField(8);
+        txtTempMin = new JTextField(5);
+        txtTempMax = new JTextField(5);
+        panelInjetavel.add(new JLabel("Via Admin.:"));
         panelInjetavel.add(txtVia);
-        panelInjetavel.add(lblTempMin);
+        panelInjetavel.add(new JLabel("Temp. Min:"));
         panelInjetavel.add(txtTempMin);
-        panelInjetavel.add(lblTempMax);
+        panelInjetavel.add(new JLabel("Temp. Max:"));
         panelInjetavel.add(txtTempMax);
 
         JPanel panelTopico = new JPanel();
-        JLabel lblPeso = new JLabel("Peso (g):");
-        JTextField txtPeso = new JTextField(8);
-        JLabel lblEmbalagem = new JLabel("Embalagem:");
-        JTextField txtEmbalagem = new JTextField(10);
-        panelTopico.add(lblPeso);
+        txtPeso = new JTextField(8);
+        txtEmbalagem = new JTextField(10);
+        panelTopico.add(new JLabel("Peso (g):"));
         panelTopico.add(txtPeso);
-        panelTopico.add(lblEmbalagem);
+        panelTopico.add(new JLabel("Embalagem:"));
         panelTopico.add(txtEmbalagem);
 
-        panelCards.add(panelComum, "Comum");
+        panelCards.setPreferredSize(new java.awt.Dimension(600, 90));
+        panelCards.setMinimumSize(new java.awt.Dimension(600, 90));
+        panelCards.setMaximumSize(new java.awt.Dimension(600, 90));
+        panelCards.add(panelVazio, "Vazio");
         panelCards.add(panelComprimido, "Comprimido");
         panelCards.add(panelLiquido, "Líquido");
         panelCards.add(panelInjetavel, "Injetável");
         panelCards.add(panelTopico, "Tópico");
 
         comboTipo.addActionListener(e -> {
-            String selecionado = (String) comboTipo.getSelectedItem();
-            cardLayout.show(panelCards, selecionado);
+            String tipo = comboTipo.getSelectedItem().toString();
+            cardLayout.show(panelCards,
+                    tipo.equals("Selecione...") ? "Vazio" : tipo);
         });
 
         JButton btnCadastrar = new JButton("Cadastrar");
         JButton btnCancelar = new JButton("Cancelar");
 
-        btnCadastrar.addActionListener(evt -> {
-            try {
-                String tipoSelecionado = (String) comboTipo.getSelectedItem();
-                int dia = Integer.parseInt(boxDia.getSelectedItem().toString());
-                int ano = Integer.parseInt(boxAno.getSelectedItem().toString());
-                int mes = converterMes(boxMes.getSelectedItem().toString());
-                LocalDate dataExp = LocalDate.of(ano, mes, dia);
-                java.math.BigDecimal preco = new java.math.BigDecimal(txtPreco.getText().replace(",", "."));
-
-                if ("Comprimido".equals(tipoSelecionado)) {
-                    MedicamentoComprimido med = new MedicamentoComprimido();
-                    preencherDadosComuns(med, txtSku, txtNome, txtCodigo, txtDosagem, txtForma, txtFabricante, txtLab, dataExp, txtEstMin, txtEstMax, txtEstAtual, preco);
-                    
-                    med.setQuantidadeComprimidos(Integer.parseInt(txtQtdComp.getText()));
-                    new MedicamentoComprimidoDAO().create(med);
-
-                } else if ("Líquido".equals(tipoSelecionado)) {
-                    MedicamentoLiquido med = new MedicamentoLiquido();
-                    preencherDadosComuns(med, txtSku, txtNome, txtCodigo, txtDosagem, txtForma, txtFabricante, txtLab, dataExp, txtEstMin, txtEstMax, txtEstAtual, preco);
-                    
-                    med.setVolumeMl(Double.parseDouble(txtVolume.getText()));
-                    med.setTipoRecipiente(txtRecipiente.getText());
-                    new MedicamentoLiquidoDAO().create(med);
-
-                } else if ("Injetável".equals(tipoSelecionado)) {
-                    MedicamentoInjetavel med = new MedicamentoInjetavel();
-                    preencherDadosComuns(med, txtSku, txtNome, txtCodigo, txtDosagem, txtForma, txtFabricante, txtLab, dataExp, txtEstMin, txtEstMax, txtEstAtual, preco);
-                    
-                    med.setViaAdministracao(txtVia.getText());
-                    med.setTemperaturaMinima(Double.parseDouble(txtTempMin.getText()));
-                    med.setTemperaturaMaxima(Double.parseDouble(txtTempMax.getText()));
-                    new MedicamentoInjetavelDAO().create(med);
-
-                } else if ("Tópico".equals(tipoSelecionado)) {
-                    MedicamentoTopico med = new MedicamentoTopico();
-                    preencherDadosComuns(med, txtSku, txtNome, txtCodigo, txtDosagem, txtForma, txtFabricante, txtLab, dataExp, txtEstMin, txtEstMax, txtEstAtual, preco);
-                    
-                    med.setPesoGramas(Double.parseDouble(txtPeso.getText()));
-                    med.setTipoEmbalagem(txtEmbalagem.getText());
-                    new MedicamentoTopicoDAO().create(med);
-
-                } else {
-                    Medicamento med = new Medicamento();
-                    preencherDadosComuns(med, txtSku, txtNome, txtCodigo, txtDosagem, txtForma, txtFabricante, txtLab, dataExp, txtEstMin, txtEstMax, txtEstAtual, preco);
-                    new MedicamentoDAO().create(med);
-                }
-
-                JOptionPane.showMessageDialog(this, "Medicamento cadastrado com sucesso!");
-                this.dispose();
-
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this,
-                        "Erro ao cadastrar: " + e.getMessage(),
-                        "Erro", JOptionPane.ERROR_MESSAGE);
-                e.printStackTrace();
-            }
-        });
-
-        btnCancelar.addActionListener(evt -> dispose());
+        btnCadastrar.addActionListener(e -> cadastrar());
+        btnCancelar.addActionListener(e -> dispose());
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
 
+        // ===== HORIZONTAL (SEM BASELINE) =====
         layout.setHorizontalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                         .addComponent(labelTitulo)
-
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(40)
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -247,9 +200,7 @@ public class TelaCadastroMedicamento extends JFrame {
                                                 .addComponent(lblData)
                                                 .addGap(10)
                                                 .addComponent(boxDia)
-                                                .addGap(5)
                                                 .addComponent(boxMes)
-                                                .addGap(5)
                                                 .addComponent(boxAno))
 
                                         .addGroup(layout.createSequentialGroup()
@@ -272,17 +223,17 @@ public class TelaCadastroMedicamento extends JFrame {
                                                 .addGap(10)
                                                 .addComponent(txtPreco, 100, 100, 100))
 
-                                        .addComponent(panelCards, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(panelCards)
 
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(btnCancelar)
                                                 .addGap(20)
                                                 .addComponent(btnCadastrar))
                                 )
-                                .addGap(40)
-                        )
+                                .addGap(40))
         );
 
+        // ===== VERTICAL (COM BASELINE) =====
         layout.setVerticalGroup(
                 layout.createSequentialGroup()
                         .addGap(20)
@@ -292,86 +243,107 @@ public class TelaCadastroMedicamento extends JFrame {
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblTipo)
                                 .addComponent(comboTipo))
-                        .addGap(15)
 
+                        .addGap(10)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblSku)
                                 .addComponent(txtSku))
-                        .addGap(10)
 
+                        .addGap(10)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblNome)
                                 .addComponent(txtNome))
-                        .addGap(10)
 
+                        .addGap(10)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblCodigo)
                                 .addComponent(txtCodigo))
-                        .addGap(10)
 
+                        .addGap(10)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblDosagem)
                                 .addComponent(txtDosagem))
-                        .addGap(10)
 
+                        .addGap(10)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblForma)
                                 .addComponent(txtForma))
-                        .addGap(10)
 
+                        .addGap(10)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblFabricante)
                                 .addComponent(txtFabricante))
-                        .addGap(10)
 
+                        .addGap(10)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblLab)
                                 .addComponent(txtLab))
-                        .addGap(10)
 
+                        .addGap(10)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblData)
                                 .addComponent(boxDia)
                                 .addComponent(boxMes)
                                 .addComponent(boxAno))
-                        .addGap(20)
 
+                        .addGap(10)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblEstMin)
                                 .addComponent(txtEstMin))
-                        .addGap(10)
 
+                        .addGap(10)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblEstMax)
                                 .addComponent(txtEstMax))
-                        .addGap(10)
 
+                        .addGap(10)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblEstAtual)
                                 .addComponent(txtEstAtual))
-                        .addGap(10)
 
+                        .addGap(10)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblPreco)
                                 .addComponent(txtPreco))
-                        .addGap(30)
 
-                        .addComponent(panelCards, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addGap(20)
+                        .addComponent(panelCards)
 
+                        .addGap(20)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(btnCancelar)
                                 .addComponent(btnCadastrar))
-                        .addGap(20)
         );
 
         setLocationRelativeTo(null);
     }
 
-    private void preencherDadosComuns(Medicamento med, JTextField txtSku, JTextField txtNome, JTextField txtCodigo,
-                                      JTextField txtDosagem, JTextField txtForma, JTextField txtFabricante,
-                                      JTextField txtLab, LocalDate dataExp, JTextField txtEstMin,
-                                      JTextField txtEstMax, JTextField txtEstAtual, java.math.BigDecimal preco) {
+    // ===== CADASTRO =====
+    private void cadastrar() {
+        try {
+            String tipo = comboTipo.getSelectedItem().toString();
+
+            if ("Comprimido".equals(tipo)) {
+                MedicamentoComprimido m = new MedicamentoComprimido();
+                preencherDadosComuns(m);
+                m.setQuantidadeComprimidos(Integer.parseInt(txtQtdComp.getText()));
+                new MedicamentoComprimidoDAO().create(m);
+            }
+
+            JOptionPane.showMessageDialog(this, "Medicamento cadastrado com sucesso!");
+            dispose();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void preencherDadosComuns(Medicamento med) {
+        int dia = Integer.parseInt(boxDia.getSelectedItem().toString());
+        int mes = converterMes(boxMes.getSelectedItem().toString());
+        int ano = Integer.parseInt(boxAno.getSelectedItem().toString());
+
         med.setSku(txtSku.getText());
         med.setNomeComercial(txtNome.getText());
         med.setCodigoBarras(txtCodigo.getText());
@@ -379,34 +351,35 @@ public class TelaCadastroMedicamento extends JFrame {
         med.setFormaFarmaceutica(txtForma.getText());
         med.setFabricante(txtFabricante.getText());
         med.setLaboratorio(txtLab.getText());
-        med.setDataExpiracao(dataExp);
+        med.setDataExpiracao(LocalDate.of(ano, mes, dia));
         med.setEstoqueMin(Integer.parseInt(txtEstMin.getText()));
         med.setEstoqueMax(Integer.parseInt(txtEstMax.getText()));
         med.setEstoqueAtual(Integer.parseInt(txtEstAtual.getText()));
-        med.setPreco(preco);
+        med.setPreco(new BigDecimal(txtPreco.getText().replace(",", ".")));
     }
 
     private String[] dias() {
-        String[] d = new String[31];
-        for (int i = 1; i <= 31; i++) d[i - 1] = String.valueOf(i);
+        String[] d = new String[32];
+        d[0] = "Dia";
+        for (int i = 1; i <= 31; i++) d[i] = String.valueOf(i);
         return d;
     }
 
     private String[] meses() {
-        return new String[]{"janeiro", "fevereiro", "março", "abril", "maio", "junho",
-                "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"};
+        return new String[]{"Mês","janeiro","fevereiro","março","abril","maio","junho",
+                "julho","agosto","setembro","outubro","novembro","dezembro"};
     }
 
     private String[] anos() {
-        String[] anos = new String[80];
-        int idx = 0;
-        for (int a = 2025; a >= 1950; a--) anos[idx++] = String.valueOf(a);
-        return anos;
+        String[] a = new String[122];
+        a[0] = "Ano";
+        int idx = 1;
+        for (int i = 2070; i >= 1950; i--) a[idx++] = String.valueOf(i);
+        return a;
     }
 
     private int converterMes(String mes) {
-        mes = mes.toLowerCase();
-        switch (mes) {
+        switch (mes.toLowerCase()) {
             case "janeiro": return 1;
             case "fevereiro": return 2;
             case "março": return 3;
