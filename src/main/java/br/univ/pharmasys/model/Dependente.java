@@ -1,6 +1,8 @@
 package br.univ.pharmasys.model;
 
 import br.univ.pharmasys.service.DependenteValidador;
+import br.univ.pharmasys.util.ValidadorUtils;
+
 import java.time.LocalDate;
 
 public class Dependente {
@@ -28,12 +30,14 @@ public class Dependente {
     }
 
     public void setFuncionario(Funcionario funcionario) {
+
         DependenteValidador.validarFuncionario(funcionario);
         this.funcionario = funcionario;
+
         //Ao setar o objeto já preenche o CPF automaticamente
-        if (funcionario != null && funcionario.getCpf() != null) {
-            this.cpfFuncionario = funcionario.getCpf();
-        }
+
+        this.cpfFuncionario = funcionario.getCpf();
+
     }
 
     public String getCpfFuncionario() {
@@ -42,7 +46,7 @@ public class Dependente {
 
     public void setCpfFuncionario(String cpfFuncionario) {
         //Chama a validação no serviço
-        DependenteValidador.validarCpfFuncionario(cpfFuncionario);
+        ValidadorUtils.cpfValido(cpfFuncionario);
         this.cpfFuncionario = cpfFuncionario.trim();
     }
 
