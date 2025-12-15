@@ -2,7 +2,6 @@ package br.univ.pharmasys.ui;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -17,171 +16,141 @@ public class TelaEstoquista extends JFrame {
         initRelogio();
     }
 
-    // Método que inicializa o relógio
     private void initRelogio() {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("HH:mm");
         Timer timer = new Timer(1000, e -> {
-            LocalTime agora = LocalTime.now();
-            relogio.setText(agora.format(formato));
+            relogio.setText(LocalTime.now().format(formato));
         });
         timer.setInitialDelay(0);
         timer.start();
     }
-    
-    // Método para definir o nome do usuário mostrado na tela
+
     public void definirUsuarioLogado(String nome) {
-    	labelNome.setText(nome);
+        labelNome.setText(nome);
     }
+
     private void initComponents() {
 
         labelLogo = new JLabel();
         jLabelSair = new JLabel();
         labelNome = new JLabel();
-        relogio = new JLabel();
-        textFieldBusca = new JTextField();
-        labelLupa = new JLabel();
-        buttonCadastroMed = new JButton();
-        buttonFornecedores = new JButton();
-        buttonEstoque = new JButton();
+        relogio = new JLabel("00:00");
+        textFieldBusca = new JTextField("Buscar no estoque");
+        labelLupa = new JLabel("LUPA");
+
+        buttonCadastroMed = new JButton("Cadastrar Medicamento");
+        buttonFornecedores = new JButton("Gerenciar Fornecedores");
+        buttonEstoque = new JButton("Visualizar Estoque");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(new Dimension(700, 450));
 
-  try {   
-        labelLogo.setIcon(new ImageIcon(getClass().getResource("/pharmasys_logo.png")));
-    } catch (Exception e) {
-        labelLogo.setText("Imagem não encontrada");
-    }
+        try {
+            labelLogo.setIcon(new ImageIcon(getClass().getResource("/pharmasys_logo.png")));
+        } catch (Exception e) {
+            labelLogo.setText("LOGO");
+        }
 
-        jLabelSair.setFont(new Font("SF Pro", 0, 14));
-        jLabelSair.setForeground(new Color(204, 0, 51));
+        jLabelSair.setFont(new Font("SF Pro", Font.PLAIN, 14));
+        jLabelSair.setForeground(Color.RED);
+        jLabelSair.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jLabelSair.setText("Sair");
-        jLabelSair.setCursor(new Cursor(Cursor.HAND_CURSOR));
         jLabelSair.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                jLabelSairMouseClicked(evt);
+            public void mouseClicked(MouseEvent e) {
+                new TelaInicial().setVisible(true);
+                dispose();
             }
         });
 
-        labelNome.setFont(new Font("SF Pro", 0, 14));
+        labelNome.setFont(new Font("SF Pro", Font.PLAIN, 14));
+        relogio.setFont(new Font("SF Pro", Font.PLAIN, 14));
 
-        relogio.setFont(new Font("SF Pro", 0, 14));
-        relogio.setText("00:00");
+        textFieldBusca.setFont(new Font("SF Pro", Font.ITALIC, 14));
+        textFieldBusca.setForeground(Color.GRAY);
 
-        textFieldBusca.setFont(new Font("SF Pro", 2, 14));
-        textFieldBusca.setForeground(new Color(102, 102, 102));
-        textFieldBusca.setText("Buscar no estoque");
+        labelLupa = new JLabel("🔍");
+        Dimension tamanhoBotao = new Dimension(260, 100);
+        buttonCadastroMed.setPreferredSize(tamanhoBotao);
+        buttonFornecedores.setPreferredSize(tamanhoBotao);
+        buttonEstoque.setPreferredSize(tamanhoBotao);
 
-        labelLupa.setText("LUPA");
+        buttonCadastroMed.setFont(new Font("SF Pro", Font.PLAIN, 18));
+        buttonFornecedores.setFont(new Font("SF Pro", Font.PLAIN, 18));
+        buttonEstoque.setFont(new Font("SF Pro", Font.PLAIN, 18));
 
-        buttonCadastroMed.setFont(new Font("SF Pro", 0, 18));
-        buttonCadastroMed.setText("Cadastrar Medicamento");
-        buttonCadastroMed.addActionListener(evt -> abrirCadastroMedicamento());
+        buttonCadastroMed.addActionListener(e -> {
+            new TelaCadastroMedicamento().setVisible(true);
+            dispose();
+        });
 
-        buttonFornecedores.setFont(new Font("SF Pro", 0, 18));
-        buttonFornecedores.setText("Gerenciar Fornecedores");
-        buttonFornecedores.addActionListener(evt -> abrirFornecedores());
+        buttonFornecedores.addActionListener(e -> {
+            new TelaFornecedores().setVisible(true);
+            dispose();
+        });
 
-        buttonEstoque.setFont(new Font("SF Pro", 0, 18));
-        buttonEstoque.setText("Visualizar Estoque");
-        buttonEstoque.addActionListener(evt -> abrirEstoque());
+        buttonEstoque.addActionListener(e -> {
+            new TelaEstoque().setVisible(true);
+            dispose();
+        });
 
-        // Layout
         GroupLayout layout = new GroupLayout(getContentPane());
-        layout.setHorizontalGroup(
-        	layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(layout.createSequentialGroup()
-        			.addGap(23)
-        			.addComponent(labelLogo)
-        			.addPreferredGap(ComponentPlacement.RELATED, 610, Short.MAX_VALUE)
-        			.addComponent(jLabelSair)
-        			.addContainerGap())
-        		.addGroup(layout.createSequentialGroup()
-        			.addGap(34)
-        			.addComponent(textFieldBusca, GroupLayout.PREFERRED_SIZE, 631, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(labelLupa)
-        			.addContainerGap())
-        		.addGroup(layout.createSequentialGroup()
-        			.addGap(50)
-        			.addComponent(buttonCadastroMed, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
-        			.addGap(40)
-        			.addComponent(buttonFornecedores, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
-        			.addGap(40)
-        			.addComponent(buttonEstoque, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
-        			.addGap(0, 30, Short.MAX_VALUE))
-        		.addGroup(layout.createSequentialGroup()
-        			.addContainerGap()
-        			.addComponent(labelNome, GroupLayout.PREFERRED_SIZE, 270, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED, 490, Short.MAX_VALUE)
-        			.addComponent(relogio)
-        			.addContainerGap())
-        );
-        layout.setVerticalGroup(
-        	layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(layout.createSequentialGroup()
-        			.addContainerGap()
-        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(labelLogo)
-        				.addComponent(jLabelSair))
-        			.addGap(42)
-        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(textFieldBusca, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(labelLupa))
-        			.addGap(40)
-        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(buttonCadastroMed, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(buttonFornecedores, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(buttonEstoque, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
-        			.addPreferredGap(ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
-        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(labelNome)
-        				.addComponent(relogio)))
-        );
         getContentPane().setLayout(layout);
 
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(20)
+                                .addComponent(labelLogo)
+                                .addPreferredGap(ComponentPlacement.RELATED, 400, Short.MAX_VALUE)
+                                .addComponent(jLabelSair)
+                                .addContainerGap())
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(30)
+                                .addComponent(textFieldBusca, GroupLayout.PREFERRED_SIZE, 580, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(labelLupa))
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(15)
+                                .addComponent(buttonCadastroMed)
+                                .addGap(15)
+                                .addComponent(buttonFornecedores)
+                                .addGap(15)
+                                .addComponent(buttonEstoque))
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(labelNome, 250, 250, 250)
+                                .addPreferredGap(ComponentPlacement.RELATED, 380, Short.MAX_VALUE)
+                                .addComponent(relogio)
+                                .addContainerGap())
+        );
+
+        layout.setVerticalGroup(
+                layout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(Alignment.BASELINE)
+                                        .addComponent(labelLogo)
+                                        .addComponent(jLabelSair))
+                                .addGap(40)
+                                .addGroup(layout.createParallelGroup(Alignment.BASELINE)
+                                        .addComponent(textFieldBusca, 26, 26, 26)
+                                        .addComponent(labelLupa))
+                                .addGap(40)
+                                .addGroup(layout.createParallelGroup(Alignment.BASELINE)
+                                        .addComponent(buttonCadastroMed)
+                                        .addComponent(buttonFornecedores)
+                                        .addComponent(buttonEstoque))
+                                .addPreferredGap(ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(Alignment.BASELINE)
+                                        .addComponent(labelNome)
+                                        .addComponent(relogio))
+                        )
+        );
+
         pack();
+        setLocationRelativeTo(null);
     }
 
-    private void jLabelSairMouseClicked(MouseEvent evt) {
-        new TelaInicial().setVisible(true);
-        this.dispose();
-    }
-
-    private void abrirCadastroMedicamento() {
-        new TelaCadastroMedicamento().setVisible(true);
-        this.dispose();
-    }
-
-    private void abrirFornecedores() {
-        new TelaFornecedores().setVisible(true);
-        this.dispose();
-    }
-
-    private void abrirEstoque() {
-        new TelaEstoque().setVisible(true);
-        this.dispose();
-    }
-
-    public static void main(String args[]) {
-
-         try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
+    public static void main(String[] args) {
         EventQueue.invokeLater(() -> new TelaEstoquista().setVisible(true));
     }
 
