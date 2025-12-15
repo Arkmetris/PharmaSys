@@ -1,6 +1,5 @@
 package br.univ.pharmasys.service;
 
-import br.univ.pharmasys.exceptions.CpfInvalidoException;
 import br.univ.pharmasys.exceptions.ErroDePreenchimentoInvalidoException;
 import br.univ.pharmasys.exceptions.NomeInvalidoException;
 

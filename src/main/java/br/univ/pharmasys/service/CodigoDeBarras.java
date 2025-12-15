@@ -9,8 +9,8 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.oned.EAN13Writer;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
-import java.io.IOException;
-import java.nio.file.FileSystems;
+//import java.io.IOException;           /-- Esses imports nao estão sendo usados,
+//import java.nio.file.FileSystems;      -- Caso não for usar-los, pode remova
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.Level;

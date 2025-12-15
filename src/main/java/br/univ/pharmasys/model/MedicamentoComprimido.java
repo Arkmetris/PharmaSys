@@ -1,8 +1,6 @@
 package br.univ.pharmasys.model;
-//a
+
 import br.univ.pharmasys.service.MedicamentoComprimidoValidador;
-//a
-import br.univ.pharmasys.exceptions.ErroDePreenchimentoInvalidoException;
 
 public class MedicamentoComprimido extends Medicamento {
 
