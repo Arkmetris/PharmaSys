@@ -89,7 +89,7 @@ public class TelaEstoque extends JFrame {
 
     private void voltar() {
         new TelaEstoquista().setVisible(true);
-        dispose();
+        this.dispose();
     }
 
 
@@ -97,6 +97,7 @@ public class TelaEstoque extends JFrame {
         SwingUtilities.invokeLater(() -> {
             new TelaEstoque().setVisible(true);
         });
+
     }
 
     private JTable tabelaEstoque;
