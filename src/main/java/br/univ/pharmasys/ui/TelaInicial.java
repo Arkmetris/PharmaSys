@@ -22,13 +22,13 @@ public class TelaInicial extends JFrame {
     private void initComponents() {
 
     	// Declaração dos componentes
-        jLabel2 = new JLabel();
-        jPanel1 = new JPanel();
-        jLabel1 = new JLabel();
+        labelLogo = new JLabel();
+        panelLogo = new JPanel();
+        fundoLogo = new JLabel();
         jLabel3 = new JLabel();
         jLabel4 = new JLabel();
-        jLabel5 = new JLabel();
-        jLabel6 = new JLabel();
+        labelLogin = new JLabel();
+        labelSenha = new JLabel();
         
         // Campos de texto
         textSenha = new JPasswordField(); // Campo da senha
@@ -41,39 +41,39 @@ public class TelaInicial extends JFrame {
         setPreferredSize(new Dimension(700, 450));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new Font("SansSerif", 1, 36));
-        jLabel2.setForeground(new Color(255, 255, 255));
-        jLabel2.setText("PHARMASYS");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
+        labelLogo.setFont(new Font("SansSerif", 1, 36));
+        labelLogo.setForeground(new Color(255, 255, 255));
+        labelLogo.setText("PHARMASYS");
+        getContentPane().add(labelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
 
         // Painel da Logo
-        jPanel1.setBackground(new Color(51, 166, 178));
-        jPanel1.setPreferredSize(new Dimension(350, 450));
+        panelLogo.setBackground(new Color(51, 166, 178));
+        panelLogo.setPreferredSize(new Dimension(350, 450));
 
         // Carregar a imagem da logo
         try {
-            jLabel1.setIcon(new ImageIcon(getClass().getResource("/br/univ/pharmasys/ui/Frame_23.png")));
+            fundoLogo.setIcon(new ImageIcon(getClass().getResource("/Frame_23.png")));
         } catch (Exception e) {
-            jLabel1.setText("Imagem não encontrada");
+            fundoLogo.setText("Imagem não encontrada");
         }
 
         // Layout do painel da logo
-        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 349, GroupLayout.PREFERRED_SIZE)
+        GroupLayout panelLogoLayout = new GroupLayout(panelLogo);
+        panelLogo.setLayout(panelLogoLayout);
+        panelLogoLayout.setHorizontalGroup(
+            panelLogoLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(panelLogoLayout.createSequentialGroup()
+                .addComponent(fundoLogo, GroupLayout.PREFERRED_SIZE, 349, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 1, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1)
+        panelLogoLayout.setVerticalGroup(
+            panelLogoLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(panelLogoLayout.createSequentialGroup()
+                .addComponent(fundoLogo)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 450));
+        getContentPane().add(panelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 450));
 
         //
         jLabel3.setFont(new Font("SansSerif", 1, 24));
@@ -86,14 +86,14 @@ public class TelaInicial extends JFrame {
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, -1, -1));
 
         //
-        jLabel5.setFont(new Font("SansSerif", 1, 12));
-        jLabel5.setText("Login:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 170, -1, -1));
+        labelLogin.setFont(new Font("SansSerif", 1, 12));
+        labelLogin.setText("Login:");
+        getContentPane().add(labelLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 170, -1, -1));
 
         //
-        jLabel6.setFont(new Font("SansSerif", 1, 12));
-        jLabel6.setText("Senha:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, -1, -1));
+        labelSenha.setFont(new Font("SansSerif", 1, 12));
+        labelSenha.setText("Senha:");
+        getContentPane().add(labelSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, -1, -1));
         
         // Campos de senha
         textSenha.setForeground(Color.black);
@@ -201,13 +201,13 @@ public class TelaInicial extends JFrame {
 }
 
     private JButton buttonEntrar;
-    private JLabel jLabel1;
-    private JLabel jLabel2;
+    private JLabel fundoLogo;
+    private JLabel labelLogo;
     private JLabel jLabel3;
     private JLabel jLabel4;
-    private JLabel jLabel5;
-    private JLabel jLabel6;
-    private JPanel jPanel1;
+    private JLabel labelLogin;
+    private JLabel labelSenha;
+    private JPanel panelLogo;
     private JPasswordField textSenha;
     private JTextField textLogin;
 }

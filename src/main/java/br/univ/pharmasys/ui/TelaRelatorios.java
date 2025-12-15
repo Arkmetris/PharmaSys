@@ -111,8 +111,6 @@ public class TelaRelatorios extends JFrame {
 
 private void configurarEventos() {
         
-        ButtonCancelar.addActionListener(evt -> dispose());
-
         ButtonVisualizar.addActionListener(this::acaoVisualizar);
 
         ButtonGerarPDF.addActionListener(this::acaoGerarPDF);
@@ -294,7 +292,7 @@ private void configurarEventos() {
         }
     }
     private void ButtonCancelarActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+        this.dispose();
     }
     
     private boolean verificarListaVazia(List<?> lista) {

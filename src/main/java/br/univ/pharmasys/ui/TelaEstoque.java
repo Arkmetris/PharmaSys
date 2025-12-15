@@ -1,29 +1,29 @@
 package br.univ.pharmasys.ui;
 
-import javax.swing.JFrame;
+import javax.swing.*;
+import javax.swing.table.*;
 
-public class TelaEstoque extends javax.swing.JFrame {
+public class TelaEstoque extends JFrame {
 
     public TelaEstoque() {
         initComponents();
     }
 
-    @SuppressWarnings("unchecked")
     private void initComponents() {
 
-        jLabelTitulo = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaEstoque = new javax.swing.JTable();
-        btnAtualizar = new javax.swing.JButton();
-        btnVoltar = new javax.swing.JButton();
+        jLabelTitulo = new JLabel();
+        jScrollPane1 = new JScrollPane();
+        tabelaEstoque = new JTable();
+        btnAtualizar = new JButton();
+        btnVoltar = new JButton();
 
-        setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Estoque de Medicamentos");
 
         jLabelTitulo.setFont(new java.awt.Font("SF Pro", 1, 20));
         jLabelTitulo.setText("Estoque de Medicamentos");
 
-        tabelaEstoque.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaEstoque.setModel(new DefaultTableModel(
                 new Object [][] {},
                 new String [] { "SKU", "Nome", "Quantidade", "Validade", "Preço" }
         ));
@@ -33,16 +33,16 @@ public class TelaEstoque extends javax.swing.JFrame {
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(evt -> voltar());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
 
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabelTitulo)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 650, GroupLayout.PREFERRED_SIZE)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(btnAtualizar)
                                                 .addGap(440, 440, 440)
@@ -51,14 +51,14 @@ public class TelaEstoque extends javax.swing.JFrame {
         );
 
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addComponent(jLabelTitulo)
                                 .addGap(30, 30, 30)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(btnAtualizar)
                                         .addComponent(btnVoltar))
                                 .addContainerGap(30, Short.MAX_VALUE))
@@ -73,9 +73,9 @@ public class TelaEstoque extends javax.swing.JFrame {
         this.dispose();
     }
 
-    private javax.swing.JButton btnAtualizar;
-    private javax.swing.JButton btnVoltar;
-    private javax.swing.JLabel jLabelTitulo;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabelaEstoque;
+    private JButton btnAtualizar;
+    private JButton btnVoltar;
+    private JLabel jLabelTitulo;
+    private JScrollPane jScrollPane1;
+    private JTable tabelaEstoque;
 }

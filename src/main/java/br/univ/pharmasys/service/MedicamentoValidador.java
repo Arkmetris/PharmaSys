@@ -10,42 +10,30 @@ public class MedicamentoValidador {
     // Contém validações de campos do Medicamento
     // Todos os atributos são verificados antes de salvar/atualizar
 
-    public static void idLoteValidar(long id){
-
-        if(id <=0){
-            throw new IdInvalidoException("\nError: O ID de um fornecedor deve ser sempre positiva e maior que zero");
-        }
-    }
-
-
-    public static void skuValidar(String sku) {
+    public static void skuValidador(String sku) {
         if (sku == null || sku.trim().isEmpty()) {
             throw new ErroDePreenchimentoInvalidoException("O campo SKU não pode estar vazio.");
         }
 
         sku = sku.trim();
         if (!sku.matches("[A-Z0-9\\-]+")) {
-            throw new ErroDePreenchimentoInvalidoException("O SKU não pode conter espaços ou símbolos.");
+            throw new ErroDePreenchimentoInvalidoException("O SKU deve conter apenas letras maiúsculas, dígitos e hífen.");
         }
     }
 
-    public static void codigoBarrasValidar(String codigo) {
+    public static void codigoBarrasValidador(String codigo) {
         if (codigo == null || codigo.trim().isEmpty()) {
             throw new ErroDePreenchimentoInvalidoException("O código de barras deve ser preenchido.");
         }
 
         codigo = codigo.trim();
 
-        if (codigo.length() != 13) {
-            throw new ErroDePreenchimentoInvalidoException("O código de barras deve ter exatamente 13 caracteres.");
-        }
-
-        if (!codigo.matches("\\S+")) {
-            throw new ErroDePreenchimentoInvalidoException("O código de barras não pode conter espaços.");
+        if (!codigo.matches("\\d{13}")) {
+            throw new ErroDePreenchimentoInvalidoException("O código de barras deve conter exatamente 13 dígitos (somente números).");
         }
     }
 
-    public static void nomeValidar(String nome) {
+    public static void nomeValidador(String nome) {
         if (nome == null) {
             throw new NomeInvalidoException("O nome do medicamento é obrigatório.");
         }
@@ -61,43 +49,41 @@ public class MedicamentoValidador {
         }
     }
 
-    public static void fabricanteValidar(String fabricante) {
+    public static void fabricanteValidador(String fabricante) {
         if (fabricante == null || fabricante.trim().isEmpty()) {
             throw new ErroDePreenchimentoInvalidoException("O fabricante não pode estar vazio.");
         }
 
         fabricante = fabricante.trim();
-
         if (!fabricante.matches("[\\p{L}\\p{N} .()\\-]+")) {
-            throw new ErroDePreenchimentoInvalidoException("O fabricante não pode conter espaços.");
+            throw new ErroDePreenchimentoInvalidoException("O fabricante contém caracteres inválidos.");
         }
     }
 
-    public static void dosagemValidar(String dose) {
+    public static void dosagemValidador(String dose) {
         if (dose == null || dose.trim().isEmpty()) {
             throw new ErroDePreenchimentoInvalidoException("A dosagem não pode estar vazia.");
         }
 
         dose = dose.trim();
-
         if (!dose.matches("[\\p{L}\\p{N} %/.,()\\-]+")) {
-            throw new ErroDePreenchimentoInvalidoException("A dosagem não pode conter espaços.");
+            throw new ErroDePreenchimentoInvalidoException("A dosagem contém caracteres inválidos.");
         }
     }
 
-    public static void formaFarmaceuticaValidar(String forma) {
+    public static void formaFarmaceuticaValidador(String forma) {
         if (forma == null || forma.trim().isEmpty()) {
             throw new ErroDePreenchimentoInvalidoException("A forma farmacêutica não pode estar vazia.");
         }
 
         forma = forma.trim();
-
-        if (!forma.matches("[\\p{L}]+")) {
-            throw new ErroDePreenchimentoInvalidoException("A forma farmacêutica não pode conter espaços.");
+        // Permite nomes como "comprimido revestido" (letras e espaços)
+        if (!forma.matches("[\\p{L} ]+")) {
+            throw new ErroDePreenchimentoInvalidoException("A forma farmacêutica contém caracteres inválidos.");
         }
     }
 
-    public static void laboratorioValidar(String laboratorio) {
+    public static void laboratorioValidador(String laboratorio) {
         if (laboratorio == null || laboratorio.trim().isEmpty()) {
             throw new ErroDePreenchimentoInvalidoException("O laboratório não pode estar vazio.");
         }
@@ -106,11 +92,11 @@ public class MedicamentoValidador {
 
         //Vai permitir caracteres especiais, letras, numeros e acentos...
         if (!laboratorio.matches("[\\p{L}\\p{N} .()\\-]+")) {
-            throw new ErroDePreenchimentoInvalidoException("O laboratório não pode conter espaços.");
+            throw new ErroDePreenchimentoInvalidoException("O laboratório contém caracteres inválidos.");
         }
     }
 
-    public static void dataExpiracaoValidar(LocalDate data) {
+    public static void dataExpiracaoValidador(LocalDate data) {
         if (data == null) {
             throw new DataInvalidoException("A data de validade não pode ser nula.");
         }
@@ -120,48 +106,48 @@ public class MedicamentoValidador {
         }
     }
 
-    public static void estoqueMinValidar(int minimo, int maximoAtual) {
-        if (minimo < 0) {
+    public static void estoqueMinValidador(int min, int max) {
+        if (min < 0) {
             throw new EstoqueInvalidoException("O estoque mínimo não pode ser negativo.");
         }
 
-        if (minimo > maximoAtual) {
+        if (max > 0 && min > max) {
             throw new EstoqueInvalidoException("O estoque mínimo não pode ser maior que o estoque máximo.");
         }
     }
 
-    public static void estoqueMaxValidar(int maximo, int minimoAtual) {
-        if (maximo <= 0) {
+    public static void estoqueMaxValidador(int max, int min) {
+        if (max <= 0) {
             throw new EstoqueInvalidoException("O estoque máximo deve ser maior que zero.");
         }
 
-        if (minimoAtual > maximo) {
+        if (min > 0 && min > max) {
             throw new EstoqueInvalidoException("O estoque mínimo não pode ser maior que o máximo.");
         }
     }
 
-    public static String estoqueAtualValidar(int atual, int minimo, int maximo) {
+    public static String estoqueAtualValidador(int atual, int min, int max) {
         if (atual < 0) {
             throw new ErroDePreenchimentoInvalidoException("O estoque atual não pode ser negativo.");
         }
 
-        if (atual <= minimo) {
+        if (min>0 && atual <= min) {
             return "Estoque baixo.";
         }
 
-        if (atual >= maximo) {
+        if (max > 0 && atual >= max) {
             return "Estoque cheio.";
         }
 
         return "Estoque atual: " + atual;
     }
 
-    public static void precoValido(BigDecimal preco) {
+    public static void precoValidador(BigDecimal preco) {
         if (preco == null) {
             throw new CustoUnitarioInvalidoException("O preço não pode ser nulo.");
         }
 
-        if (preco.compareTo(BigDecimal.ZERO) <= 0) {
+        if (preco.signum() <= 0) {
             throw new CustoUnitarioInvalidoException("O preço deve ser maior que zero.");
         }
     }

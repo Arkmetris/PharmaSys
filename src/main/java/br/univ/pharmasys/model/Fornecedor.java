@@ -1,6 +1,5 @@
 package br.univ.pharmasys.model;
 
-import br.univ.pharmasys.exceptions.ErroDePreenchimentoInvalidoException;
 import br.univ.pharmasys.service.FornecedorValidador;
 import br.univ.pharmasys.service.TelefoneValidador;
 import br.univ.pharmasys.util.ValidadorUtils;
@@ -49,13 +48,8 @@ public class Fornecedor {
       
     public void setCnpj(String cnpj) {
 
-        if (cnpj == null || cnpj.trim().isEmpty()) {
-            throw new IllegalArgumentException("O CNPJ não pode estar vazio.");
-        }
-        boolean valido = ValidadorUtils.cnpjValido(cnpj);
-        if (!valido) {
-            throw new IllegalArgumentException("CNPJ inválido! Verifique os dígitos.");
-        }
+        cnpj = cnpj.trim();
+        ValidadorUtils.cnpjValido(cnpj);
         this.cnpj = cnpj.replaceAll("\\D", "");
     }
     public String getEstado() {
@@ -114,14 +108,7 @@ public class Fornecedor {
 
     public void setEmail(String email) {
         email = email.trim();
-
-        if(email == null || email.trim().isEmpty() ){
-            throw new ErroDePreenchimentoInvalidoException("O campo do E-mail deve ser preenchido.");
-        }
-
-        if (!ValidadorUtils.emailValido(email)) {
-            throw new IllegalArgumentException("Formato de E-mail inválido.");
-        }       
+        ValidadorUtils.emailValido(email);
         this.email = email;
     }
 
