@@ -111,8 +111,6 @@ public class TelaRelatorios extends JFrame {
 
 private void configurarEventos() {
         
-        ButtonCancelar.addActionListener(evt -> dispose());
-
         ButtonVisualizar.addActionListener(this::acaoVisualizar);
 
         ButtonGerarPDF.addActionListener(this::acaoGerarPDF);
@@ -294,8 +292,6 @@ private void configurarEventos() {
         }
     }
     private void ButtonCancelarActionPerformed(ActionEvent evt) {
-        TelaGerencia gerente = new TelaGerencia();
-        gerente.setVisible(true);
         this.dispose();
     }
     

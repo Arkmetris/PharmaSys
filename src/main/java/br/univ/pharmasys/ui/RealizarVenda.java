@@ -45,12 +45,18 @@ private void initRelogio() {
         jScrollBar1 = new JScrollBar();
         labelTotal = new JLabel();
         buttonAdicionarProduto = new JButton();
+        buttonAdicionarProduto.addActionListener(e -> abrirDialogAdicionarProduto());
         buttonFinalizarCompra = new JButton();
         buttonVoltar = new JButton();
-        jCheckBox1 = new JCheckBox();
-        jCheckBox2 = new JCheckBox();
-        jCheckBox3 = new JCheckBox();
-        jCheckBox4 = new JCheckBox();
+        rbPix = new JRadioButton();
+        rbDebito = new JRadioButton();
+        rbCredito = new JRadioButton();
+        rbEspecie = new JRadioButton();
+        grupoPagamento = new ButtonGroup();
+        grupoPagamento.add(rbPix);
+        grupoPagamento.add(rbDebito);
+        grupoPagamento.add(rbCredito);
+        grupoPagamento.add(rbEspecie);
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -135,18 +141,10 @@ private void initRelogio() {
         labelPagamento.setFont(new Font("SF Pro", 0, 15)); 
         labelPagamento.setText("Método de pagamento:");
 
-        jCheckBox1.setText("Pix");
-        jCheckBox1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox2.setText("Débito");
-
-        jCheckBox3.setText("Crédito");
-
-        jCheckBox4.setText("Em espécie");
+        rbPix.setText("Pix");
+        rbDebito.setText("Débito");
+        rbCredito.setText("Crédito");
+        rbEspecie.setText("Em espécie");
 
         buttonVoltar.setFont(new Font("SF Pro", 0, 12)); 
         buttonVoltar.setText("<< Voltar");
@@ -165,13 +163,13 @@ private void initRelogio() {
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(labelPagamento)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jCheckBox1)
+                        .addComponent(rbPix)
                         .addGap(18, 18, 18)
-                        .addComponent(jCheckBox2)
+                        .addComponent(rbDebito)
                         .addGap(18, 18, 18)
-                        .addComponent(jCheckBox3)
+                        .addComponent(rbCredito)
                         .addGap(18, 18, 18)
-                        .addComponent(jCheckBox4)))
+                        .addComponent(rbEspecie)))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonFinalizarCompra)
                 .addGap(26, 26, 26))
@@ -220,21 +218,26 @@ private void initRelogio() {
                         .addComponent(labelPagamento)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jCheckBox2)
-                            .addComponent(jCheckBox3)
-                            .addComponent(jCheckBox4))))
+                            .addComponent(rbPix)
+                            .addComponent(rbDebito)
+                            .addComponent(rbCredito)
+                            .addComponent(rbEspecie))))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
     private void jCheckBox1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
-
-    private void jButton3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void abrirDialogAdicionarProduto() {
+        DialogAdicionarProduto dialog =
+        new DialogAdicionarProduto(this, true);
+        dialog.setVisible(true);
+}
+    
+    private void jButton3ActionPerformed(ActionEvent evt) {                                         
      Object[] opcoes = { "Sim, cancelar", "Voltar" };
 
     int escolha = JOptionPane.showOptionDialog(
@@ -284,10 +287,11 @@ private void initRelogio() {
     private JButton buttonAdicionarProduto;
     private JButton buttonFinalizarCompra;
     private JButton buttonVoltar;
-    private JCheckBox jCheckBox1;
-    private JCheckBox jCheckBox2;
-    private JCheckBox jCheckBox3;
-    private JCheckBox jCheckBox4;
+    private JRadioButton rbPix;
+    private JRadioButton rbDebito;
+    private JRadioButton rbCredito;
+    private JRadioButton rbEspecie;
+    private ButtonGroup grupoPagamento;
     private JLabel labelLogo;
     private JLabel labelTotal;
     private JLabel labelPagamento;
