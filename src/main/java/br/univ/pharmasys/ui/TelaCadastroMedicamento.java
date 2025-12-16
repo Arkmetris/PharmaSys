@@ -84,7 +84,7 @@ public class TelaCadastroMedicamento extends JFrame {
         JLabel lblPreco = new JLabel("Preço:");
         txtPreco = new JTextField();
 
-        // ===== CARDS =====
+
         cardLayout = new CardLayout();
         panelCards = new JPanel(cardLayout);
         panelCards.setBorder(BorderFactory.createTitledBorder("Dados Específicos"));
@@ -148,7 +148,7 @@ public class TelaCadastroMedicamento extends JFrame {
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
 
-        // ===== HORIZONTAL (SEM BASELINE) =====
+
         layout.setHorizontalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                         .addComponent(labelTitulo)
@@ -233,7 +233,7 @@ public class TelaCadastroMedicamento extends JFrame {
                                 .addGap(40))
         );
 
-        // ===== VERTICAL (COM BASELINE) =====
+
         layout.setVerticalGroup(
                 layout.createSequentialGroup()
                         .addGap(20)
@@ -318,26 +318,72 @@ public class TelaCadastroMedicamento extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    // ===== CADASTRO =====
+
     private void cadastrar() {
         try {
             String tipo = comboTipo.getSelectedItem().toString();
 
+
+            if (tipo.equals("Selecione...") ||
+                    txtSku.getText().isEmpty() ||
+                    txtNome.getText().isEmpty() ||
+                    txtCodigo.getText().isEmpty() ||
+                    txtDosagem.getText().isEmpty() ||
+                    txtForma.getText().isEmpty() ||
+                    txtFabricante.getText().isEmpty() ||
+                    txtLab.getText().isEmpty() ||
+                    txtEstMin.getText().isEmpty() ||
+                    txtEstMax.getText().isEmpty() ||
+                    txtEstAtual.getText().isEmpty() ||
+                    txtPreco.getText().isEmpty() ||
+                    boxDia.getSelectedIndex() == 0 ||
+                    boxMes.getSelectedIndex() == 0 ||
+                    boxAno.getSelectedIndex() == 0) {
+
+                JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos obrigatórios!");
+                return;
+            }
+
             if ("Comprimido".equals(tipo)) {
+                if (txtQtdComp.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Informe a quantidade de comprimidos.");
+                    return;
+                }
                 MedicamentoComprimido m = new MedicamentoComprimido();
                 preencherDadosComuns(m);
                 m.setQuantidadeComprimidos(Integer.parseInt(txtQtdComp.getText()));
                 new MedicamentoComprimidoDAO().create(m);
             }
 
+
+            else if ("Líquido".equals(tipo)) {
+                Medicamento m = new Medicamento();
+                preencherDadosComuns(m);
+                new MedicamentoDAO().create(m); // só cadastra os dados comuns
+            }
+            else if ("Injetável".equals(tipo)) {
+                Medicamento m = new Medicamento();
+                preencherDadosComuns(m);
+                new MedicamentoDAO().create(m);
+            }
+            else if ("Tópico".equals(tipo)) {
+                Medicamento m = new Medicamento();
+                preencherDadosComuns(m);
+                new MedicamentoDAO().create(m);
+            }
+
             JOptionPane.showMessageDialog(this, "Medicamento cadastrado com sucesso!");
             dispose();
 
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Erro: valores numéricos inválidos!");
+            e.printStackTrace();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + e.getMessage());
             e.printStackTrace();
         }
     }
+
 
     private void preencherDadosComuns(Medicamento med) {
         int dia = Integer.parseInt(boxDia.getSelectedItem().toString());
