@@ -75,6 +75,3 @@ public class Pedido {
                 .multiply(BigDecimal.valueOf(quantidade));
     }
 }
-
-
-

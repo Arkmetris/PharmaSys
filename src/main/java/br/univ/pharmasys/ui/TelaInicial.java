@@ -144,7 +144,7 @@ public class TelaInicial extends JFrame {
                 // Verifica o tipo de usuário
                 if (usuario.getTipo() == 3) {
                     
-                    TelaGerencia tela = new TelaGerencia();
+                    ZNovaTelaGerencia tela = new ZNovaTelaGerencia();
                     tela.definirUsuarioLogado(usuario.getNome());
                     tela.definirUsuarioLogado(usuario.getNome());
                     tela.setVisible(true);
@@ -152,7 +152,7 @@ public class TelaInicial extends JFrame {
                     
                 } else if (usuario.getTipo() == 2) {
                     JOptionPane.showMessageDialog(this, "Bem-vindo Farmacêutico(a) " + usuario.getNome());
-                    TelaFuncionario tela = new TelaFuncionario();
+                    NovaTelaFuncionario tela = new NovaTelaFuncionario();
                     tela.setVisible(true);
                     tela.definirUsuarioLogado(usuario.getNome());
                     this.dispose();
