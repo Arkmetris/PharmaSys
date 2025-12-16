@@ -89,7 +89,14 @@ public class TelaEstoque extends JFrame {
 
     private void voltar() {
         new TelaEstoquista().setVisible(true);
-        this.dispose();
+        dispose();
+    }
+
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new TelaEstoque().setVisible(true);
+        });
     }
 
 
