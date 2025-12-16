@@ -52,5 +52,38 @@ public class NotaFiscalDAO {
 
         return idGerado;
     }
+    
+    public NotaFiscal buscarPorId(Long id) {
+        NotaFiscal nota = null;
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID_SQL)) {
+
+            stmt.setLong(1, id);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    nota = mapear(rs);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar Nota Fiscal: " + e.getMessage(), e);
+        }
+        return nota;
+    }
+
+    public List<NotaFiscal> listarTodas() {
+        List<NotaFiscal> lista = new ArrayList<>();
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_ALL_SQL);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                lista.add(mapear(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao listar Notas Fiscais: " + e.getMessage(), e);
+        }
+        return lista;
+    }   
 
 }
