@@ -2,18 +2,20 @@ package br.univ.pharmasys.model;
 
 import java.time.LocalDate;
 import br.univ.pharmasys.service.FuncionarioValidador;
+import br.univ.pharmasys.service.TelefoneValidador;
+import br.univ.pharmasys.util.ValidadorUtils;
 
 public class Funcionario {
 
-  protected  long idFuncionario;
-  protected String nome;
-  protected  String cpf;
-  protected LocalDate dataNascimento;
-  protected String sexo;
-  protected String telefone;
-  protected int tipo;
-  protected String senha;
-
+  private  long idFuncionario;
+  private String nome;
+  private  String cpf;
+  private LocalDate dataNascimento;
+  private String sexo;
+  private String telefone;
+  private int tipo;
+  private String senha;
+  private String email;
 
   public Funcionario(){
 
@@ -22,8 +24,6 @@ public class Funcionario {
   public  long getIdFuncionario() {
     return idFuncionario;
   }
-
-
 
   public void setIdFuncionario(long idFuncionario) {
 
@@ -51,7 +51,8 @@ public class Funcionario {
   public void setCpf(String cpf) {
 
       //Vai validar o CPF do funcionario, mas provavelmente vai ser mudado logo, logo
-      FuncionarioValidador.cpfValidar(cpf);
+      cpf = cpf.trim();
+      ValidadorUtils.cpfValido(cpf);
       cpf=cpf.replaceAll("\\D", "");
       this.cpf = cpf;
   }
@@ -88,7 +89,8 @@ public class Funcionario {
 
   public void setTelefone(String telefone) {
 
-      FuncionarioValidador.telefoneValidar(telefone);
+      telefone = telefone.trim();
+      TelefoneValidador.numeroTelefoneValidar(telefone);
       telefone = telefone.replaceAll("\\D", "");
       this.telefone = telefone;
   }
@@ -110,6 +112,15 @@ public class Funcionario {
         senha= senha.trim();
         FuncionarioValidador.senhaValidar(senha);
         this.senha = senha;
+    }
+
+    public String getEmail() {
+      return email;
+    }
+    public void setEmail(String email) {
+      email = email.trim();
+      ValidadorUtils.emailValido(email);
+      this.email = email;
     }
 
 }

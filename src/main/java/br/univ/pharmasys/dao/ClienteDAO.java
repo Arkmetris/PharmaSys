@@ -1,7 +1,7 @@
 package br.univ.pharmasys.dao;
 
 import br.univ.pharmasys.model.Cliente;
-import br.univ.pharmasys.util.ConnectionFactory; // Ajuste o pacote se necessário
+import br.univ.pharmasys.util.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

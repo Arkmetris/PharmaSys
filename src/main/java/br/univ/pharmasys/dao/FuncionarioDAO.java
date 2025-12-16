@@ -10,57 +10,104 @@ import java.util.List;
 
 import br.univ.pharmasys.model.Funcionario;
 import br.univ.pharmasys.model.Telefone;
+import br.univ.pharmasys.util.SenhaUtil;
 import br.univ.pharmasys.util.ConnectionFactory;
 
 public class FuncionarioDAO {
 
-    public void create(Funcionario fun) {
-        
-        TelefoneDAO telefoneDAO = new TelefoneDAO();
-        long idTel;
+    private final TelefoneDAO telefoneDAO = new TelefoneDAO();
 
-        Telefone tel = telefoneDAO.buscarPorNumero(fun.getTelefone());
-
-        if (tel != null) {
-            idTel = tel.getIdTelefone();
-        } else {
-            Telefone novoTelefone = new Telefone();
-            novoTelefone.setNumeroTelefone(fun.getTelefone());
-            idTel = telefoneDAO.create(novoTelefone);
+    // Método para pegar ID do telefone ou criar se não existir
+    private long pegarTelefoneId(String numeroTelefone, Connection conn) throws SQLException {
+        Telefone existente = telefoneDAO.buscarPorNumero(numeroTelefone);
+        if (existente != null) {
+            return existente.getIdTelefone();
         }
+        Telefone novo = new Telefone();
+        novo.setNumeroTelefone(numeroTelefone);
+        return telefoneDAO.create(novo, conn); 
+    }
 
-        String sql = "INSERT INTO FUNCIONARIO (CPF, DATA_NASCIMENTO, SEXO, NOME, TIPO, TELEFONE_ID) "
-                   + "VALUES (?, ?, ?, ?, ?, ?)";
-        
+    // Criação do funcionário no banco de dados
+    public void create(Funcionario fun) {
+
+        String senhaHash = SenhaUtil.hashPassword(fun.getSenha().trim());
+
+        String sql = """
+            INSERT INTO FUNCIONARIO 
+            (CPF, DATA_NASCIMENTO, SEXO, NOME, EMAIL, TIPO, TELEFONE_ID, SENHA)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        """;
+
         try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
+            long idTel = pegarTelefoneId(fun.getTelefone(), conn);
 
             stmt.setString(1, fun.getCpf());
-            
+
             if (fun.getDataNascimento() != null) {
                 stmt.setDate(2, Date.valueOf(fun.getDataNascimento()));
             } else {
                 stmt.setNull(2, java.sql.Types.DATE);
             }
-            
+
             stmt.setString(3, fun.getSexo());
             stmt.setString(4, fun.getNome());
-            stmt.setInt(5, fun.getTipo());
-            stmt.setLong(6, idTel);
-            
+            stmt.setString(5, fun.getEmail());
+            stmt.setInt(6, fun.getTipo());
+            stmt.setLong(7, idTel);
+            stmt.setString(8, senhaHash);
+
             stmt.executeUpdate();
-            
+
+
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    long id = rs.getLong(1);
+                    fun.setIdFuncionario(id);
+                }
+            }
+
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao salvar Funcionário: " + e.getMessage(), e);
+            throw new RuntimeException("Erro ao salvar Funcionario: " + e.getMessage(), e);
         }
     }
+ 
+    // Lista todos os funcionários
+    public List<Funcionario> listarTodos() {
+        String sql = """
+            SELECT F.*, T.NUMERO AS NUMERO_TELEFONE
+            FROM FUNCIONARIO F
+            INNER JOIN TELEFONE T ON F.TELEFONE_ID = T.TELEFONE_ID
+            ORDER BY F.NOME
+        """;
 
+        List<Funcionario> lista = new ArrayList<>();
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                lista.add(montarFuncionario(rs)); // Reutiliza a lógica de montagem
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao listar todos os funcionários: " + e.getMessage(), e);
+        }
+        return lista;
+    }
+    // Busca funcionário por nome
     public List<Funcionario> buscarPorNome(String nome) {
-        String sql = "SELECT F.*, T.NUMERO AS NUMERO_TELEFONE " +
-                     "FROM FUNCIONARIO F " +
-                     "INNER JOIN TELEFONE T ON F.TELEFONE_ID = T.TELEFONE_ID " +
-                     "WHERE F.NOME LIKE ?";
-        
+
+        String sql = """
+            SELECT F.*, T.NUMERO AS NUMERO_TELEFONE
+            FROM FUNCIONARIO F
+            INNER JOIN TELEFONE T ON F.TELEFONE_ID = T.TELEFONE_ID
+            WHERE F.NOME LIKE ?
+        """;
+
         List<Funcionario> lista = new ArrayList<>();
 
         try (Connection conn = ConnectionFactory.getConnection();
@@ -70,67 +117,86 @@ public class FuncionarioDAO {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
-                    Funcionario fun = new Funcionario();         
-
-                    fun.setIdFuncionario(rs.getLong("ID_FUNCIONARIO"));
-                    fun.setNome(rs.getString("NOME"));
-                    fun.setCpf(rs.getString("CPF"));
-                    
-                    java.sql.Date sqlDate = rs.getDate("DATA_NASCIMENTO");
-                    if (sqlDate != null) {
-                        fun.setDataNascimento(sqlDate.toLocalDate());
-                    }
-                    fun.setSexo(rs.getString("SEXO"));
-                    fun.setTipo(rs.getInt("TIPO"));
-                    fun.setTelefone(rs.getString("NUMERO_TELEFONE"));
-
-                    lista.add(fun);
+                    lista.add(montarFuncionario(rs));
                 }
             }
 
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao buscar Funcionário por nome: " + e.getMessage(), e);
         }
+
         return lista;
     }
-
-    public void update(Funcionario fun) {
-        
-        TelefoneDAO telefoneDAO = new TelefoneDAO();
-        long idTel;
-
-        Telefone tel = telefoneDAO.buscarPorNumero(fun.getTelefone());
-
-        if (tel != null) {
-            idTel = tel.getIdTelefone();
-        } else {
-            Telefone novoTelefone = new Telefone();
-            novoTelefone.setNumeroTelefone(fun.getTelefone());
-            idTel = telefoneDAO.create(novoTelefone);
-        }
-
-        String sql = "UPDATE FUNCIONARIO SET CPF = ?, DATA_NASCIMENTO = ?, SEXO = ?, "
-                   + "NOME = ?, TIPO = ?, TELEFONE_ID = ? WHERE ID_FUNCIONARIO = ?";
+    // Busca funcionário por CPF
+    public Funcionario buscarPorCpf(String cpf) {
+        String sql = """
+            SELECT F.*, T.NUMERO AS NUMERO_TELEFONE
+            FROM FUNCIONARIO F
+            INNER JOIN TELEFONE T ON F.TELEFONE_ID = T.TELEFONE_ID
+            WHERE F.CPF = ?
+        """;
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
+            String cpfLimpo = cpf.replaceAll("\\D", "");
+            stmt.setString(1, cpfLimpo);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return montarFuncionario(rs);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar Funcionário por CPF: " + e.getMessage(), e);
+        }
+        
+        return null;
+    }
+    // Atualização dos dados do funcionário
+    public void update(Funcionario fun) {
+
+        boolean trocarSenha = fun.getSenha() != null && !fun.getSenha().trim().isEmpty();
+
+        StringBuilder sql = new StringBuilder("""
+            UPDATE FUNCIONARIO 
+            SET CPF=?, DATA_NASCIMENTO=?, SEXO=?, NOME=?, EMAIL=?, TIPO=?, TELEFONE_ID=?
+        """);
+
+        if (trocarSenha) {
+            sql.append(", SENHA=?");
+        }
+
+        sql.append(" WHERE ID_FUNCIONARIO=?");
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql.toString())) {
+
+            long idTel = pegarTelefoneId(fun.getTelefone(), conn);
+
             stmt.setString(1, fun.getCpf());
-            
+
             if (fun.getDataNascimento() != null) {
                 stmt.setDate(2, Date.valueOf(fun.getDataNascimento()));
             } else {
                 stmt.setNull(2, java.sql.Types.DATE);
             }
-            
+
             stmt.setString(3, fun.getSexo());
             stmt.setString(4, fun.getNome());
-            stmt.setInt(5, fun.getTipo());
-            
-            stmt.setLong(6, idTel);
-            
-            stmt.setLong(7, fun.getIdFuncionario());
+            stmt.setString(5, fun.getEmail()); 
+            stmt.setInt(6, fun.getTipo());
+            stmt.setLong(7, idTel);
 
+            int index = 8;
+
+            if (trocarSenha) {
+                String senhaHash = SenhaUtil.hashPassword(fun.getSenha().trim());
+                stmt.setString(index++, senhaHash);
+            }
+
+            stmt.setLong(index, fun.getIdFuncionario());
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -138,6 +204,7 @@ public class FuncionarioDAO {
         }
     }
 
+    // Deleção do funcionário
     public void delete(long idFuncionario) {
         String sql = "DELETE FROM FUNCIONARIO WHERE ID_FUNCIONARIO = ?";
 
@@ -150,5 +217,55 @@ public class FuncionarioDAO {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao excluir Funcionário: " + e.getMessage(), e);
         }
+    }
+
+    // Autenticação do funcionário
+    public Funcionario autenticar(String login, String senhaDigitada) {
+
+        String sql = """
+            SELECT F.*, T.NUMERO AS NUMERO_TELEFONE
+            FROM FUNCIONARIO F
+            INNER JOIN TELEFONE T ON F.TELEFONE_ID = T.TELEFONE_ID
+            WHERE F.CPF = ?
+        """;
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            String cpfNormalizado = login.replaceAll("\\D", "");
+            stmt.setString(1, cpfNormalizado);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (!rs.next()) return null;
+
+                String hashArmazenado = rs.getString("SENHA");
+                if (hashArmazenado == null) return null;
+
+                if (!SenhaUtil.verifyPassword(senhaDigitada, hashArmazenado)) {
+                    return null;
+                }
+
+                return montarFuncionario(rs);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao autenticar: " + e.getMessage(), e);
+        }
+    }
+    
+    private Funcionario montarFuncionario(ResultSet rs) throws SQLException {
+        Funcionario fun = new Funcionario();
+        fun.setIdFuncionario(rs.getLong("ID_FUNCIONARIO"));
+        fun.setNome(rs.getString("NOME"));
+        fun.setCpf(rs.getString("CPF"));
+        fun.setSexo(rs.getString("SEXO"));
+        fun.setEmail(rs.getString("EMAIL"));
+        fun.setTipo(rs.getInt("TIPO"));
+        fun.setTelefone(rs.getString("NUMERO_TELEFONE"));
+
+        Date sqlDate = rs.getDate("DATA_NASCIMENTO");
+        if (sqlDate != null) {
+            fun.setDataNascimento(sqlDate.toLocalDate());
+        }
+        return fun;
     }
 }

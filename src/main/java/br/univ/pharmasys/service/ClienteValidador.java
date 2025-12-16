@@ -1,29 +1,20 @@
 package br.univ.pharmasys.service;
 
-import br.univ.pharmasys.exceptions.CpfInvalidoException;
 import br.univ.pharmasys.exceptions.ErroDePreenchimentoInvalidoException;
 import br.univ.pharmasys.exceptions.NomeInvalidoException;
 
 public class ClienteValidador {
 
-    public static void cpfValidar(String cpf){
-
-        if(cpf==null || cpf.trim().isEmpty()){
-            throw new CpfInvalidoException("Error: Campo não foi preenchido!");
-        }
-
-        cpf = cpf.replaceAll("\\D", "");
-
-        if(cpf.length()!=11){
-            throw new CpfInvalidoException("Error: todo CPF deve conter 11 digitos!");
-        }
-
-    }
-
     public static void nomeValidar(String nome){
 
         if(nome==null || nome.trim().isEmpty()){
             throw new NomeInvalidoException("\nError: O Campo deve ser preenchido, não pode ficar vazio! ");
+        }
+
+        //Vai validar o nome tendo apenas letras e caracteres como "ç" ou "ã".
+        if(!nome.matches("[\\p{L} ]+")){
+
+            throw new NomeInvalidoException("Atenção: Preencha o campo corretamente, sem números ou símbolos");
         }
 
     }

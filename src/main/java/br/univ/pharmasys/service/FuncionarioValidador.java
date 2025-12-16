@@ -5,93 +5,72 @@ import java.time.LocalDate;
 
 public class FuncionarioValidador {
 
-    public static void idFuncionarioValidar(long id){
+    public static void idFuncionarioValidar(long id) {
 
-        if(id<=0){
+        if (id <= 0) {
 
             throw new IdInvalidoException("\nError: O ID de um funcionário precisa ser positivo");
 
         }
     }
 
-    public static void nomeValidar(String nome){
+    public static void nomeValidar(String nome) {
 
-       if(nome==null || nome.trim().isEmpty()){
-           throw new NomeInvalidoException("\nError: O Campo deve ser preenchido, não pode ficar vazio! ");
-       }
-   }
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new NomeInvalidoException("\nError: O Campo deve ser preenchido, não pode ficar vazio! ");
+        }
+        //Vai validar o nome tendo apenas letras e caracteres como "ç" ou "ã".
+        if (!nome.matches("[\\p{L} ]+")) {
 
-   public static void cpfValidar(String cpf){
+            throw new NomeInvalidoException("Atenção: Preencha o campo corretamente, sem números ou símbolos");
+        }
+    }
 
-       if(cpf==null || cpf.trim().isEmpty()){
-           throw new CpfInvalidoException("Error: Campo não foi preenchido!");
-       }
+    public static void dataNascimentoValidar(LocalDate dataNascimento) {
 
-       cpf = cpf.replaceAll("\\D", "");
+        if (dataNascimento == null) {
+            throw new DataInvalidoException("Error: O Campo deve ser preenchido!");
+        }
 
-       if(cpf.length()!=11){
-           throw new CpfInvalidoException("Error: todo CPF deve conter 11 digitos!");
-       }
+        if (dataNascimento.isAfter(LocalDate.now())) {
 
-   }
+            throw new DataInvalidoException("Error: data de nascimento inválida");
+        }
+    }
 
-   public static void dataNascimentoValidar(LocalDate dataNascimento){
+    public static void sexoValidar(String sexo) {
 
-       if (dataNascimento==null){
-           throw new DataNascimentoInvalidoException("Error: O Campo deve ser preenchido!");
-       }
+        if (sexo == null || sexo.trim().isEmpty()) {
+            throw new ErroDePreenchimentoInvalidoException("Error: Campo não foi preenchido corretamente!");
+        }
 
-       if (dataNascimento.isAfter(LocalDate.now())){
+        sexo = sexo.trim();
 
-           throw new DataNascimentoInvalidoException("Error: data de nascimento inválida");
-       }
-   }
+        if (!sexo.matches("\\S+")) {
 
-   public static void sexoValidar(String sexo){
+            throw new ErroDePreenchimentoInvalidoException("Atenção: Não pode ter espaçamentos nesse campo");
+        }
 
-       if(sexo==null || sexo.trim().isEmpty()){
-           throw new ErroDePreenchimentoInvalidoException("Error: Campo não foi preenchido!");
-       }
+    }
 
-       sexo = sexo.trim();
-
-       if(!sexo.matches("\\S+")){
-
-           throw new ErroDePreenchimentoInvalidoException("Atenção: Não pode ter espaçamentos nesse campo");
-       }
-
-   }
-
-   public static void telefoneValidar(String telefone){
-
-       if(telefone ==null || telefone.isEmpty()){
-           throw new TelefoneInvalidoException("Error: Preencha o campo de telefone!");
-       }
-
-       telefone = telefone.replaceAll("\\D", "");
-
-       if(telefone.length()!=11){
-           throw new TelefoneInvalidoException("Error: O número deve conter 11 digitos!");
-       }
-       if(telefone.trim().matches("\\S+")){
-
-
-           throw new TelefoneInvalidoException("Error: O campo de telefone deve ser preenchido!");
-
-       }
-   }
-
-   public static void senhaValidar(String senha){
-        if(senha==null || senha.trim().isEmpty()){
+    public static void senhaValidar(String senha) {
+        if (senha == null || senha.trim().isEmpty()) {
             throw new ErroDePreenchimentoInvalidoException("Error: Preencha o campo de senha!");
         }
 
         senha = senha.trim();
 
-        if(!senha.matches("\\S+")){
+        //Vai verificar se a senha possui no mínimo 8 caracteres ou no máximo 14.
+        if (senha.length() < 8 || senha.length() > 14) {
 
-            throw new ErroDePreenchimentoInvalidoException("Atenção: Não pode ter espaçamentos no meio da senha");
+            throw new ErroDePreenchimentoInvalidoException("Atenção: Senha incompleta, ela deve ter no mínimo 8 dígitos e no máximo 14 dígitos");
+
         }
-   }
 
+        if (!senha.matches("[A-Za-z0-9]+")) {
+            throw new ErroDePreenchimentoInvalidoException(
+                    "A senha deve conter apenas letras e números, sem espaços."
+            );
+        }
+    }
 }

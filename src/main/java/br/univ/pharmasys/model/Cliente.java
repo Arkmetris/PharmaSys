@@ -1,11 +1,7 @@
 package br.univ.pharmasys.model;
 
-//CPF_CLIENTE VARCHAR(11) NOT NULL,
-//  SEXO VARCHAR(10),
-//  NOME VARCHAR(200),
-//  PRIMARY KEY (CPF_CLIENTE)
-
 import br.univ.pharmasys.service.ClienteValidador;
+import br.univ.pharmasys.util.ValidadorUtils;
 
 public class Cliente {
     protected String cpf;
@@ -21,7 +17,8 @@ public class Cliente {
     }
 
     public void setCpf(String cpf) {
-        ClienteValidador.cpfValidar(cpf);
+        cpf = cpf.trim();
+        ValidadorUtils.cpfValido(cpf);
         cpf=cpf.replaceAll("\\D", "");
         this.cpf = cpf;
     }
@@ -31,8 +28,8 @@ public class Cliente {
     }
 
     public void setSexo(String sexo) {
-        ClienteValidador.sexoValidar(sexo);
         sexo = sexo.trim();
+        ClienteValidador.sexoValidar(sexo);
         this.sexo = sexo;
     }
 
@@ -41,8 +38,8 @@ public class Cliente {
     }
 
     public void setNome(String nome) {
-        ClienteValidador.nomeValidar(nome);
         nome = nome.trim();
+        ClienteValidador.nomeValidar(nome);
         this.nome = nome;
     }
 }

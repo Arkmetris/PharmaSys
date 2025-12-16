@@ -1,39 +1,38 @@
 package br.univ.pharmasys.service;
 
+import br.univ.pharmasys.exceptions.ErroDePreenchimentoInvalidoException;
 import br.univ.pharmasys.exceptions.IdInvalidoException;
 import br.univ.pharmasys.exceptions.TelefoneInvalidoException;
 
 public class TelefoneValidador {
 
 
-    public static void idTelefoneValidar(long id){
+    public static void idTelefoneValidar(long id) {
 
 
-        if(id <=0){
-            throw new IdInvalidoException("\nError: O ID de um fornecedor deve ser sempre positiva e maior que zero");
-
+        if (id <= 0) {
+            throw new IdInvalidoException("Error: O id do telefone precisa ser positivo e não nulo!");
         }
     }
 
     public static void numeroTelefoneValidar(String numerotelefone) {
 
-        if(numerotelefone ==null || numerotelefone.trim().isEmpty()){
+        if (numerotelefone == null || numerotelefone.trim().isEmpty()) {
 
             throw new TelefoneInvalidoException("Error: Preencha o campo de telefone!");
         }
 
-        numerotelefone = numerotelefone.replaceAll("\\D", "");
+        String numeroLimpo = numerotelefone.replaceAll("[^0-9]", ""); //vai limpar todos os caracteres não numéricos
 
-        if(numerotelefone.length()!=11){
-            throw new TelefoneInvalidoException("Error: O número deve conter 11 digitos!");
-        }
-        if(numerotelefone.trim().matches("\\S+")){
+        //Vai determinar o número de telefone com apenas 11 dígitos (sendo apenas números, claro).
+        if(!numeroLimpo.matches("^\\d{11}$")){
 
-
-            throw new TelefoneInvalidoException("Error: O campo de telefone deve ser preenchido!");
-
+            throw new ErroDePreenchimentoInvalidoException("Atenção: O telefone deve contar 11 digitos (DDD + número)!");
         }
 
+        int ddd = Integer.parseInt(numeroLimpo.substring(0, 2)); //Vai pegar os 2 dígitos e analisar se é válido ou não
+        if (ddd < 11 || ddd > 99) {
+            throw new ErroDePreenchimentoInvalidoException("Atenção: DDD inválido. Deve estar entre 11 e 99.");
+        }
     }
-
 }
