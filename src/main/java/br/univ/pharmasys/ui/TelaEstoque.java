@@ -99,13 +99,5 @@ public class TelaEstoque extends JFrame {
         });
     }
 
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new TelaEstoque().setVisible(true);
-        });
-
-    }
-
     private JTable tabelaEstoque;
 }
