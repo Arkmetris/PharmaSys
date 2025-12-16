@@ -84,6 +84,29 @@ public class NotaFiscalDAO {
             throw new RuntimeException("Erro ao listar Notas Fiscais: " + e.getMessage(), e);
         }
         return lista;
-    }   
+    } 
+    
+    private NotaFiscal mapear(ResultSet rs) throws SQLException {
+        NotaFiscal nf = new NotaFiscal();
+        
+        nf.setId(rs.getLong("id"));
+        nf.setNumeroNota(rs.getString("numero_nota"));
+        
+        if (rs.getTimestamp("data_emissao") != null) {
+            nf.setDataEmissao(rs.getTimestamp("data_emissao").toLocalDateTime());
+        }
+        
+        nf.setValorTotal(rs.getBigDecimal("valor_total"));
+        nf.setCpfCliente(rs.getString("cpf_cliente"));
+
+        Long idFunc = rs.getLong("id_funcionario");
+        if (idFunc > 0) {
+            Funcionario f = new Funcionario();
+            f.setIdFuncionario(idFunc);
+            nf.setFuncionarioResponsavel(f);
+        }
+
+        return nf;
+    }
 
 }
