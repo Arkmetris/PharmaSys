@@ -194,10 +194,12 @@
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="buttonRealizarVenda" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
-                          <Component id="buttonVisualizarEstoque" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jButton1" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="buttonRealizarVenda" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="buttonVisualizarEstoque" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="-2" pref="204" max="-2" attributes="0"/>
                   </Group>
@@ -247,6 +249,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="PESQUISAR"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel4MouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
