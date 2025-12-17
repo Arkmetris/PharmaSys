@@ -11,9 +11,15 @@ public class NovaTelaFuncionario extends javax.swing.JFrame {
     public NovaTelaFuncionario() {
         initComponents();
         initRelogio();
+        buttonRealizarVenda.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 16));
+        buttonVisualizarEstoque.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 16));
+        jButton1.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 16));
+
+        pack();
+        setLocationRelativeTo(null);
     }
 
-    // Método que inicializa o relógio
+
     private void initRelogio() {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("HH:mm");
         Timer timer = new Timer(1000, e -> {
@@ -24,7 +30,7 @@ public class NovaTelaFuncionario extends javax.swing.JFrame {
         timer.start();
     }
     
-    // Método para definir o labelNome do usuário mostrado na tela
+
     public void definirUsuarioLogado(String nome) {
         labelNome.setText(nome);
     }
