@@ -47,7 +47,7 @@ public class LoteDAO {
         }
     }
 
-    // ✅ AGORA ESTÁ NO LUGAR CERTO
+   
     public Lote buscarPorSkuEValidade(String sku, java.time.LocalDate validade) {
 
         String sql = "SELECT * FROM LOTE WHERE SKU_MEDICAMENTO = ? AND VALIDADE = ?";
