@@ -1,5 +1,6 @@
 package br.univ.pharmasys.ui;
 
+import java.awt.event.MouseEvent;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.Timer;
@@ -293,10 +294,15 @@ public class ZNovaTelaGerencia extends javax.swing.JFrame {
         new TelaRelatorios() .setVisible(true);
     }//GEN-LAST:event_ButtonEmitirRelatorioActionPerformed
 
-    private void buttonSairMouseClicked(java.awt.event.MouseEvent evt) { 
+
+    private void buttonSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSairMouseClicked
         new TelaInicial().setVisible(true);
-        this.dispose();
-    }
+        java.awt.Window janela =
+        javax.swing.SwingUtilities.getWindowAncestor(this);
+        janela.dispose();
+    }//GEN-LAST:event_buttonSairMouseClicked
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AbaFornecedor;
     private javax.swing.JPanel AbaFuncionarios;

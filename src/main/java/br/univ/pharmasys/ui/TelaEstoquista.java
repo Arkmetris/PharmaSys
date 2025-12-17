@@ -11,6 +11,13 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 @SuppressWarnings("serial")
 public class TelaEstoquista extends JFrame {
 
+// Replicando o design das outras telas principais:
+private JPanel panelTopo;
+private JPanel panelFundo;
+private static final Font FONTE_BOTAO_PRINCIPAL = new Font("SF Pro", Font.BOLD | Font.ITALIC, 14);
+private static final int LARGURA_BOTAO = 200;
+private static final int ALTURA_BOTAO = 100;
+
     public TelaEstoquista() {
         initComponents();
         initRelogio();
@@ -30,19 +37,32 @@ public class TelaEstoquista extends JFrame {
     }
 
     private void initComponents() {
-
         labelLogo = new JLabel();
         jLabelSair = new JLabel();
         labelNome = new JLabel();
         relogio = new JLabel("00:00");
-        textFieldBusca = new JTextField("Buscar no estoque");
-        labelLupa = new JLabel("LUPA");
-
+        textFieldBusca = new JTextField();
+        labelLupa = new JLabel();
+        labelBemvindo = new JLabel("Olá, estoquista!");
+        labelBuscar = new JLabel("Buscar por medicamento:");
+        
+        
         buttonCadastroMed = new JButton("Cadastrar Medicamento");
         buttonFornecedores = new JButton("Gerenciar Fornecedores");
         buttonEstoque = new JButton("Visualizar Estoque");
+        
+        Dimension tamanhoBotao = new Dimension(LARGURA_BOTAO, ALTURA_BOTAO);
+        buttonCadastroMed.setPreferredSize(tamanhoBotao);
+        buttonFornecedores.setPreferredSize(tamanhoBotao);
+        buttonEstoque.setPreferredSize(tamanhoBotao);
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        panelTopo = new JPanel();
+        panelFundo = new JPanel();
+
+        panelTopo.setBackground(Color.WHITE);
+        panelFundo.setBackground(new Color(208, 226, 231));
 
         try {
             labelLogo.setIcon(new ImageIcon(getClass().getResource("/pharmasys_logo.png")));
@@ -50,6 +70,12 @@ public class TelaEstoquista extends JFrame {
             labelLogo.setText("LOGO");
         }
 
+        labelBemvindo.setFont(new Font("SF Pro", Font.BOLD, 18));
+        labelBuscar.setFont(new Font("SF Pro", Font.ITALIC, 14));
+        labelBuscar.setForeground(new Color(102, 102, 102));    
+        textFieldBusca.setFont(new Font("SF Pro", Font.ITALIC, 14));
+        textFieldBusca.setForeground(Color.BLACK); 
+        
         jLabelSair.setFont(new Font("SF Pro", Font.PLAIN, 14));
         jLabelSair.setForeground(Color.RED);
         jLabelSair.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -60,6 +86,75 @@ public class TelaEstoquista extends JFrame {
                 dispose();
             }
         });
+        
+        GroupLayout fundoLayout = new GroupLayout(panelFundo);
+        panelFundo.setLayout(fundoLayout);
+
+        fundoLayout.setHorizontalGroup(
+            fundoLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(fundoLayout.createSequentialGroup()
+            .       addGap(30)
+                .addGroup(fundoLayout.createParallelGroup(Alignment.LEADING)
+                    .addComponent(labelBemvindo)
+                    .addComponent(labelBuscar)
+                    .addGroup(fundoLayout.createSequentialGroup()
+                        .addComponent(textFieldBusca, 580, 580, 580)
+                        .addPreferredGap(ComponentPlacement.RELATED)
+                        .addComponent(labelLupa)
+                        )
+                    )
+                )
+        .addGroup(fundoLayout.createSequentialGroup()
+            .addGap(30)
+            .addComponent(buttonCadastroMed,
+                GroupLayout.PREFERRED_SIZE, LARGURA_BOTAO, GroupLayout.PREFERRED_SIZE)
+            .addGap(15)
+            .addComponent(buttonFornecedores,
+                GroupLayout.PREFERRED_SIZE, LARGURA_BOTAO, GroupLayout.PREFERRED_SIZE)
+            .addGap(15)
+            .addComponent(buttonEstoque,
+                GroupLayout.PREFERRED_SIZE, LARGURA_BOTAO, GroupLayout.PREFERRED_SIZE)
+        )
+);
+
+
+            fundoLayout.setVerticalGroup(
+                fundoLayout.createSequentialGroup()
+                    .addGap(30)
+                    .addComponent(labelBemvindo)
+                    .addPreferredGap(ComponentPlacement.RELATED)
+                    .addComponent(labelBuscar)
+                    .addPreferredGap(ComponentPlacement.RELATED)
+                    .addGroup(fundoLayout.createParallelGroup(Alignment.BASELINE)
+                        .addComponent(textFieldBusca, 35, 35, 35)
+                        .addComponent(labelLupa))
+                    .addGap(40)
+                    .addGroup(fundoLayout.createParallelGroup(Alignment.BASELINE)
+                        .addComponent(buttonCadastroMed,
+                            GroupLayout.PREFERRED_SIZE, ALTURA_BOTAO, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonFornecedores,
+                            GroupLayout.PREFERRED_SIZE, ALTURA_BOTAO, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonEstoque,
+                            GroupLayout.PREFERRED_SIZE, ALTURA_BOTAO, GroupLayout.PREFERRED_SIZE)
+                    )
+                    .addGap(200)
+            );
+
+            GroupLayout frameLayout = new GroupLayout(getContentPane());
+                getContentPane().setLayout(frameLayout);
+
+            frameLayout.setHorizontalGroup(
+            frameLayout.createParallelGroup(Alignment.LEADING)
+                .addComponent(panelTopo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelFundo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        frameLayout.setVerticalGroup(
+            frameLayout.createSequentialGroup()
+                .addComponent(panelTopo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelFundo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
 
         labelNome.setFont(new Font("SF Pro", Font.PLAIN, 14));
         relogio.setFont(new Font("SF Pro", Font.PLAIN, 14));
@@ -67,19 +162,14 @@ public class TelaEstoquista extends JFrame {
         textFieldBusca.setFont(new Font("SF Pro", Font.ITALIC, 14));
         textFieldBusca.setForeground(Color.GRAY);
 
-        labelLupa = new JLabel("🔍");
-        Dimension tamanhoBotao = new Dimension(260, 100);
-        buttonCadastroMed.setPreferredSize(tamanhoBotao);
-        buttonFornecedores.setPreferredSize(tamanhoBotao);
-        buttonEstoque.setPreferredSize(tamanhoBotao);
+        labelLupa.setText("🔍");
 
-        buttonCadastroMed.setFont(new Font("SF Pro", Font.PLAIN, 18));
-        buttonFornecedores.setFont(new Font("SF Pro", Font.PLAIN, 18));
-        buttonEstoque.setFont(new Font("SF Pro", Font.PLAIN, 18));
+        buttonCadastroMed.setFont(FONTE_BOTAO_PRINCIPAL);
+        buttonFornecedores.setFont(FONTE_BOTAO_PRINCIPAL);
+        buttonEstoque.setFont(FONTE_BOTAO_PRINCIPAL);
 
         buttonCadastroMed.addActionListener(e -> {
             new TelaCadastroMedicamento().setVisible(true);
-            dispose();
         });
 
         buttonFornecedores.addActionListener(e -> {
@@ -92,61 +182,37 @@ public class TelaEstoquista extends JFrame {
             dispose();
         });
 
-        GroupLayout layout = new GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        
+        GroupLayout topoLayout = new GroupLayout(panelTopo);
+                panelTopo.setLayout(topoLayout);
 
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(20)
-                                .addComponent(labelLogo)
-                                .addPreferredGap(ComponentPlacement.RELATED, 400, Short.MAX_VALUE)
-                                .addComponent(jLabelSair)
-                                .addContainerGap())
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(30)
-                                .addComponent(textFieldBusca, GroupLayout.PREFERRED_SIZE, 580, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(ComponentPlacement.RELATED)
-                                .addComponent(labelLupa))
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(15)
-                                .addComponent(buttonCadastroMed)
-                                .addGap(15)
-                                .addComponent(buttonFornecedores)
-                                .addGap(15)
-                                .addComponent(buttonEstoque))
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(labelNome, 250, 250, 250)
-                                .addPreferredGap(ComponentPlacement.RELATED, 380, Short.MAX_VALUE)
-                                .addComponent(relogio)
-                                .addContainerGap())
-        );
+                topoLayout.setHorizontalGroup(
+                    topoLayout.createSequentialGroup()
+                        .addGap(20)
+                        .addComponent(labelLogo)
+                        .addPreferredGap(ComponentPlacement.RELATED, 300, Short.MAX_VALUE)
+                        .addComponent(labelNome, 200, 200, 200)
+                        .addGap(10)
+                        .addComponent(relogio)
+                        .addGap(10)
+                        .addComponent(jLabelSair)
+                        .addGap(20)
+                );
 
-        layout.setVerticalGroup(
-                layout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(Alignment.BASELINE)
-                                        .addComponent(labelLogo)
-                                        .addComponent(jLabelSair))
-                                .addGap(40)
-                                .addGroup(layout.createParallelGroup(Alignment.BASELINE)
-                                        .addComponent(textFieldBusca, 26, 26, 26)
-                                        .addComponent(labelLupa))
-                                .addGap(40)
-                                .addGroup(layout.createParallelGroup(Alignment.BASELINE)
-                                        .addComponent(buttonCadastroMed)
-                                        .addComponent(buttonFornecedores)
-                                        .addComponent(buttonEstoque))
-                                .addPreferredGap(ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(Alignment.BASELINE)
-                                        .addComponent(labelNome)
-                                        .addComponent(relogio))
-                        )
-        );
+                topoLayout.setVerticalGroup(
+                    topoLayout.createParallelGroup(Alignment.CENTER)
+                        .addComponent(labelLogo)
+                        .addComponent(labelNome)
+                        .addComponent(relogio)
+                        .addComponent(jLabelSair)
+                );
 
+        
         pack();
+        
+        setSize(700, 500);
+        setResizable(false);
+        
         setLocationRelativeTo(null);
     }
 
@@ -154,6 +220,8 @@ public class TelaEstoquista extends JFrame {
         EventQueue.invokeLater(() -> new TelaEstoquista().setVisible(true));
     }
 
+    private JLabel labelBemvindo;
+    private JLabel labelBuscar;
     private JButton buttonCadastroMed;
     private JButton buttonFornecedores;
     private JButton buttonEstoque;
