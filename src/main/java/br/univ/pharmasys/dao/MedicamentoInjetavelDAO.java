@@ -59,7 +59,7 @@ public class MedicamentoInjetavelDAO extends MedicamentoDAO {
     public void create(MedicamentoInjetavel inj) {
         super.create(inj); //salva primeiro na tabela pai
 
-        String sql = "INSERT INTO MEDICAMENTOINJETAVEL (SKU, VIA_ADMINISTRACAO, TEMPERATURA_MINIMA, TEMPERATURA_MAXIMA) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO MEDICAMENTO_INJETAVEL (SKU, VIA_ADMINISTRACAO, TEMPERATURA_MINIMA, TEMPERATURA_MAXIMA) VALUES (?,?,?,?)";
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -81,7 +81,7 @@ public class MedicamentoInjetavelDAO extends MedicamentoDAO {
     public void update(MedicamentoInjetavel inj) {
         super.update(inj);
 
-        String sql = "UPDATE MEDICAMENTOINJETAVEL SET VIA_ADMINISTRACAO = ?, TEMPERATURA_MINIMA = ?, TEMPERATURA_MAXIMA = ? WHERE SKU = ?";
+        String sql = "UPDATE MEDICAMENTO_INJETAVEL SET VIA_ADMINISTRACAO = ?, TEMPERATURA_MINIMA = ?, TEMPERATURA_MAXIMA = ? WHERE SKU = ?";
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -100,7 +100,7 @@ public class MedicamentoInjetavelDAO extends MedicamentoDAO {
     //metodo de deletar tanto da classe pai e da classe filha (delete)
     @Override
     public void delete(String sku) {
-        String sqlFilha = "DELETE FROM MEDICAMENTOINJETAVEL WHERE SKU=?";
+        String sqlFilha = "DELETE FROM MEDICAMENTO_INJETAVEL WHERE SKU=?";
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sqlFilha)) {

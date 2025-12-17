@@ -58,7 +58,7 @@ public class MedicamentoTopicoDAO extends MedicamentoDAO {
     public void create(MedicamentoTopico top) {
         super.create(top);
 
-        String sql = "INSERT INTO MEDICAMENTOTOPICO (SKU, PESO_GRAMAS, TIPO_EMBALAGEM) VALUES (?,?)";
+        String sql = "INSERT INTO MEDICAMENTO_TOPICO (SKU, PESO_GRAMAS, TIPO_EMBALAGEM) VALUES (?,?)";
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -79,7 +79,7 @@ public class MedicamentoTopicoDAO extends MedicamentoDAO {
     public void update(MedicamentoTopico top) {
         super.update(top); // Atualiza tabela pai
 
-        String sql = "UPDATE MEDICAMENTOTOPICO SET PESO_GRAMAS = ?, TIPO_EMBALAGEM = ? WHERE SKU = ?";
+        String sql = "UPDATE MEDICAMENTO_TOPICO SET PESO_GRAMAS = ?, TIPO_EMBALAGEM = ? WHERE SKU = ?";
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -97,7 +97,7 @@ public class MedicamentoTopicoDAO extends MedicamentoDAO {
     //metodo de delete, tanto pai quanto filha
     @Override
     public void delete(String sku) {
-        String sqlFilha = "DELETE FROM MEDICAMENTOTOPICO WHERE SKU=?";
+        String sqlFilha = "DELETE FROM MEDICAMENTO_TOPICO WHERE SKU=?";
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sqlFilha)) {

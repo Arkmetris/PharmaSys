@@ -52,7 +52,7 @@ public class MedicamentoComprimidoDAO extends MedicamentoDAO {
         //metodo de criar um novo medicamento comprimido(create)
         public void create(MedicamentoComprimido comp) {
             super.create(comp);
-            String sql = "INSERT INTO MEDICAMENTOCOMPRIMIDO (SKU, QUANTIDADE_COMPRIMIDOS) VALUES (?,?)";
+            String sql = "INSERT INTO MEDICAMENTO_COMPRIMIDO (SKU, QUANTIDADE_COMPRIMIDOS) VALUES (?,?)";
 
             try (Connection conn = ConnectionFactory.getConnection();
                  PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -72,7 +72,7 @@ public class MedicamentoComprimidoDAO extends MedicamentoDAO {
         public void update(MedicamentoComprimido comp) {
             super.update(comp);
 
-            String sql = "UPDATE MEDICAMENTOCOMPRIMIDO SET QUANTIDADE_COMPRIMIDOS = ? WHERE SKU = ?";
+            String sql = "UPDATE MEDICAMENTO_COMPRIMIDO SET QUANTIDADE_COMPRIMIDOS = ? WHERE SKU = ?";
 
             try(Connection conn = ConnectionFactory.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)){
@@ -89,7 +89,7 @@ public class MedicamentoComprimidoDAO extends MedicamentoDAO {
         //metodo de deletar(delete)
         @Override
         public void delete(String sku) {
-            String sqlFilha = "DELETE FROM MEDICAMENTOCOMPRIMIDO WHERE SKU=?";
+            String sqlFilha = "DELETE FROM MEDICAMENTO_COMPRIMIDO WHERE SKU=?";
 
             try(Connection conn = ConnectionFactory.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sqlFilha)){
