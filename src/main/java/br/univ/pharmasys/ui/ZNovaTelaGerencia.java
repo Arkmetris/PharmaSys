@@ -28,7 +28,7 @@ public class ZNovaTelaGerencia extends javax.swing.JFrame {
     }
         
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
@@ -295,12 +295,12 @@ public class ZNovaTelaGerencia extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonEmitirRelatorioActionPerformed
 
 
-    private void buttonSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSairMouseClicked
+    private void buttonSairMouseClicked(java.awt.event.MouseEvent evt) {
+        this.dispose();
         new TelaInicial().setVisible(true);
-        java.awt.Window janela =
-        javax.swing.SwingUtilities.getWindowAncestor(this);
-        janela.dispose();
-    }//GEN-LAST:event_buttonSairMouseClicked
+
+
+}//GEN-LAST:event_buttonSairMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
