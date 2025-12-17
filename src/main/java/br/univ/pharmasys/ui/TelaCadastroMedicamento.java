@@ -318,68 +318,173 @@ public class TelaCadastroMedicamento extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    private boolean validarCamposObrigatorios() {
+        if (comboTipo.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Selecione o tipo de medicamento.");
+            return false;
+        }
+
+        JTextField[] campos = {
+                txtSku, txtNome, txtCodigo, txtDosagem, txtForma,
+                txtFabricante, txtLab, txtEstMin, txtEstMax,
+                txtEstAtual, txtPreco
+        };
+
+        for (JTextField campo : campos) {
+            if (campo.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Preencha todos os campos obrigatórios.");
+                campo.requestFocus();
+                return false;
+            }
+        }
+
+        if (boxDia.getSelectedIndex() == 0 ||
+                boxMes.getSelectedIndex() == 0 ||
+                boxAno.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Selecione uma data de expiração válida.");
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean validarRegrasEstoque() {
+        int min = Integer.parseInt(txtEstMin.getText());
+        int max = Integer.parseInt(txtEstMax.getText());
+        int atual = Integer.parseInt(txtEstAtual.getText());
+
+        if (min < 0 || max < 0 || atual < 0) {
+            JOptionPane.showMessageDialog(this, "Valores de estoque não podem ser negativos.");
+            return false;
+        }
+
+        if (min > max) {
+            JOptionPane.showMessageDialog(this, "Estoque mínimo não pode ser maior que o máximo.");
+            return false;
+        }
+
+        if (atual > max) {
+            JOptionPane.showMessageDialog(this, "Estoque atual não pode ser maior que o máximo.");
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean validarPorTipo(String tipo) {
+
+        switch (tipo) {
+            case "Comprimido":
+                if (txtQtdComp.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Informe a quantidade de comprimidos.");
+                    return false;
+                }
+                try {
+                    int qtd = Integer.parseInt(txtQtdComp.getText());
+                    if (qtd <= 0) {
+                        JOptionPane.showMessageDialog(this, "Quantidade de comprimidos inválida.");
+                        return false;
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Quantidade de comprimidos inválida.");
+                    return false;
+                }
+                break;
+
+            case "Líquido":
+                if (txtVolume.getText().trim().isEmpty() || txtRecipiente.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Informe volume e recipiente.");
+                    return false;
+                }
+                break;
+
+            case "Injetável":
+                if (txtVia.getText().trim().isEmpty() ||
+                        txtTempMin.getText().trim().isEmpty() ||
+                        txtTempMax.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Preencha todos os dados do injetável.");
+                    return false;
+                }
+                break;
+
+            case "Tópico":
+                if (txtPeso.getText().trim().isEmpty() || txtEmbalagem.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Informe peso e embalagem.");
+                    return false;
+                }
+                break;
+        }
+
+        return true;
+    }
+
+    private boolean validarData() {
+        try {
+            int dia = Integer.parseInt(boxDia.getSelectedItem().toString());
+            int mes = converterMes(boxMes.getSelectedItem().toString());
+            int ano = Integer.parseInt(boxAno.getSelectedItem().toString());
+
+            LocalDate data = LocalDate.of(ano, mes, dia);
+
+            if (data.isBefore(LocalDate.now())) {
+                JOptionPane.showMessageDialog(this, "Data de expiração não pode ser no passado.");
+                return false;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Data inválida.");
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean validarNumeros() {
+        try {
+            Integer.parseInt(txtEstMin.getText());
+            Integer.parseInt(txtEstMax.getText());
+            Integer.parseInt(txtEstAtual.getText());
+            new BigDecimal(txtPreco.getText().replace(",", "."));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Campos numéricos inválidos.");
+            return false;
+        }
+        return true;
+    }
 
     private void cadastrar() {
+
+        String tipo = comboTipo.getSelectedItem().toString();
+
+        if (!validarCamposObrigatorios()) return;
+        if (!validarNumeros()) return;
+        if (!validarRegrasEstoque()) return;
+        if (!validarData()) return;
+        if (!validarPorTipo(tipo)) return;
+
         try {
-            String tipo = comboTipo.getSelectedItem().toString();
-
-
-            if (tipo.equals("Selecione...") ||
-                    txtSku.getText().isEmpty() ||
-                    txtNome.getText().isEmpty() ||
-                    txtCodigo.getText().isEmpty() ||
-                    txtDosagem.getText().isEmpty() ||
-                    txtForma.getText().isEmpty() ||
-                    txtFabricante.getText().isEmpty() ||
-                    txtLab.getText().isEmpty() ||
-                    txtEstMin.getText().isEmpty() ||
-                    txtEstMax.getText().isEmpty() ||
-                    txtEstAtual.getText().isEmpty() ||
-                    txtPreco.getText().isEmpty() ||
-                    boxDia.getSelectedIndex() == 0 ||
-                    boxMes.getSelectedIndex() == 0 ||
-                    boxAno.getSelectedIndex() == 0) {
-
-                JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos obrigatórios!");
-                return;
-            }
 
             if ("Comprimido".equals(tipo)) {
-                if (txtQtdComp.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Informe a quantidade de comprimidos.");
-                    return;
-                }
                 MedicamentoComprimido m = new MedicamentoComprimido();
                 preencherDadosComuns(m);
-                m.setQuantidadeComprimidos(Integer.parseInt(txtQtdComp.getText()));
+                m.setQuantidadeComprimidos(
+                        Integer.parseInt(txtQtdComp.getText())
+                );
                 new MedicamentoComprimidoDAO().create(m);
-            }
 
-
-            else if ("Líquido".equals(tipo)) {
-                Medicamento m = new Medicamento();
-                preencherDadosComuns(m);
-                new MedicamentoDAO().create(m); // só cadastra os dados comuns
-            }
-            else if ("Injetável".equals(tipo)) {
-                Medicamento m = new Medicamento();
-                preencherDadosComuns(m);
-                new MedicamentoDAO().create(m);
-            }
-            else if ("Tópico".equals(tipo)) {
+            } else {
                 Medicamento m = new Medicamento();
                 preencherDadosComuns(m);
                 new MedicamentoDAO().create(m);
             }
 
-            JOptionPane.showMessageDialog(this, "Medicamento cadastrado com sucesso!");
+            JOptionPane.showMessageDialog(this,
+                    "Medicamento cadastrado com sucesso!");
+
             dispose();
 
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Erro: valores numéricos inválidos!");
-            e.printStackTrace();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + e.getMessage());
+            JOptionPane.showMessageDialog(this,
+                    "Erro ao cadastrar: " + e.getMessage());
             e.printStackTrace();
         }
     }

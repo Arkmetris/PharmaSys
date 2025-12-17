@@ -1,36 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package br.univ.pharmasys.ui;
 
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
-import javax.swing.JOptionPane;
 import java.time.LocalDate;
 import java.time.YearMonth;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
 import br.univ.pharmasys.dao.MedicamentoDAO;
 import br.univ.pharmasys.model.Medicamento;
 
-
-
 public class TelaCadastroLote extends javax.swing.JPanel {
-
-
 
     public TelaCadastroLote() {
         initComponents();
-
-        try {
-            javax.swing.text.MaskFormatter mask =
-                    new javax.swing.text.MaskFormatter("##/####");
-            mask.setPlaceholderCharacter('_');
-            CampoValidade.setFormatterFactory(
-                    new javax.swing.text.DefaultFormatterFactory(mask)
-            );
-        } catch (java.text.ParseException e) {
-            e.printStackTrace();
-        }
+        carregarMesesAnos();
 
         CampoSkuMedicamento.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
@@ -43,14 +27,31 @@ public class TelaCadastroLote extends javax.swing.JPanel {
         ButtonCadastrar.addActionListener(evt -> ButtonCadastrarActionPerformed(evt));
     }
 
-    private LocalDate converterValidade(String texto) {
-        String[] partes = texto.split("/");
-        int mes = Integer.parseInt(partes[0]);
-        int ano = Integer.parseInt(partes[1]);
+
+
+    private void carregarMesesAnos() {
+        String[] meses = {
+                "01", "02", "03", "04", "05", "06",
+                "07", "08", "09", "10", "11", "12"
+        };
+
+        for (String mes : meses) {
+            ComboMes.addItem(mes);
+        }
+
+        int anoAtual = LocalDate.now().getYear();
+        for (int i = 0; i <= 45; i++) {
+            ComboAno.addItem(anoAtual + i);
+        }
+    }
+
+    private LocalDate obterValidadeSelecionada() {
+        int mes = Integer.parseInt(ComboMes.getSelectedItem().toString());
+        int ano = (Integer) ComboAno.getSelectedItem();
         return LocalDate.of(ano, mes, 1);
     }
-    private void preencherValidadePorSku() {
 
+    private void preencherValidadePorSku() {
         String sku = CampoSkuMedicamento.getText().trim();
         if (sku.isEmpty()) return;
 
@@ -59,118 +60,126 @@ public class TelaCadastroLote extends javax.swing.JPanel {
 
         if (med != null && med.getDataExpiracao() != null) {
             LocalDate data = med.getDataExpiracao();
-            CampoValidade.setText(
-                    String.format("%02d/%d",
-                            data.getMonthValue(),
-                            data.getYear())
-            );
+            ComboMes.setSelectedItem(String.format("%02d", data.getMonthValue()));
+            ComboAno.setSelectedItem(data.getYear());
         }
     }
 
 
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        javax.swing.JPanel formPanel = new javax.swing.JPanel();
 
         LabelCadastroDeLote = new javax.swing.JLabel();
         CampoNumeroLote = new javax.swing.JTextField();
         CampoSkuMedicamento = new javax.swing.JTextField();
         CampoQuantidadeRecebida = new javax.swing.JTextField();
-        CampoValidade = new javax.swing.JFormattedTextField();
         CampoQuantidadeAtual = new javax.swing.JTextField();
         CampoPreco = new javax.swing.JTextField();
+        ComboMes = new javax.swing.JComboBox<>();
+        ComboAno = new javax.swing.JComboBox<>();
         ButtonVoltar = new javax.swing.JButton();
         ButtonCadastrar = new javax.swing.JButton();
-        LabelCadastroDeLote.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+
+        LabelCadastroDeLote.setFont(new java.awt.Font("Segoe UI", 1, 24));
         LabelCadastroDeLote.setText("Cadastro de Lote");
-        CampoNumeroLote.setBorder(javax.swing.BorderFactory.createTitledBorder("Número do Lote:"));
-        CampoSkuMedicamento.setBorder(javax.swing.BorderFactory.createTitledBorder("SKU Medicamento:"));
-        CampoQuantidadeRecebida.setBorder(javax.swing.BorderFactory.createTitledBorder("Quantidade Recebida:"));
-        CampoValidade.setBorder(javax.swing.BorderFactory.createTitledBorder("Validade:"));
-        CampoQuantidadeAtual.setBorder(javax.swing.BorderFactory.createTitledBorder("Quantidade Atual:"));
-        CampoPreco.setBorder(javax.swing.BorderFactory.createTitledBorder("Preço:"));
+
+        CampoNumeroLote.setBorder(javax.swing.BorderFactory.createTitledBorder("Número do Lote"));
+        CampoSkuMedicamento.setBorder(javax.swing.BorderFactory.createTitledBorder("SKU Medicamento"));
+        CampoQuantidadeRecebida.setBorder(javax.swing.BorderFactory.createTitledBorder("Quantidade Recebida"));
+        CampoQuantidadeAtual.setBorder(javax.swing.BorderFactory.createTitledBorder("Quantidade Atual"));
+        CampoPreco.setBorder(javax.swing.BorderFactory.createTitledBorder("Preço"));
+
+        ComboMes.setBorder(javax.swing.BorderFactory.createTitledBorder("Mês"));
+        ComboAno.setBorder(javax.swing.BorderFactory.createTitledBorder("Ano"));
+
         ButtonVoltar.setText("Voltar");
         ButtonCadastrar.setText("Cadastrar");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(formPanel);
+        formPanel.setLayout(layout);
+
+        int alturaCampo = 28;
+
+        CampoNumeroLote.setPreferredSize(new java.awt.Dimension(250, alturaCampo));
+        CampoSkuMedicamento.setPreferredSize(new java.awt.Dimension(250, alturaCampo));
+        CampoQuantidadeRecebida.setPreferredSize(new java.awt.Dimension(250, alturaCampo));
+        CampoQuantidadeAtual.setPreferredSize(new java.awt.Dimension(250, alturaCampo));
+        CampoPreco.setPreferredSize(new java.awt.Dimension(250, alturaCampo));
+
+        ComboMes.setPreferredSize(new java.awt.Dimension(120, alturaCampo));
+        ComboAno.setPreferredSize(new java.awt.Dimension(120, alturaCampo));
+
+        CampoQuantidadeAtual.setEnabled(false);
+
+
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(201, 201, 201)
-                        .addComponent(LabelCadastroDeLote))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addComponent(LabelCadastroDeLote)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup()
+                                        .addComponent(CampoNumeroLote)
+                                        .addComponent(CampoSkuMedicamento)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(ComboMes)
+                                                .addGap(10)
+                                                .addComponent(ComboAno)))
+                                .addGap(40)
+                                .addGroup(layout.createParallelGroup()
+                                        .addComponent(CampoQuantidadeRecebida)
+                                        .addComponent(CampoQuantidadeAtual)
+                                        .addComponent(CampoPreco)))
+                        .addGroup(layout.createSequentialGroup()
                                 .addComponent(ButtonVoltar)
-                                .addGap(18, 18, 18)
+                                .addGap(20)
                                 .addComponent(ButtonCadastrar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CampoSkuMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CampoNumeroLote, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CampoValidade, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(49, 49, 49)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CampoQuantidadeRecebida, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CampoQuantidadeAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CampoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(35, Short.MAX_VALUE))
         );
+
+
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(LabelCadastroDeLote, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CampoNumeroLote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CampoQuantidadeRecebida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CampoSkuMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CampoQuantidadeAtual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CampoValidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CampoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ButtonVoltar)
-                    .addComponent(ButtonCadastrar))
-                .addGap(21, 21, 21))
+                layout.createSequentialGroup()
+                        .addGap(20)
+                        .addComponent(LabelCadastroDeLote)
+                        .addGap(30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(CampoNumeroLote)
+                                .addComponent(CampoQuantidadeRecebida))
+                        .addGap(20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(CampoSkuMedicamento)
+                                .addComponent(CampoQuantidadeAtual))
+                        .addGap(20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(ComboMes)
+                                .addComponent(ComboAno)
+                                .addComponent(CampoPreco))
+                        .addGap(30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(ButtonVoltar)
+                                .addComponent(ButtonCadastrar))
         );
-    }// </editor-fold>//GEN-END:initComponents
 
+        this.setLayout(new java.awt.GridBagLayout());
+        this.add(formPanel);
 
-
-    private javax.swing.JButton ButtonCadastrar;
-    private javax.swing.JButton ButtonVoltar;
-    private javax.swing.JTextField CampoNumeroLote;
-    private javax.swing.JTextField CampoPreco;
-    private javax.swing.JTextField CampoQuantidadeAtual;
-    private javax.swing.JTextField CampoQuantidadeRecebida;
-    private javax.swing.JTextField CampoSkuMedicamento;
-    private javax.swing.JFormattedTextField CampoValidade;
-    private javax.swing.JLabel LabelCadastroDeLote;
+    }
 
     private void ButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {
-
-        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        frame.dispose();
+        java.awt.Window window = SwingUtilities.getWindowAncestor(this);
+        if (window != null) {
+            window.dispose();
+        }
     }
-    private void ButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {
 
+
+    private void ButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {
         try {
+
             if (CampoSkuMedicamento.getText().isEmpty()
                     || CampoQuantidadeRecebida.getText().isEmpty()
-                    || CampoQuantidadeAtual.getText().isEmpty()
-                    || CampoPreco.getText().isEmpty()
-                    || CampoValidade.getText().isEmpty()) {
+                    || CampoPreco.getText().isEmpty()) {
 
                 JOptionPane.showMessageDialog(
                         this,
@@ -181,33 +190,21 @@ public class TelaCadastroLote extends javax.swing.JPanel {
                 return;
             }
 
-            if (CampoValidade.getText().contains("_")) {
+            int quantidadeRecebida = Integer.parseInt(CampoQuantidadeRecebida.getText());
+            LocalDate validadeLote = obterValidadeSelecionada();
+
+            YearMonth atual = YearMonth.now();
+            YearMonth validade = YearMonth.from(validadeLote);
+
+            if (!validade.isAfter(atual)) {
                 JOptionPane.showMessageDialog(
                         this,
-                        "Informe a validade completa (MM/AAAA).",
+                        "A validade deve ser maior que o mês/ano atual.",
                         "Validade inválida",
                         JOptionPane.ERROR_MESSAGE
                 );
                 return;
             }
-
-            LocalDate validadeLote = converterValidade(CampoValidade.getText());
-
-
-
-            YearMonth mesAtual = YearMonth.now();
-            YearMonth mesValidade = YearMonth.from(validadeLote);
-
-            if (!mesValidade.isAfter(mesAtual)) {
-                JOptionPane.showMessageDialog(
-                        this,
-                        "A data de validade deve ser maior que o mês e ano atual.",
-                        "Validade inválida",
-                        JOptionPane.ERROR_MESSAGE
-                );
-                return;
-            }
-
 
             MedicamentoDAO medicamentoDAO = new MedicamentoDAO();
             Medicamento medicamento = medicamentoDAO.buscarPorSku(
@@ -224,11 +221,10 @@ public class TelaCadastroLote extends javax.swing.JPanel {
                 return;
             }
 
-
             if (!validadeLote.equals(medicamento.getDataExpiracao())) {
                 JOptionPane.showMessageDialog(
                         this,
-                        "A validade do lote deve ser IGUAL à validade do medicamento:\n"
+                        "A validade do lote deve ser igual à validade do medicamento:\n"
                                 + medicamento.getDataExpiracao(),
                         "Validade incompatível",
                         JOptionPane.ERROR_MESSAGE
@@ -236,22 +232,33 @@ public class TelaCadastroLote extends javax.swing.JPanel {
                 return;
             }
 
-            // Criar Lote
-            br.univ.pharmasys.model.Lote lote = new br.univ.pharmasys.model.Lote();
-            lote.setSkuMedicamento(CampoSkuMedicamento.getText().trim());
-            lote.setQuantidadeRecebida(Integer.parseInt(CampoQuantidadeRecebida.getText()));
-            lote.setQuantidadeAtual(Integer.parseInt(CampoQuantidadeAtual.getText()));
-            lote.setPreco(new java.math.BigDecimal(CampoPreco.getText()));
-            lote.setValidade(validadeLote);
-
-            // Salvar
             br.univ.pharmasys.dao.LoteDAO dao = new br.univ.pharmasys.dao.LoteDAO();
-            dao.create(lote);
+            br.univ.pharmasys.model.Lote loteExistente =
+                    dao.buscarPorSkuEValidade(
+                            CampoSkuMedicamento.getText().trim(),
+                            validadeLote
+                    );
 
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Lote cadastrado com sucesso!"
-            );
+            if (loteExistente != null) {
+                int novaQuantidade =
+                        loteExistente.getQuantidadeAtual() + quantidadeRecebida;
+
+                loteExistente.setQuantidadeAtual(novaQuantidade);
+                dao.update(loteExistente);
+
+            } else {
+                br.univ.pharmasys.model.Lote lote = new br.univ.pharmasys.model.Lote();
+                lote.setSkuMedicamento(CampoSkuMedicamento.getText().trim());
+                lote.setQuantidadeRecebida(quantidadeRecebida);
+                lote.setQuantidadeAtual(quantidadeRecebida);
+                lote.setPreco(new java.math.BigDecimal(CampoPreco.getText()));
+                lote.setValidade(validadeLote);
+
+                dao.create(lote);
+            }
+
+            JOptionPane.showMessageDialog(this, "Lote cadastrado com sucesso!");
+            ButtonVoltarActionPerformed(null);
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(
@@ -272,17 +279,27 @@ public class TelaCadastroLote extends javax.swing.JPanel {
 
 
 
-    public static void main(String[]args){
-        javax.swing.SwingUtilities.invokeLater(() -> {
-        javax.swing.JFrame frame = new javax.swing.JFrame("Cadastro De Lote");
-        frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        frame.setContentPane(new TelaCadastroLote()); 
-        frame.pack(); 
-        frame.setLocationRelativeTo(null); 
-        frame.setVisible(true); 
-    });
+    private javax.swing.JButton ButtonCadastrar;
+    private javax.swing.JButton ButtonVoltar;
+    private javax.swing.JTextField CampoNumeroLote;
+    private javax.swing.JTextField CampoPreco;
+    private javax.swing.JTextField CampoQuantidadeAtual;
+    private javax.swing.JTextField CampoQuantidadeRecebida;
+    private javax.swing.JTextField CampoSkuMedicamento;
+    private javax.swing.JComboBox<String> ComboMes;
+    private javax.swing.JComboBox<Integer> ComboAno;
+    private javax.swing.JLabel LabelCadastroDeLote;
 
-    
+
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Cadastro de Lote");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setContentPane(new TelaCadastroLote());
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        });
     }
 }
-
