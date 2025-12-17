@@ -274,33 +274,32 @@ public class ZNovaTelaGerencia extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ButtonVIsualizarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonVIsualizarEstoqueActionPerformed
+    private void ButtonVIsualizarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {
         new TelaEstoque().setVisible(true);
-    }//GEN-LAST:event_ButtonVIsualizarEstoqueActionPerformed
+    }
 
-    private void ButtonCadastrarMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCadastrarMedicamentoActionPerformed
+    private void ButtonCadastrarMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {
         new TelaCadastroDeEstoque() .setVisible(true);
-    }//GEN-LAST:event_ButtonCadastrarMedicamentoActionPerformed
+    }
 
-    private void ButtonCadastrarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCadastrarFuncionarioActionPerformed
+    private void ButtonCadastrarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {
         new TelaCadastroFuncionario() .setVisible(true);
-    }//GEN-LAST:event_ButtonCadastrarFuncionarioActionPerformed
+    }
 
-    private void ButtonCadastrarFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCadastrarFornecedorActionPerformed
+    private void ButtonCadastrarFornecedorActionPerformed(java.awt.event.ActionEvent evt) {
         new TelaCadastroFornecedor() .setVisible(true);
-    }//GEN-LAST:event_ButtonCadastrarFornecedorActionPerformed
+    }
 
-    private void ButtonEmitirRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEmitirRelatorioActionPerformed
+    private void ButtonEmitirRelatorioActionPerformed(java.awt.event.ActionEvent evt) {
         new TelaRelatorios() .setVisible(true);
-    }//GEN-LAST:event_ButtonEmitirRelatorioActionPerformed
+    }
 
 
-    private void buttonSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSairMouseClicked
+    private void buttonSairMouseClicked(java.awt.event.MouseEvent evt) {
+        this.dispose();
         new TelaInicial().setVisible(true);
-        java.awt.Window janela =
-        javax.swing.SwingUtilities.getWindowAncestor(this);
-        janela.dispose();
-    }//GEN-LAST:event_buttonSairMouseClicked
+    }
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -322,8 +321,7 @@ public class ZNovaTelaGerencia extends javax.swing.JFrame {
     private javax.swing.JLabel labelNome;
     private javax.swing.JLabel logoPharmasys;
     private javax.swing.JLabel relogio;
-    // End of variables declaration//GEN-END:variables
-// End of variables declaration                   
+                   
 
 public static void main(String[] args) {
     javax.swing.SwingUtilities.invokeLater(() -> {
