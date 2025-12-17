@@ -8,7 +8,7 @@ public class DependenteValidador {
 
     public static void validarFuncionario(Funcionario funcionario) {
         if (funcionario == null) {
-            throw new ErroDePreenchimentoInvalidoException("O dependente deve estar vinculado a um funcionário (Objeto).");
+            throw new ErroDePreenchimentoInvalidoException("O dependente deve estar vinculado a um funcionário.");
         }
     }
 
