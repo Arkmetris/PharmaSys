@@ -5,6 +5,10 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import br.univ.pharmasys.model.Medicamento;
+import br.univ.pharmasys.dao.MedicamentoDAO;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 public class NovaTelaFuncionario extends javax.swing.JFrame {
 
@@ -108,6 +112,11 @@ public class NovaTelaFuncionario extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("PESQUISAR");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("SF Pro", 1, 18)); // NOI18N
         jLabel2.setText("Olá, farmacêutico!");
@@ -156,10 +165,11 @@ public class NovaTelaFuncionario extends javax.swing.JFrame {
                     .addComponent(campoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonRealizarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonVisualizarEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(buttonRealizarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonVisualizarEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(204, 204, 204))
         );
 
@@ -230,6 +240,26 @@ public class NovaTelaFuncionario extends javax.swing.JFrame {
     TelaScanner scanner = new TelaScanner();
     scanner.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+    String busca = campoPesquisa.getText().trim();
+        
+        if (!busca.isEmpty()){
+            MedicamentoDAO dao = new MedicamentoDAO();
+            List<Medicamento> listaEncontrada = dao.buscarPorNome(busca);
+            
+            if(listaEncontrada.isEmpty()){
+            JOptionPane.showMessageDialog(this,"Nenhum medicamento encontrado com esse nome.");
+            }else{
+              TelaResultados tela = new TelaResultados();
+              tela.setVisible(true);
+              tela.setLocationRelativeTo(null);
+              tela.preencherTabela(listaEncontrada);
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Por favor, digite um nome para pesquisar.");
+        }
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     public static void main(String args[]) {
 
