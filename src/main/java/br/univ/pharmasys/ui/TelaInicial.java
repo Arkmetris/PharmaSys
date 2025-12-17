@@ -144,8 +144,7 @@ public class TelaInicial extends JFrame {
                 // Verifica o tipo de usuário
                 if (usuario.getTipo() == 3) {
                     
-                    TelaGerencia tela = new TelaGerencia();
-                    tela.definirUsuarioLogado(usuario.getNome());
+                    ZNovaTelaGerencia tela = new ZNovaTelaGerencia();
                     tela.definirUsuarioLogado(usuario.getNome());
                     tela.setVisible(true);
                     this.dispose();
@@ -211,4 +210,3 @@ public class TelaInicial extends JFrame {
     private JPasswordField textSenha;
     private JTextField textLogin;
 }
-
