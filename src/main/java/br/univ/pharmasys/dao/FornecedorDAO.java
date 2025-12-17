@@ -83,7 +83,7 @@ public class FornecedorDAO {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao listar todos os funcionários: " + e.getMessage(), e);
+            throw new RuntimeException("Erro ao listar todos os fornecedores: " + e.getMessage(), e);
         }
         return lista;
     }
@@ -111,7 +111,7 @@ public class FornecedorDAO {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao buscar Funcionário por nome: " + e.getMessage(), e);
+            throw new RuntimeException("Erro ao buscar Fornecedor por nome: " + e.getMessage(), e);
         }
         return lista;
     }
@@ -175,7 +175,7 @@ public class FornecedorDAO {
             System.out.println("Fornecedor atualizado com sucesso!");
 
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao atualizar Funcionário: " + e.getMessage(), e);
+            throw new RuntimeException("Erro ao atualizar Fornecedor: " + e.getMessage(), e);
         }
     }
 

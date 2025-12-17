@@ -2,6 +2,7 @@ package br.univ.pharmasys.ui;
 
 import br.univ.pharmasys.model.Fornecedor;
 import br.univ.pharmasys.model.Funcionario;
+import br.univ.pharmasys.model.Medicamento;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -52,6 +53,9 @@ public class TelaVisualizacaoRelatorio extends JFrame {
             } else if (primeiroItem instanceof Fornecedor) {
                 configurarTabelaFornecedores(model, (List<Fornecedor>) lista);
             }
+            else if(primeiroItem instanceof Medicamento) {
+                configurarTabelaEstoque(model, (List<Medicamento>) lista);
+            }
         } else {
             JOptionPane.showMessageDialog(this, "A lista está vazia.");
         }
@@ -100,6 +104,32 @@ public class TelaVisualizacaoRelatorio extends JFrame {
             });
         }
     }
+
+    private void configurarTabelaEstoque(DefaultTableModel model, List<Medicamento> lista) {
+
+        model.addColumn("SKU");
+        model.addColumn("Nome");
+        model.addColumn("Data Expiração");
+        model.addColumn("Estoque Atual");
+        model.addColumn("Laboratório");
+        model.addColumn("Fabricante");
+        model.addColumn("Preço");
+
+
+        for (Medicamento m : lista) {
+            model.addRow(new Object[]{
+                    m.getSku(),
+                    m.getNomeComercial(),
+                    m.getDataExpiracao(),
+                    m.getEstoqueAtual(),
+                    m.getLaboratorio(),
+                    m.getFabricante(),
+                    m.getPreco()
+
+            });
+        }
+    }
+
 }
 
        
