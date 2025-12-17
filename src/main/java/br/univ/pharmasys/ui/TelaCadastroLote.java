@@ -112,6 +112,8 @@ public class TelaCadastroLote extends javax.swing.JPanel {
         ComboMes.setPreferredSize(new java.awt.Dimension(120, alturaCampo));
         ComboAno.setPreferredSize(new java.awt.Dimension(120, alturaCampo));
 
+        CampoQuantidadeAtual.setEnabled(false);
+
 
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
@@ -164,18 +166,19 @@ public class TelaCadastroLote extends javax.swing.JPanel {
 
     }
 
-
-
     private void ButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {
-        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        frame.dispose();
+        java.awt.Window window = SwingUtilities.getWindowAncestor(this);
+        if (window != null) {
+            window.dispose();
+        }
     }
+
 
     private void ButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {
         try {
+
             if (CampoSkuMedicamento.getText().isEmpty()
                     || CampoQuantidadeRecebida.getText().isEmpty()
-                    || CampoQuantidadeAtual.getText().isEmpty()
                     || CampoPreco.getText().isEmpty()) {
 
                 JOptionPane.showMessageDialog(
@@ -187,6 +190,7 @@ public class TelaCadastroLote extends javax.swing.JPanel {
                 return;
             }
 
+            int quantidadeRecebida = Integer.parseInt(CampoQuantidadeRecebida.getText());
             LocalDate validadeLote = obterValidadeSelecionada();
 
             YearMonth atual = YearMonth.now();
@@ -228,17 +232,33 @@ public class TelaCadastroLote extends javax.swing.JPanel {
                 return;
             }
 
-            br.univ.pharmasys.model.Lote lote = new br.univ.pharmasys.model.Lote();
-            lote.setSkuMedicamento(CampoSkuMedicamento.getText().trim());
-            lote.setQuantidadeRecebida(Integer.parseInt(CampoQuantidadeRecebida.getText()));
-            lote.setQuantidadeAtual(Integer.parseInt(CampoQuantidadeAtual.getText()));
-            lote.setPreco(new java.math.BigDecimal(CampoPreco.getText()));
-            lote.setValidade(validadeLote);
-
             br.univ.pharmasys.dao.LoteDAO dao = new br.univ.pharmasys.dao.LoteDAO();
-            dao.create(lote);
+            br.univ.pharmasys.model.Lote loteExistente =
+                    dao.buscarPorSkuEValidade(
+                            CampoSkuMedicamento.getText().trim(),
+                            validadeLote
+                    );
+
+            if (loteExistente != null) {
+                int novaQuantidade =
+                        loteExistente.getQuantidadeAtual() + quantidadeRecebida;
+
+                loteExistente.setQuantidadeAtual(novaQuantidade);
+                dao.update(loteExistente);
+
+            } else {
+                br.univ.pharmasys.model.Lote lote = new br.univ.pharmasys.model.Lote();
+                lote.setSkuMedicamento(CampoSkuMedicamento.getText().trim());
+                lote.setQuantidadeRecebida(quantidadeRecebida);
+                lote.setQuantidadeAtual(quantidadeRecebida);
+                lote.setPreco(new java.math.BigDecimal(CampoPreco.getText()));
+                lote.setValidade(validadeLote);
+
+                dao.create(lote);
+            }
 
             JOptionPane.showMessageDialog(this, "Lote cadastrado com sucesso!");
+            ButtonVoltarActionPerformed(null);
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(
@@ -256,6 +276,7 @@ public class TelaCadastroLote extends javax.swing.JPanel {
             );
         }
     }
+
 
 
     private javax.swing.JButton ButtonCadastrar;
