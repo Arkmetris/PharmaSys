@@ -13,7 +13,7 @@ public class MedicamentoInjetavelDAO extends MedicamentoDAO {
     public MedicamentoInjetavel buscarPorSku(String sku) {
         String sql = "SELECT m.*, mi.VIA_ADMINISTRACAO, mi.TEMPERATURA_MINIMA, mi.TEMPERATURA_MAXIMA " +
                 "FROM MEDICAMENTO m " +
-                "INNER JOIN MEDICAMENTOINJETAVEL mi ON m.SKU = mi.SKU " +
+                "INNER JOIN MEDICAMENTO_INJETAVEL mi ON m.SKU = mi.SKU " +
                 "WHERE m.SKU = ?";
 
         try (Connection conn = ConnectionFactory.getConnection();

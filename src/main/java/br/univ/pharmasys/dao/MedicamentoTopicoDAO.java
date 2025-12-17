@@ -13,7 +13,7 @@ public class MedicamentoTopicoDAO extends MedicamentoDAO {
     public MedicamentoTopico buscarPorSku(String sku) {
         String sql = "SELECT m.*, mt.PESO_GRAMAS, mt.TIPO_EMBALAGEM " +
                 "FROM MEDICAMENTO m " +
-                "INNER JOIN MEDICAMENTOTOPICO mt ON m.SKU = mt.SKU " +
+                "INNER JOIN MEDICAMENTO_TOPICO mt ON m.SKU = mt.SKU " +
                 "WHERE m.SKU = ?";
 
         try (Connection conn = ConnectionFactory.getConnection();
