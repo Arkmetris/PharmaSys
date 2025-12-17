@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class ItemNotaFiscal {
 
-    private Long idItem;
+    private long idItem;
     private NotaFiscal notaFiscal; // Vincula à nota pai
     private Medicamento medicamento; // Vincula ao produto
     private int quantidade;
@@ -29,11 +29,11 @@ public class ItemNotaFiscal {
         }
     }
 
-    public Long getIdItem() {
+    public long getIdItem() {
         return idItem;
     }
 
-    public void setIdItem(Long idItem) {
+    public void setIdItem(long idItem) {
         this.idItem = idItem;
     }
 

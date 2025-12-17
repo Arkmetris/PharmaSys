@@ -99,7 +99,7 @@ public class NotaFiscalDAO {
         nf.setValorTotal(rs.getBigDecimal("valor_total"));
         nf.setCpfCliente(rs.getString("cpf_cliente"));
 
-        Long idFunc = rs.getLong("id_funcionario");
+        long idFunc = rs.getLong("id_funcionario");
         if (idFunc > 0) {
             Funcionario f = new Funcionario();
             f.setIdFuncionario(idFunc);

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class NotaFiscal {
 
-    private Long id;
+    private long id;
     private String numeroNota; // Identificador fiscal
     private LocalDateTime dataEmissao; // Rastreabilidade de Data/Hora 
     private BigDecimal valorTotal;
@@ -23,7 +23,7 @@ public class NotaFiscal {
         this.itens = new ArrayList<>();
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
