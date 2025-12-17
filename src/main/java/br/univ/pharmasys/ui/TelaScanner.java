@@ -1,14 +1,124 @@
 package br.univ.pharmasys.ui;
 
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.github.sarxos.webcam.WebcamResolution;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.Result;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
 
-public class TelaScanner extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaScanner.class.getName());
+import javax.swing.*;
+import java.awt.*;
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+
+public class TelaScanner extends javax.swing.JFrame implements Runnable, ThreadFactory {
+
+    private static final long serialVersionUID = 6441489157408381878L;
+
+    private Webcam webcam = null;
+    private WebcamPanel panel = null;
+    private Executor executor = Executors.newSingleThreadExecutor(this);
 
     public TelaScanner() {
         initComponents();
+        initWebcam();
     }
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+
+    private void initWebcam() {
+    	
+        Dimension size = WebcamResolution.QVGA.getSize();
+        webcam = Webcam.getDefault();
+        
+        if (webcam != null) {
+            webcam.setViewSize(size);
+
+            panel = new WebcamPanel(webcam);
+            panel.setPreferredSize(size);
+            panel.setFPSDisplayed(true);
+
+            // Adiciona o painel da webcam ao jPanel1 existente
+            jPanel1.setLayout(new BorderLayout());
+            jPanel1.add(panel, BorderLayout.CENTER);
+            jPanel1.revalidate(); // Atualiza o layout
+            
+            // Inicia a thread de leitura
+            executor.execute(this);
+        } else {
+            JOptionPane.showMessageDialog(this, "Nenhuma webcam encontrada!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    @Override
+    public void run() {
+        do {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Result result = null;
+            BufferedImage image = null;
+
+            if (webcam != null && webcam.isOpen()) {
+                if ((image = webcam.getImage()) == null) {
+                    continue;
+                }
+            }
+
+            if (image != null) {
+                try {
+                    BufferedImageLuminanceSource source = new BufferedImageLuminanceSource(image);
+                    BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+                    
+                    // Tenta decodificar a imagem procurando por códigos de barras
+                    result = new MultiFormatReader().decode(bitmap);
+                } catch (NotFoundException e) {
+                    // Nenhum código encontrado no frame atual, continua tentando
+                }
+            }
+
+            if (result != null) {
+                // Código encontrado!
+                final String textoLido = result.getText();
+                
+                // Atualiza a interface na Thread do Swing
+                SwingUtilities.invokeLater(() -> {
+                    // Preenche o campo de SKU ou exibe o código
+                    jTextField2.setText(textoLido); 
+                    
+                    // Opcional: Tocar um som ou fechar a câmera
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(this, "Código lido: " + textoLido);
+                    
+                    // Se quiser parar de ler após encontrar um:
+                });
+            }
+        } while (true);
+    }
+
+    @Override
+    public Thread newThread(Runnable r) {
+        Thread t = new Thread(r, "My-Scanner-Thread");
+        t.setDaemon(true);
+        return t;
+    }
+    
+    @Override
+    public void dispose() {
+        if (webcam != null && webcam.isOpen()) {
+            webcam.close();
+        }
+        super.dispose();
+    }
+                        
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
@@ -21,12 +131,13 @@ public class TelaScanner extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18));
         jLabel1.setText("Scanner ");
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -36,14 +147,14 @@ public class TelaScanner extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 80, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         jLabel2.setText("Posicione o código de barras:");
 
         jTextField1.setBorder(javax.swing.BorderFactory.createTitledBorder("Nome Comercial:"));
 
-        jTextField2.setBorder(javax.swing.BorderFactory.createTitledBorder("SKU:"));
+        jTextField2.setBorder(javax.swing.BorderFactory.createTitledBorder("Código Lido / SKU:"));
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -51,8 +162,13 @@ public class TelaScanner extends javax.swing.JFrame {
         });
 
         jButton1.setText("Voltar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dispose();
+            }
+        });
 
-        jButton2.setText("Escanear outro");
+        jButton2.setText("Limpar / Escanear outro");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -61,7 +177,7 @@ public class TelaScanner extends javax.swing.JFrame {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Obs: talvez seja melhor um pop-up\naqui");
+        jTextArea1.setText("Obs: O código lido aparecerá\nno campo SKU automaticamente.");
         jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -118,22 +234,34 @@ public class TelaScanner extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }                    
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }                                           
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // Botão para limpar o campo e permitir nova leitura
+        jTextField2.setText("");
+        jTextField1.setText("");
+        // Se a webcam estiver fechada, poderia reabrir aq
+    }                                        
 
     public static void main(String args[]) {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TelaScanner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
 
         java.awt.EventQueue.invokeLater(() -> new TelaScanner().setVisible(true));
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+                   
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -142,6 +270,5 @@ public class TelaScanner extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    // End of variables declaration//GEN-END:variables
+    private javax.swing.JTextField jTextField2;                  
 }
