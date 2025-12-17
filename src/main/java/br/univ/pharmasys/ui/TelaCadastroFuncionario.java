@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import br.univ.pharmasys.dao.FuncionarioDAO;
 import br.univ.pharmasys.model.Funcionario;
+import br.univ.pharmasys.service.MensagemEmailFuncionario;
 
 @SuppressWarnings("serial")
 public class TelaCadastroFuncionario extends JFrame {
@@ -322,6 +323,16 @@ public class TelaCadastroFuncionario extends JFrame {
 
             FuncionarioDAO dao = new FuncionarioDAO();
             dao.create(func);
+            
+            new Thread(() -> {
+                try {
+                    MensagemEmailFuncionario emailService = new MensagemEmailFuncionario();
+                    emailService.enviarConfirmacao(func.getEmail(), func.getNome());
+                } catch (Exception ex) {
+                    System.err.println("Erro ao enviar e-mail: " + ex.getMessage());
+                    ex.printStackTrace();
+                }
+            }).start();
 
             JOptionPane.showMessageDialog(this, "Funcionário cadastrado com sucesso!");
            
