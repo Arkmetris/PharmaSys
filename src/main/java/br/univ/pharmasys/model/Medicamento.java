@@ -20,11 +20,11 @@ public class Medicamento {
     private BigDecimal preco;
     private boolean inativo;
 
-
-    public Medicamento() {
+    
+    public Medicamento(){
+    
     }
-
-    //Classe Medicamento onde vai pegar os valores e recebera validações
+    // Objetivo aqui é fazer um "escopo" para o projeto de LPOO
 
     public String getSku() {
         return sku;

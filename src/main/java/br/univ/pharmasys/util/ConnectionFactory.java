@@ -9,8 +9,8 @@ public class ConnectionFactory {
 
     private static final String DATABASE_NAME = "pharmasys";
     private static final String URL = "jdbc:mysql://localhost:3306/" + DATABASE_NAME + "?useTimezone=true&serverTimezone=America/Recife";
-    private static final String USER = "ricardo";
-    private static final String PASSWORD = "490240412"; // <--- Coloque a senha que você definiu no mysql
+    private static final String USER = "root";
+    private static final String PASSWORD = "SUA_SENHA_AQUI"; // <--- Coloque a senha que você definiu no mysql
 
     public static Connection getConnection() {
         try {

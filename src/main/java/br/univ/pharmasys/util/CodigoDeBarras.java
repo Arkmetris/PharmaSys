@@ -1,16 +1,16 @@
 package br.univ.pharmasys.util;
-//a
-import br.univ.pharmasys.dao.CodigoDeBarrasDAO; // Importação necessária do DAO
+
 import br.univ.pharmasys.exceptions.ValorVazioException;
-import br.univ.pharmasys.exceptions.ErroDePreenchimentoInvalidoException; // Import para erro de duplicidade
+import br.univ.pharmasys.exceptions.ErroDePreenchimentoInvalidoException;
+
 import br.univ.pharmasys.model.Medicamento;
+import br.univ.pharmasys.dao.CodigoDeBarrasDAO;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.oned.EAN13Writer;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
-//import java.io.IOException;           /-- Esses imports nao estão sendo usados,
-//import java.nio.file.FileSystems;      -- Caso não for usar-los, pode remova
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.Level;
