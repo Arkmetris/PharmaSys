@@ -36,7 +36,6 @@ public class LoteDAO {
 
             stmt.executeUpdate();
 
-            // Recuperar ID do lote gerado
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
                     lote.setNumeroLote(rs.getInt(1));
@@ -46,6 +45,42 @@ public class LoteDAO {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao cadastrar Lote: " + e.getMessage(), e);
         }
+    }
+
+   
+    public Lote buscarPorSkuEValidade(String sku, java.time.LocalDate validade) {
+
+        String sql = "SELECT * FROM LOTE WHERE SKU_MEDICAMENTO = ? AND VALIDADE = ?";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, sku);
+            stmt.setDate(2, Date.valueOf(validade));
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Lote lote = new Lote();
+
+                    lote.setNumeroLote(rs.getInt("NUMERO_LOTE"));
+                    lote.setSkuMedicamento(rs.getString("SKU_MEDICAMENTO"));
+
+                    Date sqlDate = rs.getDate("VALIDADE");
+                    lote.setValidade(sqlDate != null ? sqlDate.toLocalDate() : null);
+
+                    lote.setQuantidadeRecebida(rs.getInt("QUANTIDADE_RECEBIDA"));
+                    lote.setQuantidadeAtual(rs.getInt("QUANTIDADE_ATUAL"));
+                    lote.setPreco(rs.getBigDecimal("PRECO"));
+
+                    return lote;
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar lote por SKU e validade: " + e.getMessage(), e);
+        }
+
+        return null;
     }
 
     public List<Lote> buscarPorSku(String sku) {
@@ -63,7 +98,7 @@ public class LoteDAO {
                 while (rs.next()) {
                     Lote lote = new Lote();
 
-                    lote.setNumeroLote(rs.getInt("NUMERO_LOTE"));              // 🔧 CORRIGIDO!
+                    lote.setNumeroLote(rs.getInt("NUMERO_LOTE"));
                     lote.setSkuMedicamento(rs.getString("SKU_MEDICAMENTO"));
 
                     Date sqlDate = rs.getDate("VALIDADE");
@@ -104,7 +139,6 @@ public class LoteDAO {
             stmt.setInt(3, lote.getQuantidadeRecebida());
             stmt.setInt(4, lote.getQuantidadeAtual());
             stmt.setBigDecimal(5, lote.getPreco());
-
             stmt.setInt(6, lote.getNumeroLote());
 
             stmt.executeUpdate();
