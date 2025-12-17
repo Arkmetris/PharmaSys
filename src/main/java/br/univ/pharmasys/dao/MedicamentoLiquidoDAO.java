@@ -12,7 +12,7 @@ public class MedicamentoLiquidoDAO extends MedicamentoDAO {
     public MedicamentoLiquido buscarPorSku(String sku) {
         String sql = "SELECT m.*, ml.VOLUME_ML, ml.TIPO_RECIPIENTE " +
                 "FROM MEDICAMENTO m " +
-                "INNER JOIN MEDICAMENTOLIQUIDO ml ON m.SKU = ml.SKU " +
+                "INNER JOIN MEDICAMENTO_LIQUIDO ml ON m.SKU = ml.SKU " +
                 "WHERE m.SKU = ?";
 
         try (Connection conn = ConnectionFactory.getConnection();
