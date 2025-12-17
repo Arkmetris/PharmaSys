@@ -4,11 +4,12 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.Timer;
 
-public class ZNovaTelaGerencia extends javax.swing.JPanel {
+public class ZNovaTelaGerencia extends javax.swing.JFrame {
 
     public ZNovaTelaGerencia() {
         initComponents();
         initRelogio();
+        setLocationRelativeTo(null);
     }
     
     private void initRelogio() {
@@ -198,6 +199,11 @@ public class ZNovaTelaGerencia extends javax.swing.JPanel {
         buttonSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         buttonSair.setForeground(new java.awt.Color(153, 0, 51));
         buttonSair.setText("Sair >");
+        buttonSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonSairMouseClicked(evt);
+            }
+        });
 
         relogio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -239,8 +245,10 @@ public class ZNovaTelaGerencia extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("SF Pro", 1, 20)); // NOI18N
         jLabel4.setText("Olá, gerente!");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -261,6 +269,8 @@ public class ZNovaTelaGerencia extends javax.swing.JPanel {
                 .addComponent(TabbedPanePrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(197, Short.MAX_VALUE))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButtonVIsualizarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonVIsualizarEstoqueActionPerformed
@@ -283,8 +293,9 @@ public class ZNovaTelaGerencia extends javax.swing.JPanel {
         new TelaRelatorios() .setVisible(true);
     }//GEN-LAST:event_ButtonEmitirRelatorioActionPerformed
 
-    private void ButtonSairActionPerformed(java.awt.event.ActionEvent evt) { 
+    private void buttonSairMouseClicked(java.awt.event.MouseEvent evt) { 
         new TelaInicial().setVisible(true);
+        this.dispose();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AbaFornecedor;
@@ -310,15 +321,7 @@ public class ZNovaTelaGerencia extends javax.swing.JPanel {
 
 public static void main(String[] args) {
     javax.swing.SwingUtilities.invokeLater(() -> {
-        javax.swing.JFrame frame = new javax.swing.JFrame("Tela do Gerente");
-        frame.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
-        frame.setContentPane(new ZNovaTelaGerencia()); 
-        frame.pack(); 
-        frame.setLocationRelativeTo(null); 
-        frame.setVisible(true); 
+        new ZNovaTelaGerencia().setVisible(true);
     });
 }
 }
-
-
-
