@@ -14,7 +14,15 @@ public class NovaTelaFuncionario extends javax.swing.JFrame {
 
     public NovaTelaFuncionario() {
         initComponents();
+        buttonRealizarVenda.setText("<html><center>Realizar<br>Venda</center></html>");
+        buttonVisualizarEstoque.setText("<html><center>Visualizar<br>Estoque</center></html>");
+        jButton1.setText("<html><center>Buscar por<br>Scanner</center></html>");
+        buttonRealizarVenda.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 16));
+        buttonVisualizarEstoque.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 16));
+        jButton1.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 16));
         initRelogio();
+        setLocationRelativeTo(null);
+        pack();
     }
 
     // Método que inicializa o relógio
@@ -27,12 +35,12 @@ public class NovaTelaFuncionario extends javax.swing.JFrame {
         timer.setInitialDelay(0);
         timer.start();
     }
-    
+
     // Método para definir o labelNome do usuário mostrado na tela
     public void definirUsuarioLogado(String nome) {
         labelNome.setText(nome);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -243,11 +251,11 @@ public class NovaTelaFuncionario extends javax.swing.JFrame {
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
     String busca = campoPesquisa.getText().trim();
-        
+
         if (!busca.isEmpty()){
             MedicamentoDAO dao = new MedicamentoDAO();
             List<Medicamento> listaEncontrada = dao.buscarPorNome(busca);
-            
+
             if(listaEncontrada.isEmpty()){
             JOptionPane.showMessageDialog(this,"Nenhum medicamento encontrado com esse nome.");
             }else{
