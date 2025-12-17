@@ -12,7 +12,7 @@ public class MedicamentoLiquidoDAO extends MedicamentoDAO {
     public MedicamentoLiquido buscarPorSku(String sku) {
         String sql = "SELECT m.*, ml.VOLUME_ML, ml.TIPO_RECIPIENTE " +
                 "FROM MEDICAMENTO m " +
-                "INNER JOIN MEDICAMENTOLIQUIDO ml ON m.SKU = ml.SKU " +
+                "INNER JOIN MEDICAMENTO_LIQUIDO ml ON m.SKU = ml.SKU " +
                 "WHERE m.SKU = ?";
 
         try (Connection conn = ConnectionFactory.getConnection();
@@ -53,7 +53,7 @@ public class MedicamentoLiquidoDAO extends MedicamentoDAO {
     public void create(MedicamentoLiquido liq) {
         super.create(liq);
 
-        String sql = "INSERT INTO MEDICAMENTOLIQUIDO (SKU, VOLUME_ML, TIPO_RECIPIENTE) VALUES (?,?,?)";
+        String sql = "INSERT INTO MEDICAMENTO_LIQUIDO (SKU, VOLUME_ML, TIPO_RECIPIENTE) VALUES (?,?,?)";
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -74,7 +74,7 @@ public class MedicamentoLiquidoDAO extends MedicamentoDAO {
     public void update(MedicamentoLiquido liq) {
         super.update(liq);
 
-        String sql = "UPDATE MEDICAMENTOLIQUIDO SET VOLUME_ML = ?, TIPO_RECIPIENTE = ? WHERE SKU = ?";
+        String sql = "UPDATE MEDICAMENTO_LIQUIDO SET VOLUME_ML = ?, TIPO_RECIPIENTE = ? WHERE SKU = ?";
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -92,7 +92,7 @@ public class MedicamentoLiquidoDAO extends MedicamentoDAO {
     //metodo de deletar tanto da classe pai e da classe filha (delete)
     @Override
     public void delete(String sku) {
-        String sqlFilha = "DELETE FROM MEDICAMENTOLIQUIDO WHERE SKU=?";
+        String sqlFilha = "DELETE FROM MEDICAMENTO_LIQUIDO WHERE SKU=?";
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sqlFilha)) {
