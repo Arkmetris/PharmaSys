@@ -1,147 +1,265 @@
 package br.univ.pharmasys.ui;
 
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.github.sarxos.webcam.WebcamResolution;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.Result;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
 
-public class TelaScanner extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaScanner.class.getName());
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.geom.RoundRectangle2D;
+import java.awt.image.BufferedImage;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+
+public class TelaScanner extends javax.swing.JFrame implements Runnable, ThreadFactory {
+
+    private static final long serialVersionUID = 1L;
+
+    private Webcam webcam = null;
+    private WebcamPanel panel = null;
+    private Executor executor = Executors.newSingleThreadExecutor(this);
+
+    // Componentes da tela
+    private javax.swing.JPanel jPanelCamera;
+    private javax.swing.JTextField txtNomeProduto;
+    private javax.swing.JTextField txtSku;
+    private BotaoArredondado btnLimpar;
+    private javax.swing.JLabel lblInstrucao;
+    private javax.swing.JLabel lblTitulo;
 
     public TelaScanner() {
-        initComponents();
+        configurarJanela();
+        inicializarComponentes();
+        initWebcam();
     }
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+    private void configurarJanela() {
+        setTitle("Scanner PharmaSys");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new Color(245, 245, 250)); // Cor de fundo suave
+        // Layout principal
+        setLayout(new BorderLayout(10, 10));
+    }
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    private void inicializarComponentes() {
+        JPanel pnlTopo = new JPanel();
+        pnlTopo.setBackground(new Color(245, 245, 250));
+        pnlTopo.setBorder(new EmptyBorder(15, 0, 10, 0));
+        
+        lblTitulo = new JLabel("Scanner de Código de Barras");
+        lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        lblTitulo.setForeground(new Color(50, 50, 80));
+        pnlTopo.add(lblTitulo);
+        
+        add(pnlTopo, BorderLayout.NORTH);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Scanner ");
+        JPanel pnlCentral = new JPanel();
+        pnlCentral.setLayout(new BoxLayout(pnlCentral, BoxLayout.Y_AXIS));
+        pnlCentral.setBackground(new Color(245, 245, 250));
+        pnlCentral.setBorder(new EmptyBorder(0, 20, 0, 20));
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        lblInstrucao = new JLabel("Posicione o código no centro da câmera:");
+        lblInstrucao.setAlignmentX(Component.CENTER_ALIGNMENT);
+        lblInstrucao.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        lblInstrucao.setBorder(new EmptyBorder(0, 0, 10, 0));
+        pnlCentral.add(lblInstrucao);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 522, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 80, Short.MAX_VALUE)
-        );
+        jPanelCamera = new JPanel();
+        jPanelCamera.setBackground(Color.BLACK);
+        jPanelCamera.setPreferredSize(new Dimension(640, 480)); // Tamanho VGA
+        jPanelCamera.setMaximumSize(new Dimension(640, 480));
+        jPanelCamera.setAlignmentX(Component.CENTER_ALIGNMENT);
+        jPanelCamera.setBorder(BorderFactory.createLineBorder(new Color(200, 200, 200), 1));
+        pnlCentral.add(jPanelCamera);
 
-        jLabel2.setText("Posicione o código de barras:");
+        pnlCentral.add(Box.createVerticalStrut(20)); // Espaço
 
-        jTextField1.setBorder(javax.swing.BorderFactory.createTitledBorder("Nome Comercial:"));
+        // Campos de Texto
+        JPanel pnlCampos = new JPanel(new GridLayout(1, 2, 15, 0));
+        pnlCampos.setBackground(new Color(245, 245, 250));
+        pnlCampos.setMaximumSize(new Dimension(640, 60));
 
-        jTextField2.setBorder(javax.swing.BorderFactory.createTitledBorder("SKU:"));
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+        txtNomeProduto = criarTextFieldEstilizado("Nome Comercial");
+        txtSku = criarTextFieldEstilizado("Código Lido / SKU");
+
+        pnlCampos.add(txtNomeProduto);
+        pnlCampos.add(txtSku);
+        
+        pnlCentral.add(pnlCampos);
+        
+        add(pnlCentral, BorderLayout.CENTER);
+
+        JPanel pnlInferior = new JPanel();
+        pnlInferior.setBackground(new Color(245, 245, 250));
+        pnlInferior.setBorder(new EmptyBorder(20, 0, 20, 0));
+
+        btnLimpar = new BotaoArredondado("Limpar / Escanear Outro");
+        btnLimpar.setPreferredSize(new Dimension(250, 45)); // Botão maior
+        btnLimpar.addActionListener(evt -> limparCampos());
+
+        pnlInferior.add(btnLimpar);
+        add(pnlInferior, BorderLayout.SOUTH);
+
+        pack(); 
+        setLocationRelativeTo(null);
+    }
+
+    private JTextField criarTextFieldEstilizado(String titulo) {
+        JTextField campo = new JTextField();
+        campo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        campo.setBorder(BorderFactory.createTitledBorder(
+                BorderFactory.createLineBorder(new Color(150, 150, 150)), 
+                titulo,
+                javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
+                javax.swing.border.TitledBorder.DEFAULT_POSITION,
+                new Font("Segoe UI", Font.BOLD, 12)
+        ));
+        return campo;
+    }
+
+    private void initWebcam() {
+        Dimension size = WebcamResolution.VGA.getSize(); 
+        webcam = Webcam.getDefault();
+        
+        if (webcam != null) {
+            webcam.setViewSize(size);
+
+            panel = new WebcamPanel(webcam);
+            panel.setPreferredSize(size);
+            panel.setFPSDisplayed(false);
+            panel.setImageSizeDisplayed(false);
+            panel.setMirrored(true);
+
+            jPanelCamera.setLayout(new BorderLayout());
+            jPanelCamera.add(panel, BorderLayout.CENTER);
+            jPanelCamera.revalidate(); 
+            
+            executor.execute(this);
+        } else {
+            JOptionPane.showMessageDialog(this, "Nenhuma webcam encontrada!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    @Override
+    public void run() {
+        do {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        });
 
-        jButton1.setText("Voltar");
+            Result result = null;
+            BufferedImage image = null;
 
-        jButton2.setText("Escanear outro");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+            if (webcam != null && webcam.isOpen()) {
+                if ((image = webcam.getImage()) == null) {
+                    continue;
+                }
             }
-        });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Obs: talvez seja melhor um pop-up\naqui");
-        jScrollPane1.setViewportView(jTextArea1);
+            if (image != null) {
+                try {
+                    BufferedImageLuminanceSource source = new BufferedImageLuminanceSource(image);
+                    BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+                    result = new MultiFormatReader().decode(bitmap);
+                } catch (NotFoundException e) {
+                }
+            }
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(229, 229, 229))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(270, 270, 270))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(23, 23, 23))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jLabel1)
-                .addGap(39, 39, 39)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(20, 20, 20))
-        );
+            if (result != null) {
+                final String textoLido = result.getText();
+                SwingUtilities.invokeLater(() -> {
+                    // Evita ficar bipando o mesmo código repetidamente se ja estiver preenchid
+                    if (!textoLido.equals(txtSku.getText())) {
+                        txtSku.setText(textoLido); 
+                        Toolkit.getDefaultToolkit().beep();
+                    }
+                });
+            }
+        } while (true);
+    }
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+    @Override
+    public Thread newThread(Runnable r) {
+        Thread t = new Thread(r, "Scanner-Thread");
+        t.setDaemon(true);
+        return t;
+    }
+    
+    @Override
+    public void dispose() {
+        if (webcam != null && webcam.isOpen()) {
+            webcam.close();
+        }
+        super.dispose();
+    }
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void limparCampos() {
+        txtSku.setText("");
+        txtNomeProduto.setText("");
+        txtSku.requestFocus();
+    }
 
     public static void main(String args[]) {
-
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         java.awt.EventQueue.invokeLater(() -> new TelaScanner().setVisible(true));
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    // End of variables declaration//GEN-END:variables
+    class BotaoArredondado extends JButton {
+        private Color corNormal = new Color(70, 130, 180);
+        private Color corHover = new Color(100, 149, 237); 
+        private Color corTexto = Color.WHITE;
+        private int raio = 20; 
+
+        public BotaoArredondado(String texto) {
+            super(texto);
+            setContentAreaFilled(false);
+            setFocusPainted(false);
+            setBorderPainted(false);
+            setFont(new Font("Segoe UI", Font.BOLD, 14));
+            setForeground(corTexto);
+            setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+            addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    setBackground(corHover);
+                }
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    setBackground(corNormal);
+                }
+            });
+            setBackground(corNormal);
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g.create();
+
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            
+            g2.setColor(getBackground());
+            g2.fill(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), raio, raio));
+            
+            // Desenha o texto
+            super.paintComponent(g2);
+            g2.dispose();
+        }
+    }
 }

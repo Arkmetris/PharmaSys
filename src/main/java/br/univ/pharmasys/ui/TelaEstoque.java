@@ -100,5 +100,6 @@ public class TelaEstoque extends JFrame {
     }
 
 
+
     private JTable tabelaEstoque;
 }
