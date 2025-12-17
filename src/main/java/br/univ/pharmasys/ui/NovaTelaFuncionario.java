@@ -109,7 +109,7 @@ public class NovaTelaFuncionario extends javax.swing.JFrame {
         jLabel4.setText("PESQUISAR");
 
         jLabel2.setFont(new java.awt.Font("SF Pro", 1, 18)); // NOI18N
-        jLabel2.setText("Olá, funcionário!");
+        jLabel2.setText("Olá, farmacêutico!");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
