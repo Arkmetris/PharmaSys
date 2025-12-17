@@ -146,7 +146,7 @@ public class MedicamentoDAO {
             stmt.setDate(10, Date.valueOf(med.getDataExpiracao()));
             stmt.setBigDecimal(11, med.getPreco());
 
-            stmt.setString(12, med.getSku());
+            stmt.setString(13, med.getSku());
 
             stmt.executeUpdate();
             System.out.println("Medicamento atualizado com sucesso!");
