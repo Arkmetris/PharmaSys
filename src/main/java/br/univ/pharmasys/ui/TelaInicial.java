@@ -209,4 +209,5 @@ public class TelaInicial extends JFrame {
     private JPanel panelLogo;
     private JPasswordField textSenha;
     private JTextField textLogin;
+
 }

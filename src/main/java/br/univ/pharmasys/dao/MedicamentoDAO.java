@@ -1,6 +1,7 @@
 package br.univ.pharmasys.dao;
 
 import br.univ.pharmasys.model.Medicamento;
+import br.univ.pharmasys.model.MedicamentoInjetavel;
 import br.univ.pharmasys.util.ConnectionFactory;
 
 import java.sql.*;
@@ -108,7 +109,7 @@ public class MedicamentoDAO {
                     med.setEstoqueMin(rs.getInt("ESTOQUE_MIN"));
                     med.setEstoqueAtual(rs.getInt("ESTOQUE_ATUAL"));
                     med.setPreco(rs.getBigDecimal("PRECO"));
-                    //med.setLoteId(rs.getObject("LOTE_ID", Integer.class));
+
 
                     if (rs.getDate("DATA_EXPIRACAO") != null) {
                         med.setDataExpiracao(rs.getDate("DATA_EXPIRACAO").toLocalDate());
@@ -124,6 +125,24 @@ public class MedicamentoDAO {
         return lista;
     }
 
+    public List<Medicamento> listarTodos() {
+        String sql = "SELECT M.*FROM MEDICAMENTO M ORDER BY M.NOME_COMERCIAL";
+
+        List<Medicamento> lista = new ArrayList<>();
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                lista.add(montarMedicamento(rs));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao listar todos os medicamentos: " + e.getMessage(), e);
+        }
+        return lista;
+    }
 
     public void update(Medicamento med) {
 
@@ -176,4 +195,31 @@ public class MedicamentoDAO {
             throw new RuntimeException("Erro ao excluir medicamento: " + e.getMessage(), e);
         }
     }
+
+    private Medicamento montarMedicamento(ResultSet rs) throws SQLException {
+        Medicamento med = new Medicamento();
+
+        //Vai fazer o corpo do Medicamento no BD
+
+        med.setNomeComercial(rs.getString("NOME_COMERCIAL"));
+        med.setSku(rs.getString("SKU"));
+        med.setDosagem(rs.getString("DOSAGEM"));
+        med.setFormaFarmaceutica(rs.getString("FORMA_FARMACEUTICA"));
+        med.setFabricante(rs.getString("FABRICANTE")); // corrigido
+        med.setCodigoBarras(rs.getString("CODIGO_BARRAS"));
+        med.setLaboratorio(rs.getString("LABORATORIO"));
+        med.setEstoqueMax(rs.getInt("ESTOQUE_MAX"));
+        med.setEstoqueMin(rs.getInt("ESTOQUE_MIN"));
+        med.setEstoqueAtual(rs.getInt("ESTOQUE_ATUAL"));
+        med.setPreco(rs.getBigDecimal("PRECO"));
+
+        Date sqlDate = rs.getDate("DATA_EXPIRACAO");
+        if (sqlDate != null) {
+            med.setDataExpiracao(sqlDate.toLocalDate());
+        }
+        return med;
+    }
+
 }
+
+

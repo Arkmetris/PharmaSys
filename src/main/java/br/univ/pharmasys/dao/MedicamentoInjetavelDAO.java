@@ -2,10 +2,10 @@ package br.univ.pharmasys.dao;
 
 import br.univ.pharmasys.model.MedicamentoInjetavel;
 import br.univ.pharmasys.util.ConnectionFactory;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MedicamentoInjetavelDAO extends MedicamentoDAO {
 
@@ -77,6 +77,30 @@ public class MedicamentoInjetavelDAO extends MedicamentoDAO {
         }
     }
 
+    public List<MedicamentoInjetavel> listarInjetavel() {
+        String sql = "SELECT m.*, mi.VIA_ADMINISTRACAO, mi.TEMPERATURA_MINIMA, mi.TEMPERATURA_MAXIMA " +
+                      "FROM MEDICAMENTO m " +
+                      "INNER JOIN MEDICAMENTO_INJETAVEL mi ON m.SKU = mi.SKU ";
+
+
+        List<MedicamentoInjetavel> lista = new ArrayList<>();
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                lista.add(montarInjetavel(rs));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao listar todos os injetáveis: " + e.getMessage(), e);
+        }
+        return lista;
+    }
+
+
+
     //metodo de atualizar as infos do medicamento injetavel (update)
     public void update(MedicamentoInjetavel inj) {
         super.update(inj);
@@ -112,5 +136,34 @@ public class MedicamentoInjetavelDAO extends MedicamentoDAO {
         }
         //depois de apagar o filho, chama o pai para apagar o registro geral
         super.delete(sku);
+    }
+
+    private MedicamentoInjetavel montarInjetavel(ResultSet rs) throws SQLException {
+        MedicamentoInjetavel injetavel = new MedicamentoInjetavel();
+
+        //Vai fazer o corpo do Medicamento no BD
+
+        injetavel.setNomeComercial(rs.getString("NOME_COMERCIAL"));
+        injetavel.setSku(rs.getString("SKU"));
+        injetavel.setDosagem(rs.getString("DOSAGEM"));
+        injetavel.setFormaFarmaceutica(rs.getString("FORMA_FARMACEUTICA"));
+        injetavel.setFabricante(rs.getString("FABRICANTE")); // corrigido
+        injetavel.setCodigoBarras(rs.getString("CODIGO_BARRAS"));
+        injetavel.setLaboratorio(rs.getString("LABORATORIO"));
+        injetavel.setEstoqueMax(rs.getInt("ESTOQUE_MAX"));
+        injetavel.setEstoqueMin(rs.getInt("ESTOQUE_MIN"));
+        injetavel.setEstoqueAtual(rs.getInt("ESTOQUE_ATUAL"));
+        injetavel.setPreco(rs.getBigDecimal("PRECO"));
+
+        Date sqlDate = rs.getDate("DATA_EXPIRACAO");
+        if (sqlDate != null) {
+            injetavel.setDataExpiracao(sqlDate.toLocalDate());
+        }
+
+        injetavel.setViaAdministracao(rs.getString("VIA_ADMINISTRACAO"));
+        injetavel.setTemperaturaMinima(rs.getDouble("TEMPERATURA_MINIMA"));
+        injetavel.setTemperaturaMaxima(rs.getDouble("TEMPERATURA_MAXIMA"));
+
+        return injetavel;
     }
 }
