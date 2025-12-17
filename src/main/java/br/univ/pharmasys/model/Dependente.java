@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 public class Dependente {
 
-    private Long id;
+    private long id;
     private Funcionario funcionario; 
     private String cpfFuncionario; 
     private String nome;
@@ -17,7 +17,7 @@ public class Dependente {
     public Dependente() {
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
