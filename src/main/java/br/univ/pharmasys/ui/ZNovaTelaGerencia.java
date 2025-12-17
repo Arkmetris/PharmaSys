@@ -1,5 +1,6 @@
 package br.univ.pharmasys.ui;
 
+import java.awt.event.MouseEvent;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.Timer;
@@ -198,6 +199,11 @@ public class ZNovaTelaGerencia extends javax.swing.JPanel {
         buttonSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         buttonSair.setForeground(new java.awt.Color(153, 0, 51));
         buttonSair.setText("Sair >");
+        buttonSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonSairMouseClicked(evt);
+            }
+        });
 
         relogio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -283,9 +289,13 @@ public class ZNovaTelaGerencia extends javax.swing.JPanel {
         new TelaRelatorios() .setVisible(true);
     }//GEN-LAST:event_ButtonEmitirRelatorioActionPerformed
 
-    private void ButtonSairActionPerformed(java.awt.event.ActionEvent evt) { 
+    private void buttonSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSairMouseClicked
         new TelaInicial().setVisible(true);
-    }
+        java.awt.Window janela =
+        javax.swing.SwingUtilities.getWindowAncestor(this);
+        janela.dispose();
+    }//GEN-LAST:event_buttonSairMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AbaFornecedor;
     private javax.swing.JPanel AbaFuncionarios;

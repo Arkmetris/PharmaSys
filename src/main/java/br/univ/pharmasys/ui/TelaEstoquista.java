@@ -170,7 +170,6 @@ private static final int ALTURA_BOTAO = 100;
 
         buttonCadastroMed.addActionListener(e -> {
             new TelaCadastroMedicamento().setVisible(true);
-            dispose();
         });
 
         buttonFornecedores.addActionListener(e -> {
