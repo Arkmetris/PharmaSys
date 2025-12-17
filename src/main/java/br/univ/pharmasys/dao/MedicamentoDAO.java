@@ -13,8 +13,8 @@ public class MedicamentoDAO {
     public void create(Medicamento med) {
 
         String sql = "INSERT INTO MEDICAMENTO (NOME_COMERCIAL, SKU, DOSAGEM, FORMA_FARMACEUTICA, FABRICANTE, "
-                + "CODIGO_BARRAS, LABORATORIO, ESTOQUE_MAX, ESTOQUE_MIN, ESTOQUE_ATUAL, DATA_EXPIRACAO, PRECO, LOTE_ID) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "CODIGO_BARRAS, LABORATORIO, ESTOQUE_MAX, ESTOQUE_MIN, ESTOQUE_ATUAL, DATA_EXPIRACAO, PRECO) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -129,7 +129,7 @@ public class MedicamentoDAO {
 
         String sql = "UPDATE MEDICAMENTO SET NOME_COMERCIAL=?, DOSAGEM=?, FORMA_FARMACEUTICA=?, FABRICANTE=?, "
                 + "CODIGO_BARRAS=?, LABORATORIO=?, ESTOQUE_MAX=?, ESTOQUE_MIN=?, ESTOQUE_ATUAL=?, DATA_EXPIRACAO=?, "
-                + "PRECO=?, LOTE_ID=? WHERE SKU=?";
+                + "PRECO=?, WHERE SKU=?";
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -146,7 +146,7 @@ public class MedicamentoDAO {
             stmt.setDate(10, Date.valueOf(med.getDataExpiracao()));
             stmt.setBigDecimal(11, med.getPreco());
 
-            stmt.setString(13, med.getSku());
+            stmt.setString(12, med.getSku());
 
             stmt.executeUpdate();
             System.out.println("Medicamento atualizado com sucesso!");
