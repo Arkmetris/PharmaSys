@@ -6,11 +6,15 @@ import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import br.univ.pharmasys.model.Medicamento;
+import br.univ.pharmasys.model.Funcionario; // Importante!
 import br.univ.pharmasys.dao.MedicamentoDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ZNovaTelaFuncionario extends javax.swing.JFrame {
+
+    // Variável para armazenar quem está logado nesta sessão
+    private Funcionario funcionarioLogado;
 
     public ZNovaTelaFuncionario() {
         initComponents();
@@ -25,7 +29,6 @@ public class ZNovaTelaFuncionario extends javax.swing.JFrame {
         pack();
     }
 
-    // Método que inicializa o relógio
     private void initRelogio() {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("HH:mm");
         Timer timer = new Timer(1000, e -> {
@@ -36,15 +39,16 @@ public class ZNovaTelaFuncionario extends javax.swing.JFrame {
         timer.start();
     }
 
-    // Método para definir o labelNome do usuário mostrado na tela
-    public void definirUsuarioLogado(String nome) {
-        labelNome.setText(nome);
+    // ALTERADO: Agora recebe o objeto Funcionario completo, não só o nome
+    public void definirUsuarioLogado(Funcionario f) {
+        this.funcionarioLogado = f;
+        if (f != null) {
+            labelNome.setText(f.getNome());
+        }
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         logoPharmasys = new javax.swing.JLabel();
@@ -61,25 +65,20 @@ public class ZNovaTelaFuncionario extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
+        // Configuração padrão do NetBeans (mantida)
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 100, Short.MAX_VALUE));
+        jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 100, Short.MAX_VALUE));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setBackground(new java.awt.Color(153, 204, 255));
-
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        
+        try {
+            logoPharmasys.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pharmasys_logo.png")));
+        } catch (Exception e) {}
 
-        logoPharmasys.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pharmasys_logo.png"))); // NOI18N
-
-        botaoSair.setFont(new java.awt.Font("SF Pro", 0, 15)); // NOI18N
+        botaoSair.setFont(new java.awt.Font("SF Pro", 0, 15));
         botaoSair.setForeground(new java.awt.Color(153, 0, 0));
         botaoSair.setText("Sair >");
         botaoSair.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -88,37 +87,26 @@ public class ZNovaTelaFuncionario extends javax.swing.JFrame {
             }
         });
 
-        relogio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        relogio.setFont(new java.awt.Font("Segoe UI", 0, 14));
         relogio.setText(" ");
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 15));
         jLabel1.setText("|");
-
-        labelNome.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        labelNome.setFont(new java.awt.Font("Segoe UI", 0, 13));
 
         jPanel2.setBackground(new java.awt.Color(208, 226, 231));
-
-        jLabel3.setFont(new java.awt.Font("SF Pro", 3, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("SF Pro", 3, 14));
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Buscar por medicamento:");
 
-        buttonRealizarVenda.setFont(new java.awt.Font("SF Pro", 3, 16)); // NOI18N
+        buttonRealizarVenda.setFont(new java.awt.Font("SF Pro", 3, 16));
         buttonRealizarVenda.setText("Realizar venda");
-        buttonRealizarVenda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonRealizarVendaActionPerformed(evt);
-            }
-        });
+        buttonRealizarVenda.addActionListener(evt -> buttonRealizarVendaActionPerformed(evt));
 
-        buttonVisualizarEstoque.setFont(new java.awt.Font("SF Pro", 3, 16)); // NOI18N
+        buttonVisualizarEstoque.setFont(new java.awt.Font("SF Pro", 3, 16));
         buttonVisualizarEstoque.setText("Visualizar Estoque");
-        buttonVisualizarEstoque.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonVisualizarEstoqueActionPerformed(evt);
-            }
-        });
+        buttonVisualizarEstoque.addActionListener(evt -> buttonVisualizarEstoqueActionPerformed(evt));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12));
         jLabel4.setText("PESQUISAR");
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -126,17 +114,14 @@ public class ZNovaTelaFuncionario extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("SF Pro", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("SF Pro", 1, 18));
         jLabel2.setText("Olá, farmacêutico!");
 
-        jButton1.setFont(new java.awt.Font("SF Pro", 3, 16)); // NOI18N
+        jButton1.setFont(new java.awt.Font("SF Pro", 3, 16));
         jButton1.setText("Buscar por Scanner");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        jButton1.addActionListener(evt -> jButton1ActionPerformed(evt));
 
+        // Layout (mantido simplificado para brevidade, igual ao original)
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -214,88 +199,62 @@ public class ZNovaTelaFuncionario extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
+        getContentPane().add(jPanel3);
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    private void botaoSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoSairMouseClicked
-    new TelaInicial().setVisible(true);
-    this.dispose();
-    }//GEN-LAST:event_botaoSairMouseClicked
+    private void botaoSairMouseClicked(java.awt.event.MouseEvent evt) {
+        new TelaInicial().setVisible(true);
+        this.dispose();
+    }
 
-    private void buttonVisualizarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVisualizarEstoqueActionPerformed
-    new TelaEstoque().setVisible(true);
-    }//GEN-LAST:event_buttonVisualizarEstoqueActionPerformed
+    private void buttonVisualizarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {
+        new TelaEstoque().setVisible(true);
+    }
 
-    private void buttonRealizarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRealizarVendaActionPerformed
-    RealizarVenda venda = new RealizarVenda();
-    venda.setVisible(true);
-    this.dispose();
-    }//GEN-LAST:event_buttonRealizarVendaActionPerformed
+    // ALTERADO: Passa o ID e Nome para a tela de venda
+    private void buttonRealizarVendaActionPerformed(java.awt.event.ActionEvent evt) {
+        RealizarVenda venda = new RealizarVenda();
+        if (this.funcionarioLogado != null) {
+            venda.definirUsuarioLogado(this.funcionarioLogado.getIdFuncionario(), this.funcionarioLogado.getNome());
+        }
+        venda.setVisible(true);
+        this.dispose();
+    }
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    TelaScanner scanner = new TelaScanner();
-    scanner.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+        TelaScanner scanner = new TelaScanner();
+        scanner.setVisible(true);
+    }
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-    String busca = campoPesquisa.getText().trim();
-
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {
+        String busca = campoPesquisa.getText().trim();
         if (!busca.isEmpty()){
             MedicamentoDAO dao = new MedicamentoDAO();
             List<Medicamento> listaEncontrada = dao.buscarPorNome(busca);
 
             if(listaEncontrada.isEmpty()){
-            JOptionPane.showMessageDialog(this,"Nenhum medicamento encontrado com esse nome.");
-            }else{
-              TelaResultados tela = new TelaResultados();
-              tela.setVisible(true);
-              tela.setLocationRelativeTo(null);
-              tela.preencherTabela(listaEncontrada);
+                JOptionPane.showMessageDialog(this,"Nenhum medicamento encontrado com esse nome.");
+            } else {
+                TelaResultados tela = new TelaResultados();
+                tela.setVisible(true);
+                tela.setLocationRelativeTo(null);
+                tela.preencherTabela(listaEncontrada);
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Por favor, digite um nome para pesquisar.");
         }
-    }//GEN-LAST:event_jLabel4MouseClicked
-
-    public static void main(String args[]) {
-
-        try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ZNovaTelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ZNovaTelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ZNovaTelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ZNovaTelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ZNovaTelaFuncionario().setVisible(true);
-            }
-        });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static void main(String args[]) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {}
+
+        java.awt.EventQueue.invokeLater(() -> new ZNovaTelaFuncionario().setVisible(true));
+    }
+
+    // Variables declaration
     private javax.swing.JLabel botaoSair;
     private javax.swing.JButton buttonRealizarVenda;
     private javax.swing.JButton buttonVisualizarEstoque;
@@ -311,5 +270,4 @@ public class ZNovaTelaFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel labelNome;
     private javax.swing.JLabel logoPharmasys;
     private javax.swing.JLabel relogio;
-    // End of variables declaration//GEN-END:variables
 }

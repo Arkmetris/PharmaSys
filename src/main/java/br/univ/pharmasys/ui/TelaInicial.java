@@ -153,7 +153,7 @@ public class TelaInicial extends JFrame {
                     JOptionPane.showMessageDialog(this, "Bem-vindo Farmacêutico(a) " + usuario.getNome());
                     ZNovaTelaFuncionario tela = new ZNovaTelaFuncionario();
                     tela.setVisible(true);
-                    tela.definirUsuarioLogado(usuario.getNome());
+                    tela.definirUsuarioLogado(usuario);
                     this.dispose();
                 } else if (usuario.getTipo() == 1) {
                     JOptionPane.showMessageDialog(this, "Bem-vindo Estoquista " + usuario.getNome());

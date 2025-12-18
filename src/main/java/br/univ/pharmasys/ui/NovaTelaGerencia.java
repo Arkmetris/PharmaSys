@@ -2,6 +2,7 @@ package br.univ.pharmasys.ui;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JFrame;
 import javax.swing.Timer;
 
 public class NovaTelaGerencia extends javax.swing.JFrame {
@@ -26,12 +27,11 @@ public class NovaTelaGerencia extends javax.swing.JFrame {
         timer.start();
     }
     
-        public void definirUsuarioLogado(String nome) {
+    public void definirUsuarioLogado(String nome) {
         labelNome.setText(nome);
     }
         
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
@@ -39,6 +39,7 @@ public class NovaTelaGerencia extends javax.swing.JFrame {
         AbaMedicamentos = new javax.swing.JPanel();
         ButtonCadastrarMedicamento = new javax.swing.JButton();
         ButtonVIsualizarEstoque = new javax.swing.JButton();
+        ButtonCadastrarLote = new javax.swing.JButton(); // NOVO
         AbaFuncionarios = new javax.swing.JPanel();
         ButtonCadastrarFuncionario = new javax.swing.JButton();
         AbaFornecedor = new javax.swing.JPanel();
@@ -53,39 +54,31 @@ public class NovaTelaGerencia extends javax.swing.JFrame {
         labelNome = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
+        // Configurações padrão do NetBeans mantidas...
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        jPanel2Layout.setHorizontalGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 100, Short.MAX_VALUE));
+        jPanel2Layout.setVerticalGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 100, Short.MAX_VALUE));
 
         setBackground(new java.awt.Color(208, 226, 231));
 
         TabbedPanePrincipal.setBackground(new java.awt.Color(255, 255, 245));
-
         AbaMedicamentos.setBackground(new java.awt.Color(219, 238, 245));
 
-        ButtonCadastrarMedicamento.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
+        ButtonCadastrarMedicamento.setFont(new java.awt.Font("SF Pro", 0, 14));
         ButtonCadastrarMedicamento.setText("Cadastrar Medicamento");
-        ButtonCadastrarMedicamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonCadastrarMedicamentoActionPerformed(evt);
-            }
-        });
+        ButtonCadastrarMedicamento.addActionListener(evt -> ButtonCadastrarMedicamentoActionPerformed(evt));
 
-        ButtonVIsualizarEstoque.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
+        ButtonVIsualizarEstoque.setFont(new java.awt.Font("SF Pro", 0, 14));
         ButtonVIsualizarEstoque.setText("Visualizar Estoque");
-        ButtonVIsualizarEstoque.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonVIsualizarEstoqueActionPerformed(evt);
-            }
-        });
+        ButtonVIsualizarEstoque.addActionListener(evt -> ButtonVIsualizarEstoqueActionPerformed(evt));
 
+        // CONFIGURAÇÃO DO NOVO BOTÃO
+        ButtonCadastrarLote.setFont(new java.awt.Font("SF Pro", 0, 14));
+        ButtonCadastrarLote.setText("Cadastrar Lote");
+        ButtonCadastrarLote.addActionListener(evt -> ButtonCadastrarLoteActionPerformed(evt));
+
+        // Layout da Aba Medicamentos
         javax.swing.GroupLayout AbaMedicamentosLayout = new javax.swing.GroupLayout(AbaMedicamentos);
         AbaMedicamentos.setLayout(AbaMedicamentosLayout);
         AbaMedicamentosLayout.setHorizontalGroup(
@@ -94,7 +87,8 @@ public class NovaTelaGerencia extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(AbaMedicamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ButtonVIsualizarEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButtonCadastrarMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ButtonCadastrarMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButtonCadastrarLote, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)) // Adicionado aqui
                 .addContainerGap(440, Short.MAX_VALUE))
         );
         AbaMedicamentosLayout.setVerticalGroup(
@@ -104,103 +98,73 @@ public class NovaTelaGerencia extends javax.swing.JFrame {
                 .addComponent(ButtonVIsualizarEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ButtonCadastrarMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ButtonCadastrarLote, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE) // Adicionado aqui
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
         TabbedPanePrincipal.addTab("Medicamentos", AbaMedicamentos);
 
+        // --- (Código das outras abas mantido igual) ---
+        
         AbaFuncionarios.setBackground(new java.awt.Color(219, 238, 245));
-
-        ButtonCadastrarFuncionario.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
+        ButtonCadastrarFuncionario.setFont(new java.awt.Font("SF Pro", 0, 14));
         ButtonCadastrarFuncionario.setText("Cadastrar Funcionário");
-        ButtonCadastrarFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonCadastrarFuncionarioActionPerformed(evt);
-            }
-        });
+        ButtonCadastrarFuncionario.addActionListener(evt -> ButtonCadastrarFuncionarioActionPerformed(evt));
 
         javax.swing.GroupLayout AbaFuncionariosLayout = new javax.swing.GroupLayout(AbaFuncionarios);
         AbaFuncionarios.setLayout(AbaFuncionariosLayout);
         AbaFuncionariosLayout.setHorizontalGroup(
             AbaFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AbaFuncionariosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ButtonCadastrarFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(440, Short.MAX_VALUE))
+            .addGroup(AbaFuncionariosLayout.createSequentialGroup().addContainerGap().addComponent(ButtonCadastrarFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(440, Short.MAX_VALUE))
         );
         AbaFuncionariosLayout.setVerticalGroup(
             AbaFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AbaFuncionariosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ButtonCadastrarFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+            .addGroup(AbaFuncionariosLayout.createSequentialGroup().addContainerGap().addComponent(ButtonCadastrarFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(64, Short.MAX_VALUE))
         );
-
         TabbedPanePrincipal.addTab("Funcionários", AbaFuncionarios);
 
         AbaFornecedor.setBackground(new java.awt.Color(219, 238, 245));
-
-        ButtonCadastrarFornecedor.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
+        ButtonCadastrarFornecedor.setFont(new java.awt.Font("SF Pro", 0, 14));
         ButtonCadastrarFornecedor.setText("Cadastrar Fornecedor");
-        ButtonCadastrarFornecedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonCadastrarFornecedorActionPerformed(evt);
-            }
-        });
+        ButtonCadastrarFornecedor.addActionListener(evt -> ButtonCadastrarFornecedorActionPerformed(evt));
 
         javax.swing.GroupLayout AbaFornecedorLayout = new javax.swing.GroupLayout(AbaFornecedor);
         AbaFornecedor.setLayout(AbaFornecedorLayout);
         AbaFornecedorLayout.setHorizontalGroup(
             AbaFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AbaFornecedorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ButtonCadastrarFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(441, Short.MAX_VALUE))
+            .addGroup(AbaFornecedorLayout.createSequentialGroup().addContainerGap().addComponent(ButtonCadastrarFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(441, Short.MAX_VALUE))
         );
         AbaFornecedorLayout.setVerticalGroup(
             AbaFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AbaFornecedorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ButtonCadastrarFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+            .addGroup(AbaFornecedorLayout.createSequentialGroup().addContainerGap().addComponent(ButtonCadastrarFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(64, Short.MAX_VALUE))
         );
-
         TabbedPanePrincipal.addTab("Fornecedor", AbaFornecedor);
 
         AbaRelatorios.setBackground(new java.awt.Color(219, 238, 245));
-
-        ButtonEmitirRelatorio.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
+        ButtonEmitirRelatorio.setFont(new java.awt.Font("SF Pro", 0, 14));
         ButtonEmitirRelatorio.setText("Emitir Relatório");
-        ButtonEmitirRelatorio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonEmitirRelatorioActionPerformed(evt);
-            }
-        });
+        ButtonEmitirRelatorio.addActionListener(evt -> ButtonEmitirRelatorioActionPerformed(evt));
 
         javax.swing.GroupLayout AbaRelatoriosLayout = new javax.swing.GroupLayout(AbaRelatorios);
         AbaRelatorios.setLayout(AbaRelatoriosLayout);
         AbaRelatoriosLayout.setHorizontalGroup(
             AbaRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AbaRelatoriosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ButtonEmitirRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(441, Short.MAX_VALUE))
+            .addGroup(AbaRelatoriosLayout.createSequentialGroup().addContainerGap().addComponent(ButtonEmitirRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(441, Short.MAX_VALUE))
         );
         AbaRelatoriosLayout.setVerticalGroup(
             AbaRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AbaRelatoriosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ButtonEmitirRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+            .addGroup(AbaRelatoriosLayout.createSequentialGroup().addContainerGap().addComponent(ButtonEmitirRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(64, Short.MAX_VALUE))
         );
-
         TabbedPanePrincipal.addTab("Relatórios", AbaRelatorios);
 
+        // Painel Topo
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        logoPharmasys.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pharmasys_logo.png"))); // NOI18N
-
-        buttonSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        try {
+            logoPharmasys.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pharmasys_logo.png")));
+        } catch (Exception e) {}
+        
+        buttonSair.setFont(new java.awt.Font("Segoe UI", 0, 14));
         buttonSair.setForeground(new java.awt.Color(153, 0, 51));
         buttonSair.setText("Sair >");
         buttonSair.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -209,12 +173,10 @@ public class NovaTelaGerencia extends javax.swing.JFrame {
             }
         });
 
-        relogio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        relogio.setFont(new java.awt.Font("Segoe UI", 0, 14));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 15));
         jLabel3.setText("|");
-
-        labelNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelNome.setFont(new java.awt.Font("Segoe UI", 0, 14));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -246,7 +208,7 @@ public class NovaTelaGerencia extends javax.swing.JFrame {
                         .addComponent(logoPharmasys))))
         );
 
-        jLabel4.setFont(new java.awt.Font("SF Pro", 1, 20)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("SF Pro", 1, 20)); 
         jLabel4.setText("Olá, gerente!");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -270,42 +232,49 @@ public class NovaTelaGerencia extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addComponent(TabbedPanePrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addComponent(TabbedPanePrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE) // Aumentei tamanho do painel
+                .addContainerGap(150, Short.MAX_VALUE))
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
     private void ButtonVIsualizarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {
         new TelaEstoque().setVisible(true);
     }
 
     private void ButtonCadastrarMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {
-        new TelaCadastroMedicamento() .setVisible(true);
+        new TelaCadastroMedicamento().setVisible(true);
+    }
+    
+    // Método de Ação do Novo Botão
+    private void ButtonCadastrarLoteActionPerformed(java.awt.event.ActionEvent evt) {
+        JFrame frame = new JFrame("Cadastro de Lote");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setContentPane(new TelaCadastroLote());
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 
     private void ButtonCadastrarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {
-        new TelaCadastroFuncionario() .setVisible(true);
+        new TelaCadastroFuncionario().setVisible(true);
     }
 
     private void ButtonCadastrarFornecedorActionPerformed(java.awt.event.ActionEvent evt) {
-        new TelaCadastroFornecedor() .setVisible(true);
+        new TelaCadastroFornecedor().setVisible(true);
     }
 
     private void ButtonEmitirRelatorioActionPerformed(java.awt.event.ActionEvent evt) {
-        new TelaRelatorios() .setVisible(true);
+        new TelaRelatorios().setVisible(true);
     }
-
 
     private void buttonSairMouseClicked(java.awt.event.MouseEvent evt) {
         this.dispose();
         new TelaInicial().setVisible(true);
     }
 
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration
     private javax.swing.JPanel AbaFornecedor;
     private javax.swing.JPanel AbaFuncionarios;
     private javax.swing.JPanel AbaMedicamentos;
@@ -313,6 +282,7 @@ public class NovaTelaGerencia extends javax.swing.JFrame {
     private javax.swing.JButton ButtonCadastrarFornecedor;
     private javax.swing.JButton ButtonCadastrarFuncionario;
     private javax.swing.JButton ButtonCadastrarMedicamento;
+    private javax.swing.JButton ButtonCadastrarLote; // Variável adicionada
     private javax.swing.JButton ButtonEmitirRelatorio;
     private javax.swing.JButton ButtonVIsualizarEstoque;
     private javax.swing.JTabbedPane TabbedPanePrincipal;
@@ -324,11 +294,12 @@ public class NovaTelaGerencia extends javax.swing.JFrame {
     private javax.swing.JLabel labelNome;
     private javax.swing.JLabel logoPharmasys;
     private javax.swing.JLabel relogio;
-                   
 
-public static void main(String[] args) {
-    javax.swing.SwingUtilities.invokeLater(() -> {
-        new NovaTelaGerencia().setVisible(true);
-    });
+    public static void main(String[] args) {
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            new NovaTelaGerencia().setVisible(true);
+        });
+    }
 }
-}
+
+

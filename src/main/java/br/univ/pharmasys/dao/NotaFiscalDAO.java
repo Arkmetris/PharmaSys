@@ -10,9 +10,9 @@ import java.util.List;
 
 public class NotaFiscalDAO {
 
-    private static final String INSERT_SQL = "INSERT INTO nota_fiscal (numero_nota, data_emissao, valor_total, id_funcionario, cpf_cliente) VALUES (?, ?, ?, ?, ?)";
-    private static final String SELECT_ALL_SQL = "SELECT * FROM nota_fiscal";
-    private static final String SELECT_BY_ID_SQL = "SELECT * FROM nota_fiscal WHERE id = ?";
+    private static final String INSERT_SQL = "INSERT INTO NOTA_FISCAL (NUMERO_NOTA, DATA_EMISSAO, VALOR_TOTAL, ID_FUNCIONARIO, CPF_CLIENTE) VALUES (?, ?, ?, ?, ?)";
+    private static final String SELECT_ALL_SQL = "SELECT * FROM NOTA_FISCAL";
+    private static final String SELECT_BY_ID_SQL = "SELECT * FROM NOTA_FISCAL WHERE id = ?";
 
     public Long salvar(NotaFiscal nota) {
         Long idGerado = null;
@@ -89,17 +89,17 @@ public class NotaFiscalDAO {
     private NotaFiscal mapear(ResultSet rs) throws SQLException {
         NotaFiscal nf = new NotaFiscal();
         
-        nf.setId(rs.getLong("id"));
-        nf.setNumeroNota(rs.getString("numero_nota"));
+        nf.setId(rs.getLong("ID"));
+        nf.setNumeroNota(rs.getString("NUMERO_NOTA"));
         
-        if (rs.getTimestamp("data_emissao") != null) {
-            nf.setDataEmissao(rs.getTimestamp("data_emissao").toLocalDateTime());
+        if (rs.getTimestamp("DATA_EMISSAO") != null) {
+            nf.setDataEmissao(rs.getTimestamp("DATA_EMISSAO").toLocalDateTime());
         }
         
-        nf.setValorTotal(rs.getBigDecimal("valor_total"));
-        nf.setCpfCliente(rs.getString("cpf_cliente"));
+        nf.setValorTotal(rs.getBigDecimal("VALOR_TOTAL"));
+        nf.setCpfCliente(rs.getString("CPF_CLIENTE"));
 
-        long idFunc = rs.getLong("id_funcionario");
+        long idFunc = rs.getLong("ID_FUNCIONARIO");
         if (idFunc > 0) {
             Funcionario f = new Funcionario();
             f.setIdFuncionario(idFunc);

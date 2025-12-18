@@ -125,6 +125,31 @@ public class MedicamentoDAO {
         return lista;
     }
 
+    public Medicamento buscarPorCodigoBarras(String codigoBarras) {
+
+        String sql = "SELECT * FROM MEDICAMENTO WHERE CODIGO_BARRAS = ?";
+        Medicamento med = null;
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, codigoBarras);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+
+                if (rs.next()) {
+                    med = montarMedicamento(rs);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar medicamento por código de barras: " + e.getMessage(), e);
+        }
+
+        return med;
+    }
+
+    
     public List<Medicamento> listarTodos() {
         String sql = "SELECT M.*FROM MEDICAMENTO M ORDER BY M.NOME_COMERCIAL";
 
