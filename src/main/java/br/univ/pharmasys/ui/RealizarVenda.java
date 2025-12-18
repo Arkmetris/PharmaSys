@@ -1,9 +1,23 @@
 package br.univ.pharmasys.ui;
+
 import javax.swing.*;
+
+import br.univ.pharmasys.model.Medicamento;
+import br.univ.pharmasys.model.MetodoPagamento;
+import br.univ.pharmasys.model.Pagamento;
+import br.univ.pharmasys.model.Pedido;
+import br.univ.pharmasys.model.Status;
+import br.univ.pharmasys.service.MercadoPagoService;
+
+import java.math.BigDecimal;
 import java.awt.*;
 import java.awt.event.*;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,11 +39,13 @@ private void initRelogio() {
         timer.start();
     }
     
+private List<Medicamento> itensVenda = new ArrayList<>();
+
     // Método para definir o labelNome do usuário mostrado na tela
     public void definirUsuarioLogado(String nome) {
         labelNome.setText(nome);
     }
-
+    
     private void initComponents() {
 
         labelLogo = new JLabel();
@@ -47,6 +63,12 @@ private void initRelogio() {
         buttonAdicionarProduto = new JButton();
         buttonAdicionarProduto.addActionListener(e -> abrirDialogAdicionarProduto());
         buttonFinalizarCompra = new JButton();
+        buttonFinalizarCompra.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        	finalizarCompra();
+        	}
+        });
         buttonVoltar = new JButton();
         rbPix = new JRadioButton();
         rbDebito = new JRadioButton();
@@ -228,14 +250,31 @@ private void initRelogio() {
         pack();
     }// </editor-fold>                        
 
-    private void jCheckBox1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+//    private void jCheckBox1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+//        // TODO add your handling code here:
+//    }//GEN-LAST:event_jCheckBox1ActionPerformed
+//    
     private void abrirDialogAdicionarProduto() {
-        DialogAdicionarProduto dialog =
-        new DialogAdicionarProduto(this, true);
-        dialog.setVisible(true);
-}
+        TelaScanner scan = new TelaScanner(medicamento -> {
+            adicionarProdutoNaVenda(medicamento);
+        });
+        scan.setVisible(true);
+    }
+
+    private void adicionarProdutoNaVenda(Medicamento med) {
+        itensVenda.add(med);
+
+        labelQuantidade.setText(String.valueOf(itensVenda.size()));
+
+        BigDecimal total = itensVenda.stream()
+                .map(Medicamento::getPreco)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        labelTotal.setText(total.toString());
+
+        // Aqui depois você pode listar os itens visualmente (JTable)
+    }
+
     
     private void jButton3ActionPerformed(ActionEvent evt) {                                         
      Object[] opcoes = { "Sim, cancelar", "Voltar" };
@@ -258,7 +297,80 @@ private void initRelogio() {
     else if (escolha == 1) {
         System.out.println("Voltando...");
     }
+
     }
+    public void finalizarCompra() {
+		
+    	try {
+    		Pedido pedido = new Pedido();
+    		Random id = new Random();
+    		Pagamento pag = new Pagamento();
+    		pedido.setIdPedido(id.nextLong());
+    		pedido.setQuantidade(Integer.valueOf(labelQuantidade.getText()));
+    		pedido.setStatus(Status.PENDENTE);
+    		pedido.setData(LocalDate.now());
+    		BigDecimal valorUnitario= new BigDecimal(labelTotal.getText());
+    		pedido.setPrecoUnitario(valorUnitario);
+    		
+    		pag.setIdPedido(pedido);
+    		
+    		BigDecimal valorTotal = new BigDecimal(labelTotal.getText());
+    		pag.setValor(valorTotal);
+    		
+    		rbPix.addMouseListener(new MouseAdapter() {
+    			@Override
+    			public void mouseClicked(MouseEvent e) {
+    				pag.setMetodo(MetodoPagamento.PIX);
+    			}
+    		});
+    		
+    		
+    		rbDebito.addMouseListener(new MouseAdapter() {
+    	       	@Override
+    	       	public void mouseClicked(MouseEvent e) {
+    	       		pag.setMetodo(MetodoPagamento.CARTAO_DEBITO);
+    	       	}
+    	    });
+    		
+    		rbEspecie.addMouseListener(new MouseAdapter() {
+    	       	@Override
+    	       	public void mouseClicked(MouseEvent e) {
+    	       		pag.setMetodo(MetodoPagamento.DINHEIRO);
+    	       	}
+    	    });
+    		
+    		rbCredito.addMouseListener(new MouseAdapter() {
+    	       	@Override
+    	       	public void mouseClicked(MouseEvent e) {
+    	       		pag.setMetodo(MetodoPagamento.CARTAO_CREDITO);
+    	       	}
+    	    });
+    		
+    		
+    		pag.setDataPagamento(LocalDate.now().plusDays(1));
+    		
+    	    MercadoPagoService mpService = new MercadoPagoService();
+
+            String qrCodeGerado = mpService.gerarPixApi(pag, "ajudapharmasys@gmail.com", "12345678909");
+            pag.setQrCode(qrCodeGerado);
+            System.out.println("QR Code gerado com sucesso!");
+    		
+    		
+    		ImageIcon image = new ImageIcon("pix_pedido_1.png");
+    		JOptionPane.showMessageDialog(this, new JLabel(image));
+    		
+    		
+    		
+    	} catch (Exception e) {
+    		JOptionPane.showMessageDialog(this, e.getMessage(), "Erro: ", JOptionPane.ERROR_MESSAGE);
+    	}
+    		
+    }
+    
+    
+    
+    
+    
     public static void main(String args[]) {
 
         try {

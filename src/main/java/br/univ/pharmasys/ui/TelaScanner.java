@@ -11,7 +11,9 @@ import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
+import javax.swing.border.*;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -21,7 +23,12 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
-public class TelaScanner extends javax.swing.JFrame implements Runnable, ThreadFactory {
+import br.univ.pharmasys.dao.*;
+import br.univ.pharmasys.model.*;
+
+
+
+public class TelaScanner extends JFrame implements Runnable, ThreadFactory {
 
     private static final long serialVersionUID = 1L;
 
@@ -30,12 +37,15 @@ public class TelaScanner extends javax.swing.JFrame implements Runnable, ThreadF
     private Executor executor = Executors.newSingleThreadExecutor(this);
 
     // Componentes da tela
-    private javax.swing.JPanel jPanelCamera;
-    private javax.swing.JTextField txtNomeProduto;
-    private javax.swing.JTextField txtSku;
+    private BotaoArredondado buttonCadastrar;
+    private BotaoArredondado buttonSair;
+    private JPanel jPanelCamera;
+    private JTextField txtNomeProduto;
+    private JTextField txtSku;
     private BotaoArredondado btnLimpar;
-    private javax.swing.JLabel lblInstrucao;
-    private javax.swing.JLabel lblTitulo;
+    private JLabel lblInstrucao;
+    private JLabel lblTitulo;
+    
 
     public TelaScanner() {
         configurarJanela();
@@ -45,7 +55,7 @@ public class TelaScanner extends javax.swing.JFrame implements Runnable, ThreadF
 
     private void configurarJanela() {
         setTitle("Scanner PharmaSys");
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new Color(245, 245, 250)); // Cor de fundo suave
         // Layout principal
         setLayout(new BorderLayout(10, 10));
@@ -90,8 +100,10 @@ public class TelaScanner extends javax.swing.JFrame implements Runnable, ThreadF
         pnlCampos.setMaximumSize(new Dimension(640, 60));
 
         txtNomeProduto = criarTextFieldEstilizado("Nome Comercial");
+        txtNomeProduto.setEditable(false);
         txtSku = criarTextFieldEstilizado("Código Lido / SKU");
-
+        txtSku.setEditable(false);
+        
         pnlCampos.add(txtNomeProduto);
         pnlCampos.add(txtSku);
         
@@ -109,19 +121,35 @@ public class TelaScanner extends javax.swing.JFrame implements Runnable, ThreadF
 
         pnlInferior.add(btnLimpar);
         add(pnlInferior, BorderLayout.SOUTH);
-
+//
+//        
+//        
+//        
+        
+        buttonSair = new BotaoArredondado("Sair");
+        buttonSair.setPreferredSize(new Dimension(250, 45));
+        buttonSair.addActionListener(evt -> dispose());
+        pnlInferior.add(buttonSair);
+        
+        
+        buttonCadastrar = new BotaoArredondado("Cadastrar");
+        buttonSair.setPreferredSize(new Dimension(250, 45));
+        buttonSair.addActionListener(evt -> cadastrarProduto());
+        pnlInferior.add(buttonCadastrar);
+        
         pack(); 
         setLocationRelativeTo(null);
     }
-
+    
+    
     private JTextField criarTextFieldEstilizado(String titulo) {
         JTextField campo = new JTextField();
         campo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         campo.setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createLineBorder(new Color(150, 150, 150)), 
                 titulo,
-                javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
-                javax.swing.border.TitledBorder.DEFAULT_POSITION,
+                TitledBorder.DEFAULT_JUSTIFICATION,
+                TitledBorder.DEFAULT_POSITION,
                 new Font("Segoe UI", Font.BOLD, 12)
         ));
         return campo;
@@ -211,6 +239,36 @@ public class TelaScanner extends javax.swing.JFrame implements Runnable, ThreadF
         txtSku.requestFocus();
     }
 
+    public void cadastrarProduto() {
+    	MedicamentoDAO medDAO = new MedicamentoDAO();
+    	Medicamento med = medDAO.buscarPorCodigoBarras(txtSku.getText());
+    	if (med == null) {
+            JOptionPane.showMessageDialog(this, "Medicamento não encontrado!");
+            return;
+        }
+    	 listener.produtoSelecionado(med);
+    	    dispose();
+    	    
+    	txtNomeProduto.setText(med.getNomeComercial());
+    	
+    }
+    
+    public interface ProdutoSelecionadoListener {
+        void produtoSelecionado(Medicamento medicamento);
+    }
+
+    private ProdutoSelecionadoListener listener;
+
+    public TelaScanner(ProdutoSelecionadoListener listener) {
+        this.listener = listener;
+        configurarJanela();
+        inicializarComponentes();
+        initWebcam();
+    }
+
+    
+    
+    
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
