@@ -8,6 +8,8 @@ import br.univ.pharmasys.exceptions.IdInvalidoException;
 import br.univ.pharmasys.exceptions.NomeInvalidoException;
 import br.univ.pharmasys.exceptions.TelefoneInvalidoException;
 import br.univ.pharmasys.model.Fornecedor;
+import br.univ.pharmasys.util.MensagemEmailFornecedor;
+import br.univ.pharmasys.util.MensagemEmailFuncionario;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -165,13 +167,18 @@ public class TelaCadastroFornecedor extends JFrame {
             fornecedor.setEmail(CampoEmail.getText());
             fornecedor.setTelefoneId(CampoTelefone.getText());
 
-            //Tem que atualziar a tela com isso ainda
+            //Tem que atualizar a tela com isso ainda
             fornecedor.setEstado("PE"); 
             fornecedor.setCep("00000000");
             fornecedor.setRua("Sem Rua");
             fornecedor.setBairro("Sem Bairro");
             fornecedor.setCidade("Sem Cidade");
+
+            MensagemEmailFornecedor mensagem = new MensagemEmailFornecedor();
+
             dao.create(fornecedor);
+
+            mensagem.enviarConfirmacaoFornecedor(fornecedor.getEmail(), fornecedor.getNome());
 
             JOptionPane.showMessageDialog(this, "Fornecedor cadastrado com sucesso!");
             limparCampos();

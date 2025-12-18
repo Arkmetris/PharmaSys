@@ -1,5 +1,8 @@
-package br.univ.pharmasys.service;
+package br.univ.pharmasys.util;
 
+import jakarta.mail.*;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.mail.Authenticator;
 import java.util.Properties;
 import jakarta.mail.Message;
@@ -7,15 +10,13 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.PasswordAuthentication;
 import jakarta.mail.Session;
 import jakarta.mail.Transport;
-import jakarta.mail.internet.MimeMessage;
-import jakarta.mail.internet.InternetAddress;
 
-public class MensagemEmailFuncionario {
-    
-    public void enviarConfirmacao(String emailUsuario, String nomeUsuario) {
+public class MensagemEmailFornecedor {
+
+    public void enviarConfirmacaoFornecedor(String emailUsuario, String nomeUsuario) {
         // Configurações do remetente
         final String remetente = "ajudapharmasys@gmail.com";
-        final String senha = "admin12345!";
+        final String senha = "aduutabbkyyrhbkj";
 
         // Propriedades do Servidor SMTP
         Properties props = new Properties();
@@ -29,19 +30,19 @@ public class MensagemEmailFuncionario {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(remetente, senha);
-            }
-        });
+                }
+            });
 
         try {
             //  Criar a Mensagem
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(remetente));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(emailUsuario));
-            message.setSubject("Confirmação de Cadastro Realizada!");
+            message.setSubject("Confirmação de Cadastro de Fornecedor Realizada!");
 
             // O conteúdo da mensagem
             String corpoEmail = nomeUsuario + ",\n\n"
-                    + "Este é um e-mail automático para confirmar que seu cadastro foi concluído.";
+                    + "Este é um e-mail automático para confirmar se o e-mail do Fornecedor foi concluído.";
             message.setText(corpoEmail);
 
             //  Enviar o e-mail
@@ -53,6 +54,4 @@ public class MensagemEmailFuncionario {
             System.err.println("Falha ao enviar e-mail: " + e.getMessage());
         }
     }
-
-    //falta: conexao com a tela funcionario(ao clicar no botão cadastrar)
 }

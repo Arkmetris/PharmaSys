@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import br.univ.pharmasys.dao.FuncionarioDAO;
 import br.univ.pharmasys.model.Funcionario;
+import br.univ.pharmasys.util.MensagemEmailFuncionario;
 
 @SuppressWarnings("serial")
 public class TelaCadastroFuncionario extends JFrame {
@@ -321,7 +322,12 @@ public class TelaCadastroFuncionario extends JFrame {
 
 
             FuncionarioDAO dao = new FuncionarioDAO();
+
+            MensagemEmailFuncionario mensagem = new MensagemEmailFuncionario();
+
             dao.create(func);
+
+            mensagem.enviarConfirmacao(func.getEmail(), func.getNome());
 
             JOptionPane.showMessageDialog(this, "Funcionário cadastrado com sucesso!");
            

@@ -15,7 +15,7 @@ public class MensagemEmailFuncionario {
     public void enviarConfirmacao(String emailUsuario, String nomeUsuario) {
         // Configurações do remetente
         final String remetente = "ajudapharmasys@gmail.com";
-        final String senha = "admin12345!";
+        final String senha = "aduutabbkyyrhbkj";
 
         // Propriedades do Servidor SMTP
         Properties props = new Properties();
@@ -53,6 +53,4 @@ public class MensagemEmailFuncionario {
             System.err.println("Falha ao enviar e-mail: " + e.getMessage());
         }
     }
-
-    //falta: conexao com a tela funcionario(ao clicar no botão cadastrar)
 }

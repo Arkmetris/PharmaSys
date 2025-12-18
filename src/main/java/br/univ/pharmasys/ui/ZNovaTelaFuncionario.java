@@ -10,9 +10,9 @@ import br.univ.pharmasys.dao.MedicamentoDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-public class NovaTelaFuncionario extends javax.swing.JFrame {
+public class ZNovaTelaFuncionario extends javax.swing.JFrame {
 
-    public NovaTelaFuncionario() {
+    public ZNovaTelaFuncionario() {
         initComponents();
         buttonRealizarVenda.setText("<html><center>Realizar<br>Venda</center></html>");
         buttonVisualizarEstoque.setText("<html><center>Visualizar<br>Estoque</center></html>");
@@ -279,18 +279,18 @@ public class NovaTelaFuncionario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ZNovaTelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ZNovaTelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ZNovaTelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ZNovaTelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NovaTelaFuncionario().setVisible(true);
+                new ZNovaTelaFuncionario().setVisible(true);
             }
         });
     }
