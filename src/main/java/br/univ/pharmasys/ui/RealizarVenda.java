@@ -252,7 +252,7 @@ private void initRelogio() {
     );
 
     if (escolha == 0) {
-        new NovaTelaFuncionario().setVisible(true);
+        new ZNovaTelaFuncionario().setVisible(true);
         this.dispose();
     }
     else if (escolha == 1) {

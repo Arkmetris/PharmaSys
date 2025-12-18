@@ -144,19 +144,19 @@ public class TelaInicial extends JFrame {
                 // Verifica o tipo de usuário
                 if (usuario.getTipo() == 3) {
                     
-                    ZNovaTelaGerencia tela = new ZNovaTelaGerencia();
+                    NovaTelaGerencia tela = new NovaTelaGerencia();
                     tela.definirUsuarioLogado(usuario.getNome());
                     tela.setVisible(true);
                     this.dispose();
                     
                 } else if (usuario.getTipo() == 2) {
                     JOptionPane.showMessageDialog(this, "Bem-vindo Farmacêutico(a) " + usuario.getNome());
-                    NovaTelaFuncionario tela = new NovaTelaFuncionario();
+                    ZNovaTelaFuncionario tela = new ZNovaTelaFuncionario();
                     tela.setVisible(true);
                     tela.definirUsuarioLogado(usuario.getNome());
                     this.dispose();
                 } else if (usuario.getTipo() == 1) {
-                    JOptionPane.showMessageDialog(this, "Bem-vindo Esoquista " + usuario.getNome());
+                    JOptionPane.showMessageDialog(this, "Bem-vindo Estoquista " + usuario.getNome());
                     TelaEstoquista tela = new TelaEstoquista();
                     tela.setVisible(true);
                     tela.definirUsuarioLogado(usuario.getNome());
@@ -183,7 +183,7 @@ public class TelaInicial extends JFrame {
 	    }
 	
 	    
-	    try {
+	    /*try {
 	        for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 	            if ("Nimbus".equals(info.getName())) {
 	                UIManager.setLookAndFeel(info.getClassName());
@@ -192,7 +192,7 @@ public class TelaInicial extends JFrame {
 	        }
 	    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
 	        java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-	    }
+	    }*/
 	    
 	    EventQueue.invokeLater(() -> {
 	        new TelaInicial().setVisible(true);

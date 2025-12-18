@@ -1,18 +1,21 @@
 package br.univ.pharmasys.ui;
 
-import java.awt.event.MouseEvent;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.Timer;
 
-public class ZNovaTelaGerencia extends javax.swing.JFrame {
+public class NovaTelaGerencia extends javax.swing.JFrame {
 
-    public ZNovaTelaGerencia() {
+    public NovaTelaGerencia() {
         initComponents();
         initRelogio();
         setLocationRelativeTo(null);
     }
-    
+
+    private static void run() {
+        new NovaTelaGerencia().setVisible(true);
+    }
+
     private void initRelogio() {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("HH:mm");
         Timer timer = new Timer(1000, e -> {
@@ -279,7 +282,7 @@ public class ZNovaTelaGerencia extends javax.swing.JFrame {
     }
 
     private void ButtonCadastrarMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {
-        new TelaCadastroDeEstoque() .setVisible(true);
+        new TelaCadastroMedicamento() .setVisible(true);
     }
 
     private void ButtonCadastrarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {
@@ -325,7 +328,7 @@ public class ZNovaTelaGerencia extends javax.swing.JFrame {
 
 public static void main(String[] args) {
     javax.swing.SwingUtilities.invokeLater(() -> {
-        new ZNovaTelaGerencia().setVisible(true);
+        new NovaTelaGerencia().setVisible(true);
     });
 }
 }
