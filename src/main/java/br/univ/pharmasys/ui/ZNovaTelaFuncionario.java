@@ -2,14 +2,15 @@ package br.univ.pharmasys.ui;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+
+import br.univ.pharmasys.dao.MedicamentoDAO; // Importante!
+import br.univ.pharmasys.model.Funcionario;
 import br.univ.pharmasys.model.Medicamento;
-import br.univ.pharmasys.model.Funcionario; // Importante!
-import br.univ.pharmasys.dao.MedicamentoDAO;
-import java.util.List;
-import javax.swing.JOptionPane;
 
 public class ZNovaTelaFuncionario extends javax.swing.JFrame {
 
@@ -61,7 +62,7 @@ public class ZNovaTelaFuncionario extends javax.swing.JFrame {
         campoPesquisa = new javax.swing.JTextField();
         buttonRealizarVenda = new javax.swing.JButton();
         buttonVisualizarEstoque = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        jButtonPesquisar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
@@ -106,13 +107,9 @@ public class ZNovaTelaFuncionario extends javax.swing.JFrame {
         buttonVisualizarEstoque.setText("Visualizar Estoque");
         buttonVisualizarEstoque.addActionListener(evt -> buttonVisualizarEstoqueActionPerformed(evt));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12));
-        jLabel4.setText("PESQUISAR");
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
-            }
-        });
+        jButtonPesquisar.setFont(new java.awt.Font("SF Pro", 3, 16));
+        jButtonPesquisar.setText("Pesquisar");
+        jButtonPesquisar.addActionListener(evt -> buttonPesquisarActionPerformed(evt));
 
         jLabel2.setFont(new java.awt.Font("SF Pro", 1, 18));
         jLabel2.setText("Olá, farmacêutico!");
@@ -136,7 +133,7 @@ public class ZNovaTelaFuncionario extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(campoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)))
+                                .addComponent(jButtonPesquisar)))
                         .addGap(18, 18, 18))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(buttonRealizarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -156,7 +153,7 @@ public class ZNovaTelaFuncionario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jButtonPesquisar))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,14 +224,14 @@ public class ZNovaTelaFuncionario extends javax.swing.JFrame {
         scanner.setVisible(true);
     }
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {
+    private void buttonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {
         String busca = campoPesquisa.getText().trim();
-        if (!busca.isEmpty()){
+        if (!busca.isEmpty()) {
             MedicamentoDAO dao = new MedicamentoDAO();
             List<Medicamento> listaEncontrada = dao.buscarPorNome(busca);
 
-            if(listaEncontrada.isEmpty()){
-                JOptionPane.showMessageDialog(this,"Nenhum medicamento encontrado com esse nome.");
+            if (listaEncontrada.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Nenhum medicamento encontrado com esse nome.");
             } else {
                 TelaResultados tela = new TelaResultados();
                 tela.setVisible(true);
@@ -258,12 +255,12 @@ public class ZNovaTelaFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel botaoSair;
     private javax.swing.JButton buttonRealizarVenda;
     private javax.swing.JButton buttonVisualizarEstoque;
+    private javax.swing.JButton jButtonPesquisar;
     private javax.swing.JTextField campoPesquisa;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
